@@ -476,13 +476,14 @@ header nav ul li a:hover{
 
 }
 
-@media (max-width: 359px) {
+@media (max-width: 400px) {
 
   .index-banner {
     margin-top: 70px;
   }
 
   .index-banner h2{
+    padding-top: 20px;
     font-size: 43px;
   }
 

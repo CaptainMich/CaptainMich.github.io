@@ -624,6 +624,11 @@ header nav ul li a:hover{
   font-size: 45px;
 }
 
+.fa-code,
+.fa-bug{
+  font-size: 40px !important;
+}
+
 .stat-items{
   display: block;
   margin-top: 20px;

@@ -10,7 +10,7 @@ function open_String() {
 }
 
 function open_Sets() {
-    window.open("code/script_example.html");
+    window.open("code/3-Sets.html");
 }
 
 function open_List() {

@@ -138,7 +138,7 @@ h6 {
 p {
   max-width: 50rem;
   margin: 0 auto;
-  text-align: justify;
+  text-align: left;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;

@@ -14,11 +14,11 @@ function open_Sets() {
 }
 
 function open_List() {
-    window.open("code/script_example.html");
+    window.open("code/4-Lists.html");
 }
 
 function open_Tuples() {
-    window.open("code/script_example.html");
+    window.open("code/5-Tuples.html");
 }
  /* ---------------------------------------------- */
  /*                   LOOPS                        */

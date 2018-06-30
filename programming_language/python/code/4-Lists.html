@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Python Code | Lists </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../css/style.css">
+      <link rel="stylesheet" href="../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="script.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../../portfolio.html"> Portofolio </a> </li>
+            <li><a href="../../../about.html"> About Me</a> </li>
+            <li><a href="../../../contact.html"> Contact </a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Menu </button>
+              <div class="dropdown-content active">
+                <a href="../python.html"> Python </a>
+                <a href="../../c_plus_plus/c_plus_plus.html"> C++ </a>
+                <a href="web_based_programming.html"> HTML,CSS and JS </a>
+                <a href="android.html"> Android </a>
+                <a href="matlab.html"> MATLAB </a>
+              </div>
+        </div>
+    </nav>
+    <div class="menu-toggle">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+  </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+      <br><br><br><br><br><br>
+      <div class="container">
+      <article role="article">
+    		<h3> Lists </h3>
+        <p> B elow we cover all the default lists construction </p>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# LISTS
+# -------------------------------------------------------------------------------------------------
+
+print('\n\t\tLISTS\n')
+
+players = [70,5,9]                  # syntax of a list
+print(players)                      # print entire list
+
+# -------------------------------------------------------------------------------------------------
+# WORK with LIST
+# -------------------------------------------------------------------------------------------------
+
+print('\n\tWORK with LISTS\n')
+
+print(players[2])                   # to access a member of a list in the position ['x']
+players[2] = 96                     # to permanently change the value of a member
+print(players)                      # to see the change
+
+print(players + [0,1,2])            # concatenate list to another list, and see the change...
+print(players)                      # ... but it is not a permanently change
+
+players = players * 2               # multiply the list
+print(players)                      # to see the change
+
+players.append(4)                   # to permanently add an element to the list
+print(players)                      # to see the change
+
+players.pop(2)                      # to permanently remove an element to the list (position of
+print(players)                      # the list is indicate in brackets)to see the change
+
+players.sort()                      # to order list in ascending fashion
+print(players)                      # to see the change
+
+players.reverse()                   # to reverse list
+print(players)                      # to see the change
+
+print('')
+
+print(players[0:2])                 # to slicing up a list [from element 'x' to(:) element 'y']
+print(players[1:2])                 # ...
+print(players[1:])                  # ...
+print(players[:])                   # ...
+
+print('')
+
+players[:2] = [0,1,2]               # to change multiple values [from element 'x' to(:) element 'y']
+print(players)                      # to see the changes
+
+players[:2] = []                    # to delete items from the list(1)
+print(players)                      # to see the changes
+
+players[:2] = []                    # to delete item from the list(2)
+print(players)                      # to see the change
+
+players[:] = []                     # to delete the entire list
+print(players)                      # to see the change
+
+
+# -------------------------------------------------------------------------------------------------
+# NESTING and List COMPREHENSION
+# -------------------------------------------------------------------------------------------------
+
+print('\n\tNESTING and List COMPREHENSION\n')
+
+matrix = [[1,2,3],                                      # 3 x 3 Matrix, as nested list
+          [4,5,6],                                      # ...
+          [7,8,9]]                                      # ...
+
+print(matrix)                                           # print entire list
+print(matrix[1])                                        # print row 2
+print(matrix[1][2], '\n')                               # print element 3 of the row 2
+
+col2 = [row[1] for row in matrix]                       # collect the items in column 2
+print(col2)                                             # to see the change
+
+print(matrix)                                           # matrix is unchanges
+print('')
+                                                        # .. some other examples
+print([row[1] + 1 for row in matrix])                   # add 1 to each item in column 2
+print([row[1] for row in matrix if row[1] % 2 == 0])    # filter out odd items of column 2
+print('')
+
+diag = [matrix[i][i] for i in [0,1,2]]                  # collect diagonal from matrix
+print(diag)                                             # to see the result
+
+doubles = [letter * 2 for letter in 'spam']             # repeat character in a string
+print(doubles, '\n')                                    # to see the result
+
+Generator = (sum(row) for row in matrix)                # create a generator of row sum (sum items
+print(next(Generator))                                  # in a sequence)
+print(next(Generator))                                  # run the iteration protocol next()
+print(next(Generator))                                  # ...
+
+print(list(map(sum,matrix)))                            # map sum over items in matrix
+
+print({sum(row) for row in matrix})                     # create a set of row sums
+print({i : sum(matrix[i]) for i in range(3)})           # creates key/value table of row sums
+print('')
+
+print([ord(x) for x in 'spaam'])                        # list of character ordinals
+print({ord(x) for x in 'spaam'})                        # sets remove duplicates
+print({x: ord(x) for x in 'spaam'})                     # dictionary keys are unique
+  </code></pre>
+</div>
+
+    	</article>
+
+
+
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+          <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:michele.salvo96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../prism_themes/prism.js"></script>
+  </body>
+</html>

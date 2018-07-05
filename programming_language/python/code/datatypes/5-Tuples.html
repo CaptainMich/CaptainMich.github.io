@@ -2,17 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title> Python Code | Sets </title>
+    <title> Python Code | Tuples </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
-      <link rel="stylesheet" href="../../../css/style.css">
-      <link rel="stylesheet" href="../../../css/personal_icon.css">
-      <link rel="stylesheet" href="../../../res/prism_themes/prism-monokai.css">
-      <link rel="stylesheet" href="script.css">
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="../script.css">
 
   </head>
   <body>
@@ -20,16 +20,16 @@
     <!-- Navbar -->
 
     <header>
-      <a href="../../../index.html" class="header-brand"> CAPTAIN </a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
       <nav>
           <ul>
-            <li><a href="../python.html"> Python </a> </li>
-            <li><a href="../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
-            <li><a href="../android/android.html"> Android </a> </li>
-            <li><a href="../matlab/matlab.html"> MATLAB </a> </li>
-            <li><a href="../web_based_programming/web_based_programming.html"> HTML5 ~ CSS3 ~ JS </a> </li>
-            <li><a href="../deep_learning/deep_learning.html"> Deep Learning </a> </li>
-            <li><a href="../../../about.html"> About Me</a> </li>
+            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="../../android/android.html"> Android </a> </li>
+            <li><a href="../../matlab/matlab.html"> MATLAB </a> </li>
+            <li><a href="../../web_based_programming/web_based_programming.html"> HTML5 ~ CSS3 ~ JS </a> </li>
+            <li><a href="../../deep_learning/deep_learning.html"> Deep Learning </a> </li>
+            <li><a href="../../../../about.html"> About Me</a> </li>
           </ul>
           <div id="dropdown-header" class="dropdown">
             <button class="dropbtn"> Last Projects </button>
@@ -57,32 +57,42 @@
       <br><br><br><br><br><br>
       <div class="container">
       <article role="article">
-    		<h3>Sets </h3>
-        <p> B elow we cover the default sets construction </p>
+    		<h3> Tuples </h3>
+        <p> B elow we cover all the default tuples construction </p>
 
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# SETS
+# TUPLES
 # -------------------------------------------------------------------------------------------------
 
-print('\n\t\tSETS\n')
+print('\n\t\tTUPLES\n')
 
-groceries = {'cereal', 'milk', 'starcrunch', 'beer',          # list that can't containe any duplicate ...
-              'duct tape', 'lotion', 'beer'}                  # ...
-print(groceries)                                              # ... in fact,beer will be print only once
+numbers = (1,2,3,4,1)                             # first example: 4-item tuple
+print(numbers)                                    # ...
 
-if 'milk' in groceries:                                       # you can easily check if an element is
-    print('You already have milk hoss!')                      # inside the set (1)
-else:                                                         # ...
-    print('You need milk!')                                   # ...
+mixed_tuple = 'spam', 3.0, [10,20,30]             # second example: pharenteses are generally omitted
+print(mixed_tuple)                                # ...
 
-if 'sausages' in groceries:                                   # you can easily check if an element is
-    print('You already have sausages hoss!')                  # inside the set (2)
-else:                                                         # ...
-    print('You need sausages!')                               # ...
+# -------------------------------------------------------------------------------------------------
+# WORK with TUPLES
+# -------------------------------------------------------------------------------------------------
 
-print('')
+print('\n\t\tWORK with TUPLES\n')
+
+print(numbers + (5,6))                            # concatenation
+print(numbers)                                    # ...to see the changes
+
+print(numbers[0])                                 # indexing(1)
+print(mixed_tuple[2][1])                          # indexing(2)
+print(numbers.index(4))                           # type-specific method: number four appears at offset 3
+print(numbers.count(1))                           # counts how many times the argument occured
+
+#numbers[0] = 2                                   # tuples are immutable(1) (uncomment to see the error)
+#mixed_tuple.append(234)                          # tuples are immutable(2) (uncomment to see the error)
+mutable_numbers = (2,) + numbers[1:]              # create a new tuple for change value
+print(mutable_numbers)                            # to see the changes
+
   </code></pre>
 </div>
 
@@ -114,8 +124,8 @@ print('')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
-    <script type="text/javascript" src="../../../js/menu.js"></script>
-    <script type="text/javascript" src="../../../js/return_to_top_arrow.js"></script>
-    <script type="text/javascript" src="../../../res/prism_themes/prism.js"></script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
   </body>
 </html>

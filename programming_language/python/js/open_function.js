@@ -2,23 +2,23 @@
 /*                   LOOPS                        */
 /* ---------------------------------------------- */
 function open_MathOperator() {
-    window.open("code/1-Math_Operator.html");
+    window.open("code/datatypes/1-Math_Operator.html");
 }
 
 function open_String() {
-    window.open("code/2-String.html");
+    window.open("code/datatypes/2-String.html");
 }
 
 function open_Sets() {
-    window.open("code/3-Sets.html");
+    window.open("code/datatypes/3-Sets.html");
 }
 
 function open_List() {
-    window.open("code/4-Lists.html");
+    window.open("code/datatypes/4-Lists.html");
 }
 
 function open_Tuples() {
-    window.open("code/5-Tuples.html");
+    window.open("code/datatypes/5-Tuples.html");
 }
  /* ---------------------------------------------- */
  /*                   LOOPS                        */

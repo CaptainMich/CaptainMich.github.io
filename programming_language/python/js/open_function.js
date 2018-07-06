@@ -25,25 +25,41 @@ function open_Tuples() {
  /* ---------------------------------------------- */
 
 function open_ForLoop() {
-    window.open("code/script_example.html");
+    window.open("code/loops/1-For_Loop.html");
 }
 
 function open_WhileLoop() {
-    window.open("code/script_example.html");
+    window.open("code/loops/2-While_Loop.html");
 }
 
 function open_IfStatement() {
-    window.open("code/script_example.html");
+    window.open("code/loops/3-If_Statement.html");
 }
 
 function open_Range() {
-    window.open("code/script_example.html");
+    window.open("code/loops/4-Range.html");
 }
 
 function open_BreakContinue() {
-    window.open("code/script_example.html");
+    window.open("code/loops/5-Break_Continue_Statement.html");
 }
 
 function open_Execption() {
-    window.open("code/script_example.html");
+    window.open("code/loops/6-Exception.html");
+}
+
+/* ---------------------------------------------- */
+/*                   Functions                    */
+/* ---------------------------------------------- */
+
+function open_Functions() {
+   window.open("code/functions/1-Functions.html");
+}
+
+/* ---------------------------------------------- */
+/*                      OOP                       */
+/* ---------------------------------------------- */
+
+function open_Class() {
+   window.open("code/OOP/1-Class.html");
 }

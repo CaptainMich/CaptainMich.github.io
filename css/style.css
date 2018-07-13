@@ -320,9 +320,9 @@ header nav ul li a:hover{
     color: #fff;
     margin: 0;
     position: relative;
-    left: 16px;
+    left: 15px;
     top: 13px;
-    font-size: 19px;
+    font-size: 23px;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -ms-transition: all 0.3s ease;

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Python Code | Function </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="../script.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="../../android/android.html"> Android </a> </li>
+            <li><a href="../../matlab/matlab.html"> MATLAB </a> </li>
+            <li><a href="../../web_based_programming/web_based_programming.html"> HTML5 ~ CSS3 ~ JS </a> </li>
+            <li><a href="../../deep_learning/deep_learning.html"> Deep Learning </a> </li>
+            <li><a href="../../../../about.html"> About Me</a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+      <br><br><br><br><br><br>
+      <div class="container">
+      <article role="article">
+    		<h3> Function </h3>
+        <p> B elow we cover what a function is and how to work with it </p>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # FUNCTIONS
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\t\tFUNCTIONS\n')
+
+  def test_one():                                         # define a 'normal' function
+      print('Dayum, function is cool')                    # body of a function
+
+  test_one()                                              # call the function
+  test_one()                                              # call the function
+  test_one()                                              # call the function
+
+  print ('')
+
+  def bitcoin_to_usd(btc):                                # define a function that take in input also a variable
+      amount = btc * 527                                  # body of function
+      print(amount,'$')                                   # ...
+
+  bitcoin_to_usd(5.85)                                    # call the fuction
+  bitcoin_to_usd(1)                                       # call the fuction
+
+  print ('')
+</code></pre>
+</div>
+
+<h5> Return Values </h5>
+<p> After defining what a "normal" function is, it's noticeable that a function can return a value. So we can define a function which will return a value back, we will store the returned value in a variable and we will print it.  </p> <br>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # RETURN VALUES
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\t\tRETURN VALUES\n')
+
+
+  def sample(number):                                    # define the function
+      operation = (number / 2 + 7)                       # body of the function
+      return operation                                   # return a value
+
+
+  test_sample = sample(20)                                # storage the returned value in a variable
+  print('Testing Sample: ' + str(test_sample) + '\n')     # simple print statement
+</code></pre>
+</div>
+
+<h5> Default Values for Arguments </h5>
+<p> A function can be defined with default value: it's a value that will be returned everytime the function is called without passing any argument </p> <br>
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # DEFAULT VALUES for ARGUMENTS
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\tDEFAULT VALUES for ARGUMENTS\n')
+
+
+  def get_gender(sex = 'Unknown'):                        # define a function with a DEFAULT VALUE
+      if sex is 'm':                                      # body of the function (if - elif condition)
+          sex = 'Male'                                    # ...
+      elif sex is 'f':                                    # ...
+          sex = 'Female'                                  # ...
+      print(sex)                                          # body of the function (print the final sex)
+
+  get_gender('m')                                         # call the function
+  get_gender('f')                                         # many time to display
+  get_gender()                                            # the functionality
+
+  print('')
+</code></pre>
+</div>
+
+<h5> Keyword Arguments </h5>
+<p> It's possible to define function with multiple default values associated with a keyword. As we can see, we can replace every default value simply by passing the keyword and the value; if we don't associate the keyword, the values will be replaced in order </p> <br>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # KEYWORD ARGUMENTS
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\t\tKEYWORD ARGUMENTS\n')
+
+
+  def dumb_sentence(name = 'Pippo', action = 'ate', item = 'nuts'):       # define a function with 3 default value
+      print(name,action,item)                                             # ...
+
+  dumb_sentence()                                                         # call the function
+  dumb_sentence(name = 'SuperPippo')                                      # call the function with one different keyword argument
+  dumb_sentence(action = 'drive', item = 'a car')                         # call the function with two different keywords arguments
+  dumb_sentence('Captain','plays','guitar')                               # call the function with different keywords arguments
+
+  print('')
+</code></pre>
+</div>
+
+<h5> Flexible Number of Arguments </h5>
+<p> A function can be created with a variable number of arguments that is not previously defined </p> <br>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # FLEXIBLE NUMBER OF ARGUMENTS
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\tFLEXIBLE NUMBER of ARGUMENTS\n')
+
+
+  def add_numbers(*args):                                         # define a function with a variable number of arguments
+      total = 0                                                   # create a variable to store the final result
+      for a in args:                                              # loop that adds numbers and print the total
+          total += a                                              # ...
+      print(total)                                                # ...
+
+  add_numbers(3)                                                  # some examples of function call
+  add_numbers(1, 2, 43)                                           # ...
+  add_numbers(112312, 1232134, 35765, 146547, 5563)               # ...
+
+  print('')
+</code></pre>
+</div>
+
+<h5> Unpacking Arguments </h5>
+<p> We have two different ways to pass arguments from a list to a function: the first one is pass the arguments one by one; the other one is pass a packed argument list as function argument and unpack it (it should be noted that the list must contain the same number of arguments as the number of arguments taken by the function )  </p> <br>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+  # -------------------------------------------------------------------------------------------------
+  # UNPACKING ARGUMENTS
+  # -------------------------------------------------------------------------------------------------
+
+  print('\n\t\tUNPACKING ARGUMENTS\n')
+
+  def healt_calculator(age, apples_ate, cigs_smoked):                             # define a function
+      answer = (100 - age) + (apples_ate * 0.35) - (cigs_smoked * 1)			        # ...
+      print(answer)                                                               # ...
+
+  sample_data = [20, 2, 0]
+                                                                                  # call the function and ...
+  healt_calculator(sample_data[0],sample_data[1],sample_data[2])                  # ...pass arguments one by one ...
+  healt_calculator(*sample_data)                                                  # ...or unpacking argument list
+
+  print('')
+  </code></pre>
+</div>
+    	</article>
+      </div>
+
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+          <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:michele.salvo96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+  </body>
+</html>

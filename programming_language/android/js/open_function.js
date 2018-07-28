@@ -1,6 +1,6 @@
 /* ---------------------------------------------- */
-/*                   TEMPLATE                     */
+/*                   PROJECTS                     */
 /* ---------------------------------------------- */
-function open_MathOperator() {
-    window.open("code/datatypes/1-Math_Operator.html");
+function open_Eigenfaces() {
+    window.open("projects/Eigenfaces/Eigenfaces.html");
 }

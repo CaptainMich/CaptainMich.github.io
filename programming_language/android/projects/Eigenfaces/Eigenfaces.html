@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Android | Eigenfaces </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-darcula.css">
+      <link rel="stylesheet" href="Eigenfaces.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../../python/python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="../../android.html"> Android </a> </li>
+            <li><a href="../../../matlab/matlab.html"> MATLAB </a> </li>
+            <li><a href="../../../web_based_programming/web_based_programming.html"> HTML5 ~ CSS3 ~ JS </a> </li>
+            <li><a href="../../../deep_learning/deep_learning.html"> Deep Learning </a> </li>
+            <li><a href="../../../../about.html"> About Me</a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+      <br><br><br><br><br><br>
+      <div class="container">
+
+      <article role="article">
+    		<div class="head-title">
+    			<h1> Eigenfaces </h1>
+    			<h2> A Project by Captain Mich </h2>
+    			<time> July, 2018 </time>
+    		</div>
+
+    		<p> This is an App made for a University project that computes eigenfaces and recognize a person in a given database set </p>
+
+    		<section role="group">
+    			<a href="file/eigenfaces.zip" role="button">Download ZIP</a>
+    			<a href="https://github.com/CaptainMich/" role="button">Download TAR</a>
+    			<a href="https://github.com/CaptainMich/" role="button">Fork on Github</a>
+    		</section>
+
+    		<h3> Project Division </h3>
+    		<p> Below we are going to divide the project in sections; we also assume that the database is just a folder with color pics inside  </p>
+    		<ul>
+          <li> 1. Main Activity </li>
+          <li> 2. Create Database Class </li>
+          <li> 3. Create Image Class </li>
+          <li> 4. Create Eigenfaces Class and Task </li>
+
+    			<!-- <li> Built with <abbr title="Syntatically Awesome Stylesheets">Sass</abbr></li>
+    			<li> Uses semantic HTML5 elements and <abbr title="Accessible Rich Internet Applications">ARIA</abbr> Roles.</li> -->
+    		</ul>
+
+    		<h3> Main Activity </h3>
+    		<p> To start, let's go to create a simple graphical interface for our app. It will be made by: </p>
+        <ul>
+          <li> A button to create the database and compute the eigenfaces </li>
+          <li> A button to update the database </li>
+          <li> A button to compare a taken picture with the database set </li>
+    		</ul>
+
+
+        <div class="row-full code">
+          <pre><code class="language-xml line-numbers">
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"&gt;
+
+    &lt;Button
+        android:id="@+id/btn_check"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="Check"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="409dp" /&gt;
+
+    &lt;Button
+        android:id="@+id/btn_update_db"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btn_load_db"
+        android:layout_marginEnd="15dp"
+        android:text="Update DB"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="409dp" /&gt;
+
+    &lt;Button
+        android:id="@+id/btn_load_db"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="71dp"
+        android:layout_marginStart="15dp"
+        android:text="Load DB"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="409dp" /&gt;
+
+&lt;/RelativeLayout&gt;
+      </code></pre>
+        </div>
+
+        <figure>
+          <img src="img/1.1-Activity_Main_xml.png" alt="" />
+          <figcaption> How the app interface looks like </figcaption>
+        </figure>
+
+    		<!-- <blockquote>
+    			<code>blockquote</code>. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, distinctio, facere quo laudantium fuga laborum odio eum doloremque officia eligendi voluptatibus id nulla fugit ut ipsum suscipit vel eveniet! Dolore!
+    		</blockquote> -->
+
+    		<p> Then we need to link all the created buttons in the Main Activity of our app in order to be able to use them.Two methods are defined: one to initialize the elements of our interface, the other one to initialize the listeners of each button. Then, the two methods are called inside the onCreate. </p>
+
+        <div class="row-full code">
+          <pre><code class="language-java line-numbers">
+public class MainActivity extends AppCompatActivity {
+
+    private Button btn_Load_Db = null;
+    private Button btn_Update_Db = null;
+    private Button btn_Check = null;
+    private Context context = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        initViews();
+        initListeners();
+    }
+
+    /**
+     * This method is to initialize views
+     */
+    private void initViews() {
+
+        btn_Load_Db = (Button) findViewById(R.id.btn_load_db);
+        btn_Update_Db = (Button) findViewById(R.id.btn_update_db);
+        btn_Check = (Button) findViewById(R.id.btn_check);
+
+    }
+
+    /**
+     * This method is to initialize listeners
+     */
+    private void initListeners() {
+
+        btn_Load_Db.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initDB();
+            }
+        });
+
+        btn_Update_Db.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btn_Check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+}
+          </code></pre>
+        </div>
+
+
+        <h3> Database Class </h3>
+        <p> For reasons of simplifications we are going to assume that the database is just a folder with a given set of color images of any dimension not bigger than 800kb. It's noticeable also that in a database there can be more than one face of a same person; each image should have the same light exposition and each face should be aligned. In our example we are going to take as database set 20 images made of 4 people in 5 different position. </p>
+
+          <figure>
+            <img src="http://placehold.it/1200x600" alt="" />
+            <figcaption> Our Starting Database </figcaption>
+          </figure>
+
+        <p> In order to go through the next phases of the project we need to resize the images: we have choosen 256 x 256 pixels as default dimension. We also need to turn them into grayscale to reduce the computational cost of the implementation and compress as '.png' filetype. <br>
+        Let's go into the code: </p>
+        <div class="row-full code">
+          <pre><code class="language-java line-numbers">
+public class Database {
+
+    private String DEFAULT_APP_IMAGEDATA_DIRECTORY;
+    private String lastImagePath = "";
+
+    /** Decodes the Bitmap from 'path' and returns it */
+    public Bitmap getImage(String path) {
+        Bitmap bitmapFromPath = null;
+        try {
+            bitmapFromPath = BitmapFactory.decodeFile(path);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }
+
+        return bitmapFromPath;
+    }
+
+    /** Returns the String path of the last saved image */
+    public String getSavedImagePath() {
+        return lastImagePath;
+    }
+
+    public boolean putImageWithFullPath(String fullPath, Bitmap theBitmap) {
+        return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
+    }
+
+    public String setupFullPath(String imageName) {
+        File mFolder = new File(Environment.getExternalStorageDirectory()+"/APP/DB_bw");
+
+        if (isExternalStorageReadable() && isExternalStorageWritable() && !mFolder.exists()) {
+            if (!mFolder.mkdirs()) {
+                Log.e("ERROR", "Failed to setup folder");
+                return "";
+            }
+        }
+
+        return mFolder.getPath() + '/' + imageName;
+    }
+
+    /** Check if external storage is writable or not */
+    public static boolean isExternalStorageWritable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
+
+    /** Check if external storage is readable or not */
+    public static boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        return Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state);
+    }
+
+    /** Saves the Bitmap as a PNG file at path 'fullPath' */
+    private boolean saveBitmap(String fullPath, Bitmap bitmap) {
+        if (fullPath == null || bitmap == null)
+            return false;
+
+        boolean fileCreated = false;
+        boolean bitmapCompressed = false;
+        boolean streamClosed = false;
+
+        File imageFile = new File(fullPath);
+
+        if (imageFile.exists())
+            if (!imageFile.delete())
+                return false;
+
+        try {
+            fileCreated = imageFile.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(imageFile);
+            bitmapCompressed = bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            bitmapCompressed = false;
+
+        } finally {
+            if (out != null) {
+                try {
+                    out.flush();
+                    out.close();
+                    streamClosed = true;
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    streamClosed = false;
+                }
+            }
+        }
+
+        return (fileCreated && bitmapCompressed && streamClosed);
+    }
+
+    public void createDatabase(){
+
+        String folder_path = Environment.getExternalStorageDirectory()+"/APP/DB_colors/";
+        String image_path = null;
+        File directory = new File(folder_path);
+        File[] files = directory.listFiles();
+
+        //Log.d("Files", "Size: "+ files.length);
+
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                image_path = folder_path + files[i].getName().toString();
+                Bitmap temp = getImage(image_path);
+                Bitmap temp_bw = Image.createGrayScale(temp);
+                Bitmap resized_temp = Image.resizeImage(temp_bw);
+                putImageWithFullPath(setupFullPath(files[i].getName().toString().replace(".jpeg","") + "_bw.png"), resized_temp);
+            }
+        }
+    }
+
+
+
+    public int getNumberOfFiles(){
+
+        String folder_path = Environment.getExternalStorageDirectory()+"/APP/DB_colors/";
+        File directory = new File(folder_path);
+        File[] files = directory.listFiles();
+
+       return files.length;
+
+    }
+          </code></pre>
+        </div>
+
+        <br>
+        <p> We created a public Database class made with some different methods, let's look at them in detail:
+        </p>
+
+        <ul>
+          <li> <b> getImage </b> -> this method takes in input a file path and return ,if it is possible (see the try and catch block), the decoded file as a Bitmap
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> getSaveImagedPath </b> -> this method just gives us the path of the last saved image as a string
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> isExternalStorageWritable </b> -> this method is boolean, it check if external storage is writable or not
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> isExternalStorageReadable </b> -> this method is boolean, it check if external storage is readable or not
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> setupFullPath </b> -> this method is used to create our database grayscale folder; if the path is successfully created it is returned as a string.
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> saveBitmap </b> -> this method is boolean, it save the Bitmap as a '.png' file at the given input path. It return true only if the file is created, the bitmap compression in '.png' is made and the stream is successfully closed.
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> putImageWithFullPath </b> -> this method take in input the path where you want to save the '.png' image and a Bitmap filetype; using the <code> saveBitmap </code> method, it save the image in the chosen path
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> createDatabase </b> -> this method combine some other methods of the Image class, that we will create after, to manipulate the image to satisfy our initial working conditions and finally save the garyscale image. <br>
+          After checking if the database colors fold exists, we use the <code> putImageWithFullPath </code> method in a for cycle to convert each any dimension colors image to a black and white 256 x 256 pixels '.png' image.
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> getNumberOfFiles </b> -> this method just gives us the number of files in a chosen directory
+          </li>
+        </ul>
+
+        <h3> Image Class </h3>
+    		<p> We are going to create now a class to manage all the image manipulation that we need in our process </p>
+
+        <div class="row-full code">
+          <pre><code class="language-java line-numbers">
+public class Image {
+
+    private static final String TAG="Image";
+
+
+    public static  Bitmap resizeImage(Bitmap src){
+        if(src!=null)
+            return Bitmap.createScaledBitmap(src, 256, 256, true);
+        else
+            Log.e(TAG,"Error, file don't exist");
+        return null;
+    }
+
+    public static Bitmap createGrayScale(Bitmap src){
+        int width = src.getWidth();
+        int height = src.getHeight();
+
+        Bitmap dest = Bitmap.createBitmap(width, height,
+                Bitmap.Config.RGB_565);
+
+        Canvas canvas = new Canvas(dest);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0); //value of 0 maps the color to gray-scale
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(colorMatrix);
+        paint.setColorFilter(filter);
+        canvas.drawBitmap(src, 0, 0, paint);
+
+        return dest;
+    }
+
+    public static double[] getColumnVector(Bitmap src, int imageSize){
+
+        Bitmap bitmap = src; // assign your bitmap here
+        int pixelCount = 0;
+        double[] bitmap_column = new double[imageSize];
+
+        for (int y = 0; y < bitmap.getHeight(); y++)
+        {
+            for (int x = 0; x < bitmap.getWidth(); x++)
+            {
+                int c = bitmap.getPixel(x, y);
+                bitmap_column[pixelCount] = c;
+                pixelCount++;
+            }
+        }
+
+        return bitmap_column;
+    }
+
+}
+
+          </code></pre>
+        </div>
+
+        <p> let's look at them in detail: </p>
+
+        <ul>
+          <li> <b> resizeImage </b> -> this method takes in input a Bitmap and return it scaled
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> createGrayScale </b> -> this method takes as input a Bitmap and return it in grayscale. To be able to draw something we need the <code> drawBitmap </code> method of canvas class; this method need to work : <br>
+             - A Bitmap object to hold the pixels
+            <br>
+             - A Rect object to rapresent the subset of the bitmap to be drawn
+             <br>
+             - A Rect object to rapresent that the bitmap will be scaled/translated to fit into
+             <br>
+             - A Paint object to describe the colors and styles for the drawing
+              <br>
+
+            We use the colorMatrix <code> setSaturation </code> method (set to 0 to map the grayscale) as filter for a paint ('it holds the style and color information about how to draw geometries, text and bitmaps' as described by the Android reference) object type. We finally pass it to the canvas object and get our black an white image
+          </li>
+        </ul>
+
+    	</article>
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+          <a href="#" class="social-icons"><i class="fab fa-github"></i></i></a>
+          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script src="../../../../js/menu.js"></script>
+    <script src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+  </body>
+</html>

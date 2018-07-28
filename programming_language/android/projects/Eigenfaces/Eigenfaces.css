@@ -1,0 +1,367 @@
+@font-face {
+  font-family: 'merriweather-regular';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-italic';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-bold';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-bolditalic';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-bolditalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-black';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-heavyitalic';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-heavyitalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-light';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-light.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-lightitalic';
+  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-lightitalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'merriweather-bold';
+  font-weight: 700;
+  font-style: normal;
+}
+
+[role="note"] {
+  font-family: 'merriweather-light';
+  font-weight: 200;
+  font-style: normal;
+}
+
+blockquote {
+  font-family: 'merriweather-lightitalic';
+  font-weight: 200;
+  font-style: italic;
+}
+
+a[role="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  font-family: 'merriweather-regular';
+  font-weight: 400;
+  font-style: normal;
+}
+
+h5, h6, dl dt {
+  font-family: 'merriweather-italic';
+  font-weight: 400;
+  font-style: italic;
+}
+
+/*
+  ======== Variables ========
+*/
+*, *::before, *::after {
+  box-sizing: border-box !important;
+}
+*:focus, *::before:focus, *::after:focus {
+  outline: none;
+}
+
+body {
+  font-family: "merriweather-regular", Georgia,  sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #444;
+  margin: 0px 20px 0px 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #222;
+  margin: 1em auto 0.25em auto;
+  max-width: 50rem;
+  font-weight: normal;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4.0625rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 2.5625rem;
+}
+
+h4 {
+  font-size: 2rem;
+}
+
+h5 {
+  font-size: 1.5625rem;
+}
+
+h6 {
+  font-size: 1.25rem;
+}
+
+p {
+  max-width: 50rem;
+  margin: 0 auto;
+  text-align: left;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+}
+
+p + p {
+  margin-top: 1.5em;
+}
+
+.container{
+    width: 93%;
+}
+
+[role="group"] {
+  max-width: 50rem;
+  margin: 1em auto;
+}
+
+article[role="article"] {
+  counter-reset: figure;
+}
+article[role="article"] .head-title {
+  text-align: center;
+  margin-bottom: 3em;
+}
+article[role="article"] .head-title h1, article[role="article"] .head-title h2, article[role="article"] .head-title h3, article[role="article"] header h4, article[role="article"] .head-title h5, article[role="article"] .head-title h6 {
+  margin: 0 auto;
+}
+article[role="article"] > p:first-of-type {
+  font-size: 1.25em;
+  margin-bottom: 1em;
+}
+article[role="article"] > p:first-of-type:first-letter {
+  margin-right: -0.1em;
+  font-size: 2em;
+  line-height: 0;
+}
+
+a[role="link"] {
+  text-decoration: none;
+  border: none;
+  border-bottom: 0.0625rem dotted #2c90c6;
+  color: #2c90c6;
+}
+a[role="link"]:hover, a[role="link"]:focus {
+  border-bottom-style: solid;
+}
+
+
+blockquote {
+  max-width: 42.5rem;
+  font-size: 1rem;
+  margin: 1em auto;
+  color: #444;
+}
+
+blockquote code, blockquote q {
+  font-style: normal;
+}
+blockquote cite {
+  display: block;
+  text-align: right;
+}
+
+q::before {
+  content: "\201C";
+}
+q::after {
+  content: "\201D";
+}
+
+small {
+  color: #666666;
+  font-size: 0.75rem;
+}
+
+abbr {
+  border-bottom: 0.0625rem dotted #222;
+  color: #222;
+  cursor: help;
+}
+
+ul, ol {
+  max-width: 50rem;
+  margin: 1em auto;
+}
+
+ul {
+  list-style-type: square;
+}
+
+a[role="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  font-size: 1.125em;
+  display: inline-block;
+  padding: 0.5em 0.75em;
+  margin: 0.25rem 0;
+  border: 0.0625rem solid transparent;
+  background: #f6f6f6;
+  border-radius: 0.125em;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  letter-spacing: 0.0625rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+a[role="button"]:hover, a[role="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="reset"]:hover,
+input[type="reset"]:focus,
+button:hover,
+button:focus {
+  border-color: #666666;
+}
+
+img {
+  max-width: 100%;
+}
+
+figure {
+  max-width: 42.5rem;
+  margin: 2em auto;
+  padding: 1em;
+  background: #f6f6f6;
+}
+
+figure figcaption {
+  font-size: 1.125rem;
+}
+
+figure figcaption:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  opacity: 0.5;
+}
+
+[role="note"] {
+  color: #666666;
+  font-size: 0.75rem;
+  -moz-column-count: 2;
+  -moz-column-gap: 1em;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 1em;
+}
+@media screen and (max-width: 48rem) {
+  [role="note"] {
+    -moz-column-count: 1;
+    -webkit-column-count: 1;
+    max-width: 37.5rem;
+    margin: 1em auto;
+  }
+}
+
+dl {
+  max-width: 40rem;
+  margin: 1em auto;
+}
+dl dt {
+  font-size: 1.25em;
+}
+
+::selection {
+  background: rgba(44, 144, 198, 0.1);
+}
+
+::-moz-selection {
+  background: rgba(44, 144, 198, 0.1);
+}
+
+table {
+  margin: 1em auto;
+  width: 40rem;
+}
+
+thead {
+  background: #f6f6f6;
+}
+
+td {
+  padding: 0.125em 0.5em;
+}
+
+.code {
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 80%;
+  font-size: 16px;
+}
+
+@media (min-width: 960px) {
+
+  h1, h2, h3, h4{
+
+    width: 21ch;
+  	white-space: nowrap;
+  	overflow: hidden;
+    -webkit-animation: typing 2s steps(21, end),
+      blink-caret 0.5s step-end infinite alternate;
+  }
+
+  @-webkit-keyframes typing { from { width: 0; } }
+  @-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
+}
+@media (max-width: 960px) {
+
+  .code {
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 960px) {
+
+    #return-to-top i {
+        left: 11px;
+        top: 4px;
+    }
+}

@@ -455,26 +455,6 @@ public class Image {
 
         return dest;
     }
-
-    public static double[] getColumnVector(Bitmap src, int imageSize){
-
-        Bitmap bitmap = src; // assign your bitmap here
-        int pixelCount = 0;
-        double[] bitmap_column = new double[imageSize];
-
-        for (int y = 0; y < bitmap.getHeight(); y++)
-        {
-            for (int x = 0; x < bitmap.getWidth(); x++)
-            {
-                int c = bitmap.getPixel(x, y);
-                bitmap_column[pixelCount] = c;
-                pixelCount++;
-            }
-        }
-
-        return bitmap_column;
-    }
-
 }
 
           </code></pre>

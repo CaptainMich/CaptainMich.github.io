@@ -306,6 +306,10 @@ dl dt {
   font-size: 1.25em;
 }
 
+dd {
+  font-size: 0.75em;
+}
+
 ::selection {
   background: rgba(44, 144, 198, 0.1);
 }
@@ -328,9 +332,9 @@ td {
 }
 
 .code {
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
+  margin-left: 0%;
+  margin-right: 0%;
+  width: 100%;
   font-size: 16px;
 }
 

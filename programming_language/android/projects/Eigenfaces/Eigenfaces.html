@@ -95,14 +95,14 @@
 
         <div class="row-full code">
           <pre><code class="language-xml line-numbers">
-&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;?xml version="1.0" encoding="utf-8"?/&gt;
 &lt;RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"&gt;
+    tools:context=".MainActivity"/&gt;
 
     &lt;Button
         android:id="@+id/btn_check"
@@ -151,7 +151,7 @@
     			<code>blockquote</code>. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, distinctio, facere quo laudantium fuga laborum odio eum doloremque officia eligendi voluptatibus id nulla fugit ut ipsum suscipit vel eveniet! Dolore!
     		</blockquote> -->
 
-    		<p> Then we need to link all the created buttons in the Main Activity of our app in order to be able to use them.Two methods are defined: one to initialize the elements of our interface, the other one to initialize the listeners of each button. Then, the two methods are called inside the onCreate. </p>
+    		<p> Then we need to link all the created buttons in the Main Activity of our app in order to be able to use them.Two methods are defined: one to initialize the elements of our interface, the other one to initialize the listeners of each button. Then, the two methods are called inside the onCreate. </p> <br>
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
@@ -213,15 +213,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         <h3> Database Class </h3>
-        <p> For reasons of simplifications we are going to assume that the database is just a folder with a given set of color images of any dimension not bigger than 800kb. It's noticeable also that in a database there can be more than one face of a same person; each image should have the same light exposition and each face should be aligned. In our example we are going to take as database set 20 images made of 4 people in 5 different position. </p>
+        <p> For reasons of simplifications we are going to assume that the database is just a folder with a given set of color images of any dimension not bigger than 2 MB (simply for a speed time reason, especially on big databses). It's noticeable also that in a database there can be more than one face of a same person; each image should have the same light exposition and each face should be aligned. In our example we are going to take as database set 20 images made of 4 people in 5 different position. </p>
 
           <figure>
-            <img src="http://placehold.it/1200x600" alt="" />
-            <figcaption> Our Starting Database </figcaption>
+            <img src="img/1.2-DatabaseExample.png" alt="" />
+            <figcaption> Example Of Starting Database </figcaption>
           </figure>
 
-        <p> In order to go through the next phases of the project we need to resize the images: we have choosen 256 x 256 pixels as default dimension. We also need to turn them into grayscale to reduce the computational cost of the implementation and compress as '.png' filetype. <br>
-        Let's go into the code: </p>
+        <p> In order to go through the next phases of the project we need to resize the images: we have choosen 256 x 256 pixels as default dimension. We also need to turn them into grayscale to reduce the computational cost of the implementation and compress as '.png' filetype. Let's go into the code: </p> <br>
+
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
 public class Database {
@@ -408,8 +408,20 @@ public class Database {
           </li>
         </ul>
 
+        <p> To be sure that everything works correctly we need to add the writing permission on the <code> AndroidManifest.xml</code> (it's possible to find it by following this path: 'app' -> 'manifest'):</p> <br>
+
+
+        <div class="row-full code">
+          <pre><code class="language-xml line-numbers">
+
+&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/&gt;
+
+      </code></pre>
+        </div>
+
+
         <h3> Image Class </h3>
-    		<p> We are going to create now a class to manage all the image manipulation that we need in our process </p>
+    		<p> We are now going to create a class to manage all the image manipulation that we need in our process </p> <br>
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
@@ -468,7 +480,7 @@ public class Image {
           </code></pre>
         </div>
 
-        <p> let's look at them in detail: </p>
+        <p> Let's look at them in detail: </p>
 
         <ul>
           <li> <b> resizeImage </b> -> this method takes in input a Bitmap and return it scaled
@@ -476,7 +488,7 @@ public class Image {
         </ul>
 
         <ul>
-          <li> <b> createGrayScale </b> -> this method takes as input a Bitmap and return it in grayscale. To be able to draw something we need the <code> drawBitmap </code> method of canvas class; this method need to work : <br>
+          <li> <b> createGrayScale </b> -> this method takes as input a Bitmap and return it in grayscale. To be able to draw something we need the <code> drawBitmap </code> method of canvas class; this method need to work : <br> <br>
              - A Bitmap object to hold the pixels
             <br>
              - A Rect object to rapresent the subset of the bitmap to be drawn
@@ -484,11 +496,291 @@ public class Image {
              - A Rect object to rapresent that the bitmap will be scaled/translated to fit into
              <br>
              - A Paint object to describe the colors and styles for the drawing
-              <br>
+              <br> <br>
 
             We use the colorMatrix <code> setSaturation </code> method (set to 0 to map the grayscale) as filter for a paint ('it holds the style and color information about how to draw geometries, text and bitmaps' as described by the Android reference) object type. We finally pass it to the canvas object and get our black an white image
           </li>
         </ul>
+
+        <h3> Eigenfaces Class and Task </h3>
+
+        <p> To manage the eigenfaces computation we are gonna work with asyncronous task. Let' see how an asyncronous task work </p>
+
+        <dl>
+          <dt> Asyncronous Task </dt>
+          <dd> The Android AsyncTask class allows you to perform background processing and then show the results on the UI of the main tread. It is usually used to perform short-term operations. Each asynchronous processing consists of about 4 steps that android executes consecutively and are :
+            <br>
+            - <code> onPreExecute </code> : all the operations before the task;
+            <br>
+            - <code> doInBackground </code> : the operations that the task must do;
+            <br>
+            - <code> onProgressUpdate </code> : used to show the progress of the task;
+            <br>
+            - <code> onPostExecute </code> : operations to be performed after the task;
+            <br>
+          </dd>
+        </dl>
+        <br>
+
+        <p> So, first, let's create a class that extends and overrides the AsyncTask methods by calling it, then we are gonna need a constructor for our class ( we will also use in the code the two previuosly created classes ); finally we are going to call all the four steps of which we have spoken above </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-java line-numbers">
+public class Eigenfaces extends AsyncTask &lt;Database, Integer, Void&gt; {
+
+    private Database db;
+    private int imageSize;
+    private int M;
+    EigenfacesResultTask mCallback = null;
+    Context context = null;
+    ProgressDialog myProgress = null;
+
+
+    public Eigenfaces(Context _context, Database db, int imageSize, int M, EigenfacesResultTask myEFRT) {
+
+        context = _context;
+
+        this.db = db;
+        this.imageSize = imageSize;
+        this.M = 25;                        // number of database images
+        this.mCallback = myEFRT;
+
+        myProgress = new ProgressDialog(context);
+        myProgress.setTitle("Processing Data");
+        myProgress.setMessage("Please wait...");
+        myProgress.setMax(100);
+        myProgress.setIndeterminate(false);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        //myProgress.show();
+    }
+
+
+    @Override
+    protected Void doInBackground(Database... params) {
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        myProgress.setProgress(values[0]);
+    }
+
+    /**
+     * @Override protected void onPostExecute(String result) {
+     * super.onPostExecute(result);
+     * mCallback.onTaskComplete(result);
+     * }
+     **/
+
+}
+          </code></pre>
+        </div>
+
+        <p> We can now go deeper in the code; we have to deal with the images, manipulate them. First of all, let's consider an image as a 'n x m' matrix, in our case we will have a square matrix of order 256, where each element of the matrix is composed by a value from 0 to 255 (the images are black and white). Called <b> I<sub>1</sub> </b> the image of the first subject, we have a 256 x 256 matrix that we want to rapresent as a unique concatenated column vector that we are going to call <b> &#915;<sub>1</sub> </b>. So, let's add a method inside the Image class that take as input a Bitmap (matrix) and return a conacated column vector of that image : </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-java line-numbers">
+public static double[] getColumnVector(Bitmap src, int imageSize){
+
+    Bitmap bitmap = src; // assign your bitmap here
+    int pixelCount = 0;
+    double[] bitmap_column = new double[imageSize];
+
+    for (int y = 0; y < bitmap.getHeight(); y++)
+    {
+        for (int x = 0; x < bitmap.getWidth(); x++)
+        {
+            int c = bitmap.getPixel(x, y);
+            bitmap_column[pixelCount] = c;
+            pixelCount++;
+        }
+    }
+
+    return bitmap_column;
+}
+        </code></pre>
+      </div>
+
+      <p> Iterate the process for all the images of our database and put all of them in a new set called <b> S = {&#915;<sub>1</sub>, &#915;<sub>2</sub>, ..., &#915;<sub>M</sub>}</b>, where M is the number of all the database images.</p>
+
+      <p> What it is interests for us it is to consider the difference between each subject face of the database. So we need to calculate a new array that represent the <b> <i> face average </i> </b>, let's call it <b>  &Psi; = (1/M) <i style="font-size: 34px;">&Sigma;</i> &#915;<sub>i</sub> </b>, where the sum goes from i= 1 to M). </p>
+
+      <p> Let's translate it into code as a new method that we will call <code> calculateFaceAverage </code>for the Eigenfaces class (must be after the last step of the asyncronous call); it will take as input argument the set of all column arrays and the size of our image and it will return the array of face average as a double type : </p> <br>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+private double[] calculateFaceAverage(int imageSize, List&lt;double[]&gt; set) {
+
+    double[] psi = new double[imageSize * imageSize];
+
+    for (int j = 0; j < set.size(); j++) {
+        for (int k = 0; k < set.get(j).length; k++) {
+            psi[j] += (1 / M) * set.get(j)[k];
+        }
+    }
+
+    return psi;
+}
+      </code></pre>
+    </div>
+
+    <p> Go on considering again <b> &#915;<sub>1</sub> </b> and subtract to it the face average array </p>
+
+    <p style="text-align: center"> &Phi;<sub>1</sub> = &#915;<sub>1</sub> - &Psi; </p>
+
+    <p> Repeating the process for each face, focusing on the characteristic that make unique each subjet, we will obtain a new database. We store it in a  <b> 'n <sup>2</sup> x M' </b> matrix. Called that matrix <b> A </b>, it will be the data set who will constitute our training set: </p>
+
+    <p style="text-align: center;"> A = [&Phi;<sub>1</sub>, &Phi;<sub>2</sub>, ..., &Phi;<sub>M</sub>] </p>
+
+    <p> Let's do it through the code by adding a new method called <code> subtractFaceAverageToAnImage </code> that will simply do the subtraction of two array element by element, adding the result to the A matrix of which we have spoken above </p> <br>
+
+    <div class="row-full code">
+      <pre><code class="language-java line-numbers">
+private double[][] subtractFaceAverageToAnImage(List&lt;double[]&gt; set, double[] phi) {
+
+    double[][] set_less_face_average = null;
+
+    for (int i = 0; i < set.size(); i++) {
+        for (int j = 0; j < set.get(i).length; j++) {
+            set_less_face_average[i][j] = set.get(i)[j] - phi[j];
+        }
+    }
+
+    return set_less_face_average;
+}
+        </code></pre>
+      </div>
+
+      <p> The <b> A </b> space has n<sup>2</sup> dimension, we have to reduce it by keeping the information of data dispersion intact. Let's build the covariance matrix: </p>
+
+      <p style="text-align: center;"> C = (1/M) <i style="font-size: 34px;">&Sigma;</i>  &Phi; &Phi;<sup>T</sup> <br>                         where the sum goes from n = 1 to M and both of &Phi; are &Phi; <sub>n</sub>  </p>
+
+      <p>
+        It is easy to demonstrate that :
+      </p>
+
+      <p style="text-align: center;"> C = (1/M) A A <sup>T</sup> </p>
+
+      <p> To look for the main components of the space, we can look for the eigenvectors of C. After calculating these eigenvalues ​​of A A <sup> T </sup>, we can order them in descending order according to the eigenvectors associated with them. The eigenvectors (which we will also call <b> eigenfaces </b>) associated with the larger eigenvalues ​​will be the ones that most characterize the variance of the training set
+      </p>
+
+      <p> To code this part we have made five different functions:
+      <br> <br>
+      - <code> transposeMatrix </code> : it computes the transposed of a matrix
+      <br>
+      - <code> productOfTwoMatrix </code>: it computes the product of two matrix
+      <br>
+      - <code> multiplyMatrixForANumber </code>: it multiplies each element of a matrix by a number
+      <br>
+      - <code> calculateCovarianceMatrix </code>: it computes the covariance matrix
+      <br>
+      - <code> calculateEingenvectors </code>
+
+    </p> <br>
+
+     <div class="row-full code">
+       <pre><code class="language-java line-numbers">
+private static double[][] transposeMatrix(double[][] m) {
+
+   double[][] temp = new double[m[0].length][m.length];
+
+   for (int i = 0; i < m.length; i++) {
+       for (int j = 0; j < m[0].length; j++) {
+           temp[j][i] = m[i][j];
+       }
+   }
+
+   return temp;
+}
+         </code></pre>
+       </div>
+       <br>
+
+       <div class="row-full code">
+         <pre><code class="language-java line-numbers">
+ private static double[][] productOfTwoMatrix(double[][] m1, double[][] m2) {
+
+     int m1_col = m1[0].length;              // m1 columns length
+     int m1_row = m1.length;                 // m1 row length
+     int m2_col = m2[0].length;              // m2 columns length
+     int m2_row = m2.length;                 // m2 row length
+
+     double[][] mResult = new double[m1_row][m2_col];
+
+     // check if it is possible to do matrix multiplication
+     if (m1_col != m2_row) {
+         return null;
+     } else {
+
+         for (int i = 0; i < m1_row; i++) {
+             for (int j = 0; j < m2_col; j++) {
+                 for (int k = 0; k < m1_col; k++) {
+                     mResult[i][j] += m1[i][k] * m2[k][j];
+                 }
+             }
+         }
+     }
+
+     return mResult;
+ }
+           </code></pre>
+         </div>
+         <br>
+
+         <div class="row-full code">
+           <pre><code class="language-java line-numbers">
+ private static double[][] multiplyMatrixForANumber(double[][] m, double p) {
+
+     int m_col = m[0].length;              // m1 columns length
+     int m_row = m.length;                 // m1 row length
+
+     double[][] mResult = new double[m_row][m_col];
+
+     for (int i = 0; i < m_row; i++) {
+         for (int j = 0; j < m_col; j++) {
+
+             mResult[i][j] = p * m[i][j];
+         }
+     }
+
+     return  mResult;
+ }
+             </code></pre>
+           </div>
+           <br>
+
+           <div class="row-full code">
+             <pre><code class="language-java line-numbers">
+ private double[][] calculateCovarianceMatrix(double[][] set) {
+
+     double[][] covarianceMatrix = null;
+     double[][] covarianceMatrix_temp = null;
+
+     double[][] set_transposed = transposeMatrix(set);
+
+     covarianceMatrix_temp = (productOfTwoMatrix(set, set_transposed));
+
+     covarianceMatrix = multiplyMatrixForANumber(covarianceMatrix_temp, (1/M) );
+
+     return covarianceMatrix;
+ }
+               </code></pre>
+             </div>
+
+
+
+
+
+
+
+
+
+
 
     	</article>
       </div>

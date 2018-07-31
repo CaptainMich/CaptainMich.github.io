@@ -124,6 +124,13 @@ header{
   z-index:99;
 }
 
+header .header-logo{
+  text-align: center;
+  margin-top: 20px;
+  padding-left: 20px;
+  float: left;
+}
+
 header .header-brand{
   font-family: Catamaran;
   font-size: 24px;
@@ -137,7 +144,7 @@ header .header-brand{
   margin: 31px 0;
   text-align: left;
   line-height: 38px;
-  padding: 0 20px 0 40px;
+  padding: 0 20px 0 5px;
   border-right: 3px solid #111;
   float: left;
 }
@@ -239,7 +246,7 @@ header nav ul li a:hover{
     background-color: #ccc;
 }
 
-@media (max-width: 1140px) {
+@media (max-width: 1200px) {
 
   .dropdown
   {
@@ -247,7 +254,7 @@ header nav ul li a:hover{
   }
 
 }
-@media (max-width: 960px) {
+@media (max-width: 1000px) {
 
   header
   {

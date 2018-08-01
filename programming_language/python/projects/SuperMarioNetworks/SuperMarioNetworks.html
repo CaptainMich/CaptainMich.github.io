@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Projects | SuperMarioNetworks </title>
+    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="SuperMarioNetworks.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="../../../android/android.html"> Android </a> </li>
+            <li><a href="../../../c_sharp/c_sharp.html"> C# </a> </li>
+            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+            <li><a href="../../../matlab/matlab.html"> MATLAB </a> </li>
+            <li><a href="../../../../about.html"> About Me</a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+      <br><br><br><br><br><br>
+      <div class="container">
+
+      <article role="article">
+    		<div class="head-title">
+    			<h1> Super Mario Networks </h1>
+    			<h2> A Project by Captain Mich </h2>
+    			<time> June, 2016</time>
+    		</div>
+
+    		<p> S uperMarioNetwork is a simple program for subnet computation </p>
+
+    		<section role="group">
+    			<a href="file/SuperMarioNetworks.zip" role="button">Download ZIP</a>
+    			<a href="https://github.com/CaptainMich/SuperMarioNetworks/tarball/master" role="button">Download TAR</a>
+    			<a href="https://github.com/CaptainMich/SuperMarioNetworks" role="button">Fork on Github</a>
+    		</section>
+
+    		<h3> How does it work </h3>
+    		<p> This program take in input an IP Address and its mask, besides the number of subnet and their respectively numbers of address and return all the subnet with: </p>
+    		<ul>
+    			<li> Network Address </li>
+          <li> Broadcast Address </li>
+          <li> Host Range </li>
+          <li> Subnet Mask </li>
+    		</ul>
+
+    		<h3> The code </h3>
+        <p> Take now a look at the code. The program is made by one function that use a library called <code> ipaddress </code> ( it's already present if you download the '.zip' otherwise you can download it <a href="https://github.com/python/cpython/blob/3.6/Lib/ipaddress.py" style="color: #0000ff"> HERE </a> and add as '.py' file into the folder). In this piece of code we have defined 4 different function that will return us respectively: the netmask, the broadcast address, the network address, the range of our ip block </p>
+
+        <br>
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+#!/usr/bin/env	python3
+import ipaddress
+
+def	get_mask(ip_block):
+	return ipaddress.IPv4Network(ip_block).netmask
+
+def	get_broadcast(ip_block):
+	return ipaddress.IPv4Network(ip_block).broadcast_address
+
+def get_network(ip_block):
+	return ipaddress.IPv4Network(ip_block).network_address
+
+def	get_range(ip_block):
+	network = get_network(ip_block)
+	broadcast = get_broadcast(ip_block)
+	return network + 1, broadcast - 1
+
+          </code></pre>
+        </div>
+        <br>
+
+        <p> Following the main of our program </p>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+#!/usr/bin/env	python3.5
+
+import Function as f
+import math
+
+ip_address = input("Insert the IP Address: ")
+ip_mask = input("Insert the IP Mask: ")
+
+num_subnet = input("Insert the number of subnets: ")
+print("Insert the number of address for each subnet\n")
+
+subnet = []
+for i in range(0, int(num_subnet)):
+	subnet.append(input("subnet" + str(i) + ": "))
+
+host_id = []
+for i in range(0, int(num_subnet)):
+	host_id.append(int(32 - math.log(int(subnet[i]), 2)))
+print(host_id)
+
+#network 0
+ip_block = ip_address + "/" + str(host_id[0])
+print("Network 0: ")
+print("- Network address: " + str(f.get_network(ip_block)) + "/" + str(host_id[0]))
+print("- Broadcast:       " + str(f.get_broadcast(ip_block)))
+print("- Subnet mask:     " + str(f.get_mask(ip_block)))
+first_host, last_host = f.get_range(ip_block)
+print("- Range host:      " + str(first_host) + " -> " + str(last_host))
+print()
+
+ip_address = f.get_broadcast(ip_block) + 1
+
+for i in range(1, int(num_subnet)):
+	ip_block = str(ip_address) + "/" + str(host_id[i])
+	print("Network " + str(i) + ": ")
+	print("- Network address: " + str(f.get_network(ip_block)) + "/" + str(host_id[i]))
+	print("- Broadcast:       " + str(f.get_broadcast(ip_block)))
+	print("- Subnet mask:     " + str(f.get_mask(ip_block)))
+	first_host, last_host = f.get_range(ip_block)
+	print("- Range host:      " + str(first_host) + " -> " + str(last_host))
+	print()
+ip_address = f.get_broadcast(ip_block) + 1
+          </code></pre>
+        </div>
+        <br>
+
+
+    		<h4> How does it work on phone </h4>
+        <br><p>
+         <b> 1. </b> Download SuperMarioNetworks folder
+         <br>
+         <b> 2. </b> Check the presence of the <code> ipaddress.py</code> library; if it is not present <a href="https://github.com/python/cpython/blob/3.6/Lib/ipaddress.py" style="color: #0000ff"> download </a> and save it on the same folder
+         <br>
+         <b> 3. </b> Download from the app store <a href="https://play.google.com/store/apps/details?id=org.qpython.qpy3&hl=it" style="color: #0000ff"> QPython3 App </a>
+         <br>
+         <b> 4.</b> Open QPython3 App then click on Editor
+         <br>
+         <b> 5.</b> Browse and open your <code> main.py</code> file *(5)
+         <br>
+         <b> 6.</b> Press play to run and enjoy your app *(3) </b>
+         <br>
+        </p>
+
+        <blockquote>
+          <b> Note:</b>  *() is referred to the picture below
+        </blockquote>
+
+        <figure>
+          <img src="file/explanation.png" alt="" />
+        </figure>
+
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+          <a href="#" class="social-icons"><i class="fab fa-github"></i></i></a>
+          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script src="../../../../js/menu.js"></script>
+    <script src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+  </body>
+</html>

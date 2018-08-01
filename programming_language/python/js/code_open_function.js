@@ -1,5 +1,5 @@
 /* ---------------------------------------------- */
-/*                   LOOPS                        */
+/*                  DATATYPES                     */
 /* ---------------------------------------------- */
 function open_MathOperator() {
     window.open("code/datatypes/1-Math_Operator.html");
@@ -49,7 +49,7 @@ function open_Execption() {
 }
 
 /* ---------------------------------------------- */
-/*                   Functions                    */
+/*                   FUNCTIONS                  */
 /* ---------------------------------------------- */
 
 function open_Functions() {

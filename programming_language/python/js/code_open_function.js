@@ -63,3 +63,11 @@ function open_Functions() {
 function open_Class() {
    window.open("code/OOP/1-Class.html");
 }
+
+/* ---------------------------------------------- */
+/*                      GUI                       */
+/* ---------------------------------------------- */
+
+function open_GUI_Form_and_Widget() {
+   window.open("code/GUI/1-GUI_Form_and_Widget.html");
+}

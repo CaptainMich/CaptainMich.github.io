@@ -262,9 +262,6 @@ button:focus {
 
 img {
   max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
 }
 
 figure {
@@ -275,9 +272,7 @@ figure {
 }
 
 figure figcaption {
-  padding-top: 1.25rem;
   font-size: 1.125rem;
-  text-align: center;
 }
 
 figure figcaption:before {

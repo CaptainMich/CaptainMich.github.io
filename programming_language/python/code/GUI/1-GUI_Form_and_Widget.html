@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Python Code | GUI </title>
+    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="../script.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="../../../android/android.html"> Android </a> </li>
+            <li><a href="../../../c_sharp/c_sharp.html"> C# </a> </li>
+            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+            <li><a href="../../../matlab/matlab.html"> MATLAB </a> </li>
+            <li><a href="../../../../about.html"> About Me</a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+    <br><br><br><br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> GUI Form and Widget </h3>
+        <p> B elow we are gonna cover how to work with : </p>
+
+        <ul>
+          <li> Label and Button </li>
+          <li> Text Entry Widget </li>
+          <li> Combo Box Widget </li>
+          <li> Check Button </li>
+          <li> Radio Button </li>
+          <li> Scrolled Text Widget </li>
+        </ul>
+
+        <h4> Label and Button </h4>
+        <p> In line 3 we imported the built-in <code> tkinter </code> module; in line 6 we assigned an instance of the Tk class, by calling its constructor, to the variable <code> 'win'</code>. In the next line we gave a title to our window  </p>
+
+        <blockquote>
+          if we want to prevent the window from being resized we can add the commented code line <code> win.resizable(0, 0)</code>; the maximize button in the toolbar of the window should be grayed out. Note that if we pass to the <code> resizable() </code> method other values, we hard-code the x and y start up size of the GUI, but that won't make it nonresizable.
+        </blockquote>
+
+        <p> In lines 11-12 we added the label to the GUI by passing our window instance into the <code> ttk.Label </code> constructor and setting the text property. This becomes the text our Label will display. We have also made use of the grid layout manager to set the position into the window.
+        </p>
+
+        <p> In lines 15 to 17 we defined the event handler that is being invoked once the button gets clicked; this function just change the label foreground color and the text inside the button. Then in lines 19-20 we created the button and binded the command to the <code> clickMe() </code> function.
+        </p>
+
+        <blockquote>
+          GUIs are event-driven. Clicking the button creates an event. We binded what happens when this event occurs in the callback function using the command property of the <code>ttk.Button </code> widget
+        </blockquote>
+
+        <p> By adding the property <code> state='disabled'</code> we can also disable widgets (line 25) 
+        </p>
+
+        <p> In the last line we started the window's event loop by calling the <code> mainloop()</code> method on the class instance 'win'. Up to this point in our code, the GUI will not be displayed until we start the main event loop.</p>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+#!usr/bin/env python3
+
+import tkinter as tk
+from tkinter import ttk
+
+win = tk.Tk()                                                       # create an istance of Tk class  by calling its constructor
+win.title("Label and Button")                                       # give our window a title via the title property
+# win.resizable(0, 0)                                               # preventing the GUI from being resized
+
+# Adding a Label
+label =ttk.Label(win, text="A Label")                               # assign label to a variable
+label.grid(column=0, row=0)                                         # position the label within the form
+
+# Adding a Button to perform an action
+def clickMe() :
+    btn.configure(text="** I have been Clicked! **")                # invoke the event handler once button gets clicked
+    label.configure(foreground="red")                               # the action that will be invoked
+
+btn = ttk.Button(win, text="Click Me!", command=clickMe)            # create a button and bind the command to the clickMe function
+btn.grid(column=1, row=0)                                           # position the button within the form
+
+# Adding a disabled Button
+btn_disabled = ttk.Button(win, text="Click Me!", command=clickMe)   # ..
+btn_disabled.grid(column=2, row=0)                                  # ..
+btn_disabled.configure(state='disabled')                            # clicking the button no longer creates any action
+
+win.mainloop()                                                      # start the window's event loop
+
+  </code></pre>
+</div>
+
+<figure>
+  <img src="img/1.1-Label_and_Button.png" alt="" />
+  <figcaption> Label and Button GUI </figcaption>
+</figure>
+
+    	</article>
+
+
+
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+          <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:michele.salvo96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+  </body>
+</html>

@@ -27,9 +27,9 @@ body > .dg {
 }
 
 @media (max-width: 800px) {
- #first-slide{
-   width: 50%;
- }
+  .slide{
+    display: none;
+  }
 }
 
 

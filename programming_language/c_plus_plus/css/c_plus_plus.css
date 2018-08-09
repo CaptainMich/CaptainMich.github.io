@@ -194,7 +194,7 @@ html, body{
 
 @media (max-width: 780px) {
   .modal__content h1{
-    font-size: 30px;
+    font-size: 24px;
   }
 
   .modal__content h3{

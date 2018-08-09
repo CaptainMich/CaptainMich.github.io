@@ -230,6 +230,20 @@ html, body{
   transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+#modal3 h1{
+  font-size: 325% !important;
+}
+
+@media (max-width: 600px) {
+  #modal2 h1 {
+      font-size: 95% !important;
+  }
+
+  #modal3 h1{
+    font-size: 80% !important;
+  }
+}
+
 body {
   height: 100%;
   overflow: hidden;

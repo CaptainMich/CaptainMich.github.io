@@ -234,10 +234,17 @@ html, body{
   font-size: 325% !important;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
+  #modal1 h1 {
+      font-size: 100% !important;
+  }
+
+  #modal2 h1 {
+      font-size: 90% !important;
+  }
 
   #modal3 h1{
-    font-size: 120% !important;
+    font-size: 80% !important;
   }
 }
 

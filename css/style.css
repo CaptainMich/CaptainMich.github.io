@@ -763,11 +763,8 @@ header nav ul li a:hover{
   }
 
   .swiper-slide {
-    background-position: center;
-    background-size: cover;
     width: 200px;
     height: 280px;
-    background: #fff;
   }
 
   .swiper-slide .imgBox {

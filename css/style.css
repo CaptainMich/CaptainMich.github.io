@@ -722,6 +722,9 @@ header nav ul li a:hover{
   width: 500px;
   height: 580px;
   background: #3a3a3a;
+  border-style: groove;
+  border-width: 2px;
+  border-color: #3a3a3a;
 }
 
 .swiper-slide .imgBox {
@@ -793,6 +796,7 @@ header nav ul li a:hover{
 
   .swiper-slide .details h3 span{
     font-size: 10px;
+    line-height: 0px;
   }
 }
 

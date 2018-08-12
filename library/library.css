@@ -387,10 +387,99 @@ header nav ul li a:hover{
 
 }
 
+
+/* TITLE */
+
+.container-title {
+  margin: 100px auto;
+  box-sizing: border-box;
+  width: 95%;
+  padding: 2rem;
+}
+
+.decorative-title {
+  position: relative;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.decorative-title span {
+  display: block;
+  padding: 2rem 0.5rem 1rem;
+  background-color: #3a4040;
+  color: #f2f2f2;
+  text-align: center;
+  font: 2rem sans-serif;
+  letter-spacing: 0.3rem;
+}
+
+@media (min-width: 576px) {
+  .decorative-title {
+    width: 100%;
+  }
+  .decorative-title span {
+    font-size: 3rem;
+  }
+}
+
+.decorative-bar {
+  position: absolute;
+  background-color: #3a4040;
+}
+
+.left.thick {
+  left: -20px;
+}
+
+.left.thin {
+  right: 0;
+}
+
+.left.vertical,
+.left.horizontal.thick {
+  top: -20px;
+}
+
+.left.horizontal.thin {
+  top: -16px;
+}
+
+.right.thick {
+  right: -20px;
+}
+
+.right.thin {
+  left: 0;
+}
+
+.right.vertical,
+.right.horizontal.thick {
+  bottom: -20px;
+}
+
+.right.horizontal.thin {
+  bottom: -16px;
+}
+
+.vertical {
+  width: 8px;
+  height: 80px;
+}
+
+.horizontal.thick {
+  width: 30%;
+  height: 8px;
+}
+
+.horizontal.thin {
+  width: 80%;
+  height: 2px;
+}
+
 /* BOOKSHELF */
 
 .bookshelf-container{
-  margin-top: 180px;
+  margin-top: 80px;
   margin-bottom: 50px;
 }
 
@@ -408,9 +497,11 @@ header nav ul li a:hover{
   border-right: 10px solid #9A8548;
   text-align: center;
 }
+
 .bookshelf--frame:first-of-type {
   border-top: 10px solid #9A8548;
 }
+
 .bookshelf--frame .book-wrapper {
   display: inline-block;
   width: 290px;
@@ -420,6 +511,7 @@ header nav ul li a:hover{
   margin: 10px 0;
   max-width: 100%;
 }
+
 .bookshelf--frame .book-wrapper img {
   height: auto;
   width: auto;

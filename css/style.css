@@ -616,7 +616,12 @@ header nav ul li a:hover{
   .container-title{
     margin-left: 2%;
   }
+}
 
+@media only screen and (max-width: 780px) {
+  .servicebox{
+
+  }
 }
 
 

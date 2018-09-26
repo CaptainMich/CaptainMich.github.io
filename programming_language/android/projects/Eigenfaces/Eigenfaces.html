@@ -64,7 +64,7 @@
     		<div class="head-title">
     			<h1> Eigenfaces </h1>
     			<h2> A Project by Captain Mich </h2>
-    			<time> July, 2018 </time>
+    			<time> May, 2018 </time>
     		</div>
 
     		<p> This is an App made for a University project that computes eigenfaces and recognize a person in a given database set </p>
@@ -90,22 +90,22 @@
     		<h3> Main Activity </h3>
     		<p> To start, let's go to create a simple graphical interface for our app. It will be made by: </p>
         <ul>
-          <li> A button to create the database and compute the eigenfaces </li>
-          <li> A button to update the database </li>
-          <li> A button to compare a taken picture with the database set </li>
+          <li> A button to create the database </li>
+          <li> A button to compute the eigenfaces </li>
+          <li> A button to take a picture with the database set </li>
+          <li> A button to compare the taken picture with the database set </li>
     		</ul>
 
 
         <div class="row-full code">
           <pre><code class="language-xml line-numbers">
-&lt;?xml version="1.0" encoding="utf-8"?/&gt;
-&lt;RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/&gt;
+    tools:context=".MainActivity"&gt;
 
     &lt;Button
         android:id="@+id/btn_check"
@@ -119,24 +119,33 @@
         tools:layout_editor_absoluteY="409dp" /&gt;
 
     &lt;Button
-        android:id="@+id/btn_update_db"
-        android:layout_width="169dp"
+        android:id="@+id/btn_training"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/btn_load_db"
-        android:layout_marginEnd="15dp"
-        android:text="Update DB"
+        android:layout_alignEnd="@+id/btn_check"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="129dp"
+        android:text="Training"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="409dp" /&gt;
+
+    &lt;Button
+        android:id="@+id/btn_take_picture"
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="71dp"
+        android:text="Take Picture"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="409dp" /&gt;
 
     &lt;Button
         android:id="@+id/btn_load_db"
-        android:layout_width="166dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="71dp"
-        android:layout_marginStart="15dp"
+        android:layout_alignStart="@+id/btn_check"
+        android:layout_alignTop="@+id/btn_training"
         android:text="Load DB"
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="409dp" /&gt;
@@ -158,20 +167,27 @@
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EigenfacesResultTask {
 
     private Button btn_Load_Db = null;
-    private Button btn_Update_Db = null;
+    private Button btn_Take_Picture = null;
     private Button btn_Check = null;
+    private Button btn_Training = null;
     private Context context = null;
+
+    public Database db = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        context = getApplicationContext();
+
         initViews();
         initListeners();
+
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
     }
 
     /**
@@ -180,9 +196,9 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
 
         btn_Load_Db = (Button) findViewById(R.id.btn_load_db);
-        btn_Update_Db = (Button) findViewById(R.id.btn_update_db);
+        btn_Take_Picture = (Button) findViewById(R.id.btn_take_picture);
         btn_Check = (Button) findViewById(R.id.btn_check);
-
+        btn_Training = (Button) findViewById(R.id.btn_training);
     }
 
     /**
@@ -193,10 +209,17 @@ public class MainActivity extends AppCompatActivity {
         btn_Load_Db.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
             }
         });
 
-        btn_Update_Db.setOnClickListener(new View.OnClickListener() {
+        btn_Training.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btn_Take_Picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -255,8 +278,8 @@ public class Database {
         return !(fullPath == null || theBitmap == null) && saveBitmap(fullPath, theBitmap);
     }
 
-    public String setupFullPath(String imageName) {
-        File mFolder = new File(Environment.getExternalStorageDirectory()+"/APP/DB_bw");
+    public String setupFullPath(String imageName, String path) {
+        File mFolder = new File(Environment.getExternalStorageDirectory()+ path);
 
         if (isExternalStorageReadable() && isExternalStorageWritable() && !mFolder.exists()) {
             if (!mFolder.mkdirs()) {
@@ -342,22 +365,18 @@ public class Database {
                 Bitmap temp = getImage(image_path);
                 Bitmap temp_bw = Image.createGrayScale(temp);
                 Bitmap resized_temp = Image.resizeImage(temp_bw);
-                putImageWithFullPath(setupFullPath(files[i].getName().toString().replace(".jpeg","") + "_bw.png"), resized_temp);
+                putImageWithFullPath(setupFullPath(files[i].getName().toString().replace(".jpeg","") + "_bw.png", "/APP/DB_bw"), resized_temp);
             }
         }
     }
 
+    public void createTrainingDatabase(Bitmap src, int numberOfImage){
 
-
-    public int getNumberOfFiles(){
-
-        String folder_path = Environment.getExternalStorageDirectory()+"/APP/DB_colors/";
-        File directory = new File(folder_path);
-        File[] files = directory.listFiles();
-
-       return files.length;
+        putImageWithFullPath(setupFullPath("image_" + String.valueOf(numberOfImage) + "_eigen.png", "/APP/DB_Training"), src);
 
     }
+}
+
           </code></pre>
         </div>
 
@@ -391,6 +410,11 @@ public class Database {
         </ul>
 
         <ul>
+          <li> <b> setupFullPathTraining </b> -> this method is used to create our eigenfaces folder; if the path is successfully created it is returned as a string.
+          </li>
+        </ul>
+
+        <ul>
           <li> <b> saveBitmap </b> -> this method is boolean, it save the Bitmap as a '.png' file at the given input path. It return true only if the file is created, the bitmap compression in '.png' is made and the stream is successfully closed.
           </li>
         </ul>
@@ -401,13 +425,13 @@ public class Database {
         </ul>
 
         <ul>
-          <li> <b> createDatabase </b> -> this method combine some other methods of the Image class, that we will create after, to manipulate the image to satisfy our initial working conditions and finally save the garyscale image. <br>
+          <li> <b> createDatabase </b> -> this method combine some other methods of the Image class, that we will create after, to manipulate the image to satisfy our initial working conditions and finally save the grayscale image. <br>
           After checking if the database colors fold exists, we use the <code> putImageWithFullPath </code> method in a for cycle to convert each any dimension colors image to a black and white 256 x 256 pixels '.png' image.
           </li>
         </ul>
 
         <ul>
-          <li> <b> getNumberOfFiles </b> -> this method just gives us the number of files in a chosen directory
+          <li> <b> createTrainingDatabase </b> -> this method will be used in the next section to store the eigenfaces in a folder
           </li>
         </ul>
 
@@ -431,7 +455,6 @@ public class Database {
 public class Image {
 
     private static final String TAG="Image";
-
 
     public static  Bitmap resizeImage(Bitmap src){
         if(src!=null)
@@ -459,10 +482,10 @@ public class Image {
         return dest;
     }
 }
-
           </code></pre>
         </div>
 
+        <br>
         <p> Let's look at them in detail: </p>
 
         <ul>
@@ -509,61 +532,61 @@ public class Image {
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
-public class Eigenfaces extends AsyncTask &lt;Database, Integer, Void&gt; {
+public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
 
-    private Database db;
-    private int imageSize;
-    private int M;
-    EigenfacesResultTask mCallback = null;
-    Context context = null;
-    ProgressDialog myProgress = null;
+     private Database db ;
+     private int imageSize;
+     private double M;
+     EigenfacesResultTask mCallback = null;
+     ProgressDialog myProgress = null;
+     private Context mContext;
 
 
-    public Eigenfaces(Context _context, Database db, int imageSize, int M, EigenfacesResultTask myEFRT) {
+     public Eigenfaces(Context _context, Database db, int imageSize, EigenfacesResultTask myEFRT) {
 
-        context = _context;
-
-        this.db = db;
-        this.imageSize = imageSize;
-        this.M = 25;                        // number of database images
-        this.mCallback = myEFRT;
-
-        myProgress = new ProgressDialog(context);
-        myProgress.setTitle("Processing Data");
-        myProgress.setMessage("Please wait...");
-        myProgress.setMax(100);
-        myProgress.setIndeterminate(false);
-    }
+         mContext = _context;
+         this.db = db;
+         this.imageSize = imageSize;
+         this.M = 25;                        // number of database images
+         this.mCallback = myEFRT;
+     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
 
-        //myProgress.show();
+        //some code here ...
     }
 
 
     @Override
-    protected Void doInBackground(Database... params) {
+    protected Boolean doInBackground(Context... params) {
+
+        //some code here ...
+
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        myProgress.setProgress(values[0]);
+
+        //some code here ...
+
     }
 
-    /**
-     * @Override protected void onPostExecute(String result) {
-     * super.onPostExecute(result);
-     * mCallback.onTaskComplete(result);
-     * }
-     **/
+    @Override
+    protected void onPostExecute(Boolean result) {
+        super.onPostExecute(result);
+
+        //some code here ...
+
+    }
 
 }
           </code></pre>
         </div>
 
+        <br>
         <p> We can now go deeper in the code; we have to deal with the images, manipulate them. First of all, let's consider an image as a 'n x m' matrix, in our case we will have a square matrix of order 256, where each element of the matrix is composed by a value from 0 to 255 (the images are black and white). Called <b> I<sub>1</sub> </b> the image of the first subject, we have a 256 x 256 matrix that we want to rapresent as a unique concatenated column vector that we are going to call <b> &#915;<sub>1</sub> </b>. So, let's add a method inside the Image class that take as input a Bitmap (matrix) and return a concatenated column vector of that image : </p> <br>
 
         <div class="row-full code">
@@ -589,6 +612,7 @@ public static double[] getColumnVector(Bitmap src, int imageSize){
         </code></pre>
       </div>
 
+      <br>
       <p> Iterate the process for all the images of our database and put all of them in a new set called <b> S = {&#915;<sub>1</sub>, &#915;<sub>2</sub>, ..., &#915;<sub>M</sub>}</b>, where M is the number of all the database images.</p>
 
       <p> What it is interests for us it is to consider the difference between each subject face of the database. So we need to calculate a new array that represent the <b> <i> face average </i> </b>, let's call it <b>  &Psi; = (1/M) <i style="font-size: 34px;">&Sigma;</i> &#915;<sub>i</sub> </b>, where the sum goes from i= 1 to M). </p>
@@ -601,9 +625,9 @@ private double[] calculateFaceAverage(int imageSize, List&lt;double[]&gt; set) {
 
     double[] psi = new double[imageSize * imageSize];
 
-    for (int j = 0; j < set.size(); j++) {
-        for (int k = 0; k < set.get(j).length; k++) {
-            psi[j] += (1 / M) * set.get(j)[k];
+    for (int j = 0; j < imageSize * imageSize; j++) {
+        for (int k = 0; k < set.size(); k++) {
+            psi[j] += (1 / M) * set.get(k)[j];
         }
     }
 
@@ -626,19 +650,20 @@ private double[] calculateFaceAverage(int imageSize, List&lt;double[]&gt; set) {
       <pre><code class="language-java line-numbers">
 private double[][] subtractFaceAverageToAnImage(List&lt;double[]&gt; set, double[] phi) {
 
-    double[][] set_less_face_average = null;
+  double[][] set_less_face_average = new double[set.size()][set.get(0).length];
 
-    for (int i = 0; i < set.size(); i++) {
-        for (int j = 0; j < set.get(i).length; j++) {
-            set_less_face_average[i][j] = set.get(i)[j] - phi[j];
-        }
-    }
+  for (int i = 0; i < set.size(); i++) {
+      for (int j = 0; j < set.get(i).length; j++) {
+          set_less_face_average[i][j] = set.get(i)[j] - phi[j];
+      }
+  }
 
-    return set_less_face_average;
+  return set_less_face_average;
 }
         </code></pre>
       </div>
 
+      <br>
       <p> The <b> A </b> space has n<sup>2</sup> dimension, we have to reduce it by keeping the information of data dispersion intact. Let's build the covariance matrix: </p>
 
       <p style="text-align: center;"> C = (1/M) <i style="font-size: 34px;">&Sigma;</i>  &Phi; &Phi;<sup>T</sup> <br>                         where the sum goes from n = 1 to M and both of &Phi; are &Phi; <sub>n</sub>  </p>
@@ -662,7 +687,9 @@ private double[][] subtractFaceAverageToAnImage(List&lt;double[]&gt; set, double
       <br>
       - <code> calculateCovarianceMatrix </code>: it computes the covariance matrix
       <br>
-      - <code> calculateEingenvectors </code> : it computes the eigenvalues and eigenvector associated
+      - <code> calculateEingenvalues </code> : it computes the eigenvalues
+      <br>
+      - <code> calculateEingenvector </code> : it computes the eigenvector associated to the eigenvalues
 
     </p> <br>
 
@@ -759,25 +786,42 @@ private static double[][] transposeMatrix(double[][] m) {
 
              <div class="row-full code">
                <pre><code class="language-java line-numbers">
-public double[][] calculateEigenvector(double[][] m){
+public double[][] getEigenvaluesMatrix(double[][] m )
+{
+   // construct a matrix from a copy of a 2-D array
+   Matrix A = constructWithCopy(m);
+   EigenvalueDecomposition e = A.eig();
 
+   // the block diagonal eigenvalues matrix
+   Matrix diagonal_eigenvalues_matrix = e.getD();
+
+   double temp_eigenvalues[][] = diagonal_eigenvalues_matrix.getArray();
+
+   return temp_eigenvalues;
+
+}
+                 </code></pre>
+               </div>
+
+               <div class="row-full code">
+                 <pre><code class="language-java line-numbers">
+public double[][] getEigenvectorsMatrix(double[][] m )
+{
    // construct a matrix from a copy of a 2-D array
    Matrix A = constructWithCopy(m);
 
    EigenvalueDecomposition e = A.eig();
 
-   // the block diagonal eigenvalue matrix
-   Matrix diagonal_eigenvalue_matrix = e.getD();
-
    // the eigenvector matrix
-   Matrix eigenvector_matrix = e.getV();
+   Matrix eigenvectors_matrix = e.getV();
 
-   double temp[][] = eigenvector_matrix.getArray();
+   double temp_eigenvectors[][] = eigenvectors_matrix.getArray();
 
-   return temp;
+   return temp_eigenvectors;
+
 }
-                 </code></pre>
-               </div>
+                   </code></pre>
+                 </div>
 
                <dl>
                  <dt> JAMA Library </dt>
@@ -802,7 +846,46 @@ public double[][] calculateEigenvector(double[][] m){
                  <figcaption> <a href="https://abhiandroid.com/androidstudio/import-add-external-jar-files-android-studio.html"> How to install an external library  </a> </figcaption>
                </figure>
 
+      <p> Now we can actually reduce the space dimension of our faces. In order to do that we have to chose a treshold value below which will be removed all the eigenfaces.
 
+      </p>
+
+      <p> Finally we are gonna create a method to store our eigenfaces space in a new folder called "Training_DB". This method simply take as input the space of our faces projection, that is a matrix of 25 images: it pulls out each single image, stores them in an array (please note that we do a cast from double to int because the Bitmap method takes as input only integers), creates a Bitmap for each of them and store them in the folder as '.png' images.
+      </p>
+      <br>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+public static void saveToDatabase(double[][] matrixOfImages)
+ {
+     Bitmap face_projection = null;
+     Database db = null;
+     db = new Database();
+
+     double[] column = new double[matrixOfImages[0].length];          // Here I assume a rectangular 2D array!
+     int index = matrixOfImages.length;
+
+     /**double[][] originalImage = new double[256][256];
+     double[] column_temp = new double[256];*/
+     int[] column_final = new int[column.length];
+
+     for(int i=0; i < index; i++){
+
+         for(int j=0; j < column.length; j++) {
+             column[j] = matrixOfImages[i][j];
+         }
+
+         // cast the Array to int Array
+         for (int m = 0; m < column_final.length; m++) {
+             column_final[m] = (int) column[m];
+         }
+
+         face_projection = Bitmap.createBitmap(column_final, 256, 256, Bitmap.Config.ARGB_8888);
+
+         db.createTrainingDatabase(face_projection, i);
+ }
+          </code></pre>
+        </div>
 
 
 

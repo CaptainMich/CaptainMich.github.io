@@ -93,6 +93,8 @@
           <li> 2. Create Database Class </li>
           <li> 3. Create Image Class </li>
           <li> 4. Create Eigenfaces Class and Task </li>
+          <li> 5. Create Camera Task to Take a Picture </li>
+          <li> 6. Create Facial Recognition Class and Task </li>
 
     			<!-- <li> Built with <abbr title="Syntatically Awesome Stylesheets">Sass</abbr></li>
     			<li> Uses semantic HTML5 elements and <abbr title="Accessible Rich Internet Applications">ARIA</abbr> Roles.</li> -->
@@ -857,7 +859,7 @@ public double[][] getEigenvectorsMatrix(double[][] m )
                  <figcaption> <a href="https://abhiandroid.com/androidstudio/import-add-external-jar-files-android-studio.html"> How to install an external library  </a> </figcaption>
                </figure>
 
-      <p> Now we can actually reduce the space dimension of our faces. In order to do that we have to chose a treshold value below which will be removed all the eigenfaces.
+      <p> Now we can actually reduce the space dimension of our faces. In order to do that we have to chose a treshold value below which will be removed all the eigenfaces. [...]
 
       </p>
 
@@ -865,41 +867,434 @@ public double[][] getEigenvectorsMatrix(double[][] m )
       </p>
       <br>
 
-      <div class="row-full code">
-        <pre><code class="language-java line-numbers">
-public static void saveToDatabase(double[][] matrixOfImages)
- {
-     Bitmap face_projection = null;
-     Database db = null;
-     db = new Database();
 
-     double[] column = new double[matrixOfImages[0].length];          // Here I assume a rectangular 2D array!
-     int index = matrixOfImages.length;
+        <h3> Camera Task </h3>
 
-     /**double[][] originalImage = new double[256][256];
-     double[] column_temp = new double[256];*/
-     int[] column_final = new int[column.length];
+        <p>
+          In order to capture a picture from our backfront camera, we are gonna use <a href="https://developer.android.com/reference/android/hardware/camera2/package-summary"> CAMERA 2 API </a>.
+          It's important to notice that this API will only work with <code> minSdkVersion: 21 </code> or above; open the build.gradle file to check your currente version. First of all, we need to add the missing permission in the manifest adding this line of code:
+        </p>
+        <br>
 
-     for(int i=0; i < index; i++){
+        <div class="row-full code">
+          <pre><code class="language-xml line-numbers">
 
-         for(int j=0; j < column.length; j++) {
-             column[j] = matrixOfImages[i][j];
-         }
+&lt;uses-permission android:name="android.permission.CAMERA"/&gt;
+&lt;uses-permission android:name="android.hardware.camera2.full"/&gt;
 
-         // cast the Array to int Array
-         for (int m = 0; m < column_final.length; m++) {
-             column_final[m] = (int) column[m];
-         }
-
-         face_projection = Bitmap.createBitmap(column_final, 256, 256, Bitmap.Config.ARGB_8888);
-
-         db.createTrainingDatabase(face_projection, i);
- }
-          </code></pre>
+      </code></pre>
         </div>
 
+        <p>
+          Then we add <code> TextureView </code> that it will manage the real time camera preview.
+        </p>
+        <br>
+
+        <div class="row-full code">
+          <pre><code class="language-xml line-numbers">
+&lt;TextureView
+    android:id="@+id/textureView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/..."/&gt;
+      </code></pre>
+        </div>
+
+        <p>
+        Finally in order to gain some more space, we remove the top ActionBar by modifying the styles.xml file (res -> values)
+       </p>
+       <br>
+
+       <div class="row-full code">
+         <pre><code class="language-xml line-numbers">
+&lt;resources&gt;
+
+    &lt;!-- Base application theme. --&gt;
+    &lt;style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar"&gt;
+        &lt;!-- Customize your theme here. --&gt;
+        &lt;item name="colorPrimary">@color/colorPrimary&lt;/item&gt;
+        &lt;item name="colorPrimaryDark">@color/colorPrimaryDark&lt;/item&gt;
+        &lt;item name="colorAccent">@color/colorAccent&lt;/item&gt;
+    &lt;/style&gt;
+
+&lt;/resources&gt;
+     </code></pre>
+       </div>
+
+       <p>
+         Finally we can add the code on the main of our application :
+       </p>
+       <br>
+
+       <div class="row-full code">
+         <pre><code class="language-java line-numbers">
+private TextureView textureView;
+
+// Check state orientation of output image
+private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+static {
+   ORIENTATIONS.append(Surface.ROTATION_0, 90);
+   ORIENTATIONS.append(Surface.ROTATION_90, 0);
+   ORIENTATIONS.append(Surface.ROTATION_180, 270);
+   ORIENTATIONS.append(Surface.ROTATION_270, 180);
+}
+
+private String cameraId;
+private CameraDevice cameraDevice;
+private CameraCaptureSession cameraCaptureSessions;
+private CaptureRequest.Builder captureRequestBuilder;
+private Size imageDimension;
+
+private ImageReader imageReader;
+
+//Save to FILE
+private File file;
+private static final int REQUEST_CAMERA_PERMISSION = 200;
+private boolean mFlashSupported;
+private Handler mBackgroundHandler;
+private HandlerThread mBackgroundThread;
+
+CameraDevice.StateCallback stateCallBack = new CameraDevice.StateCallback() {
+   @Override
+   public void onOpened(@NonNull CameraDevice camera) {
+       cameraDevice = camera;
+       createCameraPreview();
+   }
+
+   @Override
+   public void onDisconnected(@NonNull CameraDevice camera) {
+       cameraDevice.close();
+   }
+
+   @Override
+   public void onError(@NonNull CameraDevice camera, int error) {
+       cameraDevice.close();
+       cameraDevice = null;
+   }
+};
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+   super.onCreate(savedInstanceState);
+   setContentView(R.layout.activity_main);
+
+   initViews();
+   initListeners();
+
+   assert textureView != null;
+   textureView.setSurfaceTextureListener(textureListener);
+}
 
 
+/**
+ * This method is to initialize views
+ */
+private void initViews() {
+
+   textureView = (TextureView)findViewById(R.id.textureView);
+    btn_Training = (Button) findViewById(R.id.btn_training);
+}
+
+/**
+ * This method is to initialize listeners
+ */
+private void initListeners() {
+
+    btn_Take_Picture.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            takePicture();
+        }
+    });
+}
+
+
+private void takePicture() {
+
+   if(cameraDevice == null)
+       return;
+   CameraManager manager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+   try{
+
+       CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
+       Size[] jpegSizes = null;
+       if(characteristics != null)
+           jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+                   .getOutputSizes(ImageFormat.JPEG);
+
+       // Capture image with custom size
+       int width = 640;
+       int height = 480;
+
+       if(jpegSizes != null && jpegSizes.length > 0)
+       {
+           width = jpegSizes[0].getWidth();
+           height = jpegSizes[0].getHeight();
+       }
+
+       ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
+       List&ltSurface&gt outputSurface = new ArrayList&lt&gt(2);
+       outputSurface.add(reader.getSurface());
+       outputSurface.add(new Surface(textureView.getSurfaceTexture()));
+
+       final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
+       captureBuilder.addTarget(reader.getSurface());
+       captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+
+       // Check orientation base on device
+       int rotation = getWindowManager().getDefaultDisplay().getRotation();
+       captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+
+       // save the image
+       file = new File(Environment.getExternalStorageDirectory()+ "/APP/check_image.jpg");
+       ImageReader.OnImageAvailableListener readListener = new ImageReader.OnImageAvailableListener() {
+           @Override
+           public void onImageAvailable(ImageReader reader) {
+               Image image = null;
+
+               try{
+                   image = reader.acquireLatestImage();
+                   ByteBuffer buffer = image.getPlanes()[0].getBuffer();
+                   byte[] bytes = new byte[buffer.capacity()];
+                   buffer.get(bytes);
+                   save(bytes);
+               }
+               catch (FileNotFoundException e){
+                   e.printStackTrace();
+               }
+               catch (IOException e){
+                   e.printStackTrace();
+               }
+               finally {
+                   {
+                       if(image != null)
+                           image.close();
+                   }
+               }
+           }
+
+           private void save(byte[] bytes) throws IOException {
+
+               OutputStream outputStream = null;
+               try {
+                   outputStream = new FileOutputStream(file);
+                   outputStream.write(bytes);
+               }finally {
+                   if(outputStream != null)
+                       outputStream.close();
+               }
+           }
+
+       };
+
+       reader.setOnImageAvailableListener(readListener, mBackgroundHandler);
+
+       final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
+           @Override
+           public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+               super.onCaptureCompleted(session, request, result);
+               Toast.makeText(MainActivity.this,"Saved " + file,Toast.LENGTH_SHORT).show();
+               createCameraPreview();
+           }
+       };
+
+       cameraDevice.createCaptureSession(outputSurface, new CameraCaptureSession.StateCallback() {
+           @Override
+           public void onConfigured(@NonNull CameraCaptureSession session) {
+               try {
+                   session.capture(captureBuilder.build(), captureListener,mBackgroundHandler);
+               } catch (CameraAccessException e) {
+                   e.printStackTrace();
+               }
+           }
+
+           @Override
+           public void onConfigureFailed(@NonNull CameraCaptureSession session) {
+
+           }
+       },mBackgroundHandler);
+
+   }catch (CameraAccessException e) {
+       e.printStackTrace();
+   }
+}
+
+private void createCameraPreview() {
+
+   try{
+       SurfaceTexture texture = textureView.getSurfaceTexture();
+       assert  texture != null;
+       texture.setDefaultBufferSize(imageDimension.getWidth(), imageDimension.getHeight());
+       Surface surface = new Surface(texture);
+       captureRequestBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
+       captureRequestBuilder.addTarget(surface);
+       cameraDevice.createCaptureSession(Arrays.asList(surface), new CameraCaptureSession.StateCallback() {
+           @Override
+           public void onConfigured(@NonNull CameraCaptureSession session) {
+               if(cameraDevice == null)
+                   return;
+               cameraCaptureSessions = session;
+               updatePreview();
+           }
+
+           @Override
+           public void onConfigureFailed(@NonNull CameraCaptureSession session) {
+               Toast.makeText(MainActivity.this, "Changed", Toast.LENGTH_SHORT).show();
+           }
+       },null);
+
+   } catch (CameraAccessException e) {
+       e.printStackTrace();
+   }
+}
+
+private void updatePreview() {
+   if(cameraDevice == null)
+       Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+   captureRequestBuilder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
+   try{
+       cameraCaptureSessions.setRepeatingRequest(captureRequestBuilder.build(), null, mBackgroundHandler);
+   } catch (CameraAccessException e) {
+       e.printStackTrace();
+   }
+}
+
+private void openCamera() {
+
+   CameraManager manager = (CameraManager)getSystemService(Context.CAMERA_SERVICE);
+   try {
+
+       // change [0] = FRONT_CAMERA or [1] = BACK CAMERA
+       cameraId = manager.getCameraIdList()[1];
+       CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
+       StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+       assert map != null;
+       imageDimension = map.getOutputSizes(SurfaceTexture.class)[0];
+
+       // Check realtime permission if run higher API 23
+       if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
+       {
+           ActivityCompat.requestPermissions(this, new String[]{
+                   Manifest.permission.CAMERA,
+                   Manifest.permission.WRITE_EXTERNAL_STORAGE
+           }, REQUEST_CAMERA_PERMISSION);
+           return;
+       }
+
+       manager.openCamera(cameraId, stateCallBack, null );
+
+   } catch (CameraAccessException e) {
+       e.printStackTrace();
+   }
+
+}
+
+
+TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
+   @Override
+   public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+       openCamera();
+   }
+
+   @Override
+   public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+   }
+
+   @Override
+   public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+       return false;
+   }
+
+   @Override
+   public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+   }
+};
+
+// Ctrl + O
+
+@Override
+public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+   if(requestCode == REQUEST_CAMERA_PERMISSION)
+   {
+       if(grantResults[0] != PackageManager.PERMISSION_GRANTED)
+       {
+           Toast.makeText(this, " You can't use camera without permission", Toast.LENGTH_SHORT).show();
+           finish();
+       }
+   }
+}
+
+@Override
+protected void onResume() {
+   super.onResume();
+   startBackgroundThead();
+   if(textureView.isAvailable())
+       openCamera();
+   else
+       textureView.setSurfaceTextureListener(textureListener);
+}
+
+@Override
+protected void onPause() {
+   stopBackgroundThread();
+   super.onPause();
+}
+
+private void stopBackgroundThread() {
+   mBackgroundThread.quitSafely();
+   try {
+       mBackgroundThread.join();
+       mBackgroundThread = null;
+       mBackgroundHandler = null;
+
+   } catch (InterruptedException e) {
+       e.printStackTrace();
+   }
+}
+
+private void startBackgroundThead() {
+   mBackgroundThread = new HandlerThread("Camera Background");
+   mBackgroundThread.start();
+   mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+}
+           </code></pre>
+         </div>
+
+         <p>
+           If you want to use your front camera, everything gonna works; otherwise, if you want to use your back camera, your final picture will be upside down. To fix this problem, we add a function in our Image class that takes as input the angle of which we want to rotate the image and overwrite the saved picture with the one correctly rotated
+         </p>
+         <br>
+
+         <div class="row-full code">
+           <pre><code class="language-java line-numbers">
+public static void rotateImage(Context context, float angle){
+
+   Database db = null;
+   Bitmap image = null;
+   Matrix matrix = new Matrix();
+
+   try{
+
+       String picturePath = Environment.getExternalStorageDirectory()+"/APP/check_image.jpg";
+       image = BitmapFactory.decodeFile(picturePath);
+
+       matrix.postRotate(angle);
+
+       Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0,0, image.getWidth(), image.getHeight(), matrix, true);
+
+       db = new Database();
+       db.saveBitmap(picturePath, rotatedBitmap);
+
+   } catch (Exception e) {
+       e.printStackTrace();
+       Toast.makeText(context,"An error as occurred", Toast.LENGTH_SHORT).show();
+   }
+}
+             </code></pre>
+           </div>
 
     	</article>
       </div>

@@ -1,6 +1,6 @@
 /* ---------------------------------------------- */
 /*                   TEMPLATE                     */
 /* ---------------------------------------------- */
-function open_() {
-    window.open(".html");
+function open_BaseClass() {
+    window.open("template/1.BaseClass.html");
 }

@@ -82,7 +82,7 @@
 
     		<section role="group">
     			<a href="file/eigenfaces.zip" role="button">Download ZIP</a>
-    			<a href="https://github.com/CaptainMich/" role="button">Download TAR</a>
+    			<a href="" role="button">Download TAR</a>
     			<a href="https://github.com/CaptainMich/" role="button">Fork on Github</a>
     		</section>
 
@@ -494,6 +494,20 @@ public class Image {
 
         return dest;
     }
+
+    /** Decodes the Bitmap from 'path' and returns it */
+    public static Bitmap getImage(String path) {
+      Bitmap bitmapFromPath = null;
+      try {
+          bitmapFromPath = BitmapFactory.decodeFile(path);
+
+      } catch (Exception e) {
+          // TODO: handle exception
+          e.printStackTrace();
+      }
+
+      return bitmapFromPath;
+  }
 }
           </code></pre>
         </div>
@@ -518,6 +532,11 @@ public class Image {
               <br> <br>
 
             We use the colorMatrix <code> setSaturation </code> method (set to 0 to map the grayscale) as filter for a paint ('it holds the style and color information about how to draw geometries, text and bitmaps' as described by the Android reference) object type. We finally pass it to the canvas object and get our black an white image
+          </li>
+        </ul>
+
+        <ul>
+          <li> <b> getImage </b> -> this method takes in input a String and return a Bitmap value from that path
           </li>
         </ul>
 
@@ -604,7 +623,7 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
-public static double[] getColumnVector(Bitmap src, int imageSize){
+public static double[] getColumnVectorOfImage(Bitmap src, int imageSize){
 
     Bitmap bitmap = src; // assign your bitmap here
     int pixelCount = 0;
@@ -614,8 +633,14 @@ public static double[] getColumnVector(Bitmap src, int imageSize){
     {
         for (int x = 0; x < bitmap.getWidth(); x++)
         {
-            int c = bitmap.getPixel(x, y);
-            bitmap_column[pixelCount] = c;
+            int c = bitmap.getPixel(x,y);           // the value returned is in two's complement so negative is OK
+            int A = (c >> 24) & 0xff;
+            int R = (c>> 16) & 0xff;
+            int G = (c >>  8) & 0xff;
+            int B = (c      ) & 0xff;
+
+            int color = (A+R+G+B) / 4;
+            bitmap_column[pixelCount] = color;
             pixelCount++;
         }
     }
@@ -687,7 +712,7 @@ private double[][] subtractFaceAverageToAnImage(List&lt;double[]&gt; set, double
 
       <p style="text-align: center;"> C = (1/M) A A <sup>T</sup> </p>
 
-      <p> To look for the main components of the space, we can look for the eigenvectors of C. After calculating these eigenvalues ​​of A A <sup> T </sup>, we can order them in descending order according to the eigenvectors associated with them. The eigenvectors (which we will also call <b> eigenfaces </b>) associated with the larger eigenvalues ​​will be the ones that most characterize the variance of the training set
+      <p> To look for the main components of the space, we can look for the eigenvectors of C in order to reduce the computational cost. After calculating the eigenvalues ​​of A A <sup> T </sup>, we can order them in descending order according to the eigenvectors associated with them. The eigenvectors (which we will also call <b> eigenfaces </b>) associated with the larger eigenvalues ​​will be the ones that most characterize the variance of the training set
       </p>
 
       <p> To code this part we have made five different functions:
@@ -698,11 +723,12 @@ private double[][] subtractFaceAverageToAnImage(List&lt;double[]&gt; set, double
       <br>
       - <code> multiplyMatrixForANumber </code>: it multiplies each element of a matrix by a number
       <br>
-      - <code> calculateCovarianceMatrix </code>: it computes the covariance matrix
+      - <code> productOfMatrixAndMatrixTranspose </code>: it computes the product AA<sup>T</sup>
       <br>
       - <code> calculateEingenvalues </code> : it computes the eigenvalues
       <br>
       - <code> calculateEingenvector </code> : it computes the eigenvector associated to the eigenvalues
+
 
     </p> <br>
 
@@ -777,25 +803,19 @@ private static double[][] transposeMatrix(double[][] m) {
            </div>
            <br>
 
-           <div class="row-full code">
-             <pre><code class="language-java line-numbers">
- private double[][] calculateCovarianceMatrix(double[][] set) {
+     <div class="row-full code">
+       <pre><code class="language-java line-numbers">
+public static double[][] productOfMatrixAndMatrixTranspose(double[][] set) {
 
-     double[][] covarianceMatrix = null;
-     double[][] covarianceMatrix_temp = null;
+   double[][] covarianceMatrix = null;
+   double[][] set_transposed = transposeMatrix(set);
+   covarianceMatrix= (productOfTwoMatrix(set_transposed,set));
 
-     double[][] set_transposed = transposeMatrix(set);
-
-     covarianceMatrix_temp = (productOfTwoMatrix(set, set_transposed));
-
-     covarianceMatrix = multiplyMatrixForANumber(covarianceMatrix_temp, (1/M) );
-
-     return covarianceMatrix;
- }
-               </code></pre>
-             </div>
-             <br>
-
+   return covarianceMatrix;
+}
+         </code></pre>
+       </div>
+       <br>
 
              <div class="row-full code">
                <pre><code class="language-java line-numbers">
@@ -815,6 +835,7 @@ public double[][] getEigenvaluesMatrix(double[][] m )
 }
                  </code></pre>
                </div>
+               <br>
 
                <div class="row-full code">
                  <pre><code class="language-java line-numbers">
@@ -859,14 +880,274 @@ public double[][] getEigenvectorsMatrix(double[][] m )
                  <figcaption> <a href="https://abhiandroid.com/androidstudio/import-add-external-jar-files-android-studio.html"> How to install an external library  </a> </figcaption>
                </figure>
 
-      <p> Now we can actually reduce the space dimension of our faces. In order to do that we have to chose a treshold value below which will be removed all the eigenfaces. [...]
+      <p> Now it is possible to reduce the space dimension of our faces. In order to do that we have to chose a treshold value below which will be removed all the eigenfaces. [...]
+      This part will be omitted in our application because of the small dimension of the initial dataset.
+      </p>
+
+      <p> We can finally take our starting database's faces and project them in a new space in a way that each one is linear combination of the other 25 eigenfaces. Let's consider &Phi;<sub>1</sub> which is the first subject less the face average and stored in the starting database, we want to project it in the new space. Let's call u<sub>k</sub>, where k go from 1 to 25, the eigenvectors corresponding to the eigenfaces.
+      We will have:
+
+      <p style="text-align: center;"> a<sub>k,1</sub> = u<sup>T</sup><sub>k</sub> &Phi;<sub>1</sub> </p>
+      <br>
+
+      Where a<sub>k,1</sub> represents the k-th project's coefficient of the first subject and u<sub>k<sub>i</sub></sub> is the i-th components of u<sub>k</sub> (where i goes from 1 to 65536).
+      At this point, the projection of &Phi;<sub>1</sub> can be written as linear combination of the eigenfaces:
+
+      <p style="text-align: center;"> a<sub>1,1</sub> u<sub>1</sub> + a<sub>2,1</sub> u<sub>2</sub> + ... + a<sub>25,1</sub> u<sub>25</sub>
+
+        <figure >
+          <img src="img/1.4-Phi_projection.jpg" alt="" align="middle" style="margin: auto;"/>
+          <figcaption> <a> Projection of &Phi;<sub>1</sub> </a> </figcaption>
+        </figure>
 
       </p>
 
-      <p> Finally we are gonna create a method to store our eigenfaces space in a new folder called "Training_DB". This method simply take as input the space of our faces projection, that is a matrix of 25 images: it pulls out each single image, stores them in an array (please note that we do a cast from double to int because the Bitmap method takes as input only integers), creates a Bitmap for each of them and store them in the folder as '.png' images.
+      <p> Iterating this process again for each faces of our starting database, we will get their position into the space of the faces and we can start the facial recognition process. The matrix of projection's coefficients of all faces will be composed from all the values of a<sub>k,i</sub> where the k-th values and the i-th does match in our case and it is equal to 25. <br>
+      Following the code needed to compute it:
       </p>
       <br>
 
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+// m1 : Image less face average matrix
+// m2 : eigenVectors matrix
+public static double[][] calculateProjectionCoefficients(double[][] m1, double[][] m2){
+
+    int m1_col = m1[0].length;              // m1 columns length
+    int m1_row = m1.length;                 // m1 row length
+    int m2_col = m2[0].length;              // m2 columns length
+    int m2_row = m2.length;                 // m2 row length
+
+    double[][] coefficients = new double[m1_row][m2_row];
+    double[] phi = new double[m1_col];
+    double[] u = new double[m2_col];
+
+    for (int i = 0; i < m1_row; i++) {
+        for (int p = 0; p < m1_col; p++) {
+
+            // temp value for phi[i]; each time one row is stored
+            phi[p] = m1[i][p];
+        }
+
+        for(int j=0; j < m2_row; j++) {
+            for(int k=0; k < m2_col; k++){
+
+                // temp value for
+                u[k] = m2[j][k];
+            }
+            coefficients[i][j] = productOfTwoArray(u, phi);
+        }
+    }
+
+    coefficients = transposeMatrix(coefficients);
+    return coefficients;
+}
+          </code></pre>
+        </div>
+        <br>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+public static double[][] calculateEigenfacesProjection(double[][] m1, double[][] m2, double[][] coefficients){
+
+    int m1_col = m1[0].length;              // m1 columns length
+    int m1_row = m1.length;                 // m1 row length
+
+    double[][] result = new double[m1_row][m1_col];
+    result = productOfTwoMatrix(coefficients, m2);
+
+    return result;
+}
+          </code></pre>
+        </div>
+        <br>
+
+      <p> We can now add all the pieces written above together and finally get out our eigenfaces calculation process. Let's analyze the code:
+          <br><br>
+        - <code> Eigenfaces </code> : the constructor, it takes as input the context, the image size and an EigenfacesResultTask object to bring out the scope the final result that we will pass to the facial recognition function
+        <br>
+        - <code> onPreExecute() </code>: it just displays out when the process starts
+        <br>
+        - <code> doInBackground </code>: it computes the eigenfaces , saving them as pictures into the "Training_DB" folder and return through the EigenfacesResultTask interface the face average, the eigenvectors matrix and the projection's coefficients matrix
+        <br>
+        - <code> onPostExecute </code> : it displays out a Toast whenever the database is successfully created or not
+        <br>
+        - <code> saveToDatabase </code> : this function simply transform the face's projection matrix into '.png' files
+        <br>
+        <br><br>
+      </p>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
+
+    private EigenfacesResultTask mCallback = null;
+    private Database db = null;
+    private int imageSize;
+    private double M;
+    ProgressDialog myProgress = null;
+    private Context mContext;
+
+    public Eigenfaces(Context _context, int imageSize, EigenfacesResultTask myEFRT) {
+
+        mContext = _context;
+
+        this.imageSize = imageSize;
+        this.M = 25;                        // number of database images
+        this.mCallback = myEFRT;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        CharSequence text = "Start Eigenfaces Computation Process";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(mContext, text, duration);
+        toast.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 200);
+        toast.show();
+    }
+
+    @Override
+    protected Boolean doInBackground(Context... params) {
+
+        List&lt;double[]&gt; s = new ArrayList&lt;&gt;();               // to store all the transposed images
+        double[] face_average = null;                       // face average array
+        double[][] s_less_face_average = null;              // image less face average matrix
+        double[][] s_less_face_average_transpose = null;    // image less face average matrix transpose
+        double[][] covarianceMatrix = null;                 // A^T * A
+        double[][] eigenvectorsMatrix_temp = null;          // the eigenvectors matrix temp
+        double[][] eigenvaluesMatrix_temp = null;           // the eigenvalues matrix
+        double[][] eigenvectorsMatrix_transpose = null;     // the eigenvcetors matrix trasponse
+        double[][] eigenvectorsMatrix = null;               // the eigenvectors matrix final
+        double[][] projection_coefficients;                 // the matrix of project coefficients
+        double[][] face_projection_matrix;                  // the face projection matrix
+
+        String folder_path = Environment.getExternalStorageDirectory() + "/APP/DB_bw/";
+        String image_path = null;
+        File directory = new File(folder_path);
+        File[] files = directory.listFiles();
+
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                image_path = folder_path + files[i].getName().toString();
+                Bitmap image = Image.getImage(image_path);
+
+                // transpose the image into a column vector
+                double[] image_column = Image.getColumnVectorOfImage(image, 256 * 256);
+
+                // create the set S
+                s.add(image_column);
+            }
+
+            /** calculate average face */
+            face_average = calculateFaceAverage(256, s, M);
+
+            /** subtract face average to each image => A */
+            s_less_face_average_transpose = subtractFaceAverageToAnImage(s , face_average);
+            s_less_face_average = transposeMatrix(s_less_face_average_transpose);
+
+            /** calculate covariance matrix => A x A^T */
+            covarianceMatrix = productOfMatrixAndMatrixTranspose(s_less_face_average);
+
+            /** calculate the eigenvcetors and eigenvalues of A x A^T */
+            eigenvaluesMatrix_temp = getEigenvaluesMatrix(covarianceMatrix);
+            eigenvectorsMatrix_temp = getEigenvectorsMatrix(covarianceMatrix);
+
+            /** calculate Au */
+            eigenvectorsMatrix_transpose = productOfTwoMatrix(s_less_face_average, eigenvectorsMatrix_temp);
+            eigenvectorsMatrix = multiplyMatrixForANumber(transposeMatrix(eigenvectorsMatrix_transpose), 1/M);
+
+            /** compute face projection */
+            projection_coefficients = calculateProjectionCoefficients(transposeMatrix(s_less_face_average), eigenvectorsMatrix);
+            face_projection_matrix = calculateEigenfacesProjection(transposeMatrix(s_less_face_average), eigenvectorsMatrix, projection_coefficients);
+
+            // save it into db
+            saveToDatabase(face_projection_matrix);
+
+            mCallback.onTaskComplete(face_average, eigenvectorsMatrix, projection_coefficients);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        myProgress.setProgress(values[0]);
+    }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+        super.onPostExecute(result);
+
+        if(result==true) {
+            CharSequence text = "Database Succesfull Created";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(mContext, text, duration);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+            toast.show();
+        }
+        else
+        {
+            CharSequence text = "Database Not Created";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(mContext, text, duration);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+            toast.show();
+        }
+    }
+
+
+    private static void saveToDatabase(double[][] matrixOfImages) {
+        Bitmap face_projection = null;
+        Database db = null;
+        db = new Database();
+
+        double[] column = new double[matrixOfImages[0].length]; // Here I assume a rectangular 2D array!
+        int index = matrixOfImages.length;
+
+        int[] column_final = new int[column.length];
+
+        for (int i = 0; i < index; i++) {
+
+            for (int j = 0; j < column.length; j++) {
+                column[j] = matrixOfImages[i][j];
+            }
+
+            double max_value = getMaxArrayValue(column);
+            double min_value = getMinArrayValue(column);
+
+            double scalar_coefficient = 255 / max_value;
+
+            for (int k = 0; k < column.length; k++) {
+                column[k] = column[k];
+                column[k] = scalar_coefficient * column[k];
+            }
+
+            // cast the Array to int Array
+            for (int m = 0; m < column_final.length; m++) {
+
+                int color = ((int) column[m] & 0xff) << 24 |
+                        ((int) column[m] & 0xff) << 16 |
+                        ((int) column[m] & 0xff) << 8 |
+                        ((int) column[m] & 0xff);
+
+                column_final[m] = color;
+            }
+
+            face_projection = Bitmap.createBitmap(column_final, 256, 256, Bitmap.Config.ARGB_8888);
+            db.createTrainingDatabase(face_projection, i);
+        }
+    }
+}
+          </code></pre>
+        </div>
+      <br>
 
         <h3> Camera Task </h3>
 
@@ -992,7 +1273,7 @@ protected void onCreate(Bundle savedInstanceState) {
 private void initViews() {
 
    textureView = (TextureView)findViewById(R.id.textureView);
-    btn_Training = (Button) findViewById(R.id.btn_training);
+   btn_Training = (Button) findViewById(R.id.btn_training);
 }
 
 /**
@@ -1043,11 +1324,13 @@ private void takePicture() {
        captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
 
        // Check orientation base on device
-       int rotation = getWindowManager().getDefaultDisplay().getRotation();
-       captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation));
+       int rotation = characteristics.get(CameraCharacteristics.SENSOR_ORIENTATION);
+       captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, rotation);
 
        // save the image
-       file = new File(Environment.getExternalStorageDirectory()+ "/APP/check_image.jpg");
+       dir = new File(Environment.getExternalStorageDirectory()+ "/APP/TestImage/");
+       dir.mkdirs();
+       file = new File(Environment.getExternalStorageDirectory()+ "/APP/TestImage/check_image.jpg");
        ImageReader.OnImageAvailableListener readListener = new ImageReader.OnImageAvailableListener() {
            @Override
            public void onImageAvailable(ImageReader reader) {
@@ -1262,39 +1545,6 @@ private void startBackgroundThead() {
 }
            </code></pre>
          </div>
-
-         <p>
-           If you want to use your front camera, everything gonna works; otherwise, if you want to use your back camera, your final picture will be upside down. To fix this problem, we add a function in our Image class that takes as input the angle of which we want to rotate the image and overwrite the saved picture with the one correctly rotated
-         </p>
-         <br>
-
-         <div class="row-full code">
-           <pre><code class="language-java line-numbers">
-public static void rotateImage(Context context, float angle){
-
-   Database db = null;
-   Bitmap image = null;
-   Matrix matrix = new Matrix();
-
-   try{
-
-       String picturePath = Environment.getExternalStorageDirectory()+"/APP/check_image.jpg";
-       image = BitmapFactory.decodeFile(picturePath);
-
-       matrix.postRotate(angle);
-
-       Bitmap rotatedBitmap = Bitmap.createBitmap(image, 0,0, image.getWidth(), image.getHeight(), matrix, true);
-
-       db = new Database();
-       db.saveBitmap(picturePath, rotatedBitmap);
-
-   } catch (Exception e) {
-       e.printStackTrace();
-       Toast.makeText(context,"An error as occurred", Toast.LENGTH_SHORT).show();
-   }
-}
-             </code></pre>
-           </div>
 
     	</article>
       </div>

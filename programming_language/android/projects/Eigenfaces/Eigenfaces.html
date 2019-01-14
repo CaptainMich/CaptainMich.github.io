@@ -93,8 +93,8 @@
           <li> 2. Create Database Class </li>
           <li> 3. Create Image Class </li>
           <li> 4. Create Eigenfaces Class and Task </li>
-          <li> 5. Create Camera Task to Take a Picture </li>
-          <li> 6. Create Facial Recognition Class and Task </li>
+          <li> 5. Create Facial Recognition Class and Task </li>
+          <li> 6. Create Camera Task to Take a Picture </li>
 
     			<!-- <li> Built with <abbr title="Syntatically Awesome Stylesheets">Sass</abbr></li>
     			<li> Uses semantic HTML5 elements and <abbr title="Accessible Rich Internet Applications">ARIA</abbr> Roles.</li> -->
@@ -890,10 +890,13 @@ public double[][] getEigenvectorsMatrix(double[][] m )
       <p style="text-align: center;"> a<sub>k,1</sub> = u<sup>T</sup><sub>k</sub> &Phi;<sub>1</sub> </p>
       <br>
 
-      Where a<sub>k,1</sub> represents the k-th project's coefficient of the first subject and u<sub>k<sub>i</sub></sub> is the i-th components of u<sub>k</sub> (where i goes from 1 to 65536).
-      At this point, the projection of &Phi;<sub>1</sub> can be written as linear combination of the eigenfaces:
+      <p> Where a<sub>k,1</sub> represents the k-th project's coefficient of the first subject and u<sub>k<sub>i</sub></sub> is the i-th components of u<sub>k</sub> (where i goes from 1 to 65536). At this point, the projection of &Phi;<sub>1</sub> can be written as linear combination of the eigenfaces:<br>
+      </p>
 
-      <p style="text-align: center;"> a<sub>1,1</sub> u<sub>1</sub> + a<sub>2,1</sub> u<sub>2</sub> + ... + a<sub>25,1</sub> u<sub>25</sub>
+
+      <p style="text-align: center;"> a<sub>1,1</sub> u<sub>1</sub> + a<sub>2,1</sub> u<sub>2</sub> + ... + a<sub>25,1</sub> u<sub>25</sub> </p>
+
+      <p>
 
         <figure >
           <img src="img/1.4-Phi_projection.jpg" alt="" align="middle" style="margin: auto;"/>
@@ -1148,6 +1151,245 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
           </code></pre>
         </div>
       <br>
+      <h3> Facial Recognition Class and Task  </h3>
+
+      <p> To understand if a new subject is present in the initial database, we have to consider its projection in the new space and calculate the distance compared to the other faces. If the value is close enough to one of the them, the recognition is made. Let's have a look to the process. <br>
+      First of all we must choose an arbitrary threshold value: all the values below this one will be consider "close" enough to the new space and the image will be recognized as present in the database.
+      To choose the threshold properly we have to set our final goal; mostly common objectives are:
+      <ul style="padding-left: 5%">
+        <li>Recognize a face in the initial database </li>
+        <li>Recognize if a face is present or not in the database </li>
+  		</ul>
+      </p>
+
+      <p> For this project we have choosen to recognize if a face is present or not in our database. <br>
+      Let's consider a new image 256 x 256 pixels (from now on we will call it &Delta;) which has the same starting conditions of our database; at this point we project &Delta; into eigenfaces's space. <br>
+      </p>
+
+      <p style="text-align: center;"> &delta;<sub>k</sub> = u<sub>k</sub><sup>T</sup> (&Delta; - &Psi;) <br>
+        (where k goes from 1 to 25)
+      </p> <br>
+
+      <p> In this way we have subtracted the face average &Psi; to &Delta; and we have also calculated the projection's coefficients; this gives us the new coordinates of &Delta; - &Psi; into the new space. Let's call &Omega; the column vector that describes each eigenfaces's weight for &Delta; :
+      </p>
+
+      <p style="text-align: center;"> &Omega;<sub>&Delta;</sub> = (&delta;<sub>1</sub>, &delta;<sub>2</sub>, ..., &delta;<sub>25</sub>) <br>
+      </p> <br>
+
+      <p> It is now possible to calculate the distance between &Delta; and the eigenfaces's space. We can call      &Omega;<sub>&Phi;<sub>j</sub></sub><sup>T</sup> the row vector of projection's coefficients of &Phi;<sub>j</sub>, the j-th image deprived of the face average. Let's consider the Euclidean's distance between the projection of &Delta; - &Psi; and &Phi;<sub>j</sub>
+      </p>
+
+      <p style="text-align: center;"> &epsilon;<sub>j</sub><sup>2</sup> = ||&Omega;<sub>&Delta;</sub> - &Omega;<sub>&Phi;<sub>j</sub> </sub> ||<sup>2</sup> <br>
+      </p> <br>
+
+      <p> Let's calculate the distance compared to each faces of the starting database.
+      </p>
+
+      <p style="text-align: center;"> &epsilon; = min (&epsilon;<sub>j</sub><sup>2</sup>) <br> (where the min is calculate from 1 to 25)
+      </p> <br>
+
+      <p> At this point there can be two possible outcome:
+      <br>  1. &epsilon; > &Theta;
+      <br>  2. &epsilon; < &Theta;
+      <br>
+      </p>
+
+      <p> (1) In this case we have that the Euclidean's distance between the new face's projection and anyone other face of the starting database projected into the eigenfaces's space is bigger than the threshold value. That means the new face isn't recognized as present into the database <br>
+      </p>
+
+      <p> (2) In this case the facial recognition is achieved. The distance, infact, is less or equal to threshold value and that point out that the subject has been recognized.
+      </p>
+
+      <p> Let's analyze the code:
+      </p>
+      <br>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+public class FacialRecognition extends AsyncTask&lt;Context, Integer, Boolean&gt; {
+
+    private FacialRecognitionResultTask mCallback = null;
+    private Database db ;
+
+    ProgressDialog myProgress = null;
+    private Context mContext;
+    private double threshold_min = 0;
+    private double threshold_max;
+    private boolean flag = false;
+    private Bitmap input_pic;
+    private Bitmap input_pic_bw;
+    private Bitmap input_pic_bw_resized;
+    private int M;
+    private double epsilon;
+    private double min_epsilon_temp;
+    private double min_epsilon = Math.pow(10,15);
+    private double[][] epsilon_squared;
+    private double[] face_average;
+    private double[] image_less_face_average;
+    private double[][] eigenvectors_matrix;
+    private double[] projection_coefficients;
+    private double[][] projection_coefficients_db;
+
+    public FacialRecognition(Context _context, Bitmap pic, Database db, double[] faceAverage, double[][] eigenvectorsMatrix,
+                             double[][] projectionCoefficientsDB, double numberOfPics, double thresholdValue,
+                             FacialRecognitionResultTask myFRRT)
+    {
+
+        mContext = _context;
+
+        //this.mCallback = myFCRT;
+        this.M = (int)numberOfPics;
+        this.db = db;
+        this.input_pic = pic;
+        this.face_average = faceAverage;
+        this.eigenvectors_matrix = eigenvectorsMatrix;
+        this.threshold_max = thresholdValue;
+        this.projection_coefficients_db = projectionCoefficientsDB;
+
+        /* myProgress = new ProgressDialog(context);
+        myProgress.setTitle("Processing Data");
+        myProgress.setMessage("Please wait...");
+        myProgress.setMax(100);
+        myProgress.setIndeterminate(false); */
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+
+        CharSequence text = "Start Facial Recognition Process";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(mContext, text, duration);
+        toast.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 200);
+        toast.show();
+    }
+
+    @Override
+    protected Boolean doInBackground(Context... params) {
+
+        projection_coefficients = new double[M];
+
+        String folder_path = Environment.getExternalStorageDirectory() + "/APP/TestImage/";
+        String filename = null;
+        File directory = new File(folder_path);
+
+        for (File f : directory.listFiles()) {
+            if (f.isFile())
+                filename = f.getName();
+        }
+
+        if(threshold_max == 0){
+            flag = true;
+            return false;
+        }
+
+        // transpose the image into a column vector (delta)
+
+        if ("check_image.jpg".equals(filename)) {
+            input_pic = Image.rotateImage(input_pic, 270);
+        }
+        input_pic_bw = Image.createGrayScale(input_pic);
+        input_pic_bw_resized = Image.resizeImage(input_pic_bw);
+        double[] image_column = Image.getColumnVectorOfImage(input_pic_bw_resized, 256 * 256);
+        image_less_face_average = new double[image_column.length];
+
+        // subtract the face average to the image
+        for (int i = 0; i < image_column.length; i++) {
+            image_less_face_average[i] = image_column[i] - face_average[i];
+        }
+
+        /**double[][] m1 = convertSingleArrayTo2DMatrix(image_less_face_average, 256);
+        double[][] m2 = (transposeMatrix(eigenvectors_matrix));
+        projection_coefficients = productOfTwoMatrix(m1, m2);
+        **/
+
+        for(int i=0; i < M; i++)
+        {
+            projection_coefficients[i] = productOfTwoArray(eigenvectors_matrix[i] ,image_less_face_average);
+        }
+
+        epsilon_squared = new double[M][M];
+
+        for(int k=0; k < M; k++)
+        {
+            epsilon_squared[k] =  calculateEuclideanDistance(projection_coefficients, projection_coefficients_db[k]);
+            min_epsilon_temp = getMinArrayValue(epsilon_squared[k]);
+
+            if(min_epsilon_temp < min_epsilon)
+                min_epsilon = min_epsilon_temp;
+
+        }
+
+        //epsilon = checkValue(min_epsilon);
+        epsilon = min_epsilon * Math.pow(10, 20);
+
+        if (epsilon > threshold_min && epsilon < threshold_max)
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    protected void onProgressUpdate(Integer... values) {
+        super.onProgressUpdate(values);
+        myProgress.setProgress(values[0]);
+    }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+        super.onPostExecute(result);
+
+        if(result==true) {
+            CharSequence text = "Your face match with the db. UNLOCK!\n" + "\t\t\t\t\t\t\t\t\t\t Epsilon: " + (int)epsilon;
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(mContext, text, duration);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+            toast.show();
+        }
+        else
+        {
+            if (flag == true) {
+                CharSequence text = "Please select a valid SeekBar Value";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(mContext, text, duration);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+                toast.show();
+            }
+            else{
+
+                CharSequence text = "Your face doesn't match with the db. Still LOCK. Try again.\n" + "\t\t\t\t\t\t\t\t\t\t Epsilon: " + (int)epsilon;
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(mContext, text, duration);
+                toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+                toast.show();
+            }
+        }
+
+    }
+}
+        </code></pre>
+      </div>
+
+      <div class="row-full code">
+        <pre><code class="language-java line-numbers">
+public static double[] calculateEuclideanDistance(double[] a1, double[] a2){
+
+    double[] aResult = new double[a1.length];
+
+    for (int i = 0 ; i < a1.length ; i++)
+    {
+        aResult[i] = Math.pow(Math.abs(a1[i] - a2[i]), 2);
+    }
+
+    return aResult;
+}
+        </code></pre>
+          </div>
 
         <h3> Camera Task </h3>
 

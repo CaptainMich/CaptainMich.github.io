@@ -230,6 +230,10 @@ html, body{
   transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+#modal2 h1{
+  font-size: 410% !important;
+}
+
 #modal3 h1{
   font-size: 390% !important;
 }

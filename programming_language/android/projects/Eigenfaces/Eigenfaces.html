@@ -542,10 +542,10 @@ public class Image {
 
         <h3> Eigenfaces Class and Task </h3>
 
-        <p> To manage the eigenfaces computation we are gonna work with asyncronous task. Let' see how an asyncronous task work </p>
+        <p> To manage the eigenfaces computation we are gonna work with asynchronous task. Let' see how an asynchronous task work </p>
 
         <dl>
-          <dt> Asyncronous Task </dt>
+          <dt> Asynchronous Task </dt>
           <dd> The Android AsyncTask class allows you to perform background processing and then show the results on the UI of the main tread. It is usually used to perform short-term operations. Each asynchronous processing consists of about 4 steps that android executes consecutively and are :
             <br>
             - <code> onPreExecute </code> : all the operations before the task;
@@ -655,7 +655,7 @@ public static double[] getColumnVectorOfImage(Bitmap src, int imageSize){
 
       <p> What it is interests for us it is to consider the difference between each subject face of the database. So we need to calculate a new array that represent the <b> <i> face average </i> </b>, let's call it <b>  &Psi; = (1/M) <i style="font-size: 34px;">&Sigma;</i> &#915;<sub>i</sub> </b>, where the sum goes from i= 1 to M). </p>
 
-      <p> Let's translate it into code as a new method that we will call <code> calculateFaceAverage </code>for the Eigenfaces class (must be after the last step of the asyncronous call); it will take as input argument the set of all column arrays and the size of our image and it will return the array of face average as a double type : </p> <br>
+      <p> Let's translate it into code as a new method that we will call <code> calculateFaceAverage </code>for the Eigenfaces class (must be after the last step of the asynchronous call); it will take as input argument the set of all column arrays and the size of our image and it will return the array of face average as a double type : </p> <br>
 
       <div class="row-full code">
         <pre><code class="language-java line-numbers">

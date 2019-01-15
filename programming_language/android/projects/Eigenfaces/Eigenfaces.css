@@ -344,14 +344,7 @@ td {
 
 @media (min-width: 960px) {
 
-  h1, h2, h3, h4{
 
-    width: 21ch;
-  	white-space: nowrap;
-  	overflow: hidden;
-    -webkit-animation: typing 2s steps(21, end),
-      blink-caret 0.5s step-end infinite alternate;
-  }
 
   @-webkit-keyframes typing { from { width: 0; } }
   @-webkit-keyframes blink-caret { 50% { border-color: transparent; } }

@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements EigenfacesResultT
             <figcaption> Example Of Starting Database </figcaption>
           </figure>
 
-        <p> In order to go through the next phases of the project we need to resize the images: we have choosen 256 x 256 pixels as default dimension. We also need to turn them into grayscale to reduce the computational cost of the implementation and compress as '.png' filetype. Let's go into the code: </p> <br>
+        <p> In order to go through the next phases of the project we need to resize the images: we have chosen 256 x 256 pixels as default dimension. We also need to turn them into grayscale to reduce the computational cost of the implementation and compress as '.png' filetype. Let's go into the code: </p> <br>
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
@@ -524,9 +524,9 @@ public class Image {
           <li> <b> createGrayScale </b> -> this method takes as input a Bitmap and return it in grayscale. To be able to draw something we need the <code> drawBitmap </code> method of canvas class; this method need to work : <br> <br>
              - A Bitmap object to hold the pixels
             <br>
-             - A Rect object to rapresent the subset of the bitmap to be drawn
+             - A Rect object to represent the subset of the bitmap to be drawn
              <br>
-             - A Rect object to rapresent that the bitmap will be scaled/translated to fit into
+             - A Rect object to represent that the bitmap will be scaled/translated to fit into
              <br>
              - A Paint object to describe the colors and styles for the drawing
               <br> <br>
@@ -619,7 +619,7 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
         </div>
 
         <br>
-        <p> We can now go deeper in the code; we have to deal with the images, manipulate them. First of all, let's consider an image as a 'n x m' matrix, in our case we will have a square matrix of order 256, where each element of the matrix is composed by a value from 0 to 255 (the images are black and white). Called <b> I<sub>1</sub> </b> the image of the first subject, we have a 256 x 256 matrix that we want to rapresent as a unique concatenated column vector that we are going to call <b> &#915;<sub>1</sub> </b>. So, let's add a method inside the Image class that take as input a Bitmap (matrix) and return a concatenated column vector of that image : </p> <br>
+        <p> We can now go deeper in the code; we have to deal with the images, manipulate them. First of all, let's consider an image as a 'n x m' matrix, in our case we will have a square matrix of order 256, where each element of the matrix is composed by a value from 0 to 255 (the images are black and white). Called <b> I<sub>1</sub> </b> the image of the first subject, we have a 256 x 256 matrix that we want to represent as a unique concatenated column vector that we are going to call <b> &#915;<sub>1</sub> </b>. So, let's add a method inside the Image class that take as input a Bitmap (matrix) and return a concatenated column vector of that image : </p> <br>
 
         <div class="row-full code">
           <pre><code class="language-java line-numbers">
@@ -905,7 +905,7 @@ public double[][] getEigenvectorsMatrix(double[][] m )
 
       </p>
 
-      <p> Iterating this process again for each faces of our starting database, we will get their position into the space of the faces and we can start the facial recognition process. The matrix of projection's coefficients of all faces will be composed from all the values of a<sub>k,i</sub> where the k-th values and the i-th does match in our case and it is equal to 25. <br>
+      <p> Iterating this process again for each faces of our starting database, we will get their position into the space of the faces and we can start the facial recognition process. The matrix of projection coefficients of all faces will be composed from all the values of a<sub>k,i</sub> where the k-th values and the i-th does match in our case and it is equal to 25. <br>
       Following the code needed to compute it:
       </p>
       <br>
@@ -971,7 +971,7 @@ public static double[][] calculateEigenfacesProjection(double[][] m1, double[][]
         <br>
         - <code> onPreExecute() </code>: it just displays out when the process starts
         <br>
-        - <code> doInBackground </code>: it computes the eigenfaces , saving them as pictures into the "Training_DB" folder and return through the EigenfacesResultTask interface the face average, the eigenvectors matrix and the projection's coefficients matrix
+        - <code> doInBackground </code>: it computes the eigenfaces , saving them as pictures into the "Training_DB" folder and return through the EigenfacesResultTask interface the face average, the eigenvectors matrix and the projection coefficients matrix
         <br>
         - <code> onPostExecute </code> : it displays out a Toast whenever the database is successfully created or not
         <br>
@@ -1151,7 +1151,7 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
           </code></pre>
         </div>
       <br>
-      <h3> Facial Recognition Class and Task  </h3>
+      <h3> Facial Recognition Class and Task </h3>
 
       <p> To understand if a new subject is present in the initial database, we have to consider its projection in the new space and calculate the distance compared to the other faces. If the value is close enough to one of the them, the recognition is made. Let's have a look to the process. <br>
       First of all we must choose an arbitrary threshold value: all the values below this one will be consider "close" enough to the new space and the image will be recognized as present in the database.
@@ -1162,21 +1162,21 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
   		</ul>
       </p>
 
-      <p> For this project we have choosen to recognize if a face is present or not in our database. <br>
-      Let's consider a new image 256 x 256 pixels (from now on we will call it &Delta;) which has the same starting conditions of our database; at this point we project &Delta; into eigenfaces's space. <br>
+      <p> For this project we have chosen to recognize if a face is present or not in our database. <br>
+      Let's consider a new image 256 x 256 pixels (from now on we will call it &Delta;) which has the same starting conditions of our database; at this point we project &Delta; into eigenfaces space. <br>
       </p>
 
       <p style="text-align: center;"> &delta;<sub>k</sub> = u<sub>k</sub><sup>T</sup> (&Delta; - &Psi;) <br>
         (where k goes from 1 to 25)
       </p> <br>
 
-      <p> In this way we have subtracted the face average &Psi; to &Delta; and we have also calculated the projection's coefficients; this gives us the new coordinates of &Delta; - &Psi; into the new space. Let's call &Omega; the column vector that describes each eigenfaces's weight for &Delta; :
+      <p> In this way we have subtracted the face average &Psi; to &Delta; and we have also calculated the projection coefficients; this gives us the new coordinates of &Delta; - &Psi; into the new space. Let's call &Omega; the column vector that describes each eigenfaces weight for &Delta; :
       </p>
 
       <p style="text-align: center;"> &Omega;<sub>&Delta;</sub> = (&delta;<sub>1</sub>, &delta;<sub>2</sub>, ..., &delta;<sub>25</sub>) <br>
       </p> <br>
 
-      <p> It is now possible to calculate the distance between &Delta; and the eigenfaces's space. We can call      &Omega;<sub>&Phi;<sub>j</sub></sub><sup>T</sup> the row vector of projection's coefficients of &Phi;<sub>j</sub>, the j-th image deprived of the face average. Let's consider the Euclidean's distance between the projection of &Delta; - &Psi; and &Phi;<sub>j</sub>
+      <p> It is now possible to calculate the distance between &Delta; and the eigenfaces space. We can call      &Omega;<sub>&Phi;<sub>j</sub></sub><sup>T</sup> the row vector of projection coefficients of &Phi;<sub>j</sub>, the j-th image deprived of the face average. Let's consider the Euclidean's distance between the projection of &Delta; - &Psi; and &Phi;<sub>j</sub>
       </p>
 
       <p style="text-align: center;"> &epsilon;<sub>j</sub><sup>2</sup> = ||&Omega;<sub>&Delta;</sub> - &Omega;<sub>&Phi;<sub>j</sub> </sub> ||<sup>2</sup> <br>
@@ -1194,7 +1194,7 @@ public class Eigenfaces extends AsyncTask &lt;Context, Integer, Boolean&gt; {
       <br>
       </p>
 
-      <p> (1) In this case we have that the Euclidean's distance between the new face's projection and anyone other face of the starting database projected into the eigenfaces's space is bigger than the threshold value. That means the new face isn't recognized as present into the database <br>
+      <p> (1) In this case we have that the Euclidean's distance between the new face's projection and anyone other face of the starting database projected into the eigenfaces space is bigger than the threshold value. That means the new face isn't recognized as present into the database <br>
       </p>
 
       <p> (2) In this case the facial recognition is achieved. The distance, infact, is less or equal to threshold value and that point out that the subject has been recognized.
@@ -1222,7 +1222,7 @@ public class FacialRecognition extends AsyncTask&lt;Context, Integer, Boolean&gt
     private int M;
     private double epsilon;
     private double min_epsilon_temp;
-    private double min_epsilon = Math.pow(10,15);
+    private double min_epsilon = Double.MAX_VALUE;
     private double[][] epsilon_squared;
     private double[] face_average;
     private double[] image_less_face_average;

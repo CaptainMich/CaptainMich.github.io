@@ -23,6 +23,7 @@
       <link rel="stylesheet" href="res/swiper.min.css">
       <link rel="stylesheet" href="css/style.css">
       <link rel="stylesheet" href="css/personal_icon.css">
+      <link rel="stylesheet" href="css/preloader.css">
   </head>
   <body>
 
@@ -61,6 +62,11 @@
 
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Preloader -->
+    <div class="loader-wrapper">
+      <div class="lds-circle"><div></div> </div>
+    </div>
 
     <!-- BoxLink -->
     <main>
@@ -382,6 +388,20 @@
       </div>
     </footer>
 
+    <script
+			  src="https://code.jquery.com/jquery-3.4.1.js"
+			  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+			  crossorigin="anonymous">
+    </script>
+    <script>
+    $(function(){ // this replaces document.ready
+      setTimeout(function(){
+        $('.loader-wrapper').fadeOut('slow', function() {
+          $(this).remove();
+        });
+      }, 900);
+    });
+    </script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>

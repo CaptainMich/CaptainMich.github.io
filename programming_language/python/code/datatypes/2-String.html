@@ -25,6 +25,8 @@
       <link rel="stylesheet" href="../../../../css/personal_icon.css">
       <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
       <link rel="stylesheet" href="../code.css">
+      <link rel="stylesheet" href="../sidebar.css">
+
 
   </head>
   <body>
@@ -64,14 +66,80 @@
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-    <!--  -->
-    <main>
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> Data Types </h5>
+        <ul>
+            <li><a href="#"> Math Operator </a></li>
+            <li><a href="#"> Strings </a></li>
+            <li><a href="#"> Sets </a></li>
+            <li><a href="#">  Lists </a></li>
+            <li><a href="#"> Tuples  </a></li>
+        </ul>
 
+        <h5> Loops </h5>
+        <ul>
+            <li><a href="#"> For Loop </a></li>
+            <li><a href="#"> While Loop </a></li>
+            <li><a href="#"> If Statement </a></li>
+            <li><a href="#"> Range </a></li>
+            <li><a href="#">  Break & Continue </a></li>
+            <li><a href="#"> Exception </a></li>
+        </ul>
+
+        <h5> Functions </h5>
+        <ul>
+            <li><a href="#"> Functions </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="#"> Class </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="#"> Class </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="#"> Class </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="#"> Class </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="#"> Class </a></li>
+        </ul>
+
+        <br><br>
+
+      </div>
+    </div>
+
+    <!-- Main  -->
+    <main>
+      <div class="swipe-area"></div>
       <br><br><br><br><br><br>
       <div class="container">
       <article role="article">
     		<h3>Strings </h3>
         <p> B elow we cover all the default strings construction and how to work with them </p>
+
+        <section clss= "" role="group">
+          <button id="show"> List all project </button>
+    		</section>
+
+
+
+
 
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
@@ -191,12 +259,15 @@ print(match)                                               # previous example
       </div>
     </footer>
 
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../sidebar.js"> </script>
     <script type="text/javascript" src="../../../../js/menu.js"></script>
     <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>

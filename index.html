@@ -35,12 +35,12 @@
       <nav>
           <ul>
             <li><a href="programming_language/python/python.html"> Python </a> </li>
-            <li><a href="programming_language/c_plus_plus/c_plus_plus.html"> C++ </a> </li>
+            <li><a href="programming_language/c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+            <li><a href="programming_language/reversing/reversing.html"> Reversing </a> </li>
+            <li><a href="programming_language/machine_laerning/machine_learning.html"> ML </a> </li>
             <li><a href="programming_language/android/android.html"> Android </a> </li>
-            <li><a href="programming_language/c_sharp/c_sharp.html"> C# </a> </li>
             <li><a href="programming_language/raspberry/raspberry.html"> Raspberry </a> </li>
-            <li><a href="programming_language/matlab/matlab.html"> MATLAB </a> </li>
-            <li><a href="library/library.html"> LIBRARY </a> </li>
+            <li><a href="library/library.html"> Library </a> </li>
             <li><a href="about.html"> About Me</a> </li>
           </ul>
           <div id="dropdown-header" class="dropdown">
@@ -147,8 +147,8 @@
               <div class="servicebox">
                 <a href="programming_language/c_plus_plus/c_plus_plus.html">
                   <div class="service-icon">
-                    <h3 class="title"> C++ </h3>
-                    <span class="icon-c-plus-plus-logo"></span>
+                    <h3 class="title" style="padding-top:10px;"> C / C++ </h3>
+                    <span class="icon-c-plus-plus-logo" ></span>
                   </div>
                   <p class="description">
                     C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation. It was designed with a bias toward system programming and embedded, resource-constrained and large systems, with performance, efficiency and flexibility of use as its design highlights.C++ is a compiled language, with implementations of it available on many platforms. C++ is standardized by ISO.
@@ -159,6 +159,34 @@
 
             <div class="col-lg-4">
               <div class="servicebox">
+                <a href="programming_language/reversing/reversing.html">
+                  <div class="service-icon">
+                    <h3 class="title" style="padding-top:10px;"> Binary / Reversing</h3>
+                    <span class="icon-terminal-icon"></span>
+                  </div>
+                  <p class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                  </p>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="servicebox">
+                <a href="programming_language/machine_learning/machine_learning.html">
+                  <div class="service-icon">
+                    <h3 class="title"> Machine Learning </h3>
+                    <span class="icon-artificial-intelligence-icon"></span>
+                  </div>
+                  <p class="description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                  </p>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="servicebox" style="margin-top:-6px;">
                 <a href="programming_language/android/android.html">
                   <div class="service-icon">
                     <h3 class="title"> Android </h3>
@@ -173,38 +201,10 @@
 
             <div class="col-lg-4">
               <div class="servicebox">
-                <a href="#">
-                  <div class="service-icon">
-                    <h3 class="title"> C # </h3>
-                    <span class="icon-c-sharp-logo"></span>
-                  </div>
-                  <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                  </p>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="servicebox">
-                <a href="#">
+                <a href="programming_language/raspberry/raspberry.html">
                   <div class="service-icon">
                     <h3 class="title"> Raspberry </h3>
                     <span class="icon-raspberry-pi-logo"></span>
-                  </div>
-                  <p class="description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                  </p>
-                </a>
-              </div>
-            </div>
-
-            <div class="col-lg-4">
-              <div class="servicebox">
-                <a href="#">
-                  <div class="service-icon">
-                    <h3 class="title"> MATLAB </h3>
-                    <span class="icon-matlab-logo"></span>
                   </div>
                   <p class="description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
@@ -399,9 +399,17 @@
         $('.loader-wrapper').fadeOut('slow', function() {
           $(this).remove();
         });
-      }, 900);
+      }, 500);
     });
     </script>
+    <!-- <script>
+      $(function(){
+      	$('.loader-wrapper').fadeOut('slow',function() {
+          $(this).remove();
+        });
+      });
+    </script> -->
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>

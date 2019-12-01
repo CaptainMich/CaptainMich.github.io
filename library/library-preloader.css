@@ -2,7 +2,7 @@
   width: 100%;
   height: 100%;
   z-index: 999;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: #fff;
@@ -34,7 +34,7 @@
   background-size: 300px 150px;
   background-position: center bottom;
   clip-path: circle(150px at center center);
-  animation: flashlight 5000ms infinite;
+  animation: flashlight 2500ms infinite;
 }
 .library:after {
   content: '';
@@ -47,7 +47,7 @@
   background-image: radial-gradient(circle, #fff 50%, transparent 50%), radial-gradient(circle, #fff 50%, transparent 50%);
   background-size: 10px 10px;
   background-position: left center, right center;
-  animation: eyes 5000ms infinite;
+  animation: eyes 2500ms infinite;
 }
 @-moz-keyframes flashlight {
   0%, 9% {

@@ -581,15 +581,18 @@ header nav ul li a:hover{
   transition: all 0.5s ease 0s;
 }
 
+.servicebox .service-icon span {
+  font-size: 25px
+}
+
 .servicebox .service-icon ion-icon,
 .servicebox .service-icon i{
   font-size: 30px;
 }
 
-
 .servicebox .title{
   display: inline-block;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
   margin-right: 10px;

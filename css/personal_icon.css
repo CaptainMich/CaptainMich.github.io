@@ -1,21 +1,22 @@
 /* PERSONAL ICON:
 
-    - C#            e900
-    - RASPBERRY     e901
+    - TERMINAL      e900
+    - IA            e903
     - C++           e902
-    - MATLAB        e903
+    - RASPBERRY     e901
 
 */
 
 @font-face {
   font-family: 'personal-icon';
-  src:  url('../fonts/personal-icon.eot?jm8n7r');
-  src:  url('../fonts/personal-icon.eot?jm8n7r#iefix') format('embedded-opentype'),
-    url('../fonts/personal-icon.ttf?jm8n7r') format('truetype'),
-    url('../fonts/personal-icon.woff?jm8n7r') format('woff'),
-    url('../fonts/personal-icon.svg?jm8n7r#personal-icon') format('svg');
+  src:  url('../fonts/personal-icon.eot?rsaub9');
+  src:  url('../fonts/personal-icon.eot?rsaub9#iefix') format('embedded-opentype'),
+    url('../fonts/personal-icon.ttf?rsaub9') format('truetype'),
+    url('../fonts/personal-icon.woff?rsaub9') format('woff'),
+    url('../fonts/personal-icon.svg?rsaub9#personal-icon') format('svg');
   font-weight: normal;
   font-style: normal;
+  font-display: block;
 }
 
 [class^="icon-"], [class*=" icon-"] {
@@ -33,19 +34,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-c-sharp-logo:before {
+.icon-terminal-icon:before {
   content: "\e900";
-  font-size: 25px;
+}
+.icon-artificial-intelligence-icon:before {
+  content: "\e903";
 }
 .icon-raspberry-pi-logo:before {
   content: "\e901";
-  font-size: 25px;
 }
 .icon-c-plus-plus-logo:before {
   content: "\e902";
-  font-size: 25px;
-}
-.icon-matlab-logo:before {
-  content: "\e903";
-  font-size: 25px;
 }

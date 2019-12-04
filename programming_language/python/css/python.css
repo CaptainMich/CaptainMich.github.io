@@ -230,17 +230,23 @@ html, body{
   transition: opacity 0.1s ease-out, transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-#modal3 h1{
+#modal1 h1,
+#modal3 h1,
+#modal2 h1{
   font-size: 325% !important;
 }
 
 @media (max-width: 600px) {
+  #modal1 h1 {
+      font-size: 100% !important;
+  }
+
   #modal2 h1 {
-      font-size: 95% !important;
+      font-size: 100% !important;
   }
 
   #modal3 h1{
-    font-size: 80% !important;
+    font-size: 100% !important;
   }
 }
 

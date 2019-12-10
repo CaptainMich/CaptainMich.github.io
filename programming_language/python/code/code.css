@@ -159,6 +159,122 @@ p + p {
   margin: 1em auto;
 }
 
+
+/* BUTTON HOVERING EFFECT */
+#next {
+  font-size: 1.125em;
+  display: inline-block;
+  width: 40%;
+  float: right;
+  padding: 0.5em 0.75em;
+  margin: 2.25rem 35.25em;
+  border: 0.0625rem solid transparent;
+  background: #f6f6f6;
+  border-radius: 0.125em;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  letter-spacing: 0.0625rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+
+  margin: auto;
+  margin-top: 2.25rem;
+  right: 15%;
+  transform: translateY(-50%);
+}
+
+#previous {
+  font-size: 1.125em;
+  display: inline-block;
+  width: 40%;
+  float: left;
+  padding: 0.5em 1.75em;
+  margin: 2.25rem 9.25em
+  border: 0.0625rem solid transparent;
+  background: #f6f6f6;
+  border-radius: 0.125em;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  letter-spacing: 0.0625rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+
+  left: 15%;
+  margin: auto;
+  margin-top: 2.25rem;
+  transform: translateY(-50%);
+}
+
+
+button,
+button::after {
+  -webkit-transition: all 0.3s ;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button::before,
+button::after {
+  background: #333;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+#next:hover,
+#next:focus,
+#previous:hover,
+#previous:focus{
+  color: #fff;
+  border-color: #fff;
+  right: 0px;
+}
+
+#next::after{
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 0;
+}
+
+#previous::after{
+  height: 100%;
+  right: 0;
+  top: 0;
+  width: 0;
+}
+
+#previous:hover:after,
+#next:hover:after  {
+  width: 100%;
+}
+
+
+@media (max-width: 1170px) {
+
+  #previous{
+    font-size: 1.125em;
+    display: block;
+    width: 100%;
+    padding: 0.5em 0.75em;
+    margin: auto;
+    margin-top: 5% ;
+    position: static;
+  }
+
+  #next{
+    font-size: 1.125em;
+    display: block;
+    width: 100%;
+    padding: 0.5em 0.75em;
+    margin: auto;
+    position: static;
+  }
+}
+
 article[role="article"] {
   counter-reset: figure;
 }

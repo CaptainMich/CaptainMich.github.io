@@ -305,10 +305,57 @@ a[role="link"]:hover, a[role="link"]:focus {
   border-bottom-style: solid;
 }
 
+.prism *, .token.pre.gfm * {
+  font-weight: inherit !important
+}
+
+.prism .token.cdata, .prism .token.comment, .prism .token.doctype, .prism .token.prolog, .token.pre.gfm .token.cdata, .token.pre.gfm .token.comment, .token.pre.gfm .token.doctype, .token.pre.gfm .token.prolog {
+  color: #708090
+}
+
+.prism .token.punctuation, .token.pre.gfm .token.punctuation {
+  color: #999
+}
+
+.prism .namespace, .token.pre.gfm .namespace {
+  opacity: .7
+}
+
+.prism .token.boolean, .prism .token.constant, .prism .token.deleted, .prism .token.number, .prism .token.property, .prism .token.symbol, .prism .token.tag, .token.pre.gfm .token.boolean, .token.pre.gfm .token.constant, .token.pre.gfm .token.deleted, .token.pre.gfm .token.number, .token.pre.gfm .token.property, .token.pre.gfm .token.symbol, .token.pre.gfm .token.tag {
+  color: #905
+}
+
+.prism .token.attr-name, .prism .token.builtin, .prism .token.char, .prism .token.inserted, .prism .token.selector, .prism .token.string, .token.pre.gfm .token.attr-name, .token.pre.gfm .token.builtin, .token.pre.gfm .token.char, .token.pre.gfm .token.inserted, .token.pre.gfm .token.selector, .token.pre.gfm .token.string {
+  color: #690
+}
+
+.prism .language-css .token.string, .prism .style .token.string, .prism .token.entity, .prism .token.operator, .prism .token.url, .token.pre.gfm .language-css .token.string, .token.pre.gfm .style .token.string, .token.pre.gfm .token.entity, .token.pre.gfm .token.operator, .token.pre.gfm .token.url {
+  color: #a67f59
+}
+
+.prism .token.atrule, .prism .token.attr-value, .prism .token.keyword, .token.pre.gfm .token.atrule, .token.pre.gfm .token.attr-value, .token.pre.gfm .token.keyword {
+  color: #07a
+}
+
+.prism .token.function, .token.pre.gfm .token.function {
+  color: #dd4a68
+}
+
+.prism .token.important, .prism .token.regex, .prism .token.variable, .token.pre.gfm .token.important, .token.pre.gfm .token.regex, .token.pre.gfm .token.variable {
+  color: #e90
+}
+
+.prism .token.bold, .prism .token.important, .token.pre.gfm .token.bold, .token.pre.gfm .token.important {
+  font-weight: 500
+}
+
+.prism .token.italic, .token.pre.gfm .token.italic {
+  font-style: italic
+}
 
 blockquote {
   max-width: 42.5rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
   margin: 1em auto;
   color: #444;
 }
@@ -319,6 +366,45 @@ blockquote code, blockquote q {
 blockquote cite {
   display: block;
   text-align: right;
+}
+
+blockquote {
+  color: rgba(0, 0, 0, .5);
+  padding-left: 1.5em;
+  border-left: 5px solid rgba(0, 0, 0, .1)
+}
+
+.app--dark .layout__panel--editor blockquote, .app--dark .layout__panel--preview blockquote {
+  color: hsla(0, 0%, 100%, .4);
+  border-left-color: hsla(0, 0%, 100%, .1)
+}
+
+.stackedit--pdf blockquote {
+  border-left-color: #ececec
+}
+
+b, strong {
+  font-weight: bold;
+}
+
+hr {
+  box-sizing: content-box;
+  width: 60%;
+  overflow: hidden;
+  border: 0;
+  border-top: 2px solid hsla(0, 0%, 50%, .33);
+  margin: 1em 20%
+}
+
+.scrolling-wrapper {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 q::before {
@@ -370,9 +456,7 @@ a[role="button"]:hover, a[role="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus,
 input[type="reset"]:hover,
-input[type="reset"]:focus,
-button:hover,
-button:focus {
+input[type="reset"]:focus {
   border-color: #666666;
 }
 
@@ -425,6 +509,11 @@ dl {
 }
 dl dt {
   font-size: 1.25em;
+  font-weight: bold;
+}
+
+dd dt{
+  overflow-wrap: break-word;
 }
 
 ::selection {
@@ -449,9 +538,9 @@ td {
 }
 
 .code {
-  margin-left: 10%;
-  margin-right: 10%;
-  width: 80%;
+  margin-left: 20%;
+  margin-right: 20%;
+  width:60%;
   font-size: 16px;
 }
 

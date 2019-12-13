@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title> picoCTF2019 | General Skill Writeup </title>
+    <title> picoCTF2019 | Reverse Engineering Writeup </title>
     <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -59,129 +59,358 @@
     <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> General Skill Writeup </h3>
+    		<h3> Reverse Engineering Writeup </h3>
         <br>
 
         <dl>
-          <dt> 2Warm - Points: 50 </dt>
-          <dd> Can you convert the number 42 (base 10) to binary (base 2)? </dd>
+          <dt> vault-door-training - Points: 50 </dt>
+          <dd> Your mission is to enter Dr. Evil's laboratory and retrieve the blueprints for his Doomsday Project. The laboratory is protected by a series of locked vault doors. Each door is controlled by a computer and requires a password to open. Unfortunately, our undercover agents have not been able to obtain the secret passwords for the vault doors, but one of our junior agents obtained the source code for each vault's computer! You will need to read the source code for each level to figure out what the password is for that vault door. As a warmup, we have created a replica vault in our training facility. The source code for the training vault is here: VaultDoorTraining.java </dd>
         </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoorTraining {
+    public static void main(String args[]) {
+        VaultDoorTraining vaultDoor = new VaultDoorTraining();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	}
+  else {
+	    System.out.println("Access denied!");
+	   }
+  }
+}
+
+    // The password is below. Is it safe to put the password in the source code?
+    // What if somebody stole our source code? Then they would know what our
+    // password is. Hmm... I will think of some ways to improve the security
+    // on the other doors.
+    //
+    // -Minion #9567
+    public boolean checkPassword(String password) {
+        return password.equals("w4rm1ng_Up_w1tH_jAv4_3b500738c12");
+    }
+}
+          </code></pre>
+        </div>
 
         <dl>
           <blockquote>
-            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was '11111', you would submit 'picoCTF{11111}' as the flag. </p>
+            <p><strong>Hint:</strong> The password is revealed in the program's source code. </p>
           </blockquote>
         </dl>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-# 42 (base 10) = 101010 (base 2)
+$ cat VaultDoorTraining.java
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> picoCTF{101010} </strong></p>
+            <p class="ctf"><strong> picoCTF{w4rm1ng_Up_w1tH_jAv4_3b500738c12} </strong></p>
           </blockquote>
         </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
-          <dt> Lets Warm Up - Points: 50 </dt>
-          <dd> If I told you a word started with 0x70 in hexadecimal, what would it start with in ASCII? </dd>
+          <dt> vault-door-1 - Points: 100 </dt>
+          <dd> This vault uses some complicated arrays! I hope you can make sense of it, special agent. The source code for this vault is here: VaultDoor1.java </dd>
+        </dl>
 
+          <div class="row-full code">
+            <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoor1 {
+    public static void main(String args[]) {
+        VaultDoor1 vaultDoor = new VaultDoor1();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+	String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+	   }
+  }
+}
+    // I came up with a more secure way to check the password without putting
+    // the password itself in the source code. I think this is going to be
+    // UNHACKABLE!! I hope Dr. Evil agrees...
+    //
+    // -Minion #8728
+    public boolean checkPassword(String password) {
+        return password.length() == 32 &&
+               password.charAt(0)  == 'd' &&
+               password.charAt(29) == 'f' &&
+               password.charAt(4)  == 'r' &&
+               password.charAt(2)  == '5' &&
+               password.charAt(23) == 'r' &&
+               password.charAt(3)  == 'c' &&
+               password.charAt(17) == '4' &&
+               password.charAt(1)  == '3' &&
+               password.charAt(7)  == 'b' &&
+               password.charAt(10) == '_' &&
+               password.charAt(5)  == '4' &&
+               password.charAt(9)  == '3' &&
+               password.charAt(11) == 't' &&
+               password.charAt(15) == 'c' &&
+               password.charAt(8)  == 'l' &&
+               password.charAt(12) == 'H' &&
+               password.charAt(20) == 'c' &&
+               password.charAt(14) == '_' &&
+               password.charAt(6)  == 'm' &&
+               password.charAt(24) == '5' &&
+               password.charAt(18) == 'r' &&
+               password.charAt(13) == '3' &&
+               password.charAt(19) == '4' &&
+               password.charAt(21) == 'T' &&
+               password.charAt(16) == 'H' &&
+               password.charAt(27) == '3' &&
+               password.charAt(30) == '3' &&
+               password.charAt(25) == '_' &&
+               password.charAt(22) == '3' &&
+               password.charAt(28) == 'e' &&
+               password.charAt(26) == '6' &&
+               password.charAt(31) == 'a';
+    }
+}
+            </code></pre>
+          </div>
+
+        <dl>
           <blockquote>
-            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was 'hello', you would submit 'picoCTF{hello}' as the flag. </p>
+            <p><strong>Hint:</strong> Look up the charAt() method online. </p>
           </blockquote>
         </dl>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-# 0x70 hex = p in ASCII
+# simply reorder the char at
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> picoCTF{p} </strong></p>
+            <p class="ctf"><strong> picoCTF{d35cr4mbl3_tH3_cH4r4cT3r5_63ef3a} </strong></p>
           </blockquote>
         </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
-          <dt> Warmed Up - Points: 50 </dt>
-          <dd> What is 0x3D (base 16) in decimal (base 10) </dd>
-        </dl>
-        <dl>
-          <blockquote>
-            <p><strong>Hint:</strong>  Submit your answer in our competition's flag format. For example, if you answer was '22', you would submit 'picoCTF{22}' as the flag. </p>
-          </blockquote>
+          <dt> vault-door-3 - Points: 200 </dt>
+          <dd> This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java </dd>
         </dl>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-# simply convert the number
+import java.util.*;
+
+class VaultDoor3 {
+    public static void main(String args[]) {
+        VaultDoor3 vaultDoor = new VaultDoor3();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+      }
+  }
+}
+    // Our security monitoring team has noticed some intrusions on some of the
+    // less secure doors. Dr. Evil has asked me specifically to build a stronger
+    // vault door to protect his Doomsday plans. I just *know* this door will
+    // keep all of those nosy agents out of our business. Mwa ha!
+    //
+    // -Minion #2671
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        char[] buffer = new char[32];
+        int i;
+        for (i=0; i&lt;8; i++) {
+            buffer[i] = password.charAt(i);
+        }
+        for (; i&lt;16; i++) {
+            buffer[i] = password.charAt(23-i);
+        }
+        for (; i&lt;32; i+=2) {
+            buffer[i] = password.charAt(46-i);
+        }
+        for (i=31; i>=17; i-=2) {
+            buffer[i] = password.charAt(i);
+        }
+        String s = new String(buffer);
+        return s.equals("jU5t_a_sna_3lpm1dg347_u_4_mfr54b");
+    }
+}
           </code></pre>
         </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Make a table that contains each value of the loop variables and the corresponding buffer index that it writes to. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+# reoder the buffer
+          </code></pre>
+        </div>
+
 
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> picoCTF{61} </strong></p>
+            <p class="ctf"><strong> picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_7f35db} </strong></p>
           </blockquote>
         </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
-          <dt> Bases - Points: 100 </dt>
-          <dd> What does this bDNhcm5fdGgzX3IwcDM1 mean? I think it has something to do with bases </dd>
+          <dt> vault-door-4 - Points: 250 </dt>
+          <dd> This vault uses ASCII encoding for the password. The source code for this vault is here: VaultDoor4.java </dd>
         </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+import java.util.*;
+
+class VaultDoor4 {
+    public static void main(String args[]) {
+        VaultDoor4 vaultDoor = new VaultDoor4();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+      }
+  }
+}
+    // I made myself dizzy converting all of these numbers into different bases,
+    // so I just *know* that this vault will be impenetrable. This will make Dr.
+    // Evil like me better than all of the other minions--especially Minion
+    // #5620--I just know it!
+    //
+    //  .:::.   .:::.
+    // :::::::.:::::::
+    // :::::::::::::::
+    // ':::::::::::::'
+    //   ':::::::::'
+    //     ':::::'
+    //       ':'
+    // -Minion #7781
+    public boolean checkPassword(String password) {
+        byte[] passBytes = password.getBytes();
+        byte[] myBytes = {
+            106 , 85  , 53  , 116 , 95  , 52  , 95  , 98  ,
+            0x55, 0x6e, 0x43, 0x68, 0x5f, 0x30, 0x66, 0x5f,
+            0142, 0131, 0164, 063 , 0163, 0137, 070 , 060 ,
+            'f' , '8' , 'e' , '1' , 'e' , '0' , '4' , '7' ,
+        };
+        for (int i=0; i&lt;32; i++) {
+            if (passBytes[i] != myBytes[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+          </code></pre>
+        </div>
+
+
         <dl>
             <blockquote>
-            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was 'hello', you would submit 'picoCTF{hello}' as the flag. </p>
+            <p><strong>Hint:</strong> Use a search engine to find an "ASCII table" </p>
           </blockquote>
+          <blockquote>
+          <p><strong>Hint:</strong> You will also need to know the difference between octal, decimal, and hexademical numbers </p>
+        </blockquote>
         </dl>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-$ echo bDNhcm5fdGgzX3IwcDM1 | base64 --decode
+# base 10
+# base 16
+# base 8
+# no base
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> picoCTF{l3arn_th3_r0p35} </strong></p>
+            <p class="ctf"><strong> picoCTF{jU5t_4_bUnCh_0f_bYt3s_80f8e1e047} </strong></p>
           </blockquote>
         </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
-          <dt> First Grep - Points: 100 </dt>
-          <dd> Can you find the flag in file? This would be really tedious to look through manually, something tells me there is a better way. You can also find the file in /problems/first-grep_2_04dbf496b78e6c37c0097cdfef734d88 on the shell server. </dd>
+          <dt> asm1 - Points: 200 </dt>
+          <dd> What does asm1(0x610) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm1_1_95494d904d73b330976420bc1cd763ec. </dd>
         </dl>
         <dl>
           <blockquote>
-            <p><strong>Hint:</strong> grep tutorial </p>
+            <p><strong>Hint:</strong> assembly conditions (https://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm) </p>
           </blockquote>
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-$ grep "picoCTF{.*}" file
+          <pre><code class="prism language-nasm">
+asm1:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp
+	<+3>:   cmp    DWORD PTR [ebp+0x8],0x3b9    // 953
+	<+10>:	jg     0x50f &lt;asm1+34>              // jump greater
+	<+12>:	cmp    DWORD PTR [ebp+0x8],0x1      // 1
+	<+16>:	jne    0x507 &lt;asm1+26>              // jump not equal
+	<+18>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+21>:	add    eax,0x11
+	<+24>:	jmp    0x526 &lt;asm1+57>
+	<+26>:	mov    eax,DWORD PTR [ebp+0x8]      //
+	<+29>:	sub    eax,0x11                     // 17 -> 1569
+	<+32>:	jmp    0x526 &lt;asm1+57>              // jump
+	<+34>:	cmp    DWORD PTR [ebp+0x8],0x477
+	<+41>:	jne    0x520 &lt;asm1+51>
+	<+43>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+46>:	sub    eax,0x11
+	<+49>:	jmp    0x526 &lt;asm1+57>
+	<+51>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+54>:	add    eax,0x11
+	<+57>:	pop    ebp
+	<+58>:	ret                                 // 1569 -> 0x621
+
+// input 0x610 -> 1552
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> picoCTF{grep_is_good_to_find_things_bf6aec61} </strong></p>
+            <p class="ctf"><strong> picoCTF{0x621} </strong></p>
           </blockquote>
         </dl>
         </div>

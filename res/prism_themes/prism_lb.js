@@ -9602,6 +9602,7 @@ Prism.languages.tap = {
     "remove-indent": !0,
     "left-trim": !0,
     "right-trim": !0,
+    "break-lines": 100
   }), Prism.hooks.add("before-sanity-check", function(e) {
     var n = Prism.plugins.NormalizeWhitespace;
     if (!e.settings || !1 !== e.settings["whitespace-normalization"])

@@ -65,7 +65,51 @@
         <dl>
           <dt> handy-shellcode - Points 50 </dt>
           <dd> This program executes any shellcode that you give it. Can you spawn a shell and use that to read the flag.txt? You can find the program in /problems/handy-shellcode_2_6ad1f834bdcf9fcfb41200ca8d0f55a6 on the shell server. Source. </dd>
+        </dl>
 
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+
+#define BUFSIZE 148
+#define FLAGSIZE 128
+
+void vuln(char *buf){
+  gets(buf);
+  puts(buf);
+}
+
+int main(int argc, char **argv){
+
+  setvbuf(stdout, NULL, _IONBF, 0);
+
+  // Set the gid to the effective gid
+  // this prevents /bin/sh from dropping the privileges
+  gid_t gid = getegid();
+  setresgid(gid, gid, gid);
+
+  char buf[BUFSIZE];
+
+  puts("Enter your shellcode:");
+  vuln(buf);
+
+  puts("Thanks! Executing now...");
+
+  ((void (*)())buf)();
+
+
+  puts("Finishing Executing Shellcode. Exiting now...");
+
+  return 0;
+}
+            </code></pre>
+          </div>
+
+        <dl>
           <blockquote>
             <p><strong>Hint:</strong> You might be able to find some good shellcode online. </p>
           </blockquote>
@@ -92,8 +136,8 @@ $ cat ~/shellcode.txt - | ./vuln
           </blockquote>
         </dl>
         </div>
-
         <hr> <!-- Finish post  -->
+
         <dl>
           <dt> Practice-run-1 -  Points: 50 </dt>
           <dd> You're going to need to know how to run programs if you're going to get out of here. Navigate to /problems/practice-run-1_0_62b61488e896645ebff9b6c97d0e775e on the shell server and run this program to receive a flag </dd>
@@ -124,6 +168,53 @@ $ ./run_this
           <dd> This should be easy. Overflow the correct buffer in this program and get a flag. Its
           also found in /problems/overflow-0_1_54d12127b2833f7eab9758b43e88d3b7 on the shell server.
           Source. </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;signal.h&gt;
+
+#define FLAGSIZE_MAX 64
+
+char flag[FLAGSIZE_MAX];
+
+void sigsegv_handler(int sig) {
+  fprintf(stderr, "%s\n", flag);
+  fflush(stderr);
+  exit(1);
+}
+
+void vuln(char *input){
+  char buf[128];
+  strcpy(buf, input);
+}
+
+int main(int argc, char **argv){
+
+  FILE *f = fopen("flag.txt","r");
+  if (f == NULL) {
+    printf("Flag File is Missing. Problem is Misconfigured, please contact an Admin if you are running this on the shell server.\n");
+    exit(0);
+  }
+  fgets(flag,FLAGSIZE_MAX,f);
+  signal(SIGSEGV, sigsegv_handler);
+
+  gid_t gid = getegid();
+  setresgid(gid, gid, gid);
+
+  if (argc > 1) {
+    vuln(argv[1]);
+    printf("You entered: %s", argv[1]);
+  }
+  else
+    printf("Please enter an argument next time\n");
+  return 0;
+}
+            </code></pre>
+          </div>
 
           <blockquote>
             <p><strong>Hint:</strong> Find a way to trigger the flag to printIf you try to do the math by hand, maybe try and add a few more characters. </p>
@@ -157,14 +248,13 @@ $ ./vuln `python -c "print('a'*(10000))"`
         </div>
         <hr> <!-- Finish post  -->
 
-<section class="" role="group">
-  <button id="previous" > Previous </button>
-  <button id="next" onClick=""> Next </button>
-  <br> <br> <br>
-</section>
-
     	</article>
 
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick="location.href='cryptography.html'"> Next </button>
+        <br> <br> <br>
+      </section>
 
 
       </div>
@@ -194,6 +284,6 @@ $ ./vuln `python -c "print('a'*(10000))"`
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
     <script type="text/javascript" src="../../../../js/menu.js"></script>
     <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
-    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>
   </body>
 </html>

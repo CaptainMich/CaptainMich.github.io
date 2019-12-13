@@ -17,8 +17,8 @@ function open_picoCTF2019_general_skill() {
     window.open("CTF/picoCTF2019/general_skill.html", "_self");
 }
 
-function open_picoCTF2019_reverse() {
-    window.open("CTF/picoCTF2019/reverse.html", "_self");
+function open_picoCTF2019_reverse_engineering() {
+    window.open("CTF/picoCTF2019/reverse_engineering.html", "_self");
 }
 
 function open_picoCTF2019_web_exploitation() {

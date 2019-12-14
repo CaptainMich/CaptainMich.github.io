@@ -383,16 +383,16 @@ class VaultDoor4 {
 asm1:
 	<+0>:   push   ebp
 	<+1>:   mov    ebp,esp
-	<+3>:   cmp    DWORD PTR [ebp+0x8],0x3b9    // 953
-	<+10>:	jg     0x50f &lt;asm1+34>              // jump greater
-	<+12>:	cmp    DWORD PTR [ebp+0x8],0x1      // 1
-	<+16>:	jne    0x507 &lt;asm1+26>              // jump not equal
+	<+3>:   cmp    DWORD PTR [ebp+0x8],0x3b9    ; 953
+	<+10>:	jg     0x50f &lt;asm1+34>              ; jump greater
+	<+12>:	cmp    DWORD PTR [ebp+0x8],0x1      ; 1
+	<+16>:	jne    0x507 &lt;asm1+26>              ; jump not equal
 	<+18>:	mov    eax,DWORD PTR [ebp+0x8]
 	<+21>:	add    eax,0x11
 	<+24>:	jmp    0x526 &lt;asm1+57>
-	<+26>:	mov    eax,DWORD PTR [ebp+0x8]      //
-	<+29>:	sub    eax,0x11                     // 17 -> 1569
-	<+32>:	jmp    0x526 &lt;asm1+57>              // jump
+	<+26>:	mov    eax,DWORD PTR [ebp+0x8]      ;
+	<+29>:	sub    eax,0x11                     ; 17 -> 1569
+	<+32>:	jmp    0x526 &lt;asm1+57>              ; jump
 	<+34>:	cmp    DWORD PTR [ebp+0x8],0x477
 	<+41>:	jne    0x520 &lt;asm1+51>
 	<+43>:	mov    eax,DWORD PTR [ebp+0x8]
@@ -401,7 +401,7 @@ asm1:
 	<+51>:	mov    eax,DWORD PTR [ebp+0x8]
 	<+54>:	add    eax,0x11
 	<+57>:	pop    ebp
-	<+58>:	ret                                 // 1569 -> 0x621
+	<+58>:	ret                                 ; 1569 -> 0x621
 
 // input 0x610 -> 1552
           </code></pre>
@@ -416,7 +416,356 @@ asm1:
         </div>
         <hr> <!-- Finish post  -->
 
+        <dl>
+          <dt> asm2 - Points: 250 </dt>
+          <dd> What does asm2(0x10,0x18) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm2_0_a50f0b17a6f50b50a53305ebd71af535. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> assembly conditions (https://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm) </p>
+          </blockquote>
+        </dl>
 
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+asm2:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp                     ; ebp = esp
+	<+3>:   sub    esp,0x10                    ; esp - 16
+	<+6>:   mov    eax,DWORD PTR [ebp+0xc]     ; eax = ebp + 12
+	<+9>:   mov    DWORD PTR [ebp-0x4],eax     ; [ebp - 4] = eax
+	<+12>:	mov    eax,DWORD PTR [ebp+0x8]     ; eax = ebp + 8
+	<+15>:	mov    DWORD PTR [ebp-0x8],eax     ; [ebp - 8] = eax
+	<+18>:	jmp    0x50c &lt;asm2+31>
+	<+20>:	add    DWORD PTR [ebp-0x4],0x1     ; [ebp - 4] + 1
+	<+24>:	add    DWORD PTR [ebp-0x8],0xcb    ; [ebp - 8] + 203
+	<+31>:	cmp    DWORD PTR [ebp-0x8],0xb693  ; 46739
+	<+38>:	jle    0x501 &lt;asm2+20>             ; jump less equal
+	<+40>:	mov    eax,DWORD PTR [ebp-0x4]     ; eax = [ebp - 4]
+	<+43>:	leave                              ; eax = 231+24 = 255 -> 0xff
+	<+44>:	ret
+
+input: 0x10,0x18 -> 16,24
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> Otherwise you can use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm2
+
+asm2:
+	push   ebp
+	mov    ebp,esp
+	sub    esp,0x10
+	mov    eax,DWORD PTR [ebp+0xc]
+	mov    DWORD PTR [ebp-0x4],eax
+	mov    eax,DWORD PTR [ebp+0x8]
+	mov    DWORD PTR [ebp-0x8],eax
+	jmp    asm2+31
+	add    DWORD PTR [ebp-0x4],0x1
+	add    DWORD PTR [ebp-0x8],0xcb
+	cmp    DWORD PTR [ebp-0x8],0xb693
+	jle    asm2+20
+	mov    eax,DWORD PTR [ebp-0x4]
+	leave
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm2(0x10,0x18));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm2.s -o asm2.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm2.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0xff} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl>
+          <dt> asm3 - Points: 300 </dt>
+          <dd> What does asm3(0xc264bd5c,0xb5a06caa,0xad761175) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm3_1_b71abaa5cc92e3f7061f23957206b434. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> more(?) registers (https://wiki.skullsecurity.org/index.php?title=Registers) </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+asm3:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp
+	<+3>:   xor    eax,eax
+	<+5>:   mov    ah,BYTE PTR [ebp+0x9]
+	<+8>:   shl    ax,0x10
+	<+12>:	sub    al,BYTE PTR [ebp+0xd]
+	<+15>:	add    ah,BYTE PTR [ebp+0xf]
+	<+18>:	xor    ax,WORD PTR [ebp+0x10]
+	<+22>:	nop
+	<+23>:	pop    ebp
+	<+24>:	ret
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> As before it's possible to use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm2
+
+asm3:
+	push   ebp
+	mov    ebp,esp
+	xor    eax,eax
+	mov    ah,BYTE PTR [ebp+0x9]
+	shl    ax,0x10
+    sub    al,BYTE PTR [ebp+0xd]
+	add    ah,BYTE PTR [ebp+0xf]
+	xor    ax,WORD PTR [ebp+0x10]
+	nop
+	pop    ebp
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm3(0xc264bd5c,0xb5a06caa,0xad761175));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm3.s -o asm3.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm3.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0xa4e1} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl>
+          <dt> asm4 - Points: 400 </dt>
+          <dd> What will asm4("picoCTF_c1373") return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm4_5_ca12dca0134f6b54a52c905ffc1e5b35. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Treat the Array argument as a pointer </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+<+0>:   push   ebp
+<+1>:   mov    ebp,esp
+<+3>:   push   ebx
+<+4>:   sub    esp,0x10
+<+7>:   mov    DWORD PTR [ebp-0x10],0x247
+<+14>:	mov    DWORD PTR [ebp-0xc],0x0
+<+21>:	jmp    0x518 &lt;asm4+27>
+<+23>:	add    DWORD PTR [ebp-0xc],0x1
+<+27>:	mov    edx,DWORD PTR [ebp-0xc]
+<+30>:	mov    eax,DWORD PTR [ebp+0x8]
+<+33>:	add    eax,edx
+<+35>:	movzx  eax,BYTE PTR [eax]
+<+38>:	test   al,al
+<+40>:	jne    0x514 &lt;asm4+23>
+<+42>:	mov    DWORD PTR [ebp-0x8],0x1
+<+49>:	jmp    0x587 &lt;asm4+138>
+<+51>:	mov    edx,DWORD PTR [ebp-0x8]
+<+54>:	mov    eax,DWORD PTR [ebp+0x8]
+<+57>:	add    eax,edx
+<+59>:	movzx  eax,BYTE PTR [eax]
+<+62>:	movsx  edx,al
+<+65>:	mov    eax,DWORD PTR [ebp-0x8]
+<+68>:	lea    ecx,[eax-0x1]
+<+71>:	mov    eax,DWORD PTR [ebp+0x8]
+<+74>:	add    eax,ecx
+<+76>:	movzx  eax,BYTE PTR [eax]
+<+79>:	movsx  eax,al
+<+82>:	sub    edx,eax
+<+84>:	mov    eax,edx
+<+86>:	mov    edx,eax
+<+88>:	mov    eax,DWORD PTR [ebp-0x10]
+<+91>:	lea    ebx,[edx+eax*1]
+<+94>:	mov    eax,DWORD PTR [ebp-0x8]
+<+97>:	lea    edx,[eax+0x1]
+<+100>:	mov    eax,DWORD PTR [ebp+0x8]
+<+103>:	add    eax,edx
+<+105>:	movzx  eax,BYTE PTR [eax]
+<+108>:	movsx  edx,al
+<+111>:	mov    ecx,DWORD PTR [ebp-0x8]
+<+114>:	mov    eax,DWORD PTR [ebp+0x8]
+<+117>:	add    eax,ecx
+<+119>:	movzx  eax,BYTE PTR [eax]
+<+122>:	movsx  eax,al
+<+125>:	sub    edx,eax
+<+127>:	mov    eax,edx
+<+129>:	add    eax,ebx
+<+131>:	mov    DWORD PTR [ebp-0x10],eax
+<+134>:	add    DWORD PTR [ebp-0x8],0x1
+<+138>:	mov    eax,DWORD PTR [ebp-0xc]
+<+141>:	sub    eax,0x1
+<+144>:	cmp    DWORD PTR [ebp-0x8],eax
+<+147>:	jl     0x530 &lt;asm4+51>
+<+149>:	mov    eax,DWORD PTR [ebp-0x10]
+<+152>:	add    esp,0x10
+<+155>:	pop    ebx
+<+156>:	pop    ebp
+<+157>:	ret
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> As before it's possible to use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm4
+
+asm4:
+	push   ebp
+	mov    ebp,esp
+	push   ebx
+	sub    esp,0x10
+	mov    DWORD PTR [ebp-0x10],0x247
+	mov    DWORD PTR [ebp-0xc],0x0
+	jmp    asm4+27
+	add    DWORD PTR [ebp-0xc],0x1
+	mov    edx,DWORD PTR [ebp-0xc]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	test   al,al
+	jne    asm4+23
+	mov    DWORD PTR [ebp-0x8],0x1
+	jmp    asm4+138
+	mov    edx,DWORD PTR [ebp-0x8]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	movsx  edx,al
+	mov    eax,DWORD PTR [ebp-0x8]
+	lea    ecx,[eax-0x1]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,ecx
+	movzx  eax,BYTE PTR [eax]
+	movsx  eax,al
+	sub    edx,eax
+	mov    eax,edx
+	mov    edx,eax
+	mov    eax,DWORD PTR [ebp-0x10]
+	lea    ebx,[edx+eax*1]
+	mov    eax,DWORD PTR [ebp-0x8]
+	lea    edx,[eax+0x1]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	movsx  edx,al
+	mov    ecx,DWORD PTR [ebp-0x8]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,ecx
+	movzx  eax,BYTE PTR [eax]
+	movsx  eax,al
+	sub    edx,eax
+	mov    eax,edx
+	add    eax,ebx
+	mov    DWORD PTR [ebp-0x10],eax
+	add    DWORD PTR [ebp-0x8],0x1
+	mov    eax,DWORD PTR [ebp-0xc]
+	sub    eax,0x1
+	cmp    DWORD PTR [ebp-0x8],eax
+	jl     asm4+51
+	mov    eax,DWORD PTR [ebp-0x10]
+	add    esp,0x10
+	pop    ebx
+	pop    ebp
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm4("picoCTFc1373"));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm4.s -o asm4.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm4.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0x1d8} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
 
     	</article>
 

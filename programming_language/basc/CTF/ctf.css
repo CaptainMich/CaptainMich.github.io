@@ -506,6 +506,8 @@ figure figcaption:before {
 dl {
   max-width: 40rem;
   margin: 1em auto;
+  word-break: break-all;
+
 }
 dl dt {
   font-size: 1.25em;

@@ -15,6 +15,7 @@
       <link rel="stylesheet" href="../../../../css/personal_icon.css">
       <link rel="stylesheet" href="../../../../res/prism_themes/prism-material-oceanic.css">
       <link rel="stylesheet" href="../code.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
 
   </head>
   <body>
@@ -55,9 +56,52 @@
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-    <!--  -->
-    <main>
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> Data Types </h5>
+        <ul>
+            <li><a href="1-Math_Operator.html"> Math Operator </a></li>
+            <li><a href="2-String.html"> Strings </a></li>
+            <li><a href="3-Sets.html"> Sets </a></li>
+            <li><a href="4-Lists.html">  Lists </a></li>
+            <li><a href="5-Tuples.html"> Tuples  </a></li>
+        </ul>
 
+        <h5> Loops </h5>
+        <ul>
+            <li><a href="../loops/1-For_Loop.html"> For Loop </a></li>
+            <li><a href="../loops/2-While_Loop.html"> While Loop </a></li>
+            <li><a href="../loops/3-If_Statement.html"> If Statement </a></li>
+            <li><a href="../loops/4-Range.html#"> Range </a></li>
+            <li><a href="../loops/5-Break_Continue_Statement.html">  Break & Continue </a></li>
+            <li><a href="../loops/6-Exception.html"> Exception </a></li>
+        </ul>
+
+        <h5> Functions </h5>
+        <ul>
+            <li><a href="../functions/1-Functions.html"> Functions </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="../OOP/1-Class.html"> Class </a></li>
+        </ul>
+
+        <h5> GUI </h5>
+        <ul>
+            <li><a href="../GUI/1-GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+        </ul>
+
+        <br>
+
+      </div>
+    </div>
+
+    <!-- Main  -->
+    <main>
+    <div class="swipe-area"></div>
     <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
@@ -298,6 +342,8 @@ for index, fibonacci_number in enumerate(Fibonacci()):
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
     <script type="text/javascript" src="../../../../js/menu.js"></script>
     <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>

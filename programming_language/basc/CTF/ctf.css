@@ -558,7 +558,10 @@ td {
   margin: 1em 10%;
   white-space: nowrap;
   list-style-position: inside;
-  overflow: hidden;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .toc a{

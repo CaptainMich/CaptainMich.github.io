@@ -194,9 +194,48 @@ class VaultDoor1 {
           </blockquote>
         </dl>
 
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# simply reorder the char at
+          <pre><code class="prism language-python">
+myPass = [None] * 32
+
+myPass[0]  = 'd'
+myPass[29] = 'f'
+myPass[4]  = 'r'
+myPass[2]  = '5'
+myPass[23] = 'r'
+myPass[3]  = 'c'
+myPass[17] = '4'
+myPass[1]  = '3'
+myPass[7]  = 'b'
+myPass[10] = '_'
+myPass[5]  = '4'
+myPass[9]  = '3'
+myPass[11] = 't'
+myPass[15] = 'c'
+myPass[8]  = 'l'
+myPass[12] = 'H'
+myPass[20] = 'c'
+myPass[14] = '_'
+myPass[6]  = 'm'
+myPass[24] = '5'
+myPass[18] = 'r'
+myPass[13] = '3'
+myPass[19] = '4'
+myPass[21] = 'T'
+myPass[16] = 'H'
+myPass[27] = '3'
+myPass[30] = '3'
+myPass[25] = '_'
+myPass[22] = '3'
+myPass[28] = 'e'
+myPass[26] = '6'
+myPass[31] = 'a'
+
+print("picoCTF{{{}}}".format(''.join(myPass)))
           </code></pre>
         </div>
 
@@ -269,9 +308,28 @@ class VaultDoor3 {
           </blockquote>
         </dl>
 
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
         <div class="row-full code">
-          <pre><code class="prism language-java">
-# reoder the buffer
+          <pre><code class="prism language-python">
+buffer = [None] * 32
+password = 'jU5t_a_sna_3lpm1dg347_u_4_mfr54b'
+
+for i in range(0,8):
+	buffer[i] = password[i]
+
+for i in range(8,16):
+    	buffer[i] = password[23-i]
+
+for i in range(16,32,2):
+    	buffer[i] = password[46-i]
+
+for i in range(31,16,-2):
+    	buffer[i] = password[i]
+
+print("picoCTF{{{}}}".format(''.join(buffer)))
           </code></pre>
         </div>
 
@@ -342,20 +400,47 @@ class VaultDoor4 {
 
 
         <dl>
-            <blockquote>
+          <blockquote>
             <p><strong>Hint:</strong> Use a search engine to find an "ASCII table" </p>
           </blockquote>
+
           <blockquote>
-          <p><strong>Hint:</strong> You will also need to know the difference between octal, decimal, and hexademical numbers </p>
-        </blockquote>
+            <p><strong>Hint:</strong> You will also need to know the difference between octal, decimal, and hexademical numbers </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# base 10
-# base 16
-# base 8
-# no base
+          <pre><code class="prism language-python">
+passBytes = [None] * 32
+myBytes = [
+            106 , 85  , 53  , 116 , 95  , 52  , 95  , 98  ,
+            '0x55', '0x6e', '0x43', '0x68', '0x5f', '0x30', '0x66', '0x5f',
+            '0o142', '0o131', '0o164', '0o63' , '0o163', '0o137', '0o70' , '0o60' ,
+            'f' , '8' , 'e' , '1' , 'e' , '0' , '4' , '7' ,
+	]
+
+# base10
+for i in range(0,8):
+	passBytes[i] =  chr(myBytes[i])
+
+# base16
+for i in range(8,16):
+	#passBytes[i] =  bytearray.fromhex(myBytes[i].replace('0x', '')).decode()
+	passBytes[i] =  chr(int(myBytes[i], 16))
+
+# base8
+for i in range(16,24):
+	passBytes[i] =  chr(int(myBytes[i], 8))
+
+for i in range(24,32):
+	passBytes[i] =  myBytes[i]
+
+print("picoCTF{{{}}}".format(''.join(passBytes)))
+
           </code></pre>
         </div>
 
@@ -363,6 +448,330 @@ class VaultDoor4 {
         <dl>
           <blockquote>
             <p class="ctf"><strong> picoCTF{jU5t_4_bUnCh_0f_bYt3s_80f8e1e047} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl>
+          <dt> vault-door-5 - Points: 300 </dt>
+          <dd> In the last challenge, you mastered octal (base 8), decimal (base 10), and hexadecimal (base 16) numbers, but this vault door uses a different change of base as well as URL encoding! The source code for this vault is here: VaultDoor5.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.net.URLDecoder;
+import java.util.*;
+
+class VaultDoor5 {
+    public static void main(String args[]) {
+        VaultDoor5 vaultDoor = new VaultDoor5();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Minion #7781 used base 8 and base 16, but this is base 64, which is
+    // like... eight times stronger, right? Riiigghtt? Well that's what my twin
+    // brother Minion #2415 says, anyway.
+    //
+    // -Minion #2414
+    public String base64Encode(byte[] input) {
+        return Base64.getEncoder().encodeToString(input);
+    }
+
+    // URL encoding is meant for web pages, so any double agent spies who steal
+    // our source code will think this is a web site or something, defintely not
+    // vault door! Oh wait, should I have not said that in a source code
+    // comment?
+    //
+    // -Minion #2415
+    public String urlEncode(byte[] input) {
+        StringBuffer buf = new StringBuffer();
+        for (int i=0; i&lt;input.length; i++) {
+            buf.append(String.format("%%%2x", input[i]));
+        }
+        return buf.toString();
+    }
+
+    public boolean checkPassword(String password) {
+        String urlEncoded = urlEncode(password.getBytes());
+        String base64Encoded = base64Encode(urlEncoded.getBytes());
+        String expected = "JTYzJTMwJTZlJTc2JTMzJTcyJTc0JTMxJTZlJTY3JTVm"
+                        + "JTY2JTcyJTMwJTZkJTVmJTYyJTYxJTM1JTY1JTVmJTM2"
+                        + "JTM0JTVmJTYzJTMxJTM0JTYzJTYzJTY1JTMxJTMx";
+        return base64Encoded.equals(expected);
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  You may find an encoder/decoder tool helpful, such as https://encoding.tools/  </p>
+          </blockquote>
+
+          <blockquote>
+            <p><strong>Hint:</strong> Read the wikipedia articles on URL encoding and base 64 encoding to understand how they work and what the results look like. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import base64
+
+encoded = 'JTYzJTMwJTZlJTc2JTMzJTcyJTc0JTMxJTZlJTY3JTVmJTY2JTcyJTMwJTZkJTVmJTYyJTYxJTM1JTY1JTVmJTM2JTM0JTVmJTYzJTMxJTM0JTYzJTYzJTY1JTMxJTMx'
+data = base64.b64decode(encoded).decode('utf-8')
+print(data)
+data = data.replace('%', ' 0x')
+print(data)
+
+ch = data.split(" ")
+print(ch)
+
+print('picoCTF{', end = '')
+for c in ch:
+	if(c != ''):
+		print(chr(int(c, 16)), end = '')
+
+print('}\n', end = '')
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{c0nv3rt1ng_fr0m_ba5e_64_c14cce11} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl>
+          <dt> vault-door-6 - Points: 350 </dt>
+          <dd> This vault uses an XOR encryption scheme. The source code for this vault is here: VaultDoor6.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoor6 {
+    public static void main(String args[]) {
+        VaultDoor6 vaultDoor = new VaultDoor6();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Dr. Evil gave me a book called Applied Cryptography by Bruce Schneier,
+    // and I learned this really cool encryption system. This will be the
+    // strongest vault door in Dr. Evil's entire evil volcano compound for sure!
+    // Well, I didn't exactly read the *whole* book, but I'm sure there's
+    // nothing important in the last 750 pages.
+    //
+    // -Minion #3091
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        byte[] passBytes = password.getBytes();
+        byte[] myBytes = {
+            0x3b, 0x65, 0x21, 0xa , 0x38, 0x0 , 0x36, 0x1d,
+            0xa , 0x3d, 0x61, 0x27, 0x11, 0x66, 0x27, 0xa ,
+            0x21, 0x1d, 0x61, 0x3b, 0xa , 0x2d, 0x65, 0x27,
+            0xa , 0x31, 0x30, 0x30, 0x30, 0x64, 0x61, 0x33,
+        };
+        for (int i=0; i&lt;32; i++) {
+            if (((passBytes[i] ^ 0x55) - myBytes[i]) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> If X ^ Y = Z, then Z ^ Y = X. Write a program that decrypts the flag based on this fact. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+passBytes = [None] * 32
+myBytes = [
+            0x3b, 0x65, 0x21, 0xa , 0x38, 0x0 , 0x36, 0x1d,
+            0xa , 0x3d, 0x61, 0x27, 0x11, 0x66, 0x27, 0xa ,
+            0x21, 0x1d, 0x61, 0x3b, 0xa , 0x2d, 0x65, 0x27,
+            0xa , 0x31, 0x30, 0x30, 0x30, 0x64, 0x61, 0x33,
+	]
+
+for i in range(32):
+	passBytes[i] =  chr(myBytes[i] ^ 0x55)
+
+print("picoCTF{{{}}}".format(''.join(passBytes)))
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{n0t_mUcH_h4rD3r_tH4n_x0r_deee14f} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl>
+          <dt> vault-door-7 - Points: 400 </dt>
+          <dd> This vault uses bit shifts to convert a password string into an array of integers. Hurry, agent, we are running out of time to stop Dr. Evil's nefarious plans! The source code for this vault is here: VaultDoor7.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.*;
+
+class VaultDoor7 {
+    public static void main(String args[]) {
+        VaultDoor7 vaultDoor = new VaultDoor7();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Each character can be represented as a byte value using its
+    // ASCII encoding. Each byte contains 8 bits, and an int contains
+    // 32 bits, so we can "pack" 4 bytes into a single int. Here's an
+    // example: if the hex string is "01ab", then those can be
+    // represented as the bytes {0x30, 0x31, 0x61, 0x62}. When those
+    // bytes are represented as binary, they are:
+    //
+    // 0x30: 00110000
+    // 0x31: 00110001
+    // 0x61: 01100001
+    // 0x62: 01100010
+    //
+    // If we put those 4 binary numbers end to end, we end up with 32
+    // bits that can be interpreted as an int.
+    //
+    // 00110000 00110001 01100001 01100010 -> 808542562
+    //
+    // Since 4 chars can be represented as 1 int, the 32 character password can
+    // be represented as an array of 8 ints.
+    //
+    // - Minion #7816
+    public int[] passwordToIntArray(String hex) {
+        int[] x = new int[8];
+        byte[] hexBytes = hex.getBytes();
+        for (int i=0; i&lt;8; i++) {
+            x[i] = hexBytes[i*4]   << 24
+                 | hexBytes[i*4+1] << 16
+                 | hexBytes[i*4+2] << 8
+                 | hexBytes[i*4+3];
+        }
+        return x;
+    }
+
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        int[] x = passwordToIntArray(password);
+        return x[0] == 1096770097
+            && x[1] == 1952395366
+            && x[2] == 1600270708
+            && x[3] == 1601398833
+            && x[4] == 1716808014
+            && x[5] == 1734293603
+            && x[6] == 959591523
+            && x[7] == 842097204;
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Use a decimal/hexademical converter such as this one: https://www.mathsisfun.com/binary-decimal-hexadecimal-converter.html </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> You will also need to consult an ASCII table such as this one: https://www.asciitable.com/ </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+x =[0] * 8
+
+x[0] = 1096770097
+x[1] = 1952395366
+x[2] = 1600270708
+x[3] = 1601398833
+x[4] = 1716808014
+x[5] = 1734293603
+x[6] = 959591523
+x[7] = 842097204
+
+ch = [None] * 4
+buffer = ""
+
+for i in range(0,8):
+	tmp = str(bin(x[i])[2:].zfill(32))
+	ch[0] = chr(int(hex(int(tmp[:8], 2)), 16))
+	ch[1] = chr(int(hex(int(tmp[8:16], 2)), 16))
+	ch[2] = chr(int(hex(int(tmp[16:24], 2)), 16))
+	ch[3] = chr(int(hex(int(tmp[24:32], 2)), 16))
+	buffer += ch[0] + ch[1] + ch[2] + ch[3]
+
+print("picoCTF{{{}}}".format(buffer))
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{A_b1t_0f_b1t_sh1fTiNg_8c924c21b4} </strong></p>
           </blockquote>
         </dl>
         </div>

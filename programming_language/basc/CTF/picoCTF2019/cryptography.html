@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title> picoCTF2019 | Binary Writeup </title>
-    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
-      <link rel="stylesheet" href="../../../../css/style.css">
-      <link rel="stylesheet" href="../../../../css/personal_icon.css">
-      <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
-      <link rel="stylesheet" href="../ctf.css">
 
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title> picoCTF2019 | Binary Writeup </title>
+  <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/personal_icon.css">
+  <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+  <link rel="stylesheet" href="../ctf.css">
 
-    <!-- Navbar -->
+</head>
 
-    <header>
-      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
-      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
-      <nav>
-          <ul>
-            <li><a href="../../../python/python.html"> Python </a> </li>
-            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
-            <li><a href="../../basc.html"> BASC </a> </li>
-            <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
-            <li><a href="../../../android/android.html"> Android </a> </li>
-            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
-            <li><a href="../../../../library/library.html"> Library </a> </li>
-            <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
-          </ul>
-          <div id="dropdown-header" class="dropdown">
-            <button class="dropbtn"> Last Projects </button>
-              <div class="dropdown-content active">
-                <a href="#"> Last Project 1 </a>
-                <a href="#"> Last Project 1 </a>
-                <a href="#"> Last Project 1 </a>
-                <a href="#"> Last Project 1 </a>
-                <a href="#"> Last Project 1 </a>
-             </div>
+<body>
+
+  <!-- Navbar -->
+
+  <header>
+    <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+    <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+    <nav>
+      <ul>
+        <li><a href="../../../python/python.html"> Python </a> </li>
+        <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+        <li><a href="../../basc.html"> BASC </a> </li>
+        <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
+        <li><a href="../../../android/android.html"> Android </a> </li>
+        <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+        <li><a href="../../../../library/library.html"> Library </a> </li>
+        <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
+      </ul>
+      <div id="dropdown-header" class="dropdown">
+        <button class="dropbtn"> Last Projects </button>
+        <div class="dropdown-content active">
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
         </div>
-      </nav>
-      <div class="menu-toggle">
-        <i class="fa fa-bars" aria-hidden="true"></i>
       </div>
-    </header>
+    </nav>
+    <div class="menu-toggle">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+  </header>
 
 
-    <!-- Return to Top -->
-    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+  <!-- Return to Top -->
+  <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-    <!--  -->
-    <main>
+  <!--  -->
+  <main>
     <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> Cryptography Writeup </h3>
+        <h3> Cryptography Writeup </h3>
         <br>
 
         <dl>
           <dt> The numbers - Points 50 </dt>
-          <dd> The numbers(file)... what do they mean. </dd>
+          <dd> The numbers... what do they mean. </dd>
 
           <figure>
             <img src="img/the_numbers.png" alt="" />
@@ -76,17 +78,17 @@
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# associate numbers to alphabet letter
+          <pre><code class="prism language-text">
+Associate numbers to alphabet letter
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>PICOCTF{THENUMBERSMASON}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong>PICOCTF{THENUMBERSMASON}</strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
@@ -106,17 +108,18 @@ $ echo cvpbPGS{abg_gbb_onq_bs_n_ceboyrz} | tr 'A-Za-z' 'N-ZA-Mn-za-m'
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{not_too_bad_of_a_problem}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong>picoCTF{not_too_bad_of_a_problem}</strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
           <dt> Easy1 - Points 100 </dt>
-          <dd> The one time pad can be cryptographically secure, but not when you know the key. Can you solve this? We've given you the encrypted flag, key, and a table to help UFJKXQZQUNB with the key of SOLVECRYPTO. Can you use this table to solve it?.  </dd>
+          <dd> The one time pad can be cryptographically secure, but not when you know the key. Can you solve this? We've given you the encrypted flag, key, and a table to help UFJKXQZQUNB with the key of SOLVECRYPTO. Can you use this table to solve
+            it?. </dd>
         </dl>
         <div class="row-full code">
           <pre><code class="prism language-text">
@@ -159,53 +162,77 @@ Z | Z A B C D E F G H I J K L M N O P Q R S T U V W X Y
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# It's a Vigenere code encryption
+          <pre><code class="prism language-text">
+It's a Vigenere code encryption
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{CRYPTOISFUN}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> picoCTF{CRYPTOISFUN} </strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
           <dt> caesar - Points: 100 </dt>
           <dd> Decrypt this message (picoCTF{rgdhhxcviwtgjqxrdcdydkefyh}). You can find the ciphertext in /problems/caesar_6_238b8f4604d91ecb59cda5b4f0e66fc8 on the shell server. </dd>
+        </dl>
 
+        <dl>
           <blockquote>
             <p><strong>Hint:</strong> caesar cipher tutorial </p>
           </blockquote>
         </dl>
 
+        <dl>
+          <dd> It's a Caesar cipher; below an implementation with python of Caesar Cipher Algorithm decodification </dd>
+        </dl>
+
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# It's a Caesar code encryption
+          <pre><code class="prism language-python">
+import string
+
+# Encrypted message
+message = 'rgdhhxcviwtgjqxrdcdydkefyh'
+LETTERS = string.ascii_lowercase
+
+for key in range(len(LETTERS)):
+   translated = ''
+   for symbol in message:
+      if symbol in LETTERS:
+         num = LETTERS.find(symbol)
+         num = num - key
+         if num < 0:
+            num = num + len(LETTERS)
+         translated = translated + LETTERS[num]
+      else:
+         translated = translated + symbol
+
+   print('Hacking key #{}: {}'.format(key, translated))
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{crossingtherubiconojovpqjs}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong>picoCTF{crossingtherubiconojovpqjs}</strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
         <dl>
           <dt> Flags - Points: 200 </dt>
-          <dd> What do the flags mean?
- </dd>
+          <dd> What do the flags mean?</dd>
 
           <figure>
             <img src="img/flag.png" alt="" />
           </figure>
-
+        </dl>
+        <dl>
           <blockquote>
             <p><strong>Hint:</strong> The flag is in the format PICOCTF{} </p>
           </blockquote>
@@ -219,11 +246,11 @@ $ eog flag.png
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>PICOCTF{F1AG5AND5TUFF}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong>PICOCTF{F1AG5AND5TUFF}</strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
@@ -245,17 +272,17 @@ picoCTF{(35.028309, 135.753082)(46.469391, 30.740883)(39.758949, -84.191605)(41.
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# decode the message by finding the first letter of each city at coordinates (x,y)
+          <pre><code class="prism language-text">
+Decode the message by finding the first letter of each city at coordinates (x,y)
           </code></pre>
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{KODIAK_ALASKA}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> picoCTF{KODIAK_ALASKA} </strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
@@ -291,11 +318,11 @@ $ python
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>PICOCTF{M0RS3C0D31SFUN1677257287}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> PICOCTF{M0RS3C0D31SFUN1677257287} </strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
@@ -343,11 +370,11 @@ $ nc 2019shell1.picoctf.com 12254
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{b311a50_0r_v1gn3r3_c1ph3ra653edec}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> picoCTF{b311a50_0r_v1gn3r3_c1ph3ra653edec} </strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
@@ -535,7 +562,7 @@ Outstanding move!!!
 
 If you convert the last plaintext to a hex number, then ascii, you'll find what you need! ;)
     </code></pre>
-  </div> <br>
+        </div> <br>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
@@ -548,7 +575,7 @@ c2e2e6f31383238643335377d").decode()
         </div>
 
         <dl>
-          <dd> Following the python script used to solve this challenge </dd>
+          <dd> Below the python script used to solve this challenge </dd>
         </dl>
 
         <div class="row-full code">
@@ -694,52 +721,155 @@ if __name__ == '__main__':
         </div>
 
         <div class="scrolling-wrapper">
-        <dl>
-          <blockquote>
-            <p class="ctf"><strong>picoCTF{wA8_th4t$_ill3aGal..o1828d357}</strong></p>
-          </blockquote>
-        </dl>
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong>picoCTF{wA8_th4t$_ill3aGal..o1828d357}</strong></p>
+            </blockquote>
+          </dl>
         </div>
         <hr> <!-- Finish post  -->
 
 
-<section class="" role="group">
-  <button id="previous" onClick="location.href='binary.html'"> Previous </button>
-  <button id="next" onClick="location.href='forensics.html'"> Next </button>
-  <br> <br> <br>
-</section>
+        <dl>
+          <dt> waves over lambda - Points: 300 </dt>
+          <dd> We made alot of substitutions to encrypt this. Can you decrypt it? Connect with nc 2019shell1.picoctf.com 49935. </dd>
+        </dl>
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+-------------------------------------------------------------------------------
+mirufzjb ptft hb ciyf lszu - lftwytrmc_hb_m_ivtf_szoqkz_lkhhhfyqfz
+-------------------------------------------------------------------------------
+dt dtft rij oymp oift jpzr z wyzfjtf il zr piyf iyj il iyf bphg jhss dt bzd ptf bhrn, zrk jptr h yrktfbjiik lif jpt lhfbj jhot dpzj dzb otzrj qc z bphg liyrktfhru hr jpt btz.  h oybj zmnridstkut h pzk pzfksc tctb ji siin yg dptr jpt btzotr jisk ot bpt dzb bhrnhru; lif lfio jpt oiotrj jpzj jptc fzjptf gyj ot hrji jpt qizj jpzr jpzj h ohupj qt bzhk ji ui hr, oc ptzfj dzb, zb hj dtft, ktzk dhjphr ot, gzfjsc dhjp lfhupj, gzfjsc dhjp piffif il ohrk, zrk jpt jpiyupjb il dpzj dzb ctj qtlift ot.
+          </code></pre>
+        </div>
 
-    	</article>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Flag is not in the usual flag format </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ nc 2019shell1.picoctf.com 49935
+# it's mono-alphabetic substitution cipher
+# https://www.dcode.fr/monoalphabetic-substitution
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> picoCTF{frequency_is_c_over_lambda_fdiiirubra} </strong></p>
+            </blockquote>
+          </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl>
+          <dt> miniRSA - Points: 300 </dt>
+          <dd> Lets decrypt this: ciphertext? Something seems a bit small </dd>
+        </dl>
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+N: 293319224997949857827359760455911649366830593805589503865601601057403432
+015133699390063075311659227089496191626986236753490304308595478257089947083
+218037053094594380993404277705800644009114318566569019827899482853099561118
+486869061526644733509404865074517712234358352601689712100874708944484607455
+939568405865305279158025414500929465746948095848808966013175197944428629774
+711293197813131618420565017150405559640118995890028637308686795271844207890
+105514750678629077390549661831206214072463985180989811064312192076978702934
+121764404829001835504673751902398984552011708314104604838294486034773613058
+38743852756938687673
+e: 3
+ciphertext: 220531641393113403107460374692824779903015522125251987264961368
+640888479853032113918319411438067576098067528821350949448892814989037835035
+824553674597025316228353496854530017839690022613145424062554002629647343489
+5830304509610598192929125
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> How could having too small an e affect the security of this 2048 bit key? </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> Make sure you dont lose precision, the numbers are pretty big (besides the e value) </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> As the difference between n and e suggest, to break this challenge a "low public exponent attack" is needed. This kind of attack is successful only if m, the plaintex, is short too.
+ </dd>
+        </dl>
 
 
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import gmpy2
 
-      </div>
-    </main>
+c = int(input("c: "))
+n = int(input("n: "))
+e = int(input("e: "))
 
-    <footer id="myFooter">
-      <div class="footer">
-        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
-        <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
-        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+gs = gmpy2.mpz(c)
+gm = gmpy2.mpz(n)
+ge = gmpy2.mpz(e)
 
-          <ul>
-              <li><a href="#">Site Information</a></li>
-              <li><a href="#">Contact me</a></li>
-              <li><a href="#">Reviews</a></li>
-              <li><a href="#">Terms of service</a></li>
-          </ul>
-          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
-      </div>
-    </footer>
+root, exact = gmpy2.iroot(gs, ge)
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
-    <script type="text/javascript" src="../../../../js/menu.js"></script>
-    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
-    <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>
-  </body>
+if(exact):
+  print(bytes.fromhex(hex(int(root))[2:]))
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+          <dl>
+            <blockquote>
+              <p class="ctf"><strong> picoCTF{n33d_a_lArg3r_e_2f75924d} </strong></p>
+            </blockquote>
+          </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <section class="" role="group">
+          <button id="previous" onClick="location.href='binary.html'"> Previous </button>
+          <button id="next" onClick="location.href='forensics.html'"> Next </button>
+          <br> <br> <br>
+        </section>
+
+      </article>
+
+
+    </div>
+  </main>
+
+  <footer id="myFooter">
+    <div class="footer">
+      <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+      <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+      <ul>
+        <li><a href="#">Site Information</a></li>
+        <li><a href="#">Contact me</a></li>
+        <li><a href="#">Reviews</a></li>
+        <li><a href="#">Terms of service</a></li>
+      </ul>
+      <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+  <script type="text/javascript" src="../../../../js/menu.js"></script>
+  <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+  <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>
+</body>
+
 </html>

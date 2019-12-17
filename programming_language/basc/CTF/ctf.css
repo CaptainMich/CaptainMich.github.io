@@ -396,16 +396,14 @@ hr {
   margin: 1em 20%;
 }
 
-.scrolling-wrapper {
+.scrolling-wrapper dl{
+    word-break: normal;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
 }
 
-.scrolling-wrapper dl{
-    word-break: normal;
-}
 
 .scrolling-wrapper::-webkit-scrollbar {
   display: none;

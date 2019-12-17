@@ -64,7 +64,25 @@
         <h3> Cryptography Writeup </h3>
         <br>
 
-        <dl>
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#the-numbers"> The numbers - Points 50 </a></li>
+            <li> <a href="#13"> 13 - Points 100 </a></li>
+            <li> <a href="#easy1"> Easy1 - Points 100 </a></li>
+            <li> <a href="#caesar"> caesar - Points: 100 </a></li>
+            <li> <a href="#flags"> Flags - Points: 200 </a></li>
+            <li> <a href="#mr-worldwide"> Mr-Worldwide - Points: 200 </a></li>
+            <li> <a href="#tapping"> Tapping - Points: 200 </a></li>
+            <li> <a href="#la-cifra-de"> la cifra de - Points: 200 </a></li>
+            <li> <a href="#rsa-pop-quiz"> rsa-pop-quiz - Points: 200 </a></li>
+            <li> <a href="#waves-over-lambda"> waves over lambda - Points: 300 </a></li>
+            <li> <a href="#mini-rsa"> miniRSA - Points: 300 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="the-numbers">
           <dt> The numbers - Points 50 </dt>
           <dd> The numbers... what do they mean. </dd>
 
@@ -86,16 +104,18 @@ Associate numbers to alphabet letter
         <div class="scrolling-wrapper">
           <dl>
             <blockquote>
-              <p class="ctf"><strong>PICOCTF{THENUMBERSMASON}</strong></p>
+              <p class="ctf"><strong> PICOCTF{THENUMBERSMASON} </strong></p>
             </blockquote>
           </dl>
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="13">
           <dt> 13 - Points 100 </dt>
           <dd> Cryptography can be easy, do you know what ROT13 is? cvpbPGS{abg_gbb_onq_bs_n_ceboyrz} </dd>
+        </dl>
 
+        <dl>
           <blockquote>
             <p><strong>Hint:</strong> This can be solved online if you don't want to do it by hand! </p>
           </blockquote>
@@ -116,7 +136,7 @@ $ echo cvpbPGS{abg_gbb_onq_bs_n_ceboyrz} | tr 'A-Za-z' 'N-ZA-Mn-za-m'
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="easy1">
           <dt> Easy1 - Points 100 </dt>
           <dd> The one time pad can be cryptographically secure, but not when you know the key. Can you solve this? We've given you the encrypted flag, key, and a table to help UFJKXQZQUNB with the key of SOLVECRYPTO. Can you use this table to solve
             it?. </dd>
@@ -176,7 +196,7 @@ It's a Vigenere code encryption
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="caesar">
           <dt> caesar - Points: 100 </dt>
           <dd> Decrypt this message (picoCTF{rgdhhxcviwtgjqxrdcdydkefyh}). You can find the ciphertext in /problems/caesar_6_238b8f4604d91ecb59cda5b4f0e66fc8 on the shell server. </dd>
         </dl>
@@ -224,7 +244,7 @@ for key in range(len(LETTERS)):
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="flags">
           <dt> Flags - Points: 200 </dt>
           <dd> What do the flags mean?</dd>
 
@@ -254,7 +274,7 @@ $ eog flag.png
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="mr-worldwide">
           <dt> Mr-Worldwide - Points: 200 </dt>
           <dd> A musician left us a message. What's it mean? </dd>
         </dl>
@@ -287,7 +307,7 @@ Decode the message by finding the first letter of each city at coordinates (x,y)
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="tapping">
           <dt> Tapping - Points: 200 </dt>
           <dd> Theres tapping coming in from the wires. What's it saying nc 2019shell1.picoctf.com 32273. </dd>
         </dl>
@@ -327,7 +347,7 @@ $ python
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="la-cifra-de">
           <dt> la cifra de - Points: 200 </dt>
           <dd> I found this cipher in an old book. Can you figure out what it says? Connect with nc 2019shell1.picoctf.com 12254. </dd>
         </dl>
@@ -379,7 +399,7 @@ $ nc 2019shell1.picoctf.com 12254
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="rsa-pop-quiz">
           <dt> rsa-pop-quiz - Points: 200 </dt>
           <dd> Class, take your seats! It's PRIME-time for a quiz... nc 2019shell1.picoctf.com 61751 </dd>
         </dl>
@@ -730,7 +750,7 @@ if __name__ == '__main__':
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="waves-over-lambda">
           <dt> waves over lambda - Points: 300 </dt>
           <dd> We made alot of substitutions to encrypt this. Can you decrypt it? Connect with nc 2019shell1.picoctf.com 49935. </dd>
         </dl>
@@ -766,7 +786,7 @@ $ nc 2019shell1.picoctf.com 49935
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="mini-rsa">
           <dt> miniRSA - Points: 300 </dt>
           <dd> Lets decrypt this: ciphertext? Something seems a bit small </dd>
         </dl>

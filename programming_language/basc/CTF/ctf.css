@@ -393,7 +393,7 @@ hr {
   overflow: hidden;
   border: 0;
   border-top: 2px solid hsla(0, 0%, 50%, .33);
-  margin: 1em 20%
+  margin: 1em 20%;
 }
 
 .scrolling-wrapper {
@@ -401,6 +401,10 @@ hr {
     overflow-x: auto;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+}
+
+.scrolling-wrapper dl{
+    word-break: normal;
 }
 
 .scrolling-wrapper::-webkit-scrollbar {
@@ -544,6 +548,36 @@ td {
   margin-right: 20%;
   width:60%;
   font-size: 16px;
+}
+
+
+.toc h4{
+  font-size: 30px;
+  -webkit-animation: none;
+}
+
+.toc ol{
+  margin: 1em 10%;
+  white-space: nowrap;
+  list-style-position: inside;
+  overflow: hidden;
+}
+
+.toc a{
+  text-decoration:none;
+}
+
+.toc a:hover{
+  font-weight: bold;
+  color: #333;
+}
+
+.anchor:before {
+    display: block;
+    content: " ";
+    height: 100px;      /* Give height of your fixed element */
+    margin-top: -100px; /* Give negative margin of your fixed element */
+    visibility: hidden;
 }
 
 @media (min-width: 960px) {

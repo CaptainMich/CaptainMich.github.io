@@ -62,7 +62,17 @@
     		<h3> Binary Writeup </h3>
         <br>
 
-        <dl>
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#handy-shellcode"> handy-shellcode - Points 50 </a></li>
+            <li> <a href="#practice-run-1"> Practice-run-1 - Points: 50 </a></li>
+            <li> <a href="#overflow-0"> OverFlow 0 - Points: 100 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="handy-shellcode">
           <dt> handy-shellcode - Points 50 </dt>
           <dd> This program executes any shellcode that you give it. Can you spawn a shell and use that to read the flag.txt? You can find the program in /problems/handy-shellcode_2_6ad1f834bdcf9fcfb41200ca8d0f55a6 on the shell server. Source. </dd>
         </dl>
@@ -138,7 +148,7 @@ $ cat ~/shellcode.txt - | ./vuln
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="practice-run-1">
           <dt> Practice-run-1 -  Points: 50 </dt>
           <dd> You're going to need to know how to run programs if you're going to get out of here. Navigate to /problems/practice-run-1_0_62b61488e896645ebff9b6c97d0e775e on the shell server and run this program to receive a flag </dd>
 
@@ -163,7 +173,7 @@ $ ./run_this
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="overflow-0">
           <dt> OverFlow 0 - Points: 100 </dt>
           <dd> This should be easy. Overflow the correct buffer in this program and get a flag. Its
           also found in /problems/overflow-0_1_54d12127b2833f7eab9758b43e88d3b7 on the shell server.

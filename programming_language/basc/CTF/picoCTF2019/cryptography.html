@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="../../../../css/personal_icon.css">
   <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
   <link rel="stylesheet" href="../ctf.css">
-
+  <link rel="stylesheet" href="../../css/sidebar.css">
 </head>
 
 <body>
@@ -56,8 +56,26 @@
   <!-- Return to Top -->
   <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-  <!--  -->
+  <!-- Sidebar Nav -->
+  <div id="nav" class="navigation">
+    <div class="navigation__inner">
+      <!--   Content   -->
+      <h5> picoCTF2019 </h5>
+      <ul>
+          <li><a href="binary.html"> Binary </a></li>
+          <li><a href="cryptography.html"> Cryptography </a></li>
+          <li><a href="forensics.html"> Forensics </a></li>
+          <li><a href="general_skill.html"> General Skill </a></li>
+          <li><a href="reverse_engineering.html"> Reverse Engineering </a></li>
+          <li><a href="web_exploitation.html"> Web Exploitation </a></li>
+      </ul>
+      <br>
+    </div>
+  </div>
+
+  <!-- Main -->
   <main>
+  <div class="swipe-area"></div>
     <br><br><br>
     <div class="container">
       <article role="article">
@@ -887,6 +905,8 @@ if(exact):
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+  <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript"src="../../js/sidebar.js"> </script>
   <script type="text/javascript" src="../../../../js/menu.js"></script>
   <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
   <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>

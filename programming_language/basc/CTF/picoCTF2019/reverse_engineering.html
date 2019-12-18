@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="../../../../css/personal_icon.css">
       <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
       <link rel="stylesheet" href="../ctf.css">
-
+      <link rel="stylesheet" href="../../css/sidebar.css">
   </head>
   <body>
 
@@ -54,15 +54,51 @@
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-    <!--  -->
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> picoCTF2019 </h5>
+        <ul>
+            <li><a href="binary.html"> Binary </a></li>
+            <li><a href="cryptography.html"> Cryptography </a></li>
+            <li><a href="forensics.html"> Forensics </a></li>
+            <li><a href="general_skill.html"> General Skill </a></li>
+            <li><a href="reverse_engineering.html"> Reverse Engineering </a></li>
+            <li><a href="web_exploitation.html"> Web Exploitation </a></li>
+        </ul>
+        <br>
+      </div>
+    </div>
+
+    <!-- Main -->
     <main>
+    <div class="swipe-area"></div>
     <br><br><br>
     <div class="container">
       <article role="article">
     		<h3> Reverse Engineering Writeup </h3>
         <br>
 
-        <dl>
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#vault-door-training"> vault-door-training - Points: 50 </a></li>
+            <li> <a href="#vault-door-1"> vault-door-1 - Points: 100 </a></li>
+            <li> <a href="#vault-door-3"> vault-door-3 - Points: 200 </a></li>
+            <li> <a href="#vault-door-4"> vault-door-4 - Points: 250 </a></li>
+            <li> <a href="#vault-door-5"> vault-door-5 - Points: 300 </a></li>
+            <li> <a href="#vault-door-6"> vault-door-6 - Points: 350 </a></li>
+            <li> <a href="#vault-door-7"> vault-door-7 - Points: 400 </a></li>
+            <li> <a href="#asm1"> asm1 - Points: 200 </a></li>
+            <li> <a href="#asm2"> asm2 - Points: 250 </a></li>
+            <li> <a href="#asm3"> asm3 - Points: 300 </a></li>
+            <li> <a href="#asm4"> asm4 - Points: 400 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="vault-door-training">
           <dt> vault-door-training - Points: 50 </dt>
           <dd> Your mission is to enter Dr. Evil's laboratory and retrieve the blueprints for his Doomsday Project. The laboratory is protected by a series of locked vault doors. Each door is controlled by a computer and requires a password to open. Unfortunately, our undercover agents have not been able to obtain the secret passwords for the vault doors, but one of our junior agents obtained the source code for each vault's computer! You will need to read the source code for each level to figure out what the password is for that vault door. As a warmup, we have created a replica vault in our training facility. The source code for the training vault is here: VaultDoorTraining.java </dd>
         </dl>
@@ -121,7 +157,7 @@ $ cat VaultDoorTraining.java
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="vault-door-1">
           <dt> vault-door-1 - Points: 100 </dt>
           <dd> This vault uses some complicated arrays! I hope you can make sense of it, special agent. The source code for this vault is here: VaultDoor1.java </dd>
         </dl>
@@ -248,7 +284,7 @@ print("picoCTF{{{}}}".format(''.join(myPass)))
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="vault-door-3">
           <dt> vault-door-3 - Points: 200 </dt>
           <dd> This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java </dd>
         </dl>
@@ -343,7 +379,7 @@ print("picoCTF{{{}}}".format(''.join(buffer)))
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="vault-door-4">
           <dt> vault-door-4 - Points: 250 </dt>
           <dd> This vault uses ASCII encoding for the password. The source code for this vault is here: VaultDoor4.java </dd>
         </dl>
@@ -454,7 +490,7 @@ print("picoCTF{{{}}}".format(''.join(passBytes)))
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="vault-door-5">
           <dt> vault-door-5 - Points: 300 </dt>
           <dd> In the last challenge, you mastered octal (base 8), decimal (base 10), and hexadecimal (base 16) numbers, but this vault door uses a different change of base as well as URL encoding! The source code for this vault is here: VaultDoor5.java </dd>
         </dl>
@@ -560,7 +596,7 @@ print('}\n', end = '')
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="vault-door-6">
           <dt> vault-door-6 - Points: 350 </dt>
           <dd> This vault uses an XOR encryption scheme. The source code for this vault is here: VaultDoor6.java </dd>
         </dl>
@@ -649,7 +685,7 @@ print("picoCTF{{{}}}".format(''.join(passBytes)))
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="vault-door-7">
           <dt> vault-door-7 - Points: 400 </dt>
           <dd> This vault uses bit shifts to convert a password string into an array of integers. Hurry, agent, we are running out of time to stop Dr. Evil's nefarious plans! The source code for this vault is here: VaultDoor7.java </dd>
         </dl>
@@ -777,7 +813,7 @@ print("picoCTF{{{}}}".format(buffer))
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="asm1">
           <dt> asm1 - Points: 200 </dt>
           <dd> What does asm1(0x610) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm1_1_95494d904d73b330976420bc1cd763ec. </dd>
         </dl>
@@ -825,7 +861,7 @@ asm1:
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="asm2">
           <dt> asm2 - Points: 250 </dt>
           <dd> What does asm2(0x10,0x18) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm2_0_a50f0b17a6f50b50a53305ebd71af535. </dd>
         </dl>
@@ -919,7 +955,7 @@ clean:
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="asm3">
           <dt> asm3 - Points: 300 </dt>
           <dd> What does asm3(0xc264bd5c,0xb5a06caa,0xad761175) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm3_1_b71abaa5cc92e3f7061f23957206b434. </dd>
         </dl>
@@ -1002,7 +1038,7 @@ clean:
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="asm4">
           <dt> asm4 - Points: 400 </dt>
           <dd> What will asm4("picoCTF_c1373") return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm4_5_ca12dca0134f6b54a52c905ffc1e5b35. </dd>
         </dl>
@@ -1210,6 +1246,8 @@ clean:
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
     <script type="text/javascript" src="../../../../js/menu.js"></script>
     <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>

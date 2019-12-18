@@ -14,7 +14,7 @@
       <link rel="stylesheet" href="../../../../css/personal_icon.css">
       <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
       <link rel="stylesheet" href="../ctf.css">
-
+      <link rel="stylesheet" href="../../css/sidebar.css">
   </head>
   <body>
 
@@ -54,15 +54,53 @@
     <!-- Return to Top -->
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-    <!--  -->
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> picoCTF2019 </h5>
+        <ul>
+            <li><a href="binary.html"> Binary </a></li>
+            <li><a href="cryptography.html"> Cryptography </a></li>
+            <li><a href="forensics.html"> Forensics </a></li>
+            <li><a href="general_skill.html"> General Skill </a></li>
+            <li><a href="reverse_engineering.html"> Reverse Engineering </a></li>
+            <li><a href="web_exploitation.html"> Web Exploitation </a></li>
+        </ul>
+        <br>
+      </div>
+    </div>
+
+    <!-- Main -->
     <main>
+    <div class="swipe-area"></div>
     <br><br><br>
     <div class="container">
       <article role="article">
     		<h3> General Skill Writeup </h3>
         <br>
 
-        <dl>
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#2warm"> 2Warm - Points: 50 </a></li>
+            <li> <a href="#lets-warm-up"> Lets Warm Up - Points: 50 </a></li>
+            <li> <a href="#warmed-up"> Warmed Up - Points: 50 </a></li>
+            <li> <a href="#bases"> Bases - Points: 100 </a></li>
+            <li> <a href="#first-grep-I"> First Grep - Points: 100 </a></li>
+            <li> <a href="#resources"> Resources - Points: 100 </a></li>
+            <li> <a href="#strings-it"> strings it - Points: 100 </a></li>
+            <li> <a href="#what-is-net-cat"> what's a net cat? - Points: 100 </a></li>
+            <li> <a href="#based"> Based - Points: 200 </a></li>
+            <li> <a href="#first-grep-II"> First Grep: Part II - Points: 200 </a></li>
+            <li> <a href="#plumbing"> plumbing - Points: 200 </a></li>
+            <li> <a href="#whats-the-difference"> whats-the-difference - Points: 200 </a></li>
+            <li> <a href="#where-is-the-file"> where-is-the-file - Points: 200 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="2warm">
           <dt> 2Warm - Points: 50 </dt>
           <dd> Can you convert the number 42 (base 10) to binary (base 2)? </dd>
         </dl>
@@ -74,8 +112,8 @@
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# 42 (base 10) = 101010 (base 2)
+          <pre><code class="prism language-text">
+42 (base 10) = 101010 (base 2)
           </code></pre>
         </div>
 
@@ -88,7 +126,7 @@
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="lets-warm-up">
           <dt> Lets Warm Up - Points: 50 </dt>
           <dd> If I told you a word started with 0x70 in hexadecimal, what would it start with in ASCII? </dd>
 
@@ -98,8 +136,8 @@
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# 0x70 hex = p in ASCII
+          <pre><code class="prism language-text">
+0x70 hex = p in ASCII
           </code></pre>
         </div>
 
@@ -112,7 +150,7 @@
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="warmed-up">
           <dt> Warmed Up - Points: 50 </dt>
           <dd> What is 0x3D (base 16) in decimal (base 10) </dd>
         </dl>
@@ -123,8 +161,8 @@
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# simply convert the number
+          <pre><code class="prism language-text">
+Simply convert the number
           </code></pre>
         </div>
 
@@ -137,7 +175,7 @@
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="bases">
           <dt> Bases - Points: 100 </dt>
           <dd> What does this bDNhcm5fdGgzX3IwcDM1 mean? I think it has something to do with bases </dd>
         </dl>
@@ -162,7 +200,7 @@ $ echo bDNhcm5fdGgzX3IwcDM1 | base64 --decode
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="first-grep-I">
           <dt> First Grep - Points: 100 </dt>
           <dd> Can you find the flag in file? This would be really tedious to look through manually, something tells me there is a better way. You can also find the file in /problems/first-grep_2_04dbf496b78e6c37c0097cdfef734d88 on the shell server. </dd>
         </dl>
@@ -174,7 +212,7 @@ $ echo bDNhcm5fdGgzX3IwcDM1 | base64 --decode
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-$ grep "picoCTF{.*}" file
+$ grep -oE "picoCTF{.*}" file
           </code></pre>
         </div>
 
@@ -188,7 +226,7 @@ $ grep "picoCTF{.*}" file
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="resources">
           <dt> Resources - Points: 100 </dt>
           <dd> We put together a bunch of resources to help you out on our website! If you go over there, you might even find a flag! https://picoctf.com/resources (link) </dd>
         </dl>
@@ -199,8 +237,8 @@ $ grep "picoCTF{.*}" file
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# Copy the flag from the page
+          <pre><code class="prism language-text">
+Copy the flag from the page
           </code></pre>
         </div>
 
@@ -214,7 +252,7 @@ $ grep "picoCTF{.*}" file
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="strings-it">
           <dt> strings it - Points: 100 </dt>
           <dd> Can you find the flag in file without running it? You can also find the file in /problems/strings-it_3_8386a6aa560aecfba03c0c6a550b5c51 on the shell server. </dd>
         </dl>
@@ -226,7 +264,7 @@ $ grep "picoCTF{.*}" file
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
-$ strings srings | grep -oE "picoCTF{.*}"
+$ strings file | grep -oE "picoCTF{.*}"
           </code></pre>
         </div>
 
@@ -239,7 +277,7 @@ $ strings srings | grep -oE "picoCTF{.*}"
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="what-is-net-cat">
           <dt> what's a net cat? - Points: 100 </dt>
           <dd> Using netcat (nc) is going to be pretty important. Can you connect to 2019shell1.picoctf.com at port 21865 to get the flag? </dd>
         </dl>
@@ -264,7 +302,7 @@ $ nc 2019shell1.picoctf.com 21865
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="based">
           <dt> Based - Points: 200 </dt>
           <dd> To get truly 1337, you must understand different data encodings, such as hexadecimal or binary. Can you get the flag from this program to prove you are on the way to becoming 1337? Connect with nc 2019shell1.picoctf.com 20836. </dd>
         </dl>
@@ -278,11 +316,11 @@ $ nc 2019shell1.picoctf.com 21865
         </dl>
 
         <div class="row-full code">
-          <pre><code class="prism language-bash">
-# use different converter
-#   - binary to text
-#   - octal to text
-#   - hex to text
+          <pre><code class="prism language-text">
+Use different converter
+   - binary to text
+   - octal to text
+   - hex to text
           </code></pre>
         </div>
 
@@ -294,7 +332,7 @@ $ nc 2019shell1.picoctf.com 21865
         </dl>
         </div>
 
-        <dl>
+        <dl class="anchor" id="first-grep-II">
           <dt> First Grep: Part II - Points: 200 </dt>
           <dd> Can you find the flag in /problems/first-grep--part-ii_3_b4bf3244c2886de1566a28c1b5a465ae/files on the shell server? Remember to use grep. </dd>
         </dl>
@@ -321,7 +359,7 @@ $ grep -oE "picoCTF{.*}"
         </div>
         <hr> <!-- Finish post  -->
 
-        <dl>
+        <dl class="anchor" id="plumbing">
           <dt> plumbing - Points: 200 </dt>
           <dd> Sometimes you need to handle process data outside of a file. Can you find a way to keep the output from this program and search for the flag? Connect to 2019shell1.picoctf.com 57911. </dd>
         </dl>
@@ -350,7 +388,7 @@ $ nc 2019shell1.picoctf.com 57911 | grep -oE "picoCTF{.*}"
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="whats-the-difference">
           <dt> whats-the-difference - Points: 200 </dt>
           <dd> Can you spot the difference? kitters cattos. They are also available at /problems/whats-the-difference_0_00862749a2aeb45993f36cc9cf98a47a on the shell server </dd>
         </dl>
@@ -389,7 +427,7 @@ print flag
         <hr> <!-- Finish post  -->
 
 
-        <dl>
+        <dl class="anchor" id="where-is-the-file">
           <dt> where-is-the-file - Points: 200 </dt>
           <dd> I've used a super secret mind trick to hide this file. Maybe something lies in /problems/where-is-the-file_2_f1aa319cafd4b55ee4a60c1ba65255e2. </dd>
         </dl>
@@ -454,6 +492,8 @@ $ cat .cant_me_see
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
     <script type="text/javascript" src="../../../../js/menu.js"></script>
     <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>

@@ -24,3 +24,8 @@ function open_picoCTF2019_reverse_engineering() {
 function open_picoCTF2019_web_exploitation() {
     window.open("CTF/picoCTF2019/web_exploitation.html", "_self");
 }
+
+
+function open_OverTheWire_bandit() {
+    window.open("CTF/OverTheWire/bandit.html", "_self");
+}

@@ -398,6 +398,7 @@ hr {
 
 .scrolling-wrapper dl{
     word-break: normal;
+    overflow-wrap: normal;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
@@ -508,17 +509,15 @@ figure figcaption:before {
 dl {
   max-width: 40rem;
   margin: 1em auto;
-  word-break: break-all;
-
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
+
 dl dt {
   font-size: 1.25em;
   font-weight: bold;
 }
 
-dd dt{
-  overflow-wrap: break-word;
-}
 
 ::selection {
   background: rgba(44, 144, 198, 0.1);

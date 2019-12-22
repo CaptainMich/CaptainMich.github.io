@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> picoCTF2019 | Binary Writeup </title>
+    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../../python/python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+            <li><a href="../../basc.html"> BASC </a> </li>
+            <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
+            <li><a href="../../../android/android.html"> Android </a> </li>
+            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+            <li><a href="../../../../library/library.html"> Library </a> </li>
+            <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> picoCTF2019 </h5>
+        <ul>
+            <li><a href="../picoCTF2019/binary.html"> Binary </a></li>
+            <li><a href="../picoCTF2019/cryptography.html"> Cryptography </a></li>
+            <li><a href="../picoCTF2019/forensics.html"> Forensics </a></li>
+            <li><a href="../picoCTF2019/general_skill.html"> General Skill </a></li>
+            <li><a href="../picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
+            <li><a href="../picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
+        </ul>
+
+        <h5> OverTheWire</h5>
+        <ul>
+            <li><a href="bandit.html"> Bandit </a></li>
+        </ul>
+        <br>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Bandit Writeup </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#level-start"> Level 0 </a></li>
+            <li> <a href="#level-0"> Level 0 -> Level 1 </a></li>
+            <li> <a href="#level-1"> Level 1 -> Level 2 </a></li>
+            <li> <a href="#level-2"> Level 2 -> Level 3 </a></li>
+            <li> <a href="#level-3"> Level 3 -> Level 4 </a></li>
+            <li> <a href="#level-4"> Level 4 -> Level 5 </a></li>
+            <li> <a href="#level-5"> Level 5 -> Level 6 </a></li>
+            <li> <a href="#level-6"> Level 6 -> Level 7 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="level-start">
+          <dt> Level 0 </dt>
+          <dd> The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+              ssh
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://en.wikipedia.org/wiki/Secure_Shell"> Secure Shell (SSH) on Wikipedia </a> <br>
+              <a href="https://www.wikihow.com/Use-SSH"> How to use SSH on wikiHow </a>
+            </p>
+          </blockquote>
+        </dl>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-0">
+          <dt> Level 0 -> Level 1  </dt>
+          <dd> The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit0@bandit.labs.overthewire.org -p 2220
+$ ls
+$ cat readme
+            </code></pre>
+          </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> boJ9jbbUNNfktd78OOpsqOltutMc3MY1 </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-1">
+          <dt> Level 1 -> Level 2  </dt>
+          <dd> The password for the next level is stored in a file called - located in the home directory </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://www.google.com/search?q=dashed+filename"> Google Search for “dashed filename” </a> <br>
+              <a href="http://tldp.org/LDP/abs/html/special-chars.html"> Advanced Bash-scripting Guide - Chapter 3 - Special Characters </a>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit1@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ cat ./-
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9 </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-2">
+          <dt> Level 2 -> Level 3  </dt>
+          <dd> The password for the next level is stored in a file called spaces in this filename located in the home directory </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://www.google.com/search?q=spaces+in+filename"> Google Search for “spaces in filename” </a>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit2@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ cat spaces\ in\ this\ filename
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="level-3">
+          <dt> Level 3 -> Level 4  </dt>
+          <dd> The password for the next level is stored in a hidden file in the inhere directory. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit3@bandit.labs.overthewire.org -p 2220
+$ cd inehere/
+$ ls -la
+$ cat .hidden
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> pIwrPrtPN36QITSp3EQaw936yaFoFgAB </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="level-4">
+          <dt> Level 4 -> Level 5  </dt>
+          <dd> The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit4@bandit.labs.overthewire.org -p 2220
+$ cd inehere/
+$ ls -la
+$ cat ./-file07
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> koReBOKuIDDepwhWk7jZC0RTdopnAYKh </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-5">
+          <dt> Level 5 -> Level 6  </dt>
+          <dd> The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+                  <br> <a style="padding-left:2em;"> human-readable </a>
+                  <br> <a style="padding-left:2em;"> 1033 bytes in size </a>
+                  <br> <a style="padding-left:2em;"> not executable </a>
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit5@bandit.labs.overthewire.org -p 2220
+$ cd inhere/
+$ find -size 1033c
+$ cat maybehere07/.file2
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> DXjZPULLxYr17uwoI01bNLQbtFemEgo7h </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="level-6">
+          <dt> Level 6 -> Level 7  </dt>
+          <dd> The password for the next level is stored somewhere on the server and has all of the following properties:
+                  <br> <a style="padding-left:2em;"> owned by user bandit7 </a>
+                  <br> <a style="padding-left:2em;"> owned by group bandit6 </a>
+                  <br> <a style="padding-left:2em;"> 33 bytes in size </a>
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ls, cd, cat, file, du, find, grep
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit6@bandit.labs.overthewire.org -p 2220
+$ cd ../..
+$ find -size 33c -group bandit6 -user bandit
+$ cat ./var/lib/dpkg/info/bandit7.password
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick=""> Next </button>
+        <br> <br> <br>
+      </section>
+
+
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+        <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>
+  </body>
+</html>

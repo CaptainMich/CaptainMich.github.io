@@ -1,51 +1,47 @@
 /* ---------------------------------------------- */
 /*                  DATATYPES                     */
 /* ---------------------------------------------- */
-function open_MathOperator() {
-    window.open("code/datatypes/1-Math_Operator.html", "_self");
+function open_NumericType() {
+    window.open("code/datatypes/Numeric_Type.html", "_self");
 }
 
 function open_String() {
-    window.open("code/datatypes/2-String.html", "_self");
+    window.open("code/datatypes/String.html", "_self");
 }
 
-function open_Sets() {
-    window.open("code/datatypes/3-Sets.html", "_self");
+/* ---------------------------------------------- */
+/*             COLLECTIONSTYPE                    */
+/* ---------------------------------------------- */
+
+function open_Set() {
+    window.open("code/collectionstypes/Set.html", "_self");
 }
 
 function open_List() {
-    window.open("code/datatypes/4-Lists.html", "_self");
+    window.open("code/collectionstypes/List.html", "_self");
 }
 
-function open_Tuples() {
-    window.open("code/datatypes/5-Tuples.html", "_self");
+function open_Tuple() {
+    window.open("code/collectionstypes/Tuple.html", "_self");
+}
+
+function open_Dictionary() {
+    window.open("code/collectionstypes/Dictionary.html", "_self");
 }
  /* ---------------------------------------------- */
  /*                   LOOPS                        */
  /* ---------------------------------------------- */
 
-function open_ForLoop() {
-    window.open("code/loops/1-For_Loop.html", "_self");
+function open_IfStatement() {
+    window.open("code/loops/If_Statement.html", "_self");
 }
 
 function open_WhileLoop() {
-    window.open("code/loops/2-While_Loop.html", "_self");
+    window.open("code/loops/While_Loop.html", "_self");
 }
 
-function open_IfStatement() {
-    window.open("code/loops/3-If_Statement.html", "_self");
-}
-
-function open_Range() {
-    window.open("code/loops/4-Range.html", "_self");
-}
-
-function open_BreakContinue() {
-    window.open("code/loops/5-Break_Continue_Statement.html", "_self");
-}
-
-function open_Execption() {
-    window.open("code/loops/6-Exception.html", "_self");
+function open_ForLoop() {
+    window.open("code/loops/For_Loop.html", "_self");
 }
 
 /* ---------------------------------------------- */
@@ -53,7 +49,7 @@ function open_Execption() {
 /* ---------------------------------------------- */
 
 function open_Functions() {
-   window.open("code/functions/1-Functions.html", "_self");
+   window.open("code/functions/Functions.html", "_self");
 }
 
 /* ---------------------------------------------- */
@@ -61,7 +57,7 @@ function open_Functions() {
 /* ---------------------------------------------- */
 
 function open_Class() {
-   window.open("code/OOP/1-Class.html", "_self");
+   window.open("code/OOP/Class.html", "_self");
 }
 
 /* ---------------------------------------------- */
@@ -69,5 +65,5 @@ function open_Class() {
 /* ---------------------------------------------- */
 
 function open_GUI_Form_and_Widget() {
-   window.open("code/GUI/1-GUI_Form_and_Widget.html", "_self");
+   window.open("code/GUI/GUI_Form_and_Widget.html", "_self");
 }

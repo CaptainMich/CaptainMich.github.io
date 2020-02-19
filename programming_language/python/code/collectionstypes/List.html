@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title> Python Code | List </title>
+    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-material-oceanic.css">
+      <link rel="stylesheet" href="../code.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+            <li><a href="../../../basc/basc.html"> BASC </a> </li>
+            <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
+            <li><a href="../../../android/android.html"> Android </a> </li>
+            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+            <li><a href="../../../../library/library.html"> Library </a> </li>
+            <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> Data Types </h5>
+        <ul>
+            <li><a href="../datatypes/Numeric_Type.html"> Numeric Type </a></li>
+            <li><a href="../datatypes/String.html"> Strings </a></li>
+        </ul>
+
+        <h5> Collection Types </h5>
+        <ul>
+            <li><a href="List.html">  List </a></li>
+            <li><a href="Tuple.html"> Tuple  </a></li>
+            <li><a href="Set.html"> Set </a></li>
+            <li><a href="Dictionary.html"> Dictionary </a></li>
+        </ul>
+
+        <h5> Loops </h5>
+        <ul>
+            <li><a href="../loops/If_Statement.html"> If statement </a></li>
+            <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+            <li><a href="../loops/For_Loop.html"> For Loop </a></li>
+        </ul>
+
+        <h5> Functions </h5>
+        <ul>
+            <li><a href="../functions/Functions.html"> Functions </a></li>
+        </ul>
+
+        <h5> OOP </h5>
+        <ul>
+            <li><a href="../OOP/Class.html"> Class </a></li>
+        </ul>
+
+        <h5> GUI </h5>
+        <ul>
+            <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+        </ul>
+        <br>
+      </div>
+    </div>
+
+    <!-- Main  -->
+    <main>
+      <div class="swipe-area"></div>
+
+      <div class="container">
+      <article role="article">
+    		<h3> List </h3>
+        <p> L ist is a collection which is ordered and changeable. Allows duplicate members </p>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# LISTS
+# -------------------------------------------------------------------------------------------------
+
+empty = []                                      # empty list
+print(empty)                                    # ...
+players = [70,5,9]                              # syntax of a list
+print(players)                                  # print entire list
+
+different = [10,20, "Newton", 30.5, True]       # define a different element type list
+print(different)                                # ...
+
+</code></pre>
+</div>
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# WORK with LIST
+# -------------------------------------------------------------------------------------------------
+
+print(len(different))                 # to see the lenght of the list
+print(different[2])                   # to access a member of a list in the position ['x']
+different[1] = 90                     # to permanently change the value of a member
+print(different)                      # ...
+
+print(different + [0,1,2])            # concatenate list to another list
+print(different)                      # it is not a permanently change
+
+players = players * 2                 # multiply the list
+print(players)                        # ...
+
+players.append(4)                     # to permanently add an element to the list
+print(players)                        # ...
+
+players.insert(6, 99)                 # to permanently add an (element y, at index x)
+print(players)                        # ...
+
+players.remove(70)                    # to permanently remove an element to the list
+print(players)                        # ...
+
+players.pop(2)                        # to permanently remove an element to the list
+print(players)                        # (position of the list is indicate in brackets)
+
+del(players[3])                       # to permanently remove an element at index [x]
+print(players)                        # ...
+
+players.sort()                        # to order list in ascending fashion
+print(players)                        # ...
+
+players.sort(reverse=True)            # to reverse list (1)
+print(players)                        # ...
+
+players.reverse()                     # to reverse list (2)
+print(players)                        # ...
+
+print(max(players))                   # to get the maximum value of the list
+print(min(players))                   # to get the minimum value of the list
+
+                                        # uncomment this line to see the error
+# print(max(different))                 # it's possible to use max and min only
+# print(min(different))                 # if the list is composed by numbers
+
+print('')
+
+print(different[0:4])                 # to slicing up a list [from element 'x' to(:)
+print(different[2:3])                 # element 'y']
+print(different[2:])                  # ...
+print(different[:])                   # ...
+
+print('')
+
+different[:3] = [0,1,2]               # to change multiple values [from element 'x'
+print(different)                      # to(:) element 'y']
+different[:2] = [3,4,5]               # if y is less than the number of replacing values
+print(different)                      # element will be added to the list
+
+different[:2] = []                    # to delete items from the list(1)
+print(different)                      # ...
+
+different[:] = []                     # to delete the entire list
+print(different)                      # ...
+
+players.clear()                       # to remove all item from the list
+print(players)                        # ...
+
+</code></pre>
+</div>
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+
+# -------------------------------------------------------------------------------------------------
+# NESTING and List COMPREHENSION
+# -------------------------------------------------------------------------------------------------
+
+matrix = [[1,2,3],                                      # 3 x 3 Matrix, as nested list
+          [4,5,6],                                      # ...
+          [7,8,9]]                                      # ...
+
+print(matrix)                                           # print entire list
+print(matrix[1])                                        # print row 2
+print(matrix[1][2], '\n')                               # print element 3 of the row 2
+
+col2 = [row[1] for row in matrix]                       # collect the items in column 2
+print(col2)                                             # ...
+
+print(matrix)                                           # matrix is unchanged
+print('')
+                                                        # .. some other examples
+print([row[1] + 1 for row in matrix])                   # add 1 to each item in column 2
+print([row[1] for row in matrix if row[1] % 2 == 0])    # filter out odd items
+print('')                                               # of column 2
+
+diag = [matrix[i][i] for i in range(0, len(matrix))]    # collect diagonal from matrix
+print(diag)                                             # to see the result
+
+doubles = [letter * 2 for letter in 'spam']             # repeat character in a string
+print(doubles, '\n')                                    # to see the result
+
+Generator = (sum(row) for row in matrix)                # create a generator of row sum
+print(next(Generator))                                  # (sum items in a sequence)
+print(next(Generator))                                  # run the iteration protocol
+print(next(Generator))                                  # next()
+
+
+print({sum(row) for row in matrix})                     # create a set of row sums
+print({i : sum(matrix[i]) for i in range(3)})           # creates key/value table of
+print('')                                               # row sums
+
+print([ord(x) for x in 'spaam'])                        # list of character ordinals
+print({ord(x) for x in 'spaam'})                        # Set remove duplicates
+print({x: ord(x) for x in 'spaam'})                     # dictionary keys are unique
+  </code></pre>
+</div>
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='../datatypes/String.html'"> Previous </button>
+        <button id="next" onClick="location.href='Tuple.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+        <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
+        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+  </body>
+</html>

@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title> Python Code | Sets </title>
+    <title> Python Code | Dictionary </title>
     <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -62,83 +62,105 @@
         <!--   Content   -->
         <h5> Data Types </h5>
         <ul>
-            <li><a href="1-Math_Operator.html"> Math Operator </a></li>
-            <li><a href="2-String.html"> Strings </a></li>
-            <li><a href="3-Sets.html"> Sets </a></li>
-            <li><a href="4-Lists.html">  Lists </a></li>
-            <li><a href="5-Tuples.html"> Tuples  </a></li>
+            <li><a href="../datatypes/Numeric_Type.html"> Numeric Type </a></li>
+            <li><a href="../datatypes/String.html"> Strings </a></li>
+        </ul>
+
+        <h5> Collection Types </h5>
+        <ul>
+            <li><a href="List.html">  List </a></li>
+            <li><a href="Tuple.html"> Tuple  </a></li>
+            <li><a href="Set.html"> Set </a></li>
+            <li><a href="Dictionary.html"> Dictionary </a></li>
         </ul>
 
         <h5> Loops </h5>
         <ul>
-            <li><a href="../loops/1-For_Loop.html"> For Loop </a></li>
-            <li><a href="../loops/2-While_Loop.html"> While Loop </a></li>
-            <li><a href="../loops/3-If_Statement.html"> If Statement </a></li>
-            <li><a href="../loops/4-Range.html#"> Range </a></li>
-            <li><a href="../loops/5-Break_Continue_Statement.html">  Break & Continue </a></li>
-            <li><a href="../loops/6-Exception.html"> Exception </a></li>
+            <li><a href="../loops/If_Statement.html"> If statement </a></li>
+            <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+            <li><a href="../loops/For_Loop.html"> For Loop </a></li>
         </ul>
 
         <h5> Functions </h5>
         <ul>
-            <li><a href="../functions/1-Functions.html"> Functions </a></li>
+            <li><a href="../functions/Functions.html"> Functions </a></li>
         </ul>
 
         <h5> OOP </h5>
         <ul>
-            <li><a href="../OOP/1-Class.html"> Class </a></li>
+            <li><a href="../OOP/Class.html"> Class </a></li>
         </ul>
 
         <h5> GUI </h5>
         <ul>
-            <li><a href="../GUI/1-GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+            <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
         </ul>
-
         <br>
-
       </div>
     </div>
 
     <!-- Main  -->
     <main>
       <div class="swipe-area"></div>
-      <br><br><br><br><br><br>
+      
       <div class="container">
       <article role="article">
-    		<h3>Sets </h3>
-        <p> B elow we cover the default sets construction </p>
+    		<h3> Dictionary </h3>
+        <p> D ictionary is a collection which is unordered, changeable and indexed </p>
 
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# SETS
+# DICTIONARY
 # -------------------------------------------------------------------------------------------------
 
-print('\n\t\tSETS\n')
+profile = {                                       # define a dictionary
+  1: "Captain",                                   # (key : value)
+  2: "Mich",                                      # ...
+  "Age": 100,                                     # ...
+  "Job": "Programmer"                             # ...
+}                                                 # ...
 
-groceries = {'cereal', 'milk', 'starcrunch', 'beer',          # list that can't containe any duplicate ...
-              'duct tape', 'lotion', 'beer'}                  # ...
-print(groceries)                                              # ... in fact,beer will be print only once
+print(profile)                                    # ...
 
-if 'milk' in groceries:                                       # you can easily check if an element is
-    print('You already have milk hoss!')                      # inside the set (1)
-else:                                                         # ...
-    print('You need milk!')                                   # ...
+  </code></pre>
+</div>
 
-if 'sausages' in groceries:                                   # you can easily check if an element is
-    print('You already have sausages hoss!')                  # inside the set (2)
-else:                                                         # ...
-    print('You need sausages!')                               # ...
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# WORKING with DICTIONARY
+# -------------------------------------------------------------------------------------------------
 
+print(profile.items())                            # access all items (1)
+print('')                                         # ...
+
+for k,v in profile.items():                       # access all items (2)
+  print(str(k) + ":" + str(v))                    # ...
 print('')
+
+keys = profile.keys()                             # access keys
+for k in keys:                                    # and iterate through them
+  print(k)                                        # ...
+print('')
+
+values = profile.values()                         # access values
+for v in values:                                  # and iterate through them
+  print(v)                                        # ...
+print('')
+
+print(profile["Job"])                             # access value by passing the key
+
+del profile[2]                                    # remove element by passing the key
+print(profile)                                    # ...
   </code></pre>
 </div>
 
     	</article>
 
       <section class="" role="group">
-        <button id="previous" onClick="location.href='2-String.html'"> Previous </button>
-        <button id="next" onClick="location.href='4-Lists.html'"> Next </button>
+        <button id="previous" onClick="location.href='Set.html'"> Previous </button>
+        <button id="next" onClick="location.href='../loops/If_Statement.html'"> Next </button>
         <br> <br> <br>
       </section>
 
@@ -147,7 +169,7 @@ print('')
 
     <footer id="myFooter">
       <div class="footer">
-        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></a>
         <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
         <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
 

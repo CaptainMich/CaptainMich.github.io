@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title> Python Code | Lists </title>
+    <title> Python Code | Class </title>
     <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -62,165 +62,116 @@
         <!--   Content   -->
         <h5> Data Types </h5>
         <ul>
-            <li><a href="1-Math_Operator.html"> Math Operator </a></li>
-            <li><a href="2-String.html"> Strings </a></li>
-            <li><a href="3-Sets.html"> Sets </a></li>
-            <li><a href="4-Lists.html">  Lists </a></li>
-            <li><a href="5-Tuples.html"> Tuples  </a></li>
+            <li><a href="../datatypes/Numeric_Type.html"> Numeric Type </a></li>
+            <li><a href="../datatypes/String.html"> Strings </a></li>
+        </ul>
+
+        <h5> Collection Types </h5>
+        <ul>
+            <li><a href="../collectionstypes/List.html">  List </a></li>
+            <li><a href="../collectionstypes/Tuple.html"> Tuple  </a></li>
+            <li><a href="../collectionstypes/Set.html"> Set </a></li>
+            <li><a href="../collectionstypes/Dictionary.html"> Dictionary </a></li>
         </ul>
 
         <h5> Loops </h5>
         <ul>
-            <li><a href="../loops/1-For_Loop.html"> For Loop </a></li>
-            <li><a href="../loops/2-While_Loop.html"> While Loop </a></li>
-            <li><a href="../loops/3-If_Statement.html"> If Statement </a></li>
-            <li><a href="../loops/4-Range.html#"> Range </a></li>
-            <li><a href="../loops/5-Break_Continue_Statement.html">  Break & Continue </a></li>
-            <li><a href="../loops/6-Exception.html"> Exception </a></li>
+            <li><a href="../loops/If_Statement.html"> If statement </a></li>
+            <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+            <li><a href="../loops/For_Loop.html"> For Loop </a></li>
         </ul>
 
         <h5> Functions </h5>
         <ul>
-            <li><a href="../functions/1-Functions.html"> Functions </a></li>
+            <li><a href="../functions/Functions.html"> Functions </a></li>
         </ul>
 
         <h5> OOP </h5>
         <ul>
-            <li><a href="../OOP/1-Class.html"> Class </a></li>
+            <li><a href="Class.html"> Class </a></li>
         </ul>
 
         <h5> GUI </h5>
         <ul>
-            <li><a href="../GUI/1-GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+            <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
         </ul>
-
         <br>
-
       </div>
     </div>
 
     <!-- Main  -->
     <main>
-      <div class="swipe-area"></div>
-      <br><br><br><br><br><br>
+    <div class="swipe-area"></div>
+
+
       <div class="container">
       <article role="article">
-    		<h3> Lists </h3>
-        <p> B elow we cover all the default lists construction </p>
+    		<h3> Class </h3>
+        <p> B elow we cover what a class is and how to work with it </p>
 
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# LISTS
+# CLASS
 # -------------------------------------------------------------------------------------------------
 
-print('\n\t\tLISTS\n')
+print('\n\t\tCLASS\n')
 
-players = [70,5,9]                  # syntax of a list
-print(players)                      # print entire list
+class Enemy:                                                # define a class;
+                                                            # group similiar variables and function togheter
+    life = 3                                                # ...
+    def attack(self):                                       # ...
+        print('\tOuch -> life -1')                          # ...
+        self.life -= 1                                      # ...
 
-# -------------------------------------------------------------------------------------------------
-# WORK with LIST
-# -------------------------------------------------------------------------------------------------
+    def checkLife(self):                                    # ...
+        if self.life <= 0:                                  # ...
+            print('\tI am dead')                            # ...
+        else:                                               # ...
+            print('\t' + str(self.life) + ' life left')     # ...
 
-print('\n\tWORK with LISTS\n')
-
-print(players[2])                   # to access a member of a list in the position ['x']
-players[2] = 96                     # to permanently change the value of a member
-print(players)                      # to see the change
-
-print(players + [0,1,2])            # concatenate list to another list, and see the change...
-print(players)                      # ... but it is not a permanently change
-
-players = players * 2               # multiply the list
-print(players)                      # to see the change
-
-players.append(4)                   # to permanently add an element to the list
-print(players)                      # to see the change
-
-players.pop(2)                      # to permanently remove an element to the list (position of
-print(players)                      # the list is indicate in brackets)to see the change
-
-players.sort()                      # to order list in ascending fashion
-print(players)                      # to see the change
-
-players.reverse()                   # to reverse list
-print(players)                      # to see the change
+firstEnemy = Enemy()                                        # how to access to the class
+print('Enemy_One:')                                         # ...
+firstEnemy.checkLife()                                      # ...
+firstEnemy.attack()                                         # ...
+firstEnemy.checkLife()                                      # ...
 
 print('')
 
-print(players[0:2])                 # to slicing up a list [from element 'x' to(:) element 'y']
-print(players[1:2])                 # ...
-print(players[1:])                  # ...
-print(players[:])                   # ...
-
-print('')
-
-players[:2] = [0,1,2]               # to change multiple values [from element 'x' to(:) element 'y']
-print(players)                      # to see the changes
-
-players[:2] = []                    # to delete items from the list(1)
-print(players)                      # to see the changes
-
-players[:2] = []                    # to delete item from the list(2)
-print(players)                      # to see the change
-
-players[:] = []                     # to delete the entire list
-print(players)                      # to see the change
-
+secondEnemy = Enemy()                                       # access again to the class and discover that
+print('Enemy_Two:')                                         # each object is indipendent of one another
+secondEnemy.checkLife()                                     # ...
+secondEnemy.attack()                                        # ...
+secondEnemy.attack()                                        # ...
+secondEnemy.attack()                                        # ...
+secondEnemy.checkLife()                                     # ...
 
 # -------------------------------------------------------------------------------------------------
-# NESTING and List COMPREHENSION
+# CLASS __INIT__
 # -------------------------------------------------------------------------------------------------
 
-print('\n\tNESTING and List COMPREHENSION\n')
+print('\n\n\t\tCLASS __INIT__\n')
 
-matrix = [[1,2,3],                                      # 3 x 3 Matrix, as nested list
-          [4,5,6],                                      # ...
-          [7,8,9]]                                      # ...
+class Character:
 
-print(matrix)                                           # print entire list
-print(matrix[1])                                        # print row 2
-print(matrix[1][2], '\n')                               # print element 3 of the row 2
+    def __init__(self, x):                                  # __init__ = initialize --> pass a value to them and use
+        self.energy = x                                     # it in a different way for the object that we'll create
 
-col2 = [row[1] for row in matrix]                       # collect the items in column 2
-print(col2)                                             # to see the change
+    def get_energy(self):                                   # ...
+        return self.energy                                  # ...
 
-print(matrix)                                           # matrix is unchanges
-print('')
-                                                        # .. some other examples
-print([row[1] + 1 for row in matrix])                   # add 1 to each item in column 2
-print([row[1] for row in matrix if row[1] % 2 == 0])    # filter out odd items of column 2
-print('')
+Pippo = Character(5)                                        # initialize Pippo's energy to 5
+Pluto = Character(18)                                       # initialize Pluto's energy to 18
 
-diag = [matrix[i][i] for i in [0,1,2]]                  # collect diagonal from matrix
-print(diag)                                             # to see the result
-
-doubles = [letter * 2 for letter in 'spam']             # repeat character in a string
-print(doubles, '\n')                                    # to see the result
-
-Generator = (sum(row) for row in matrix)                # create a generator of row sum (sum items
-print(next(Generator))                                  # in a sequence)
-print(next(Generator))                                  # run the iteration protocol next()
-print(next(Generator))                                  # ...
-
-print(list(map(sum,matrix)))                            # map sum over items in matrix
-
-print({sum(row) for row in matrix})                     # create a set of row sums
-print({i : sum(matrix[i]) for i in range(3)})           # creates key/value table of row sums
-print('')
-
-print([ord(x) for x in 'spaam'])                        # list of character ordinals
-print({ord(x) for x in 'spaam'})                        # sets remove duplicates
-print({x: ord(x) for x in 'spaam'})                     # dictionary keys are unique
+print('Pippo energy is ' + str(Pippo.get_energy()))         # ...
+print('Pluto energy is ' + str(Pluto.get_energy()) + '\n')  # ...
   </code></pre>
 </div>
-
     	</article>
 
       <section class="" role="group">
-        <button id="previous" onClick="location.href='3-Sets.html'"> Previous </button>
-        <button id="next" onClick="location.href='5-Tuples.html'"> Next </button>
+        <button id="previous" onClick="location.href='../functions/Functions.html'"> Previous </button>
+        <button id="next" onClick="location.href='../GUI/GUI_Form_and_Widget.html'"> Next </button>
         <br> <br> <br>
       </section>
 

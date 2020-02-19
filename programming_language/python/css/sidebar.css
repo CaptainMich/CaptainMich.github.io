@@ -17,7 +17,7 @@
 
 .navigation {
   position: fixed;
-  width: 450px;
+  width: 300px;
   height: 100%;
   top: 90px;
   opacity: 1;
@@ -33,8 +33,10 @@
 }
 
 .navigation h5{
-  font-size: 30px;
+  text-align: left;
+  font-size: 25px;
   margin-top: 1em;
+  margin-left: 5%;
 }
 
 .navigation ul, ol {

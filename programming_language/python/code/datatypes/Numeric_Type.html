@@ -3,7 +3,7 @@
   <head>
 
     <meta charset="utf-8">
-    <title> Python Code | Math Operator </title>
+    <title> Python Code | Numeric Types </title>
     <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -62,81 +62,132 @@
         <!--   Content   -->
         <h5> Data Types </h5>
         <ul>
-            <li><a href="1-Math_Operator.html"> Math Operator </a></li>
-            <li><a href="2-String.html"> Strings </a></li>
-            <li><a href="3-Sets.html"> Sets </a></li>
-            <li><a href="4-Lists.html">  Lists </a></li>
-            <li><a href="5-Tuples.html"> Tuples  </a></li>
+            <li><a href="Numeric_Type.html"> Numeric Type </a></li>
+            <li><a href="String.html"> Strings </a></li>
+        </ul>
+
+        <h5> Collection Types </h5>
+        <ul>
+            <li><a href="../collectionstypes/List.html">  List </a></li>
+            <li><a href="../collectionstypes/Tuple.html"> Tuple  </a></li>
+            <li><a href="../collectionstypes/Set.html"> Set </a></li>
+            <li><a href="..collectionstypes/Dictionary.html"> Dictionary </a></li>
         </ul>
 
         <h5> Loops </h5>
         <ul>
-            <li><a href="../loops/1-For_Loop.html"> For Loop </a></li>
-            <li><a href="../loops/2-While_Loop.html"> While Loop </a></li>
-            <li><a href="../loops/3-If_Statement.html"> If Statement </a></li>
-            <li><a href="../loops/4-Range.html#"> Range </a></li>
-            <li><a href="../loops/5-Break_Continue_Statement.html">  Break & Continue </a></li>
-            <li><a href="../loops/6-Exception.html"> Exception </a></li>
+            <li><a href="../loops/If_Statement.html"> If statement </a></li>
+            <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+            <li><a href="../loops/For_Loop.html"> For Loop </a></li>
         </ul>
 
         <h5> Functions </h5>
         <ul>
-            <li><a href="../functions/1-Functions.html"> Functions </a></li>
+            <li><a href="../functions/Functions.html"> Functions </a></li>
         </ul>
 
         <h5> OOP </h5>
         <ul>
-            <li><a href="../OOP/1-Class.html"> Class </a></li>
+            <li><a href="../OOP/Class.html"> Class </a></li>
         </ul>
 
         <h5> GUI </h5>
         <ul>
-            <li><a href="../GUI/1-GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+            <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
         </ul>
-
         <br>
-
       </div>
     </div>
 
     <!-- Main  -->
     <main>
     <div class="swipe-area"></div>
-    <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> Math Operator </h3>
-        <p> B elow we cover all the default math operator and how to work with them </p>
+    		<h3> Numeric Types </h3>
+        <p> B elow we cover all the default Numeric Types and how to work with them </p>
 
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # --------------------------------------------------------------------------------------
-# MATH OPERATOR
+# Numeric Types
 # --------------------------------------------------------------------------------------
 
-print('\n\t\tMATH OPERATOR\n')
+# Integers
+a = 5                               # example of integer (1)
+print(a)                            # ...
+print(type(a))                      # &lt;class 'int'&gt;
+print('')                           # N.B: in python everything is an object
 
-print(3 + 4)                        # example of add
-print(4 - 3)                        # example of subtraction
-print(6 * 5)                        # example of multiplication
-print(12 / 5)                       # example of division
-print(18 // 4)                      # example of division(without rest)
-print(8 % 5)                        # example of reminder
-print(5 ** 3)                       # example of power of number
-
-print(8 + 2 * 10)                   # example of order of operations (1. not ordered)
-print(8 + (2 * 10))                 # example of order of operations (2. ordered)
-
-print(int('8') + 5)                 # example of conversion
-print(float('8.5') + 5)             # example of conversion(2)
-
-x = 5                               # use of variable(1)
+# Floating Points
+x = 33.5                            # example of floating point (2)
 print(x)                            # ...
-print(20 + x)                       # ...
+print(type(x))                      # &lt;class 'float'&gt;
+print('')                           # ...
 
-y = 12                              # use of variable(2)
-print(y / x)                        # ...
-print(y - x + 6)                    # ...
+# Complex Types
+c = 4 + 5j                          # example of complex (3)
+print(c)                            # ...
+print(type(c))                      # &lt;class 'complex'&gt;
+print('')                           # ...
+
+# Binary/Hexadecimal Values
+b = 0b01010                         # example of binary integer (4)
+h = 0xf                             # example of hexadecimal integer (5)
+print(b)                            # ...
+print(h)                            # ...
+print(type(b))                      # &lt;class 'int'&gt;
+print(type(h))                      # &lt;class 'float'&gt;
+print('')                           # ...
+
+# Boolean Types
+g = True                            # example of boolean type (6)
+print(g)                            # ...
+print(type(g))                      # &lt;class 'boolean'&gt;
+print(9>8)                          # condition true
+print(9&lt;8)                          # condition false
+print('')                           # ...
+
+  </code></pre>
+</div>
+
+
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# --------------------------------------------------------------------------------------
+# Math Operator
+# --------------------------------------------------------------------------------------
+
+print(int('42'))                      # example of conversion(1)
+print(float('42'))                    # example of conversion(2)
+print(bin(42))                        # example of conversion(3)
+print(hex(42))                        # example of conversion(4)
+print(oct(42))                        # example of conversion(5)
+
+print("Addition:\t", 3 + 4)           # example of add
+print("Subtraction:\t", 4 - 3)        # example of subtraction
+print("Mul:\t\t", 6 * 5)              # example of multiplication
+print("Div:\t\t", 12 / 5)             # example of division
+print("Floor Div:\t", 18 // 4)        # example of division(without rest)
+print("Mod:\t\t", 8 % 5)              # example of reminder
+print("Pow:\t\t", 5 ** 3)             # example of power of number
+
+print(8 + 2 * 10)                     # example of order of operations (1. not ordered)
+print(8 + (2 * 10))                   # example of order of operations (2. ordered)
+
+a, b = 10,5
+
+a += b                                # assignment operator (1)
+print(a)                              # ...
+a *= b                                # assignment operator (2)
+print(a)                              # ...
+
+print(a==75 and b==5)                 # logical operator (1)
+print(a==10 and b==5)                 # logical operator (2)
+print(a==10 and b==5)                 # logical operator (3)
+print(not(a==10 and b==5))            # logical operator (4)
+
   </code></pre>
 </div>
 
@@ -156,8 +207,6 @@ print(y - x + 6)                    # ...
 
 from math import pi
 
-print('\nExercise_01')
-
 radius = float(input ('Input the radius of the circle: '))
 area = (pi * radius**2)
 print('The area of the circle with radius ' + str(radius) + ' is ' + str(area) + '\n\n')
@@ -176,10 +225,7 @@ print('The area of the circle with radius ' + str(radius) + ' is ' + str(area) +
 # Write a Python program that calculate number of days between two dates
 # -------------------------------------------------------------------------------------------------
 
-
 from datetime import date
-
-print('\nExercise_02')
 
 yy = int(input('Input the start date year: '))
 mm = int(input('Input the start date month: '))
@@ -220,8 +266,6 @@ def gcd(x, y):
 def lcm(x,y):
   return ((x * y)/ gcd(x,y))
 
-print('\nExercise_03')
-
 firstNumber = int(input('Please enter first number: '))
 secondNumber = int(input('Please enter second number: '))
 
@@ -246,8 +290,6 @@ print('LCM between ' + str(firstNumber) + ' and ' + str(secondNumber)
 
 import math
 
-print('\nExercise_04')
-
 p1 = [int(input('Enter the coordinates of the first point: ')) for x in range(2)]
 p2 = [int(input('Enter the coordinates of the second point: ')) for x in range(2)]
 distance = math.sqrt( ((p1[0]-p2[0])**2)+((p1[1]-p2[1])**2) )
@@ -268,8 +310,6 @@ print('\nDistance between ' + str(p1) + ' and ' + str(p2) + ' is ' + str(distanc
 # Write a Python program that calculate the hypotenuse of a right angled triangle.
 # -------------------------------------------------------------------------------------------------
 
-
-print('\nExercise_05')
 a = int(input('Please enter lenght of first catete: '))
 b = int(input('Please enter lenght of second catete: '))
 hypotenuse = math.sqrt((a**2) + (b**2))
@@ -290,14 +330,12 @@ print('\nThe lenght of hypotenuse is ' + str(hypotenuse) + '\n')
 # Write a Python program that calculate the Fibonacci series (not recursive way).
 # -------------------------------------------------------------------------------------------------
 
-
 def Fibonacci():
   a, b = 0, 1
-  while True:                                                     # First iteration:
-      yield a                                                     # yield 0 to start with and then
-      a, b = b, a + b                                             # a will now be 1, and b will also be 1, (0 + 1)
+  while True:                       # First iteration:
+      yield a                       # yield 0 to start with and then
+      a, b = b, a + b               # "a" will now be 1, and "b" will also be 1, (0 + 1)
 
-print('\nExercise_06')
 index_number = int(input('Please enter the number of terms: '))
 
 for index, fibonacci_number in enumerate(Fibonacci()):
@@ -310,7 +348,7 @@ for index, fibonacci_number in enumerate(Fibonacci()):
 
 <section class="" role="group">
   <button id="previous" > Previous </button>
-  <button id="next" onClick="location.href='2-String.html'"> Next </button>
+  <button id="next" onClick="location.href='String.html'"> Next </button>
   <br> <br> <br>
 </section>
 

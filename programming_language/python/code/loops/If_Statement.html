@@ -4,7 +4,7 @@
 <head>
 
   <meta charset="utf-8">
-  <title> Python Code | While Loop </title>
+  <title> Python Code | If Statement </title>
   <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -64,40 +64,41 @@
       <!--   Content   -->
       <h5> Data Types </h5>
       <ul>
-        <li><a href="../datatypes/1-Math_Operator.html"> Math Operator </a></li>
-        <li><a href="../datatypes/2-String.html"> Strings </a></li>
-        <li><a href="../datatypes/3-Sets.html"> Sets </a></li>
-        <li><a href="../datatypes/4-Lists.html"> Lists </a></li>
-        <li><a href="../datatypes/5-Tuples.html"> Tuples </a></li>
+          <li><a href="../datatypes/Numeric_Type.html"> Numeric Type </a></li>
+          <li><a href="../datatypes/String.html"> Strings </a></li>
+      </ul>
+
+      <h5> Collection Types </h5>
+      <ul>
+          <li><a href="../collectionstypes/List.html">  List </a></li>
+          <li><a href="../collectionstypes/Tuple.html"> Tuple  </a></li>
+          <li><a href="../collectionstypes/Set.html"> Set </a></li>
+          <li><a href="..collectionstypes/Dictionary.html"> Dictionary </a></li>
       </ul>
 
       <h5> Loops </h5>
       <ul>
-        <li><a href="1-For_Loop.html"> For Loop </a></li>
-        <li><a href="2-While_Loop.html"> While Loop </a></li>
-        <li><a href="3-If_Statement.html"> If Statement </a></li>
-        <li><a href="4-Range.html#"> Range </a></li>
-        <li><a href="5-Break_Continue_Statement.html"> Break & Continue </a></li>
-        <li><a href="6-Exception.html"> Exception </a></li>
+          <li><a href="If_Statement.html"> If statement </a></li>
+          <li><a href="While_Loop.html"> While Loop </a></li>
+          <li><a href="For_Loop.html"> For Loop </a></li>
+
       </ul>
 
       <h5> Functions </h5>
       <ul>
-        <li><a href="../functions/1-Functions.html"> Functions </a></li>
+          <li><a href="../functions/Functions.html"> Functions </a></li>
       </ul>
 
       <h5> OOP </h5>
       <ul>
-        <li><a href="../OOP/1-Class.html"> Class </a></li>
+          <li><a href="../OOP/Class.html"> Class </a></li>
       </ul>
 
       <h5> GUI </h5>
       <ul>
-        <li><a href="../GUI/1-GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+          <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
       </ul>
-
       <br>
-
     </div>
   </div>
 
@@ -105,36 +106,44 @@
   <main>
     <div class="swipe-area"></div>
 
-    <br><br><br><br><br><br>
+
     <div class="container">
       <article role="article">
-        <h3> While Loop </h3>
-        <p> B elow we cover the loop made with the while statement </p>
+        <h3> If Statement </h3>
+        <p> B elow we cover the if statement and how to work with it </p>
 
         <div class="row-full code">
           <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# WHILE
+# IF - ELIF - ELSE
 # -------------------------------------------------------------------------------------------------
 
-print('\n\t\tWHILE\n')
+age = 16                                                # first example
+                                                        # ...
+if age < 18:                                            # ...
+    print("No beer for you!\n")                         # ...
 
-variable = 0                                                    # first example
-                                                                # ...
-while variable < 5:                                             # ...
-    print("Spam")                                               # ...
-    variable += 1                                               # ...
+name = "Mich"                                           # second example
+                                                        # ...
+if name is "Captain":                                   # ...
+    print("Hey there Captain")                          # ...
+elif name is "Mich":                                    # ...
+    print("Hey there Mich")                             # ...
+else:                                                   # ...
+  print("Your name is not registered yet!")             # ...
 
-input('\nPress any key to start infinite loop ')                # infinite loop
-while True:                                                     # ...
-print('Doing Something')                                        # ...
+a = 2                                                   # short Hand If ... Else
+b = 330                                                 # ...
+print("A") if a > b else print("B")                     # ...
+
   </code></pre>
         </div>
+
       </article>
 
       <section class="" role="group">
-        <button id="previous" onClick="location.href='1-For_Loop.html'"> Previous </button>
-        <button id="next" onClick="location.href='3-If_Statement.html'"> Next </button>
+        <button id="previous" onClick="location.href='../collectionstypes/Dictionary.html'"> Previous </button>
+        <button id="next" onClick="location.href='While_Loop.html'"> Next </button>
         <br> <br> <br>
       </section>
 

@@ -121,6 +121,11 @@ h2 {
 
 h3 {
   font-size: 2.5625rem;
+  margin-bottom: 1cm;
+}
+
+@media query {
+
 }
 
 h4 {
@@ -277,6 +282,7 @@ button::after {
 
 article[role="article"] {
   counter-reset: figure;
+  margin-top: 6cm;
 }
 article[role="article"] .head-title {
   text-align: center;
@@ -469,18 +475,19 @@ td {
 }
 @media (max-width: 960px) {
 
+  article[role="article"] {
+    margin-top: 3cm;
+  }
+
   .code {
     margin-left: 0%;
     margin-right: 0%;
     width: 100%;
     font-size: 12px;
   }
-}
 
-@media (max-width: 960px) {
-
-    #return-to-top i {
-        left: 11px;
-        top: 4px;
-    }
+  #return-to-top i {
+      left: 11px;
+      top: 4px;
+  }
 }

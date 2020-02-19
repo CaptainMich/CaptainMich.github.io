@@ -870,19 +870,21 @@ header nav ul li a:hover{
 }
 
 #myFooter .fa-github:hover{
-  color:#333;
+  /* color:#333; */
+  color: #6e5494
 }
 
 #myFooter .fa-github:focus{
-  color:#333;
+  /* color:#333; */
+  color: #6e5494
 }
 
-#myFooter .fa-instagram:hover{
-  color:#7232bd;
+#myFooter .fa-twitter:hover{
+  color:#1da1f2;
 }
 
-#myFooter .fa-instagram:focus{
-  color:#7232bd;
+#myFooter .fa-twitter:focus{
+  color:#1da1f2;
 }
 
 #myFooter .fa-envelope{

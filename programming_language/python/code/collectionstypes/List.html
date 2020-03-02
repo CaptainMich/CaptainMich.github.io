@@ -81,14 +81,15 @@
             <li><a href="../loops/For_Loop.html"> For Loop </a></li>
         </ul>
 
-        <h5> Functions </h5>
+        <h5> Advanced </h5>
         <ul>
-            <li><a href="../functions/Functions.html"> Functions </a></li>
+            <li><a href="../advanced/Command_Line_Arguments.html"> Command Line Argument </a></li>
+            <li><a href="../advanced/Function.html"> Function </a></li>
         </ul>
 
         <h5> OOP </h5>
         <ul>
-            <li><a href="../OOP/Class.html"> Class </a></li>
+            <li><a href="../OOP/Classes_and_Objects.html"> Classes and Objects </a></li>
         </ul>
 
         <h5> GUI </h5>
@@ -111,7 +112,7 @@
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# LISTS
+# LIST
 # -------------------------------------------------------------------------------------------------
 
 empty = []                                      # empty list
@@ -124,6 +125,7 @@ print(different)                                # ...
 
 </code></pre>
 </div>
+<br>
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
@@ -141,7 +143,7 @@ print(different)                      # it is not a permanently change
 players = players * 2                 # multiply the list
 print(players)                        # ...
 
-players.append(4)                     # to permanently add an element to the list
+players.append(10)                    # to permanently add an element to the list
 print(players)                        # ...
 
 players.insert(6, 99)                 # to permanently add an (element y, at index x)
@@ -174,6 +176,14 @@ print(min(players))                   # to get the minimum value of the list
 
 print('')
 
+for i in players:                                 # to find common elements in lists (1)
+  if i in different:                              # ...
+    print(i)                                      # ...
+
+common = [i for i in different if i in players]   # to find common elements in lists (2)
+print(common)                                     # ...
+print('')                                         # ...
+
 print(different[0:4])                 # to slicing up a list [from element 'x' to(:)
 print(different[2:3])                 # element 'y']
 print(different[2:])                  # ...
@@ -197,11 +207,15 @@ print(players)                        # ...
 
 </code></pre>
 </div>
+
+<h5> Nesting and List Comprehension </h5>
+<br>
+
 <div class="row-full code">
   <pre><code class="language-python line-numbers">
 
 # -------------------------------------------------------------------------------------------------
-# NESTING and List COMPREHENSION
+# NESTING and LIST COMPREHENSION
 # -------------------------------------------------------------------------------------------------
 
 matrix = [[1,2,3],                                      # 3 x 3 Matrix, as nested list
@@ -227,6 +241,48 @@ print(diag)                                             # to see the result
 
 doubles = [letter * 2 for letter in 'spam']             # repeat character in a string
 print(doubles, '\n')                                    # to see the result
+
+</code></pre>
+</div>
+
+<h5> Filter & Map</h5>
+<dl>
+  <ul>
+    <li> <b> filter </b>: is a method that filters the given sequence with the help of a function that tests each element in the sequence to be true or not </li>
+    <li><b> map </b>: is a function that applies a given function to each item of an iterable (list, tuple etc.) and returns a list of the results. </li>
+  </ul>
+ </dl>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+
+# -------------------------------------------------------------------------------------------------
+# FILTER & MAP
+# -------------------------------------------------------------------------------------------------
+
+
+lst = [10, 2, 22, 43, 55, 67]                    # using lambda function to filter
+print(list(filter(lambda x: x % 2 == 0, lst)))   # element from the list
+
+print(list(map(lambda n:n * 2, lst)))            # using lambda to map and double
+                                                 # each element of the list
+</code></pre>
+</div>
+
+<h5> Generator </h5>
+<br>
+<p> Generator is a function that returns an generator object that is iterable, i.e., can be used as an Iterators  </p>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+
+# -------------------------------------------------------------------------------------------------
+# GENERATOR
+# -------------------------------------------------------------------------------------------------
+
+matrix = [[1,2,3],                                      # 3 x 3 Matrix
+          [4,5,6],                                      # ...
+          [7,8,9]]                                      # ...
 
 Generator = (sum(row) for row in matrix)                # create a generator of row sum
 print(next(Generator))                                  # (sum items in a sequence)

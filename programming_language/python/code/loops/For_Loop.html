@@ -83,14 +83,15 @@
           <li><a href="For_Loop.html"> For Loop </a></li>
       </ul>
 
-      <h5> Functions </h5>
+      <h5> Advanced </h5>
       <ul>
-          <li><a href="../functions/Functions.html"> Functions </a></li>
+          <li><a href="../advanced/Command_Line_Arguments.html"> Command Line Argument </a></li>
+          <li><a href="../advanced/Function.html"> Function </a></li>
       </ul>
 
       <h5> OOP </h5>
       <ul>
-          <li><a href="../OOP/Class.html"> Class </a></li>
+          <li><a href="../OOP/Classes_and_Objects.html"> Classes and Objects </a></li>
       </ul>
 
       <h5> GUI </h5>
@@ -104,7 +105,6 @@
   <!-- Main  -->
   <main>
     <div class="swipe-area"></div>
-    <br><br><br><br><br><br>
     <div class="container">
       <article role="article">
         <h3> For Loop </h3>
@@ -131,8 +131,6 @@
             </li>
           </ul>
         </dl>
-
-        <h4> For Loop </h4>
 
         <div class="row-full code">
           <pre><code class="language-python line-numbers">
@@ -161,7 +159,8 @@ for x in adj:                                                 # ...
       </code></pre>
             </div>
 
-      <h4> Break and Continue </h4>
+      <h5> Break and Continue </h5>
+      <br>
       <div class="row-full code">
         <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
@@ -194,8 +193,8 @@ for n in range(1, 20):                                  # ...
       </code></pre>
       </div>
 
-      <h4> Range() function </h4>
-
+      <h5> Range() function </h5>
+      <br>
       <div class="row-full code">
         <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
@@ -222,11 +221,42 @@ print([[x, x / 2, x*2] for x in range(-6, 7, 2) if x > 0])  # ...
 </code></pre>
       </div>
 
+<h4> Exercises </h4>
+
+<dl>
+  <dt> Exercise 1. </dt>
+  <dd> Write a Python program that find out if given number is prime or not </dd>
+</dl>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -----------------------------------------------------------------------------------------------
+# Exercise_01
+# Write a Python program that find out if given number is prime or not
+# -----------------------------------------------------------------------------------------------
+
+number = int(input("Enter a number: "))
+primeFlag = True
+dividers = []
+
+for i in range(2, number - 1):
+    if(number % i == 0):
+        primeFlag = False
+        dividers.append(i)
+        continue
+
+if(primeFlag):
+    print("\n{} is a prime number\n".format(number))
+else:
+    print("\n{} is not prime.\nDividers are: {}\n".format(number, [x for x in dividers]))
+  </code></pre>
+</div>
+
       </article>
 
       <section class="" role="group">
         <button id="previous" onClick="location.href='While_Loop.html'"> Previous </button>
-        <button id="next" onClick="location.href='../functions/Function.html'"> Next </button>
+        <button id="next" onClick="location.href='../advanced/Command_Line_Arguments.html'"> Next </button>
         <br> <br> <br>
       </section>
 

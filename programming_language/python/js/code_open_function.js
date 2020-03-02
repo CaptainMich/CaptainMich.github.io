@@ -45,11 +45,16 @@ function open_ForLoop() {
 }
 
 /* ---------------------------------------------- */
-/*                   FUNCTIONS                  */
+/*                   ADVANCED                     */
 /* ---------------------------------------------- */
 
-function open_Functions() {
-   window.open("code/functions/Functions.html", "_self");
+
+function open_CommandLineArg(){
+   window.open("code/advanced/Command_Line_Arguments.html", "_self");
+}
+
+function open_Function() {
+   window.open("code/advanced/Function.html", "_self");
 }
 
 /* ---------------------------------------------- */
@@ -57,7 +62,7 @@ function open_Functions() {
 /* ---------------------------------------------- */
 
 function open_Class() {
-   window.open("code/OOP/Class.html", "_self");
+   window.open("code/OOP/Classes_and_Objects.html", "_self");
 }
 
 /* ---------------------------------------------- */

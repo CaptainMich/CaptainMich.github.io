@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
       <link rel="stylesheet" href="../../../../css/style.css">
@@ -57,8 +57,6 @@
 
     <!--  -->
     <main>
-
-      <br><br><br><br><br><br>
       <div class="container">
 
       <article role="article">
@@ -78,12 +76,15 @@
 
     		<h3> How does it work </h3>
     		<p> This program take in input an IP Address and its mask, besides the number of subnet and their respectively numbers of address and return all the subnet with: </p>
-    		<ul>
-    			<li> Network Address </li>
-          <li> Broadcast Address </li>
-          <li> Host Range </li>
-          <li> Subnet Mask </li>
-    		</ul>
+        <dl>
+          <ul>
+            <li> Network Address </li>
+            <li> Broadcast Address </li>
+            <li> Host Range </li>
+            <li> Subnet Mask </li>
+          </ul>
+        </dl>
+
 
     		<h3> The code </h3>
         <p> Take now a look at the code. The program is made by one function that use a library called <code> ipaddress </code> ( it's already present if you download the '.zip' otherwise you can download it <a href="https://github.com/python/cpython/blob/3.6/Lib/ipaddress.py" style="color: #0000ff"> HERE </a> and add as '.py' file into the folder). In this piece of code we have defined 4 different function that will return us respectively: the netmask, the broadcast address, the network address, the range of our ip block </p>

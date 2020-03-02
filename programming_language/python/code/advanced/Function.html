@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title> Python Code | Function </title>
+  <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+  <link rel="stylesheet" href="../../../../css/style.css">
+  <link rel="stylesheet" href="../../../../css/personal_icon.css">
+  <link rel="stylesheet" href="../../../../res/prism_themes/prism-material-oceanic.css">
+  <link rel="stylesheet" href="../code.css">
+  <link rel="stylesheet" href="../../css/sidebar.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+
+  <header>
+    <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+    <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+    <nav>
+      <ul>
+        <li><a href="../../python.html"> Python </a> </li>
+        <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+        <li><a href="../../../basc/basc.html"> BASC </a> </li>
+        <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
+        <li><a href="../../../android/android.html"> Android </a> </li>
+        <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+        <li><a href="../../../../library/library.html"> Library </a> </li>
+        <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
+      </ul>
+      <div id="dropdown-header" class="dropdown">
+        <button class="dropbtn"> Last Projects </button>
+        <div class="dropdown-content active">
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+          <a href="#"> Last Project 1 </a>
+        </div>
+      </div>
+    </nav>
+    <div class="menu-toggle">
+      <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+  </header>
+
+
+  <!-- Return to Top -->
+  <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- Sidebar Nav -->
+  <div id="nav" class="navigation">
+    <div class="navigation__inner">
+      <!--   Content   -->
+      <h5> Data Types </h5>
+      <ul>
+          <li><a href="../datatypes/Numeric_Type.html"> Numeric Type </a></li>
+          <li><a href="../datatypes/String.html"> Strings </a></li>
+      </ul>
+
+      <h5> Collection Types </h5>
+      <ul>
+          <li><a href="../collectionstypes/List.html">  List </a></li>
+          <li><a href="../collectionstypes/Tuple.html"> Tuple  </a></li>
+          <li><a href="../collectionstypes/Set.html"> Set </a></li>
+          <li><a href="../collectionstypes/Dictionary.html"> Dictionary </a></li>
+      </ul>
+
+      <h5> Loops </h5>
+      <ul>
+          <li><a href="../loops/If_Statement.html"> If statement </a></li>
+          <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+          <li><a href="../loops/For_Loop.html"> For Loop </a></li>
+      </ul>
+
+      <h5> Advanced </h5>
+      <ul>
+          <li><a href="Command_Line_Arguments.html"> Command Line Argument </a></li>
+          <li><a href="Function.html"> Function </a></li>
+      </ul>
+
+      <h5> OOP </h5>
+      <ul>
+          <li><a href="../OOP/Classes_and_Objects.html"> Classes and Objects </a></li>
+      </ul>
+
+      <h5> GUI </h5>
+      <ul>
+          <li><a href="../GUI/GUI_Form_and_Widget.html"> GUI Form and Widget </a></li>
+      </ul>
+      <br>
+    </div>
+  </div>
+
+  <!-- Main  -->
+  <main>
+    <div class="swipe-area"></div>
+
+    <div class="container">
+      <article role="article">
+        <h3> Function </h3>
+        <p> B elow we cover what a function is and how to work with it </p>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# FUNCTION
+# -------------------------------------------------------------------------------------------------
+
+def test_one():                            # define a 'normal' function
+    print('Dayum, function is cool\n')     # body of a function
+
+test_one()                                 # call the function
+
+def bitcoin_to_usd(btc):                   # define a function that take variable as input
+    amount = btc * 527                     # body of function
+    print(amount,'$\n')                    # ...
+
+bitcoin_to_usd(5.85)                       # call the fuction
+bitcoin_to_usd(1)                          # call the fuction
+
+def display(name):                         # define a function
+  def message():                           # define nested function
+    return "Hello my name is "             # ...
+
+  result = message() + name + "\n"         # call the inside function
+  return result                            # ...
+
+print(display("Captain"))                  # ...
+
+</code></pre>
+        </div>
+
+        <h5> Scope of Variables </h5>
+        <br>
+        <p> Not all variables are accessible from all parts of our program, and not all variables exist for the same amount of time. Where a variable is accessible and how long it exists depend on how it is defined. We call the part of a program where a variable is accessible its scope, and the duration for which the variable exists its lifetime.
+        </p>
+        <dl>
+          <ul>
+            <li><b> global variable</b>: a variable which is defined in the main body of a file; it will be visible throughout the file, and also inside any file which imports that file. Global variables can have unintended consequences because of their wide-ranging effects that is why we should almost never use them </li>
+            <li> <b> local variable </b>: a variable which is defined inside a function; it is accessible from the point at which it is defined until the end of the function, and exists for as long as the function is executing.  </li>
+          </ul>
+         </dl> <br>
+         <div class="row-full code">
+           <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# SCOPE of VARIABLE
+# -------------------------------------------------------------------------------------------------
+
+x = "Global"                                                # define global variable
+z = 123
+
+def display():
+ y = "Local"                                                # define local variable
+ print("Function: Accessing {}".format(x))                  # access global variable
+ print("Function: Accessing {}".format(y))                  # access local variable
+ z = 456                                                    # new value for local
+ print("z local is: {}".format(z))                          # access local variable
+ print("z global is: {}".format(globals()['z']))            # access local variable
+
+display()
+print("z outside function is: {}".format(z))                # access global variable
+print("Main: Accessing {}".format(x))                       # access global variable
+                                                            # uncomment to see the error
+#print("Main: Accessing {}".format(y))                      # access local variable
+
+   </code></pre>
+         </div>
+
+        <h5> Return Values </h5>
+        <br>
+        <p> After defining what a "normal" function is, it's noticeable that a function can return a value. So we can define a function which will return a value back, we will store the returned value in a variable and we will print it. </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# RETURN VALUE
+# -------------------------------------------------------------------------------------------------
+
+def sample(number):                                  # define the function
+    operation = (number / 2 + 7)                     # body of the function
+    return operation                                 # return a value
+
+
+test_sample = sample(20)                             # storage the returned value
+print('Testing Sample: ' + str(test_sample) + '\n')  # print it
+
+def calc(a,b):                                       # define the function
+    add = a + b                                      # ...
+    diff = a - b                                     # ...
+    mul = a * b                                      # ...
+    div = a / b                                      # ...
+
+    return add, diff, mul, div                       # return multiple values
+
+result = calc(8,4)                                   # ...
+print(result)                                        # ...
+
+</code></pre>
+        </div>
+
+
+        <h5> Default Values for Arguments </h5>
+        <br>
+        <p> A function can be defined with default value: it's a value that will be returned everytime the function is called without passing any argument </p> <br>
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# DEFAULT VALUES for ARGUMENTS
+# -------------------------------------------------------------------------------------------------
+
+def get_gender(sex = 'Unknown'):    # define a function with a DEFAULT VALUE
+    if sex is 'm':                  # body of the function (if - elif condition)
+        sex = 'Male'                # ...
+    elif sex is 'f':                # ...
+        sex = 'Female'              # ...
+    print(sex)                      # body of the function (print the final sex)
+
+get_gender('m')                     # call the function
+get_gender('f')                     # many time to display
+get_gender()                        # the functionality
+
+print('')
+</code></pre>
+        </div>
+
+        <h5> Keyword Arguments </h5>
+        <br>
+        <p> It's possible to define function with multiple default values associated with a keyword. As we can see, we can replace every default value simply by passing the keyword and the value; if we don't associate the keyword, the values will be
+          replaced in order </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# KEYWORD ARGUMENTS
+# -------------------------------------------------------------------------------------------------
+
+# define a function with 3 default value
+def dumb_sentence(name = 'Pippo', action = 'ate', item = 'nuts'):
+    print(name,action,item)
+
+dumb_sentence()                                       # call the function
+dumb_sentence(name = 'SuperPippo')                    # use one different keyword arg
+dumb_sentence(action = 'drive', item = 'a car')       # use two different keyword args
+dumb_sentence('Captain','plays','guitar')             # use multi different keywords args
+
+print('')
+</code></pre>
+        </div>
+
+        <h5> Flexible Number of Arguments </h5>
+        <br>
+        <p> A function can be created with a variable number of arguments that is not previously defined </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# FLEXIBLE NUMBER OF ARGUMENTS
+# -------------------------------------------------------------------------------------------------
+
+# define a function with a variable number of arguments
+def add_numbers(*args):
+    total = 0                                       # variable that store final result
+    for a in args:                                  # adds numbers and print the total
+        total += a                                  # ...
+    print(total)                                    # ...
+
+add_numbers(3)                                      # some examples of function call
+add_numbers(1, 2, 43)                               # ...
+add_numbers(112312, 1232134, 35765, 146547, 5563)   # ...
+
+print('')
+</code></pre>
+        </div>
+
+        <h5> Unpacking Arguments </h5>
+        <br>
+        <p> We have two different ways to pass arguments from a list to a function: the first one is pass the arguments one by one; the other one is pass a packed argument list as function argument and unpack it (it should be noted that the list must
+          contain the same number of arguments as the number of arguments taken by the function ) </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# UNPACKING ARGUMENTS
+# -------------------------------------------------------------------------------------------------
+
+def healt_calculator(age, apples_ate, cigs_smoked):
+    answer = (100 - age) + (apples_ate * 0.35) - (cigs_smoked * 1)
+    print(answer)
+
+data = [20, 2, 0]
+                                                   # call the function and ...
+healt_calculator(data[0],data[1],data[2])          # ...pass arguments one by one ...
+healt_calculator(*data)                            # ...or unpacking argument list
+
+print('')
+  </code></pre>
+        </div>
+
+        <h5> Recursive Function </h5>
+        <br>
+        <p> A recursive function is a function that calls itself</p>
+        <div class="row-full code">
+          <pre><code class="language-python line-numbers">
+# -----------------------------------------------------------------------------------------------
+# RECURSIVE FUNCTION
+# -----------------------------------------------------------------------------------------------
+
+def factorial(n):                              # define a function
+ if (n == 0):                                  # ...
+   return 1                                    # ...
+ else:                                         # ...
+   return n * factorial(n-1)                   # call the function recursive
+
+result = factorial(3)                           # ...
+print(result)                                   # ...
+        </code></pre>
+      </div>
+
+      <h5> Lambda Function </h5>
+      <br>
+      <p> A lambda function is a small anonymous function which can take any number of arguments, but can only have one expression.</p>
+      <div class="row-full code">
+        <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# LAMBDA
+# -------------------------------------------------------------------------------------------------
+
+def power(n):                             # lambda inside function
+  return lambda a : a * n                 # ...
+
+result = power(2)                         # ...
+print("Function: {}".format(result(3)))   # ...
+
+f = lambda n:n**3                         # using lambda
+print("Lambda: {}".format(f(2)) )         # ...
+
+# example using lambda: even or odd
+l = lambda x: 'YES' if x % 2 == 0 else 'NO'
+print("Number is Even? {}".format(l(10)))
+print("Number is Even? {}".format(l(9)))
+
+# example using lambda: sum of numbers
+s = lambda a,b: a + b
+print("Sum is {}".format(s(10,5)))
+      </code></pre>
+    </div>
+
+    <h5> Decorator </h5>
+    <br>
+    <p> Decorators are very powerful and useful tool in Python since it allows programmers to modify the behavior of function or class. Decorators allow to wrap another function in order to extend the behavior of wrapped function, without permanently modifying it. <br> In Decorators, functions are taken as the argument into another function and then called inside the wrapper function.</p>
+    <div class="row-full code">
+      <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# DECORATOR
+# -------------------------------------------------------------------------------------------------
+
+def decorator(func):                                # defining a decorator
+  def inner():                                      # inner is a Wrapper function in
+    print("This is before function execution")      # which the argument is called
+    func()                                          # inner function can access the outer local
+    print("This is after function execution")       # functions like in this case "func"
+  return inner                                      # calling the actual function now
+                                                    # inside the wrapper function.
+@decorator
+def function_to_be_used():                          # defining a function, to be called inside wrapper
+    print("This is inside the function !!")         # ...
+
+# this is not necessary since there is @
+# passing 'function_to_be_used' inside the
+# decorator to control its behavior
+# function_to_be_used = hello_decorator(function_to_be_used)
+
+
+# calling the function
+function_to_be_used()
+
+    </code></pre>
+  </div>
+
+      </article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='Command_Line_Arguments.html'"> Previous </button>
+        <button id="next" onClick="location.href='../OOP/Classes_and_Objects.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+    </div>
+  </main>
+
+  <footer id="myFooter">
+    <div class="footer">
+      <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+      <a href="https://twitter.com/_CaptainMich" class="social-icons"><i class="fab fa-twitter"></i></a>
+      <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+      <ul>
+        <li><a href="#">Site Information</a></li>
+        <li><a href="#">Contact me</a></li>
+        <li><a href="#">Reviews</a></li>
+        <li><a href="#">Terms of service</a></li>
+      </ul>
+      <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+  <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript"src="../../js/sidebar.js"> </script>
+  <script type="text/javascript" src="../../../../js/menu.js"></script>
+  <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+  <script type="text/javascript" src="../../../../res/prism_themes/prism.js"></script>
+</body>
+
+</html>

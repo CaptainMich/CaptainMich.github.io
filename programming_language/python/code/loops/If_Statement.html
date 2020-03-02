@@ -84,14 +84,15 @@
 
       </ul>
 
-      <h5> Functions </h5>
+      <h5> Advanced </h5>
       <ul>
-          <li><a href="../functions/Functions.html"> Functions </a></li>
+          <li><a href="../advanced/Command_Line_Arguments.html"> Command Line Argument </a></li>
+          <li><a href="../advanced/Function.html"> Function </a></li>
       </ul>
 
       <h5> OOP </h5>
       <ul>
-          <li><a href="../OOP/Class.html"> Class </a></li>
+          <li><a href="../OOP/Classes_and_Objects.html"> Classes and Objects </a></li>
       </ul>
 
       <h5> GUI </h5>
@@ -118,7 +119,7 @@
 # IF - ELIF - ELSE
 # -------------------------------------------------------------------------------------------------
 
-age = 16                                                # first example
+age = int(input("Enter your age: "))                    # first example
                                                         # ...
 if age < 18:                                            # ...
     print("No beer for you!\n")                         # ...
@@ -138,6 +139,72 @@ print("A") if a > b else print("B")                     # ...
 
   </code></pre>
         </div>
+
+      <h5> Assert Statement </h5>
+      <dl>
+          <b style="color:black"> Assert </b>: is generally used during debugging code session. It lets you test if a condition in your code returns True, if not, the program will raise an AssertionError
+      </dl>
+
+      <div class="row-full code">
+        <pre><code class="language-python line-numbers">
+# -------------------------------------------------------------------------------------------------
+# ASSERT
+# -------------------------------------------------------------------------------------------------
+
+x = int(input("Enter a number greater than 10: "))      # example assert statement
+assert x > 10, "Invalid input"                          # ...
+
+print("Entered value is: {}\n".format(x))               # ...
+      </code></pre>
+      </div>
+
+
+
+<h4> Exercises </h4>
+
+<dl>
+  <dt> Exercise 1. </dt>
+  <dd> Write a Python program that take as input three scores and behave as follow:
+      <br> &emsp; &emsp; &emsp;- display a failure message if one of the scores is less than 35
+      <br> &emsp; &emsp; &emsp;- calculate the average of the scores and return the
+      <br> &emsp; &emsp; &emsp; &ensp;corresponding grade
+  </dd>
+</dl>
+
+<div class="row-full code">
+  <pre><code class="language-python line-numbers">
+# -----------------------------------------------------------------------------------------------
+# Exercise_01
+# Write a Python program that take as input three scores and does the following:
+#   - display a failure message if one of the scores is less than 35
+#   - calculate the average of the scores and return the corresponding grade
+# -----------------------------------------------------------------------------------------------
+
+grades = [int(g) for g in (input('''Enter your maths, physics and chemistry score
+splitted by , : ''')).split(',')]
+score = 0
+
+for x in grades:
+    if(x < 35):
+        print("You have failed the exam")
+        score = 0
+        break
+    else:
+        score += x
+
+if (score == 0):
+    pass
+else:
+    score = score/(len(grades))
+
+    if (score <= 59):
+        print("Average is: {}\nYour grade is C".format(score))
+    elif (score <= 69):
+        print("Average is: {}\nYour grade is B".format(score))
+    else:
+        print("Average is: {}\nYour grade is A".format(score))
+  </code></pre>
+</div>
 
       </article>
 

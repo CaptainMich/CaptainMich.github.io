@@ -4,7 +4,7 @@
 <head>
 
   <meta charset="utf-8">
-  <title> Python Code | While Loop </title>
+  <title> Python Code | Command Line Arguments </title>
   <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
@@ -73,20 +73,20 @@
           <li><a href="../collectionstypes/List.html">  List </a></li>
           <li><a href="../collectionstypes/Tuple.html"> Tuple  </a></li>
           <li><a href="../collectionstypes/Set.html"> Set </a></li>
-          <li><a href="..collectionstypes/Dictionary.html"> Dictionary </a></li>
+          <li><a href="../collectionstypes/Dictionary.html"> Dictionary </a></li>
       </ul>
 
       <h5> Loops </h5>
       <ul>
-          <li><a href="If_Statement.html"> If statement </a></li>
-          <li><a href="While_Loop.html"> While Loop </a></li>
-          <li><a href="For_Loop.html"> For Loop </a></li>
+          <li><a href="../loops/If_Statement.html"> If statement </a></li>
+          <li><a href="../loops/While_Loop.html"> While Loop </a></li>
+          <li><a href="../loops/For_Loop.html"> For Loop </a></li>
       </ul>
 
       <h5> Advanced </h5>
       <ul>
-          <li><a href="../advanced/Command_Line_Arguments.html"> Command Line Argument </a></li>
-          <li><a href="../advanced/Function.html"> Function </a></li>
+          <li><a href="Command_Line_Arguments.html"> Command Line Argument </a></li>
+          <li><a href="Function.html"> Function </a></li>
       </ul>
 
       <h5> OOP </h5>
@@ -106,66 +106,34 @@
   <main>
     <div class="swipe-area"></div>
 
-
     <div class="container">
       <article role="article">
-        <h3> While Loop </h3>
-        <p> B elow we cover the loop made with the while statement </p>
+        <h3> Command Line Arguments </h3>
+        <p> B elow we cover what command line arguments are and how to work with them </p>
 
-        <div class="row-full code">
-          <pre><code class="language-python line-numbers">
+      <div class="row-full code">
+        <pre><code class="language-python line-numbers">
 # -------------------------------------------------------------------------------------------------
-# WHILE
-# -------------------------------------------------------------------------------------------------
-
-variable = 0
-while variable &lt; 5:                                     # while loop
-  print("Spam")                                         # ...
-  variable += 1                                         # ...
-
-input('\nPress any key to start infinite loop ')        # infinite loop
-  while True:                                           # ...
-  print('Doing Something')                              # ...
-        </code></pre>
-        </div>
-
-        <h5> Exception Handling </h5>
-        <dl>
-            <ul>
-                <li> <b> try </b>: this block lets you test a block of code for errors.</li>
-                <li><b> except </b>: this block lets you handle the error.</li>
-                <li><b> finally  </b>: this block lets you execute code, regardless of the result of the try and except blocks.</li>
-            </ul>
-
-        </dl>
-
-
-        <div class="row-full code">
-          <pre><code class="language-python line-numbers">
-# -------------------------------------------------------------------------------------------------
-# EXCEPTION HANDLING
+# COMMAND LINE ARGUMENTS
 # -------------------------------------------------------------------------------------------------
 
-while True:
-  try:                                                  # to handling some user error
-    number = int(input("Favourite Number: "))           # ...
-    print(\nnumber)                                     # ...
-    break                                               # ...
-  except ValueError:                                    # except a particular error (1)
-    print("You must input a number")                    # ...
-  except ZeroDivisionError:                             # except a particular error (2)
-    print("Don't pick zero")                            # ...
-  except:                                               # except any kind of error
-    break                                               # (don't use it if it's possible)
-  finally:                                              # do some other action, no matter
-    print("Loop Complete\n")                            # what the problem is
-        </code></pre>
-        </div>
+import sys
+
+cmd = sys.argv                              # save all the arguments in a variable list
+for e in cmd:                               # (launch this program from command line
+    print(e)                                # ...
+print(len(cmd))                             # ...
+
+
+print ('')
+    </code></pre>
+            </div>
+
       </article>
 
       <section class="" role="group">
-        <button id="previous" onClick="location.href='If_Statement.html'"> Previous </button>
-        <button id="next" onClick="location.href='For_Loop.html'"> Next </button>
+        <button id="previous" onClick="location.href='../loops/For_Loop.html'"> Previous </button>
+        <button id="next" onClick="location.href='Function.html'"> Next </button>
         <br> <br> <br>
       </section>
 

@@ -121,6 +121,7 @@ h2 {
 
 h3 {
   font-size: 2.5625rem;
+  margin-bottom: 1cm;
 }
 
 h4 {
@@ -161,6 +162,7 @@ p + p {
 
 article[role="article"] {
   counter-reset: figure;
+  margin-top: 6cm;
 }
 article[role="article"] .head-title {
   text-align: center;
@@ -262,6 +264,9 @@ button:focus {
 
 img {
   max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 figure {
@@ -272,7 +277,9 @@ figure {
 }
 
 figure figcaption {
+  padding-top: 1.25rem;
   font-size: 1.125rem;
+  text-align: center;
 }
 
 figure figcaption:before {
@@ -326,7 +333,6 @@ thead {
 td {
   padding: 0.125em 0.5em;
 }
-
 .code {
   margin-left: 10%;
   margin-right: 10%;
@@ -350,15 +356,16 @@ td {
 }
 @media (max-width: 960px) {
 
+  article[role="article"] {
+    margin-top: 3cm;
+  }
+  
   .code {
     margin-left: 0%;
     margin-right: 0%;
     width: 100%;
     font-size: 12px;
   }
-}
-
-@media (max-width: 960px) {
 
     #return-to-top i {
         left: 11px;

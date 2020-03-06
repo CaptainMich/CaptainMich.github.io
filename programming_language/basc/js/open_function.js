@@ -1,5 +1,5 @@
 /* ---------------------------------------------- */
-/*                   LOOPS                        */
+/*                  PICOCTF                     */
 /* ---------------------------------------------- */
 function open_picoCTF2019_binary() {
     window.open("CTF/picoCTF2019/binary.html", "_self");
@@ -26,6 +26,14 @@ function open_picoCTF2019_web_exploitation() {
 }
 
 
+/* ---------------------------------------------- */
+/*                 OVERTHEWIRE                     */
+/* ---------------------------------------------- */
+
 function open_OverTheWire_bandit() {
     window.open("CTF/OverTheWire/bandit.html", "_self");
+}
+
+function open_OverTheWire_leviathan() {
+    window.open("CTF/OverTheWire/leviathan.html", "_self");
 }

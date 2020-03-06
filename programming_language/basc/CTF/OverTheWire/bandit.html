@@ -71,6 +71,7 @@
         <h5> OverTheWire</h5>
         <ul>
             <li><a href="bandit.html"> Bandit </a></li>
+            <li><a href="leviathan.html"> Leviathan </a></li>
         </ul>
         <br>
       </div>
@@ -96,6 +97,14 @@
             <li> <a href="#level-4"> Level 4 -> Level 5 </a></li>
             <li> <a href="#level-5"> Level 5 -> Level 6 </a></li>
             <li> <a href="#level-6"> Level 6 -> Level 7 </a></li>
+            <li> <a href="#level-7"> Level 7 -> Level 8 </a></li>
+            <li> <a href="#level-8"> Level 8 -> Level 9 </a></li>
+            <li> <a href="#level-9"> Level 9 -> Level 10 </a></li>
+            <li> <a href="#level-10"> Level 10 -> Level 11 </a></li>
+            <li> <a href="#level-11"> Level 11 -> Level 12 </a></li>
+            <li> <a href="#level-12"> Level 12 -> Level 13 </a></li>
+            <li> <a href="#level-13"> Level 13 -> Level 14 </a></li>
+            <li> <a href="#level-14"> Level 14 -> Level 15 </a></li>
           </ol>
         </dl>
         <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
@@ -149,7 +158,7 @@ $ cat readme
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> boJ9jbbUNNfktd78OOpsqOltutMc3MY1 </strong></p>
+            <p class="ctf"><strong>boJ9jbbUNNfktd78OOpsqOltutMc3MY1</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -189,7 +198,7 @@ $ cat ./-
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9 </strong></p>
+            <p class="ctf"><strong>CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -228,7 +237,7 @@ $ cat spaces\ in\ this\ filename
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK </strong></p>
+            <p class="ctf"><strong>UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -259,7 +268,7 @@ $ cat .hidden
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> pIwrPrtPN36QITSp3EQaw936yaFoFgAB </strong></p>
+            <p class="ctf"><strong>pIwrPrtPN36QITSp3EQaw936yaFoFgAB</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -283,6 +292,7 @@ $ cat .hidden
 $ ssh bandit4@bandit.labs.overthewire.org -p 2220
 $ cd inehere/
 $ ls -la
+$ file -- *
 $ cat ./-file07
             </code></pre>
           </div>
@@ -290,7 +300,7 @@ $ cat ./-file07
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> koReBOKuIDDepwhWk7jZC0RTdopnAYKh </strong></p>
+            <p class="ctf"><strong>koReBOKuIDDepwhWk7jZC0RTdopnAYKh</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -318,7 +328,12 @@ $ cat ./-file07
             <pre><code class="prism language-bash">
 $ ssh bandit5@bandit.labs.overthewire.org -p 2220
 $ cd inhere/
-$ find -size 1033c
+$ ls -laR
+$ find -type f -size 1033c
+  # some others variants can be:
+  #   - $ cat $(find . -size 1033c))
+  #   - $ find . -size 1033c -exec cat {} \;)
+
 $ cat maybehere07/.file2
             </code></pre>
           </div>
@@ -326,7 +341,7 @@ $ cat maybehere07/.file2
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> DXjZPULLxYr17uwoI01bNLQbtFemEgo7h </strong></p>
+            <p class="ctf"><strong>DXjZPULLxYr17uwoI01bNLQbtFemEgo7h</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -352,8 +367,7 @@ $ cat maybehere07/.file2
           <div class="row-full code">
             <pre><code class="prism language-bash">
 $ ssh bandit6@bandit.labs.overthewire.org -p 2220
-$ cd ../..
-$ find -size 33c -group bandit6 -user bandit
+$ find / -size 33c -group bandit6 -user bandit7
 $ cat ./var/lib/dpkg/info/bandit7.password
             </code></pre>
           </div>
@@ -361,7 +375,305 @@ $ cat ./var/lib/dpkg/info/bandit7.password
         <div class="scrolling-wrapper">
         <dl>
           <blockquote>
-            <p class="ctf"><strong> HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs </strong></p>
+            <p class="ctf"><strong>HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-7">
+          <dt> Level 7 -> Level 8  </dt>
+          <dd> The password for the next level is stored in the file <b>data.txt</b> next to the word <b>millionth</b> </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit7@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ cat data.txt | find millionth
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>cvX2JJa4CFALtqS87jk27qwqGhBM9plV</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-8">
+          <dt> Level 8 -> Level 9 </dt>
+          <dd> The password for the next level is stored in the file <b>data.txt</b> and is the only line of text that occurs only once </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit8@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ sort data.txt | uniq -u
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-9">
+          <dt> Level 9 -> Level 10 </dt>
+          <dd> The password for the next level is stored in the file data.txt in one of the few human-readable strings, beginning with several ‘=’ characters. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit9@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ strings data.txt | grep ==
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-10">
+          <dt> Level 10 -> Level 11 </dt>
+          <dd> The password for the next level is stored in the file data.txt, which contains base64 encoded data </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://en.wikipedia.org/wiki/Base64"> Base64 on Wikipedia </a> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit10@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ cat data.txt | base64 -d
+  # $ base64 -d data.txt
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-11">
+          <dt> Level 11 -> Level 12 </dt>
+          <dd> The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://en.wikipedia.org/wiki/Rot13"> Rot13 on Wikipedia </a> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit11@bandit.labs.overthewire.org -p 2220
+$ ls -la
+$ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-12">
+          <dt> Level 12 -> Level 13 </dt>
+          <dd> The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!) </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="https://en.wikipedia.org/wiki/Hex_dump"> Hex dump on Wikipedia </a> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit12@bandit.labs.overthewire.org -p 2220
+$ mkdir /tmp/myfolder
+$ cp data.txt /tmp/myfolder
+$ cd /tmp/myfolder
+$ xxd -r data.txt data.bin
+$ zcat data.bin | bzcat | zcat| tar xO | tar xO | bzcat | tar xO | zcat
+    # Tips: use the command 'file -' at each step to identify what command use next
+    #   -$ zcat data.bin | bzcat | zcat| tar xO | tar xO | bzcat | tar xO | file -)
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-13">
+          <dt> Level 13 -> Level 14 </dt>
+          <dd> The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ssh, telnet, nc, openssl, s_client, nmap
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="http://computer.howstuffworks.com/web-server5.htm"> SSH/OpenSSH/Keys </a> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit13@bandit.labs.overthewire.org -p 2220
+$ ssh bandit14@localhost -i ~/sshkey.private
+$ cat /etc/bandit_pass/bandit14
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-14">
+          <dt> Level 14 -> Level 15 </dt>
+          <dd> The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost. </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Commands you may need to solve this level:</strong> <br>
+                ssh, telnet, nc, openssl, s_client, nmap
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Helpful Reading Material</strong> <br>
+              <a href="http://computer.howstuffworks.com/web-server5.htm"> IP Addresses </a> <br>
+              <a href="https://en.wikipedia.org/wiki/IP_address"> IP Address on Wikipedia </a> <br>
+              <a href="https://en.wikipedia.org/wiki/Localhost"> Localhost on Wikipedia </a> <br>
+              <a href="http://computer.howstuffworks.com/web-server8.htm"> Ports </a> <br>
+              <a href="https://en.wikipedia.org/wiki/Port_(computer_networking)"> Port (computer networking) on Wikipedia </a> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-bash">
+$ ssh bandit14@bandit.labs.overthewire.org -p 2220
+$ telnet localhost 30000
+    # use the password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>BfMYroe26WYalil77FoDi9qh59eK5xNr</strong></p>
           </blockquote>
         </dl>
         </div>
@@ -372,10 +684,9 @@ $ cat ./var/lib/dpkg/info/bandit7.password
 
       <section class="" role="group">
         <button id="previous" > Previous </button>
-        <button id="next" onClick=""> Next </button>
+        <button id="next" onClick="location.href='leviathan.html'"> Next </button>
         <br> <br> <br>
       </section>
-
 
       </div>
     </main>

@@ -37,3 +37,11 @@ function open_OverTheWire_bandit() {
 function open_OverTheWire_leviathan() {
     window.open("CTF/OverTheWire/leviathan.html", "_self");
 }
+
+/* ---------------------------------------------- */
+/*                 CYBERCHALLENGE                 */
+/* ---------------------------------------------- */
+
+function open_CyberChallenge_week01_warm_up() {
+    window.open("CTF/CyberChallenge/week01-warm_up.html", "_self");
+}

@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Cryptography 1 </title>
+    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/themes/prism.min.css"> -->
+      <link rel="stylesheet" href="../../../../css/style.css">
+      <link rel="stylesheet" href="../../../../css/personal_icon.css">
+      <link rel="stylesheet" href="../../../../res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+
+    <header>
+      <a href="../../../../index.html" class="header-logo"><img src="../../../../img/lion-logo.png" alt="Logo" width="75"></a>
+      <a href="../../../../index.html" class="header-brand"> CAPTAIN </a>
+      <nav>
+          <ul>
+            <li><a href="../../../python/python.html"> Python </a> </li>
+            <li><a href="../../../c_plus_plus/c_plus_plus.html"> C / C++ </a> </li>
+            <li><a href="../../basc.html"> BASC </a> </li>
+            <li><a href="../../../machine_learning/machine_learning.html"> ML </a> </li>
+            <li><a href="../../../android/android.html"> Android </a> </li>
+            <li><a href="../../../raspberry/raspberry.html"> Raspberry </a> </li>
+            <li><a href="../../../../library/library.html"> Library </a> </li>
+            <li><a href="../../../../whoami.html"> WhoAmI </a> </li>
+          </ul>
+          <div id="dropdown-header" class="dropdown">
+            <button class="dropbtn"> Last Projects </button>
+              <div class="dropdown-content active">
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+                <a href="#"> Last Project 1 </a>
+             </div>
+        </div>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </div>
+    </header>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="nav" class="navigation">
+      <div class="navigation__inner">
+        <!--   Content   -->
+        <h5> picoCTF2019 </h5>
+        <ul>
+            <li><a href="../picoCTF2019/binary.html"> Binary </a></li>
+            <li><a href="../picoCTF2019/cryptography.html"> Cryptography </a></li>
+            <li><a href="../picoCTF2019/forensics.html"> Forensics </a></li>
+            <li><a href="../picoCTF2019/general_skill.html"> General Skill </a></li>
+            <li><a href="../picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
+            <li><a href="../picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
+        </ul>
+
+        <h5> OverTheWire</h5>
+        <ul>
+            <li><a href="../OverTheWire/bandit.html"> Bandit </a></li>
+            <li><a href="../OverTheWire/leviathan.html"> Leviathan </a></li>
+        </ul>
+
+        <h5> CyberChallenge </h5>
+        <ul>
+            <li><a href="week01-warm_up.html"> Week 01 - Warm Up </a></li>
+            <li><a href="week02-software_security1.html"> Week 02 - Software Security 1 </a></li>
+            <li><a href="week03-cryptography1.html"> Week 03 - Cryptography 1 </a></li>
+            <li><a href="week04-web_security1.html"> Week 04 - Web Security 1 </a></li>
+        </ul>
+
+        <br>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Week 03 - Cryptography 1 </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#spin-arovnd"> Spin Arovnd - Points: 500 </a></li>
+            <li> <a href="#planet-matrix"> Planet Matrix - Points: 500 </a></li>
+            <li> <a href="#dropped"> Dropped- Points: 500 </a></li>
+            <li> <a href="#secure-padding"> Secure padding - Points: 500 </a></li>
+            <li> <a href="#once-too-many"> Once too many - Points: 500 </a></li>
+            <li> <a href="#benchmark"> Benchmark - Points: 500 </a></li>
+            <li> <a href="#see-you-in-the-center"> See you in the center - Points: 500 </a></li>
+            <li> <a href="#redacted"> Redacted - Points: 500 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="spin-arovnd">
+          <dt> Spin Arovnd - Points: 500 </dt>
+          <dd> Just a little cryptography warmup: </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> <code> TTZK{Xrzlj_Alczlj_Trvjri} </code>  </strong> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd>
+            Supposing that is a Caesar cipher, let's try to bruteforcing it
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import string
+
+# Encrypted message
+message = ' TTZK{Xrzlj_Alczlj_Trvjri}'
+#LETTERS = string.ascii_lowercase
+LETTERS_UP = string.ascii_uppercase
+LETTERS_LOW = string.ascii_lowercase
+
+for key in range(len(LETTERS_UP)):
+    translated = ''
+    for symbol in message:
+        if (symbol.isupper() and symbol in LETTERS_UP):
+            num = LETTERS_UP.find(symbol)
+            num = num - key
+            if num < 0:
+                num = num + len(LETTERS_UP)
+            translated += LETTERS_UP[num]
+        elif(symbol.islower() and symbol in LETTERS_LOW):
+            num = LETTERS_LOW.find(symbol)
+            num = num - key
+            if num < 0:
+                num = num + len(LETTERS_LOW)
+            translated += LETTERS_LOW[num]
+        else:
+            translated = translated + symbol
+
+    print('Hacking key #{}: {}'.format(key, translated))
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{Gaius_Julius_Caesar} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="planet-matrix">
+          <dt> Planet Matrix - Points: 500 </dt>
+          <dd> Google and the images below will help you to translate the following ciphertext: </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>  <code> CGKRKRLANXBERXBHLGAUVSZMQODKGB </code>  </strong> <br>
+               The flag is NOT standard: put the plaintext into CCIT{ }
+            </p>
+          </blockquote>
+        </dl>
+
+        <figure>
+          <img src="img/3-01-planet-matrix.jpg" alt="" />
+        </figure>
+
+      <dl>
+        <dd>
+          Let's google for the image: it's Charles Wheatstone. He is scientist and inventor of many scientific breakthroughs of the Victorian era, one of them is the Playfair cipher.
+        </dd>
+      </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# An online tool has been used
+# http://rumkin.com/tools/cipher/playfair.php
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{THISISANAYFAXACIPHERYOEURQKSIT} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="dropped">
+          <dt> Dropped - Points: 500 </dt>
+          <dd> Ops! I dropped the key! </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>  <code> TCICmI_{_d343_m4}s!s </code>  </strong> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# An online tool has been used
+# http://rumkin.com/tools/cipher/playfair.php
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{I_m4d3_4_m3ss!} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="secure-padding">
+          <dt> Secure padding - Points: 500 </dt>
+          <dd> Passwords should be at least 32 characters long! Give us your password, we'll think about it!  This is a remote challenge, you can connect to the service with:
+          <code> nc 149.202.200.158 7000 </code> </dd>
+        </dl>
+
+        <dl>
+          <dd>
+            Following the script used on the remote server:
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import signal
+from binascii import hexlify
+from string import printable
+from random import randint
+from secret import FLAG
+from Crypto.Cipher import AES
+
+TIMEOUT = 300
+BLOCK = 16
+
+def pad(s):
+  return s + (BLOCK - len(s) % BLOCK) * chr(BLOCK - len(s) % BLOCK)
+
+def randkey():
+  return "".join([printable[randint(0, len(printable)-8)] for _ in range(BLOCK)]).encode()
+
+def handle():
+  print("=====================================")
+  print("=     Secure Password Encrypter     =")
+  print("=     Now with secure padding!      =")
+  print("=====================================")
+
+  cipher = AES.new(randkey(), AES.MODE_ECB)
+
+  while True:
+    print("")
+    try:
+      password = input("Give me the password to encrypt:")
+      password = pad(password + FLAG).encode()
+      password = hexlify(cipher.encrypt(password)).decode()
+      print("Here is you secure encrypted password:", password)
+    except EOFError:
+      break
+
+if __name__ == "__main__":
+    signal.alarm(TIMEOUT)
+    handle()
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            If we try to input something, the script returns us something encrypted in hexadecimal form. Looking into the code we can immediately understand that an AES cipher is initialized in ECB (Electronic Code Book) mode; then, inside the infinite loop, the program asks user for the password and catenates it with the flag plus a padding to get a multiple size of 16. Finally, the encryption is performed by using the cipher previously initialized with the password; the key used is generate randomly at each start. <br> <br>
+            <b> ECB </b> -> the message is divided into blocks and each block is encrypted/decrypted separately using always the same key; since there is no diffusion, ECB encrypt same plaintext in same ciphertext <br> <br>
+            Let's try to use these informations to break the cipher. <br>
+            First of all we can start by sending a long password to the server and see what happens:
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+Password sent:
+AAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAA
+
+Encrypted password:
+5033b05ba53d7c8ab88f65ccb2e07bba
+5033b05ba53d7c8ab88f65ccb2e07bba
+718e07e3345d2b62b1b087dee193a3cc
+f95c8a7e26d6dd73635578c77de59710
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            As we can see the first two blocks are the same, because the password we sent exceed the size of a single block, for this reason the block is broken in two different block which contain the same encrypted text. <br> <br>
+            Let's analyze now how the padding function work:
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+def pad(s):
+  return s + (BLOCK - len(s) % BLOCK) * chr(BLOCK - len(s) % BLOCK)
+
+>>> BLOCK = 16
+>>> pad("A")
+'A\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f\x0f'
+>>> pad("AAAA")
+'AAAA\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c\x0c'
+>>> pad("A"*16)
+'AAAAAAAAAAAAAAAA\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+>>> pad("A"*15)
+'AAAAAAAAAAAAAAA\x01'
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Now that we have understood how the function works, suppose our flag is <i> <b> CCIT{testing}</b> </i>
+          </dd>
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+>>> msg = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+>>> FLAG = "CCIT{testing}"
+>>> pad(msg+FLAG)
+'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACCIT{testing}\x03\x03\x03'\
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Since the ECB is breakable, we can try to understand character by character of the flag simple breaking the semplicity of the cipher which encode same <i> plaintext </i> in <i> same ciphertext </i>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+>>> "A" * 15 + "C" + "A" * 15 + FLAG
+'AAAAAAAAAAAAAAACAAAAAAAAAAAAAAACCIT{testing}'
+
+AAAAAAAAAAAAAAAC
+AAAAAAAAAAAAAAAC
+CIT{testing}
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Since the last character of the second block is the first character of the flag we will have a match between the first and the second block only when the two block are the same. So, by deacreasing the counter at each step and then bruteforcing the right character by trying them all we can finally obtain our flag. The script used is:
+          </dd>
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+from pwn import *
+from string import printable
+
+BLOCK = 32
+
+def check(msg):
+    p.recvuntil("encrypt:")
+    p.sendline(msg)
+    p.recvuntil("password: ")
+    encrypted = p.recvline().decode('utf-8').strip()
+    return encrypted
+
+def block(str):
+  return [str[i:i+BLOCK] for i in range(0, len(str), BLOCK)]
+
+#counter = 11
+counter = 31
+test = ''
+LETTERS =  string.printable[:-6]
+#flag = "CCIT{r3m3mb3r_th3_3c"
+flag = ''
+
+p = remote('149.202.200.158', 7000)
+
+for i in range(0,40):
+    for c in LETTERS:
+        print(c)
+        test = flag
+        test += c
+        sendline = "A" * counter + test + "A" * counter
+        print(sendline)
+        result = block(check(sendline))
+        print(result)
+        if result[1] == result[3]:
+            flag += c
+            test += c
+            counter -= 1
+            #print(result)
+        print("FLAG: {}".format(flag))
+
+    # for r in result:
+    #     print(r)
+
+p.interactive()
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{r3m3mb3r_th3_3cb_p3ngu1n?}  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="once-too-many">
+          <dt> Once too many - Points: 500 </dt>
+          <dd> I have a keychain but all the keys are the same! </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+03f2794833cf53f9dcc2206609fd9c3b27269f7b8f38c79301db2f3ac2c764ab3ac0d7ad075ba
+191598664241d3d6e7ca113276612cbe476bf7ec544564dad
+1eee3b1b7cd753abd18b3e6a44fd913a3d6f853ddb29cdc640de2d3cd39369b47f8dd9a0420fa
+8d4148a73321d7a643af40e3a7a03cfe53ab570dc4e5f5aa3fa01fe7df7cd7986e15b31bafccb
+c4563160a1
+3def6f1c7cc25eb8c6cc28234cec9e37272c843a8931c1c705db6c3dc19369b33ac0d7b94e48a
+09a1883202c196e727be605737d198ae876ab76cc0c4757e2fa4ea773eccd7f86f91e30bbf8c1
+c65278
+35ef684828c957ad88c7226c42fedd2d662188349670d6dc40c8223dd3db78a97f90ddb95440a
+7da59ac43082866752ab13f3e2019d3d622ed7a865f1242
+1efc3c1c34c416aac9c6282342e8847f6e3ccc2e8835c6930dc63e3787c775ba31c0d7a5444ae
+5d41b8e646108756874e61373631ec6e576b476c55c5651a3ef00ba3ce08269c7e0572eb2aec3
+db06207dadba75a21277
+16e93c1b33ce58f9c9d86d7a46f8dd376639897b9e3ec1dc04cc2872c69370be2c93d9ac420fb
+e9d0d8720205c7a686ce40e736416cea576a87fc743441feafa4ebf6bf8943c8efa5327bae7c5
+c043386badb37eaa5e3fe7b98c0de3564243
+03f2794833cf53f9dcc2206609fd9c3b27269f7b883f82c009c43c3ec29369b33e9498a4494ae
+998109b742d193d6373f5403c7257c9e824b97bd05f4051e6fd1dfe7ff8833c85e55b23b5aecd
+c007
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Since the tag claims "perfect secrecy" we can suppose it is One Time Pad Algorithm. Let's try to break it. One usefull tool is mtp(man time pad)
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+$ mtp message.enc
+
+┌ Decryptions ────────────────────────────────────────────────────────────────────────────────┐
+│  1   ___ o_e time _ad_is the a_chet__e o_ t__ _dea_____t_ea_ r_chd__                        │
+│  2   ___s _ery sim_le_ if you _ant __ ma_e __m_ssa_____i_te_lx_zbm___o a_ ea_e__r______     │
+│  3   ___t _hange e_ch_characte_ of __e o_ig__a_ me_____ _n _ f_j u___ yo_ ca_ __v____       │
+│  4   ___ t_at look_ r_ndom to _noth__ pe_so__ _CIT_____m_ny_t _ s _                         │
+│  5   ___th_ same k_y _s used m_re t__n o_ce__b_d t_____ _il_ y_cpd___nd _ou _i__ _________lh│
+│  6   ___so_n as yo_ h_ve encod_d a __ssa_e __t_ a _____ _ad_ e_aov___ aw_y i_m__i_________  │
+│  7   ___ o_e time _ad_is so si_ple __at _ne__i_tle_____o_ c_rt_vsr___s c_n b_e__ ___        │
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+┌ Key ────────────────────────────────────────────────────────────────────────────────────────┐
+│______685c__36d9a8ab4d0329__fd5f__4fec5bfb50a2b360__4c52a7b3____5fe0b8__272f____79__00417c___|
+│______53__77aa__56cd__a62c32______6ede1c__ed1ce7__3e____8e__________________7e1f             |
+└─────────────────────────────────────────────────────────────────────────────────────────────┘
+          </code></pre>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+┌ Decryptions ───────────────────────────────────────────────────────────────────────────────┐
+│  1   the one time pad is the archetype of the idea of stream cipher.                       │
+│  2   it's very simple: if you want to make a message unintelligible to an eavesdropper,    │
+│  3   Just change each character of the original message in a way that you can revert,      │
+│  4   But that looks random to another person. CCIT{t00_m4ny_t1m3s!}                        │
+│  5   if the same key is used more than once, bad things will happen and you will go to hell│
+│  6   as soon as you have encoded a message with a given pad, throw it away immediately and │
+│  7   the one time pad is so simple that one little bit of carelessness can break it!       │
+└────────────────────────────────────────────────────────────────────────────────────────────┘
+┌ Key ───────────────────────────────────────────────────────────────────────────────────────┐
+│779a1c685ca136d9a8ab4d03298dfd5f074fec5bfb50a2b360a94c52a7b31ddb5fe0b8cb272fc9f479ef00417c1d|
+|011a8160531477aa8956dc17b52c333f838e6ede1c99ed1ce7973e42de8ea4b42654128dd210ce7e57          |
+└────────────────────────────────────────────────────────────────────────────────────────────┘
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{t00_m4ny_t1m3s!} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="benchmark">
+          <dt> Benchmark - Points: 500 </dt>
+          <dd> Performance is the most important thing when it comes to cryptography. This is a remote challenge, you can connect to the service with: <code> nc 149.202.200.158 7001 </code>
+        </dl>
+
+        <dl>
+          <dd>
+            Connecting by using netcat lead us to the following screen page
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+=========================================================================
+=                   Welcome to the super secure vault!                  =
+=             (Debug mode activated for benchmark purpose)              =
+=========================================================================
+
+Give me the password to check:
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Typing just one character in, return as: <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; Wrong password, checked in 208 clock cycles </b>  </i> <br> <br>
+            This suggest us that we could try an attack based on the timer, if we are able to identify, for each character, the character that takes more clock cycles we can get the password
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+from pwn import *
+from string import *
+
+# remotely conect to the server
+p = remote('149.202.200.158', 7001)
+
+# send a message to the input line
+# and return the clock of each of them
+def check(msg):
+	p.recvuntil("check:")
+	p.sendline(msg)
+	p.recvuntil("checked in")
+	clock = int(p.recvline().split(" ")[0])
+	return clock
+
+max_time = 0
+max_c = None
+flag = ""
+test = ""
+characters = printable[:-6]
+
+for i in range(0, 1000):
+    for c in characters:
+        test = flag
+        test += c
+        c_time = check(test)
+        #print("{} : {}".format(c,c_time))
+
+        if c_time > max_time:
+            max_time = c_time
+            max_c = c
+
+    # print(max_c)
+    characters.replace(max_c, "")
+    flag += max_c
+    print(flag)
+
+#print("Max_Time:\t{}\nC_Time:\t{}".format(max_c, max_time))
+# print("Clock: {}", check("hello"))
+p.interactive()
+
+
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{s1d3_ch4nn3ls_r_c00l} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+    	</article>
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick=""> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <footer id="myFooter">
+      <div class="footer">
+        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
+        <a href="https://twitter.com/_CaptainMich" class="social-icons"><i class="fab fa-twitter"></i></a>
+        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
+
+          <ul>
+              <li><a href="#">Site Information</a></li>
+              <li><a href="#">Contact me</a></li>
+              <li><a href="#">Reviews</a></li>
+              <li><a href="#">Terms of service</a></li>
+          </ul>
+          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.0/prism.min.js"></script>
+    <script type="text/javascript" src="../../../../js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript"src="../../js/sidebar.js"> </script>
+    <script type="text/javascript" src="../../../../js/menu.js"></script>
+    <script type="text/javascript" src="../../../../js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="../../../../res/prism_themes/prism_lb.js"></script>
+  </body>
+</html>

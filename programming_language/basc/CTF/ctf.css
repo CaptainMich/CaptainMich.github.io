@@ -519,9 +519,10 @@ dl {
 }
 
 dl dt {
-  font-size: 1.25em;
+  font-size: 1.50em;
   font-weight: bold;
 }
+
 
 
 ::selection {

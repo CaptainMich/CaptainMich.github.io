@@ -77,6 +77,9 @@
         <h5> CyberChallenge </h5>
         <ul>
             <li><a href="week01-warm_up.html"> Week 01 - Warm Up </a></li>
+            <li><a href="week02-software_security1.html"> Week 02 - Software Security 1 </a></li>
+            <li><a href="week03-cryptography1.html"> Week 03 - Cryptography 1 </a></li>
+            <li><a href="week04-web_security1.html"> Week 04 - Web Security 1 </a></li>
         </ul>
 
         <br>
@@ -241,6 +244,10 @@ print(binary_to_string(x))
           <dd> The tag is the suggestion. </dd>
         </dl>
 
+        <figure>
+          <img src="img/1-01-staccah.jpg" alt="" />
+        </figure>
+
         <div class="row-full code">
           <pre><code class="prism language-bash">
 $ strings staccah.jpg | grep CCIT{.*}
@@ -261,6 +268,11 @@ $ strings staccah.jpg | grep CCIT{.*}
           <dt> Mickey Mouse - Points: 495 </dt>
           <dd> With this image strings does not work...This is an indexed image. </dd>
         </dl>
+
+        <figure>
+          <img src="img/1-02-mickeymouse.bmp" alt="" />
+        </figure>
+
 
         <dl>
           <blockquote>
@@ -298,6 +310,15 @@ $ strings staccah.jpg | grep CCIT{.*}
 # the link; open developer tool and search for the network page, then
 # in the header section of the 'file.jpg' there's the cookie flag in hex
 # decode it and get your flag
+          </code></pre>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+hex_str = "0x434349547b536f6d6574696d655f6330306b6965735f63616e5f747261636b5f796f75217d"[2:]
+bytes = bytes.fromhex(hex_str)
+ascii_string = bytes.decode("ASCII")
+print(ascii_string)
           </code></pre>
         </div>
 
@@ -339,7 +360,7 @@ $ strings staccah.jpg | grep CCIT{.*}
 
       <section class="" role="group">
         <button id="previous" > Previous </button>
-        <button id="next" onClick=""> Next </button>
+        <button id="next" onClick="location.href='week02-software_security1.html'"> Next </button>
         <br> <br> <br>
       </section>
 

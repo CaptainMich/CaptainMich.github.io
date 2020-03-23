@@ -616,6 +616,362 @@ p.interactive()
         </div>
         <hr>
 <!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="see-you-in-the-center">
+          <dt> See you in the center - Points: 500 </dt>
+          <dd> I forgot the key at home while I was going in the city center, can you recover it?
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/python3
+
+import string
+import base64
+
+from secret import KEY
+
+def encrypt(clear, key):
+  enc = []
+  for i in range(len(clear)):
+    key_c = key[i % len(key)]
+    enc_c = chr((ord(clear[i]) + ord(key_c)) % 128)
+    enc.append(enc_c)
+  return str(base64.urlsafe_b64encode("".join(enc).encode('ascii')), 'ascii')
+
+'''
+# For debug purpose
+def decrypt(enc, key):
+    dec = []
+    enc = str(base64.urlsafe_b64decode(enc.encode('ascii')), 'ascii')
+    for i in range(len(enc)):
+        key_c = key[i % len(key)]
+        dec_c = chr((128 + ord(enc[i]) - ord(key_c)) % 128)
+        dec.append(dec_c)
+    return "".join(dec)
+
+assert(len(KEY) == 8)
+assert(all(c in string.ascii_lowercase for c in KEY))
+'''
+
+print("flag: CCIT{%s}" % KEY)
+
+k1 = KEY[0:4]
+k2 = KEY[4:8]
+
+m = "See you later in the city center"
+d = encrypt(m, k1)
+c = encrypt(d, k2)
+
+print("Message:", m)
+print("Ciphertext:", c)
+
+
+'''
+m = "See you later in the city center"
+c = "QSldSTQ7HkpIJj9cQBY3VUhbQ01HXD9VRBVYSkE6UWRQS0NHRVE3VUQrTDE="
+'''
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            This time everything can be done on the local machine. The codition about our flag can be obtained by looking at the <code> assert </code> statement in the code: first condition says that the key must be 8 characters long, the second one that every characters of the key are ASCII lowercase.
+            The key is breaken in two pieces then a two phases encryption is performed: the message is encrypted first with the low part of the key then the result is encrypted again with the high part of the key. <br>
+            An easy way of decreasing the number of attempts to get the key is using the MITM (meet-in-the-middle). Since we have the following property <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; decrypt(encrypt(msg, key),  key) = msg </b> </i> <br> <br>
+            We can write our code as:
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#decrypt(c, k2) = decrypt(encrypt(encrypt(m, k1), k2), k2)
+decrypt(c, k2) = encrypt(m, k1)
+
+# add this line to the code to demonstrate that teh relation is correct
+print(decrypt(c, k2))
+print(encrypt(m, k1))
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            We can now bruteforce only 4 characters at each time:
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+# add these lines to the code
+for c1 in string.ascii_lowercase:
+  for c2 in string.ascii_lowercase:
+    for c3 in string.ascii_lowercase:
+      for c4 in string.ascii_lowercase:
+        k1 = c1 + c2 + c3 + c4
+        (print(k1, encrypt(m, k1)))
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Our aim is to find the pair of keys (k1, k2) that satisfy the equation <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; decrypt(c, k2) == encrypt(m, k1) </b> </i> <br> <br>
+            Let's now try to understand, given a message, which key generated it: given the cypher we want to know the key.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+# comment line: from secret import KEY
+KEY = "abcd efgh"
+
+# add this lines inside the last for cycle
+db[encrypt(m, k1)] = k1
+
+# print the first key
+print(db[d])
+
+# output
+>>> abcd
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Our aim is to find the pair of keys (k1, k2) that satisfy the equation <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; decrypt(c, k2) == encrypt(m, k1) </b> </i> <br>
+            Let's now try to understand, given a message, which key generated it: given the cypher we want to know the key.The process is the same as before but this time when we found a value of decrypt(c, k2) which is already in the database of keys (<code>db</code>) then we have found the key.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+# add these lines to the code
+for c1 in string.ascii_lowercase:
+  for c2 in string.ascii_lowercase:
+    for c3 in string.ascii_lowercase:
+      for c4 in string.ascii_lowercase:
+        k2 = c1 + c2 + c3 + c4
+        if decrypt(c, k2) in db:
+          k1 = db[decrypt(c, k2)]
+          K = k1 + k2
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            Let's now use given <code> m </code> and <code> c </code> as message and cypher. <br>
+            (To check if the key is correct just use the founded key as KEY and add <code style="font-size:0.75em"> assert(c == 'QSldSTQ7HkpIJj9cQBY3VUhbQ01HXD9VRBVYSkE6UWRQS0NHRVE3VUQrTDE=')</code> )
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/python3
+
+import string
+import base64
+
+#from secret import KEY
+
+#KEY = 'abcdefgh'
+
+def encrypt(clear, key):
+    enc = []
+    for i in range(len(clear)):
+        key_c = key[i % len(key)]
+        enc_c = chr((ord(clear[i]) + ord(key_c)) % 128)
+        enc.append(enc_c)
+    return str(base64.urlsafe_b64encode("".join(enc).encode('ascii')), 'ascii')
+
+# For debug purpose
+def decrypt(enc, key):
+    dec = []
+    enc = str(base64.urlsafe_b64decode(enc.encode('ascii')), 'ascii')
+    for i in range(len(enc)):
+        key_c = key[i % len(key)]
+        dec_c = chr((128 + ord(enc[i]) - ord(key_c)) % 128)
+        dec.append(dec_c)
+    return "".join(dec)
+
+m = "See you later in the city center"
+c = "QSldSTQ7HkpIJj9cQBY3VUhbQ01HXD9VRBVYSkE6UWRQS0NHRVE3VUQrTDE="
+
+db = {}
+
+# encrypt(m, k1)
+for c1 in string.ascii_lowercase:
+    for c2 in string.ascii_lowercase:
+        for c3 in string.ascii_lowercase:
+            for c4 in string.ascii_lowercase:
+                k1 = c1 + c2 + c3 + c4
+                #(print(k1, encrypt(m, k1)))
+                db[encrypt(m, k1)] = k1
+
+# decrypt(c, k2)
+for c1 in string.ascii_lowercase:
+    for c2 in string.ascii_lowercase:
+        for c3 in string.ascii_lowercase:
+            for c4 in string.ascii_lowercase:
+                k2 = c1 + c2 + c3 + c4
+                #(print(k1, encrypt(m, k1)))
+                if decrypt(c, k2) in db:
+                    print("FOUND")
+                    k1 = db[decrypt(c,k2)]
+                    K = k1 + k2
+                    print("KEY: ", K)
+
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{ufoundit} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="redacted">
+          <dt> Redacted - Points: 500 </dt>
+          <dd> Security through o█scurity! </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> Flag format: CCIT{IV} (see challenge.py) </strong>
+            </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python2.7
+
+from Crypto.Cipher import AES
+import binascii, sys
+
+KEY = "yn9RB3Lr43xJK2██".encode()
+IV  = "████████████████".encode()
+msg = "AES with CBC is very unbreakable".encode()
+
+aes = AES.new(KEY, AES.MODE_CBC, IV)
+print binascii.hexlify(aes.encrypt(msg)).decode()
+
+# output:
+# c5██████████████████████████d49e78c670cb67a9e5773d696dc96b78c4e0
+
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            As it's noticeable, the program makes an AES (Advanced Encryption Standard) encryption in Cipher Block Chaining (CBC), which is a mode of operation for AES: the plaintext and ciphertext are divide into blocks of a defined length; before encrypting the plaintext block number <i>n</i> with AES, it becomes xored with the ciphertext block <i>n-1</i>. Because the first plaintext block has no cipher text befor itself to xor with, there is an initialisation vector (IV) for this.  <br> <br>
+
+            Since we know the second ciphertext block, the plaintext and parts of the first block of ciphertext, we can brute force the key's last two characters by decrypting the second block of ciphertext with all possible keys, xoring with the first block of ciphertext (the unknown parts padded by zeros) and see, for which key the first letter and last two letters of the result match to the original plaintext.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from Crypto.Cipher import AES
+from operator import xor
+import binascii, sys
+import string
+
+LETTERS =  string.printable[:-6]
+KEY_first = "yn9RB3Lr43xJK2"
+cipher1 = "c500000000000000000000000000d49e"
+cipher2 = "78c670cb67a9e5773d696dc96b78c4e0"
+plain1 = "AES with CBC is "
+plain2 = "very unbreakable"
+
+def decrypt(cipher, passphrase):
+    aes = AES.new(passphrase, AES.MODE_CBC, binascii.unhexlify(cipher1))
+    return aes.decrypt(cipher)
+
+for i in LETTERS:
+    for j in LETTERS:
+        key = KEY_first + i + j
+        dec_plain2 = decrypt(binascii.unhexlify(cipher2),  key)
+        if str(dec_plain2).startswith("v") and str(dec_plain2).endswith('le'):
+            print("Decrypted plain2: " + dec_plain2 + " with key: " + key)
+          </code></pre>
+        </div>
+
+
+        <dl>
+          <dd>
+            The output is: <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; decrypted plain2: v�+� ��p�ӆ1Hle <br> &emsp; &emsp; &emsp; &emsp; key: yn9RB3Lr43xJK2tp </b> </i> <br> <br>
+            The not printable characters emerge by xoring with the unknown and therefor zero-padded part of the first ciphertext block. <br> <br>
+
+            Now that we have the AES key we can start looking for the first ciphertext block: since xor is revertable a⊕b=c⇔c⊕b=a and we now know the key, we can simply change the role of the first cipher text block and second plaintext block and do AES decryption on the second ciphertext block with the second plaintext block as IV (instead of the first cipher text block), which leads to the first ciphertext block as "decrypted paintext".
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from Crypto.Cipher import AES
+import binascii, sys
+
+KEY = "yn9RB3Lr43xJK2tp"
+plain2 = "very unbreakable"
+
+cipher2= "78c670cb67a9e5773d696dc96b78c4e0"
+
+def decrypt(cipher,passphrase):
+    aes = AES.new(passphrase,AES.MODE_CBC,plain2)
+    return aes.decrypt(cipher)
+
+# Output result
+print("Decrypted data:" + binascii.hexlify(decrypt(binascii.unhexlify(cipher2), KEY)))
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd>
+            The output is: <br>
+            <i> <b style="color: #585858;"> &emsp; &emsp; &emsp; &emsp; Decrypted data: c5dc598a00e6e31272bcb2ed502ad49e </b> </i> <br> <br>
+
+            By changing roles again: this time we change the role of first plaintext block and IV when doing decryption on the first ciphertext block, which leads to the IV as decrypted plaintext.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python2.7
+
+from Crypto.Cipher import AES
+import binascii, sys
+
+KEY="yn9RB3Lr43xJK2tp"
+IV="AES with CBC is "
+
+cipher1="c5dc598a00e6e31272bcb2ed502ad49e"
+
+def decrypt(cipher,passphrase):
+    aes = AES.new(passphrase,AES.MODE_CBC,IV)
+    return aes.decrypt(cipher)
+
+print "decrypted data: " + decrypt(binascii.unhexlify(cipher1), KEY)
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{P4rt14l_1nf0_b4d} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
 
 
     	</article>

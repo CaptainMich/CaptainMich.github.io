@@ -147,14 +147,18 @@ $ ./funmail
           <pre><code class="prism language-bash">
 $ chmod +x ./funmail
 $ strings ./funmail
+          </code></pre>
+        </div>
 
-  # this time even if the password is correct, nothing can help us to
-  # get our flag. Let's try to disasemble it: there is a function called
-  # 'showEmails' which simply print out the text and the flag
-  # Run the program with gdb and find the function address, then
-  # change EIP to point to that function and let the program run to
-  # receive the flag
+        <dl>
+          <dd>
+            This time even if the password is correct, nothing can help us to get our flag. Let's try to disasemble the program: there is a function called <code> 'showEmails' </code> which simply print out the text and the flag. Run the program with gdb and find the function address, then
+            change EIP to point to that function and let the program run to receive the flag
+          </dd>
+        </dl>
 
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
 $ gdb ./funmail2.0
 
   # break main
@@ -183,14 +187,17 @@ $ gdb ./funmail2.0
         <div class="row-full code">
           <pre><code class="prism language-bash">
 $ file be-quick-or-be-dead-2
-
-  # it's an executable file. Try to analyze it with ghidra
-  # inside the calculate_key() function, the program try to
-  # calculate the Fiboancci sequence of 1026
-  # (source used: https://www.bigprimes.net/archive/fibonacci/1026)
-  # let's create a script with pwntools
           </code></pre>
         </div>
+
+        <dl>
+          <dd>
+              The output is an executable file. Try to analyze it with ghidra. <br>
+              Inside the  <code> calculate_key() </code> function, the program try to calculate the Fiboancci sequence of 1026 <br>
+              # (source used: https://www.bigprimes.net/archive/fibonacci/1026) <br>
+              Let's create a script with pwntools
+          </dd>
+        </dl>
 
         <div class="row-full code">
           <pre><code class="prism language-python">

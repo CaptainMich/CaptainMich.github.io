@@ -368,6 +368,10 @@ blockquote cite {
   text-align: right;
 }
 
+blockquote strong{
+  font-size: 20px;
+}
+
 blockquote {
   color: rgba(0, 0, 0, .5);
   padding-left: 1.5em;
@@ -430,8 +434,7 @@ abbr {
 
 ul, ol {
   max-width: 50rem;
-  display: table;
-  margin: 0 auto;
+  margin: auto auto;
 }
 
 ul {
@@ -553,7 +556,6 @@ td {
   font-size: 16px;
 }
 
-
 .toc h4{
   font-size: 30px;
   -webkit-animation: none;
@@ -616,4 +618,20 @@ td {
         left: 11px;
         top: 4px;
     }
+}
+
+@media (min-width: 620px)
+{
+  .toc{
+    max-width: 75%
+  }
+
+  .two-columns {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 40px;
+    column-gap: 40px;
+    -moz-column-gap: 40px;
+  }
 }

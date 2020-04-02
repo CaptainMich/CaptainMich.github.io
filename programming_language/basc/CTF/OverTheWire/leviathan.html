@@ -74,6 +74,7 @@
       <ul>
         <li><a href="bandit.html"> Bandit </a></li>
         <li><a href="leviathan.html"> Leviathan </a></li>
+        <li><a href="natas.html"> Natas </a></li>
       </ul>
 
       <h5> CyberChallenge </h5>
@@ -104,6 +105,11 @@
             <li> <a href="#level-0"> Level 0 -> Level 1 </a></li>
             <li> <a href="#level-1"> Level 1 -> Level 2 </a></li>
             <li> <a href="#level-2"> Level 2 -> Level 3 </a></li>
+            <li> <a href="#level-3"> Level 3 -> Level 4 </a></li>
+            <li> <a href="#level-4"> Level 4 -> Level 5 </a></li>
+            <li> <a href="#level-5"> Level 5 -> Level 6 </a></li>
+            <li> <a href="#level-6"> Level 6 -> Level 7 </a></li>
+            <li> <a href="#level-7"> Level 7 </a></li>
           </ol>
         </dl>
         <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
@@ -280,34 +286,167 @@ $ ltrace ./level3
 
 $ ./level3
     # password: snlprintf
+
+$ whoami
+    # leviathan3
     </code></pre>
           </div>
 
     <dl>
-      As you can see
+      As you can see a shell has appeared but we are still leviathian3 user. Let's try to run again the ./level3 executable inside this shell
     </dl>
 
     <div class="row-full code">
-    <pre><code class="prism language-bash">
+      <pre><code class="prism language-bash">
+$ ltrace ./level3
+    # again the password is compared to "snlprintf". Try to input it
 
+$ ./level3
+    # password: snlprintf
+
+$ whoami
+    # leviathan4
+
+$ cat /etc/leviathan_pass/leviathan4
     </code></pre>
-        </div>
+          </div>
 
     <dl>
     <blockquote>
     <p><strong> To login to the next level: </strong> <br>
-      Username: leviathan3 <br>
-      Password: Ahdiemoo1j
+      Username: leviathan4 <br>
+      Password: vuH0coox6m
     </p>
     </blockquote>
     </dl>
     <hr> <!-- Finish post  -->
 
+
+    <dl class="anchor" id="level-4">
+      <dt> Level 4 -> Level 5 </dt>
+    </dl>
+
+    <dl>
+      Exploring the folder tree and the file, we can see that there is a folder called .trash  inside which there's a file called <code> ./bin </code>. Run the executable and decode the binary to ASCII.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan4@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ cd .trash
+    $ ./bin
+    $ echo 01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010 | perl -lape '$_=pack"(B8)*",@F'
+
+    # if the number is without spaces
+    ($ echo 0101010001101001011101000110100000110100011000110110111101101011011001010110100100001010 | perl -lpe '$_=pack"B*",$_')
+        </code></pre>
+    </div>
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan5 <br>
+          Password: Tith4cokei
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+    <dl class="anchor" id="level-5">
+      <dt> Level 5 -> Level 6 </dt>
+    </dl>
+
+    <dl>
+      Running the executable <code> ./leviathan5 </code> we can notice that it seems to read the content of a file <b> <i> /tmp/file.log </i>  </b> which we cannot modify. What we can do it's try to create a symbolic link through which we can access the desired  <i> leviathan6 </i> password file.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan5@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ ./leviathan5
+        # Cannot find /tmp/file.log
+
+    $ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+    $ ./leviathan5
+        </code></pre>
+    </div>
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan6 <br>
+          Password: UgaoFee4li
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+
+    <dl class="anchor" id="level-6">
+      <dt> Level 6 -> Level 7 </dt>
+    </dl>
+
+    <dl>
+      Running the executable <code> ./leviathan6 </code> we can notice that it seems to accept a 4 digit code. Let's try to bruteforce it.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan6@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ ./leviathan6 1234
+        # Wrong
+
+    $ for i in {0000..9999}; do echo $i; ./leviathan6 $i; done
+        </code></pre>
+    </div>
+
+    <dl>
+      The password correct is 7123. With the right 4 digits the executable launch a shell as a leviathan7 user; let's hust read the password file.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ cat /etc/leviathan_pass/leviathan7
+        </code></pre>
+    </div>
+
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan7 <br>
+          Password: ahy7MaeBo9
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+    <dl class="anchor" id="level-7">
+      <dt> Level 7 </dt>
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan7@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ cat CONGRATULATIONS
+        </code></pre>
+    </div>
+
+    <dl>
+      Well Done, you seem to have used a *nix system before, now try something more serious
+    </dl>
+    <hr> <!-- Finish post  -->
+
+
     </article>
 
     <section class="" role="group">
       <button id="previous" onClick="location.href='bandit.html'"> Previous </button>
-      <button id="next" onClick=""> Next </button>
+      <button id="next" onClick="location.href='natas.html'"> Next </button>
       <br> <br> <br>
     </section>
 

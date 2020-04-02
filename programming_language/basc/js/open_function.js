@@ -38,6 +38,10 @@ function open_OverTheWire_leviathan() {
     window.open("CTF/OverTheWire/leviathan.html", "_self");
 }
 
+function open_OverTheWire_natas() {
+    window.open("CTF/OverTheWire/natas.html", "_self");
+}
+
 /* ---------------------------------------------- */
 /*                 CYBERCHALLENGE                 */
 /* ---------------------------------------------- */

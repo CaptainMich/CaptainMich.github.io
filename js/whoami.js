@@ -1,52 +1,69 @@
-// Tamino Martinius - All rights reserved
+const BLACKLISTED_KEY_CODES = [38];
+const COMMANDS = {
+  help:
+    '<div class="terminal-line command"> Supported commands: <span class="code">about</span>, <span class="code">experience</span>, <span class="code">education</span>, <span class="code">skills</span>, <span class="code">contact</span> </div> ',
+  about:
+    '<div class="terminal-line command">  Hello World! </div>',
+  skills:
+    '<div class="terminal-line command"> Languages: Python, C and C++, Java, HTML, CSS, JavaScript<br> Technologies: Git, Matlab </div>',
+  education:
+    '<div class="terminal-line command"> University of Genoa <br> Electronics and Telecommunications Engineer Degree <br> Electronic Engineering Master Degree Student </div>',
+  contact:
+    '<div class="terminal-line command"> You can contact me on any of following links: <br> <a href="https://github.com/CaptainMich" class="success link">Github</a> ,<a href="https://twitter.com/_CaptainMich" class="success link">Twitter</a>, <a href="mailto:captain.mich96@gmail.com" class="success link">Email</a> </div>'
+};
+let userInput, terminalOutput;
 
-// Copyright © 2013 Tamino Martinius (http://zaku.eu)
-// Copyright © 2013 Particleslider.com (http://particleslider.com
+const app = () => {
+  userInput = document.getElementById("userInput");
+  terminalOutput = document.getElementById("terminalOutput");
+  document.getElementById("dummyKeyboard").focus();
+  console.log("Application loaded");
+};
 
-// Terms of usage: http://particleslider.com/legal/license
+const execute = function executeCommand(input) {
+  let output;
+  input = input.toLowerCase();
+  if (input.length === 0) {
+    return;
+  }
+  output = `<div class="terminal-line"><span class="id">captain</span>@<span class="pc-name">blackpearl</span> <span class="directory">~</span> ${input} </div>`;
+  if (!COMMANDS.hasOwnProperty(input)) {
+    output += `<div class="terminal-line command">no such command: ${input}</div> <br>`;
+    console.log("Oops! no such command");
+  } else {
+    output += COMMANDS[input];
+  }
 
-var init = function(){
-  var isMobile = navigator.userAgent &&
-    navigator.userAgent.toLowerCase().indexOf('mobile') >= 0;
-  var isSmall = window.innerWidth < 1000;
+  terminalOutput.innerHTML = `${terminalOutput.innerHTML}<div class="terminal-line">${output}</div>`;
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+};
 
-  var ps = new ParticleSlider({
-    ptlGap: isMobile || isSmall ? 3 : 0,
-    ptlSize: isMobile || isSmall ? 3 : 1,
-    width: 1e9,
-    height: 1e9
-  });
+const key = function keyEvent(e) {
+  const input = userInput.innerHTML;
 
-  var gui = new dat.GUI();
-  gui.add(ps, 'ptlGap').min(0).max(5).step(1).onChange(function(){
-    ps.init(true);
-  });
-  gui.add(ps, 'ptlSize').min(1).max(5).step(1).onChange(function(){
-    ps.init(true);
-  });
-  gui.add(ps, 'restless');
-  gui.addColor(ps, 'color').onChange(function(value){
-    ps.monochrome = true;
-    ps.setColor(value);
-	  ps.init(true);
-  });
+  if (BLACKLISTED_KEY_CODES.includes(e.keyCode)) {
+    return;
+  }
 
+  if (e.key === "Enter") {
+    execute(input);
+    userInput.innerHTML = "";
+    return;
+  }
 
-  (window.addEventListener
-   ? window.addEventListener('click', function(){ps.init(true)}, false)
-   : window.onclick = function(){ps.init(true)});
-}
+  userInput.innerHTML = input + e.key;
+};
 
-var initParticleSlider = function(){
-  var psScript = document.createElement('script');
-  (psScript.addEventListener
-    ? psScript.addEventListener('load', init, false)
-    : psScript.onload = init);
-  psScript.src = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/23500/ps-0.9.js';
-	psScript.setAttribute('type', 'text/javascript');
-  document.body.appendChild(psScript);
-}
+const backspace = function backSpaceKeyEvent(e) {
+  if (e.keyCode !== 8 && e.keyCode !== 46) {
+    return;
+  }
+  userInput.innerHTML = userInput.innerHTML.slice(
+    0,
+    userInput.innerHTML.length - 1
+  );
+};
 
-(window.addEventListener
-  ? window.addEventListener('load', initParticleSlider, false)
-  : window.onload = initParticleSlider);
+document.addEventListener("keydown", backspace);
+document.addEventListener("keypress", key);
+document.addEventListener("DOMContentLoaded", app);

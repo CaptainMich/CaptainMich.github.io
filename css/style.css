@@ -124,6 +124,7 @@ header{
   z-index:99;
 }
 
+
 header .header-logo{
   text-align: center;
   margin-top: 10px;
@@ -144,10 +145,15 @@ header .header-brand{
   margin: 31px 0;
   text-align: left;
   line-height: 38px;
-  padding: 0 20px 0 5px;
   border-right: 3px solid #111;
+  padding: 0 20px 0 5px;
   float: left;
 }
+
+header .header-brand:hover{
+  text-decoration: none;
+}
+
 
 header nav ul{
   display: flex;

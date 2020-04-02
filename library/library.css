@@ -149,6 +149,10 @@ header .header-brand{
   float: left;
 }
 
+header .header-brand:hover{
+  text-decoration: none;
+}
+
 header nav ul{
   display: flex;
   padding: 0;

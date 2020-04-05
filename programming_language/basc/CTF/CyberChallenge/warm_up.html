@@ -25,37 +25,7 @@
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
     <!-- Sidebar Nav -->
-    <div id="nav" class="navigation">
-      <div class="navigation__inner">
-        <!--   Content   -->
-        <h5> picoCTF2019 </h5>
-        <ul>
-            <li><a href="../picoCTF2019/binary.html"> Binary </a></li>
-            <li><a href="../picoCTF2019/cryptography.html"> Cryptography </a></li>
-            <li><a href="../picoCTF2019/forensics.html"> Forensics </a></li>
-            <li><a href="../picoCTF2019/general_skill.html"> General Skill </a></li>
-            <li><a href="../picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
-            <li><a href="../picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
-        </ul>
-
-        <h5> OverTheWire</h5>
-        <ul>
-            <li><a href="../OverTheWire/bandit.html"> Bandit </a></li>
-            <li><a href="../OverTheWire/leviathan.html"> Leviathan </a></li>
-            <li><a href="../OverTheWire/natas.html"> Natas </a></li>
-         </ul>
-
-        <h5> CyberChallenge </h5>
-        <ul>
-            <li><a href="week01-warm_up.html"> Week 01 - Warm Up </a></li>
-            <li><a href="week02-software_security1.html"> Week 02 - Software Security 1 </a></li>
-            <li><a href="week03-cryptography1.html"> Week 03 - Cryptography 1 </a></li>
-            <li><a href="week04-web_security1.html"> Week 04 - Web Security 1 </a></li>
-        </ul>
-
-        <br>
-      </div>
-    </div>
+    <div id="include_sidebar"></div>
 
     <!-- Main -->
     <main>
@@ -63,7 +33,7 @@
     <br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> Week 01 - Warm up Writeup </h3>
+    		<h3> Warm up </h3>
         <br>
 
         <dl class="toc">
@@ -332,7 +302,7 @@ print(ascii_string)
 
       <section class="" role="group">
         <button id="previous" > Previous </button>
-        <button id="next" onClick="location.href='week02-software_security1.html'"> Next </button>
+        <button id="next" onClick="location.href='software_security.html'"> Next </button>
         <br> <br> <br>
       </section>
 
@@ -371,7 +341,7 @@ print(ascii_string)
 
       // import sidebar
       $(function(){
-        $("#include_footer").load("/html_import/footer.html");
+        $("#include_sidebar").load("../../html/sidebar.html");
       });
     </script>
 

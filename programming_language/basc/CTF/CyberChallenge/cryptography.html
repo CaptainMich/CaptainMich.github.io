@@ -26,37 +26,7 @@
     <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
     <!-- Sidebar Nav -->
-    <div id="nav" class="navigation">
-      <div class="navigation__inner">
-        <!--   Content   -->
-        <h5> picoCTF2019 </h5>
-        <ul>
-            <li><a href="../picoCTF2019/binary.html"> Binary </a></li>
-            <li><a href="../picoCTF2019/cryptography.html"> Cryptography </a></li>
-            <li><a href="../picoCTF2019/forensics.html"> Forensics </a></li>
-            <li><a href="../picoCTF2019/general_skill.html"> General Skill </a></li>
-            <li><a href="../picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
-            <li><a href="../picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
-        </ul>
-
-        <h5> OverTheWire</h5>
-        <ul>
-            <li><a href="../OverTheWire/bandit.html"> Bandit </a></li>
-            <li><a href="../OverTheWire/leviathan.html"> Leviathan </a></li>
-            <li><a href="../OverTheWire/natas.html"> Natas </a></li>
-         </ul>
-
-        <h5> CyberChallenge </h5>
-        <ul>
-            <li><a href="week01-warm_up.html"> Week 01 - Warm Up </a></li>
-            <li><a href="week02-software_security1.html"> Week 02 - Software Security 1 </a></li>
-            <li><a href="week03-cryptography1.html"> Week 03 - Cryptography 1 </a></li>
-            <li><a href="week04-web_security1.html"> Week 04 - Web Security 1 </a></li>
-        </ul>
-
-        <br>
-      </div>
-    </div>
+    <div id="include_sidebar"></div>
 
     <!-- Main -->
     <main>
@@ -64,12 +34,13 @@
     <br><br><br>
     <div class="container">
       <article role="article">
-    		<h3> Week 03 - Cryptography 1 </h3>
+    		<h3> Cryptography </h3>
         <br>
 
         <dl class="toc">
           <h4> Table of Contents </h4>
-          <ol class="two-colums">
+          <ol>
+            <h5> Week 1 </h5>
             <li> <a href="#spin-arovnd"> Spin Arovnd - Points: 500 </a></li>
             <li> <a href="#planet-matrix"> Planet Matrix - Points: 500 </a></li>
             <li> <a href="#dropped"> Dropped- Points: 500 </a></li>
@@ -78,6 +49,11 @@
             <li> <a href="#benchmark"> Benchmark - Points: 500 </a></li>
             <li> <a href="#see-you-in-the-center"> See you in the center - Points: 500 </a></li>
             <li> <a href="#redacted"> Redacted - Points: 500 </a></li>
+          </ol>
+          <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
+          <ol>
+            <h5> Week 2 </h5>
+            <li> <a href="#"> coming soon ... </a></li>
           </ol>
         </dl>
         <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
@@ -948,8 +924,8 @@ print "decrypted data: " + decrypt(binascii.unhexlify(cipher1), KEY)
 
     	</article>
       <section class="" role="group">
-        <button id="previous" > Previous </button>
-        <button id="next" onClick=""> Next </button>
+        <button id="previous" onClick="location.href='software_security.html'" > Previous </button>
+        <button id="next" onClick="location.href='web_security.html'"> Next </button>
         <br> <br> <br>
       </section>
 
@@ -984,6 +960,11 @@ print "decrypted data: " + decrypt(binascii.unhexlify(cipher1), KEY)
       // import footer
       $(function(){
         $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
       });
     </script>
 

@@ -27,37 +27,7 @@
   <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
   <!-- Sidebar Nav -->
-  <div id="nav" class="navigation">
-    <div class="navigation__inner">
-      <!--   Content   -->
-      <h5> picoCTF2019 </h5>
-      <ul>
-        <li><a href="../picoCTF2019/binary.html"> Binary </a></li>
-        <li><a href="../picoCTF2019/cryptography.html"> Cryptography </a></li>
-        <li><a href="../picoCTF2019/forensics.html"> Forensics </a></li>
-        <li><a href="../picoCTF2019/general_skill.html"> General Skill </a></li>
-        <li><a href="../picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
-        <li><a href="../picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
-      </ul>
-
-      <h5> OverTheWire </h5>
-      <ul>
-        <li><a href="bandit.html"> Bandit </a></li>
-        <li><a href="leviathan.html"> Leviathan </a></li>
-        <li><a href="natas.html"> Natas </a></li>
-      </ul>
-
-      <h5> CyberChallenge </h5>
-      <ul>
-        <li><a href="../CyberChallenge/week01-warm_up.html"> Week 01 - Warm Up </a></li>
-        <li><a href="../CyberChallenge/week02-software_security1.html"> Week 02 - Software Security 1 </a></li>
-        <li><a href="../CyberChallenge/week03-cryptography1.html"> Week 03 - Cryptography 1 </a></li>
-        <li><a href="../CyberChallenge/week04-web_security1.html"> Week 04 - Web Security 1 </a></li>
-      </ul>
-
-      <br>
-    </div>
-  </div>
+  <div id="include_sidebar"></div>
 
   <!-- Main -->
   <main>
@@ -811,6 +781,11 @@ if(array_key_exists("submit", $_POST)) {
     // import footer
     $(function(){
       $("#include_footer").load("/html_import/footer.html");
+    });
+
+    // import sidebar
+    $(function(){
+      $("#include_sidebar").load("../../html/sidebar.html");
     });
   </script>
 

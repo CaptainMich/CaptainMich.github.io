@@ -47,17 +47,17 @@ function open_OverTheWire_natas() {
 /* ---------------------------------------------- */
 
 function open_CyberChallenge_week01_warm_up() {
-    window.open("CTF/CyberChallenge/week01-warm_up.html", "_self");
+    window.open("CTF/CyberChallenge/warm_up.html", "_self");
 }
 
 function open_CyberChallenge_week02_software_security_1() {
-    window.open("CTF/CyberChallenge/week02-software_security1.html", "_self");
+    window.open("CTF/CyberChallenge/software_security.html", "_self");
 }
 
 function open_CyberChallenge_week03_cryptography_1() {
-    window.open("CTF/CyberChallenge/week03-cryptography1.html", "_self");
+    window.open("CTF/CyberChallenge/cryptography.html", "_self");
 }
 
 function open_CyberChallenge_week04_web_security_1() {
-    window.open("CTF/CyberChallenge/week04-web_security1.html", "_self");
+    window.open("CTF/CyberChallenge/web_security.html", "_self");
 }

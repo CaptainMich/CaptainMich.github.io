@@ -635,3 +635,10 @@ td {
     -moz-column-gap: 40px;
   }
 }
+
+
+/* DROPDOWN */
+
+.dropdown-content {
+    font-size: 16px;
+}

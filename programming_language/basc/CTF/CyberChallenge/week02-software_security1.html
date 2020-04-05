@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title> CyberChallenge | Software Security 1 </title>
-    <link rel="shortcut icon" href="../../../../img/favicon.ico" width="70">
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900|Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
@@ -380,7 +380,7 @@ void ror(undefined4 param_1,int param_2)
 
         <dl>
           <dd>
-            Since the disassembled code doesn't help us too much, what we really use to understand this part of code is the assembly: the SAR and SHL (and also the name of the function ) suggest us that the function perform a rotate right operation. Looking to the encrypt function again, we can say that there is a cycle and each time the ROR is performed on one character of the string, which is rotated by x position where x starts from 0 and increments itself by one at each iteration(c[0] will be rotated by 1 position, c[1] will be rotated by 2 and so on). As the statement of the challenge suggest us, this function has been performed to our "flag.txt.aes" file. To reverse it why can use a python script as follow
+            Since the disassembled code doesn't help us too much, what we really use to understand this part of code is the assembly: the SAR and SHL (and also the name of the function ) suggest us that the function perform a rotate right operation. Looking to the encrypt function again, we can say that there is a cycle and each time the ROR is performed on one character of the string, which is rotated by x position where x starts from 0 and increments itself by one at each iteration(c[0] will be rotated by 1 position, c[1] will be rotated by 2 and so on). As the statement of the challenge suggest us, this function has been performed to our "flag.txt.aes" file. To reverse it we can use a python script as follow
           </dd>
         </dl>
 
@@ -452,21 +452,8 @@ print(flag)
       </div>
     </main>
 
-    <footer id="myFooter">
-      <div class="footer">
-        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
-        <a href="https://twitter.com/_CaptainMich" class="social-icons"><i class="fab fa-twitter"></i></a>
-        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
-
-          <ul>
-              <li><a href="#">Site Information</a></li>
-              <li><a href="#">Contact me</a></li>
-              <li><a href="#">Reviews</a></li>
-              <li><a href="#">Terms of service</a></li>
-          </ul>
-          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
-      </div>
-    </footer>
+    <!-- Footer -->
+    <div id="include_footer"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
@@ -480,12 +467,18 @@ print(flag)
 
     <!-- Import HTML -->
     <script>
+      // import navbar
       $("#include_navbar").load("/html_import/navbar.html", function(){
 
         // function to activate the hamburger menu
         $('.menu-toggle').click(function(){
           $('nav').toggleClass('active');
         });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
       });
     </script>
 

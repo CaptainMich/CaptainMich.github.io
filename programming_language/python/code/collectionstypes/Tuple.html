@@ -145,21 +145,8 @@ print(type(converted))                            # ...
       </div>
     </main>
 
-    <footer id="myFooter">
-      <div class="footer">
-        <a href="https://github.com/CaptainMich" class="social-icons"><i class="fab fa-github"></i></i></a>
-        <a href="https://twitter.com/_CaptainMich" class="social-icons"><i class="fab fa-twitter"></i></a>
-        <a href="mailto:captain.mich96@gmail.com" class="social-icons"><i class="fas fa-envelope"></i></a>
-
-          <ul>
-              <li><a href="#">Site Information</a></li>
-              <li><a href="#">Contact me</a></li>
-              <li><a href="#">Reviews</a></li>
-              <li><a href="#">Terms of service</a></li>
-          </ul>
-          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
-      </div>
-    </footer>
+    <!-- Footer -->
+    <div id="include_footer"></div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -173,12 +160,18 @@ print(type(converted))                            # ...
 
     <!-- Import HTML -->
     <script>
+      // import navbar
       $("#include_navbar").load("/html_import/navbar.html", function(){
 
         // function to activate the hamburger menu
         $('.menu-toggle').click(function(){
           $('nav').toggleClass('active');
         });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
       });
     </script>
 

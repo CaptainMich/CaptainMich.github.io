@@ -443,7 +443,7 @@ abbr {
 
 ul, ol {
   max-width: 50rem;
-  margin: auto auto;
+  margin: 0 auto;
 }
 
 a{
@@ -676,7 +676,6 @@ td {
   -webkit-animation: none;
 }
 
-
 .index h5{
   font-weight: 900;
   padding-left: 0%;
@@ -704,7 +703,11 @@ td {
 
 @media (max-width: 575px) {
   .index{
-    width: 50%;
+    width: 100%;
+  }
+
+  .index h2{
+    margin-left: 5%;
   }
 }
 

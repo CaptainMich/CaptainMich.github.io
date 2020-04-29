@@ -710,7 +710,11 @@ td {
 
 @media (max-width: 575px) {
   .index{
-    width: 50%;
+    width: 100%;
+  }
+
+  .index h2{
+    margin-left: 5%;
   }
 }
 

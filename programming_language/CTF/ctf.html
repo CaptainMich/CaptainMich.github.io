@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CTF | HOME </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="/programming_language/CTF/css/ctf.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+
+    <div class="parallax1">
+			<div class="caption">
+				<span class="border"> CTF </span> <span class="extension"> Writeups </span>
+			</div>
+		</div>
+
+    <div class="container">
+      <article role="article">
+        <div class="index">
+
+          <!-- <h2> Template </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li> coming soon... </li>
+            </ol>
+          </dl>
+          <br style="display: block;margin: 0px 0;">  -->
+
+          <h2> CCIT - 2019 </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li><a href="/programming_language/CTF/Challenge/CCIT/warm_up.html"> Warm Up </a></li>
+              <li><a href="/programming_language/CTF/Challenge/CCIT/software_security.html">  Software Security </a></li>
+              <li><a href="/programming_language/CTF/Challenge/CCIT/cryptography.html"> Cryptography </a></li>
+              <li><a href="/programming_language/CTF/Challenge/CCIT/web_security.html"> Web Security </a></li>
+              <li><a href="/programming_language/CTF/Challenge/CCIT/network_security.html"> Network Security </a></li>
+            </ol>
+          </dl>
+          <br style="display: block;margin: 0px 0;">
+
+          <h2> OTW </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li><a href="/programming_language/CTF/Challenge/OverTheWire/bandit.html"> Bandit </a></li>
+              <li><a href="/programming_language/CTF/Challenge/OverTheWire/leviathan.html"> Leviathan </a></li>
+              <li><a href="/programming_language/CTF/Challenge/OverTheWire/natas.html"> Natas </a></li>
+            </dl>
+          <br style="display: block;margin: 0px 0;">
+
+
+          <h2> PicoCTF 2019 </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/binary.html"> Binary </a></li>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/cryptography.html"> Cryptography </a></li>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/forensics.html"> Forensics </a></li>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/general_skill.html"> General Skill </a></li>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/reverse_engineering.html"> Reverse Engineering </a></li>
+              <li><a href="/programming_language/CTF/Challenge/picoCTF2019/web_exploitation.html"> Web Exploitation </a></li>
+            </ol>
+          </dl>
+          <br>
+
+          <h2> MISC </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li> coming soon... </li>
+            </ol>
+          </dl>
+          <br style="display: block;margin: 0px 0;">
+
+          <h2> Resources </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li> coming soon... </li>
+            </ol>
+          </dl>
+          <br style="display: block;margin: 0px 0;">
+
+        </div>
+      </div>
+
+    	</article>
+
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+    </script>
+
+  </body>
+</html>

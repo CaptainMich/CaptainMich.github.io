@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> overTheWire | Leviathan </title>
+  <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fonts/fonts.css" >
+    <link rel="stylesheet" href="/res/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/personal_icon.css">
+    <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+    <link rel="stylesheet" href="../ctf.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div id="include_navbar"></div>
+
+  <!-- Return to Top -->
+  <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- Sidebar Nav -->
+  <div id="include_sidebar"></div>
+
+  <!-- Main -->
+  <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+        <h3> Leviathan Writeup </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#level-start"> Intro Reading </a></li>
+            <li> <a href="#level-0"> Level 0 -> Level 1 </a></li>
+            <li> <a href="#level-1"> Level 1 -> Level 2 </a></li>
+            <li> <a href="#level-2"> Level 2 -> Level 3 </a></li>
+            <li> <a href="#level-3"> Level 3 -> Level 4 </a></li>
+            <li> <a href="#level-4"> Level 4 -> Level 5 </a></li>
+            <li> <a href="#level-5"> Level 5 -> Level 6 </a></li>
+            <li> <a href="#level-6"> Level 6 -> Level 7 </a></li>
+            <li> <a href="#level-7"> Level 7 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="level-start">
+          <dt> Intro Reading </dt>
+          <dd> This wargame doesn't require any knowledge about programming - just a bit of common sense and some knowledge about basic *nix commands. We had no idea that it'd be this hard to make an interesting wargame that wouldn't require
+            programming abilities from the players.
+            <br><br>
+
+            Leviathan’s levels are called <b> leviathan0, leviathan1, … etc </b> . and can be accessed on <b> leviathan.labs.overthewire.org </b> through SSH on port 2223.
+
+            <br><br>
+
+            Data for the levels can be found in the homedirectories. You can look at <b>/etc/leviathan_pass </b> for the various level passwords. <br>
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the first level: </strong> <br>
+              Username: leviathan0 <br>
+              Password: leviathan0
+            </p>
+          </blockquote>
+        </dl>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-0">
+          <dt> Level 0 -> Level 1 </dt>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ssh leviathan0@leviathan.labs.overthewire.org -p 2223
+$ ls -l /etc/leviathan_pass/
+$ ls -la
+$ cd .backup/
+$ ls -la
+$ cat bookmarks.html | grep password
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: leviathan1 <br>
+              Password: rioGegei8m
+            </p>
+          </blockquote>
+        </dl>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="level-1">
+          <dt> Level 1 -> Level 2 </dt>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ssh leviathan1@leviathan.labs.overthewire.org -p 2223
+$ ls -la
+$ strings check
+$ ltrace ./check
+            </code></pre>
+        </div>
+
+        <dl>
+          Insert a random password, you'll notice that there is <b>strcmp</b>("your_input\n", "sex")
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ./check
+        </code></pre>
+        </div>
+
+        <dl>
+          Using "sex" as password, you are now logged as leviathan2 (use command 'bash' if you want to pass to original bash view)
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ cat /etc/leviathan_pass/leviathan2
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: leviathan2 <br>
+              Password: ougahZi8Ta
+            </p>
+          </blockquote>
+        </dl>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="level-2">
+          <dt> Level 2 -> Level 3 </dt>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ssh leviathan2@leviathan.labs.overthewire.org -p 2223
+$ ls -la
+          </code></pre>
+        </div>
+
+        <dl>
+          Launch the <code> ./printfile </code> executable; you'll notice that the program outputs the text from a file; let's create a tmp file and see what happened inside the program
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ mkdir /tmp/test && touch test.txt
+$ ltrace ./printfile /tmp/test/test.txt
+        </code></pre>
+              </div>
+
+      <dl>
+        As you can see the access function is called on the input file; <code> access() </code>  checks permission based on the real user ID instead of the effective user ID this can be exploited since the ./printfile is owned by leviathan3 user. It is also noticeable that <b>  /bin/cat </b> is being called on the file to output the contents; /bin/cat  uses just the first part of the filename. Let's try to add a space to the filename, and see if /bin/cat will read the file as two separate files.
+      </dl>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+$ touch "space test.txt"
+$ ltrace ~/printfile space\ test.txt
+      </code></pre>
+            </div>
+
+      <dl>
+        It was right. It's exploitable.
+        <br>
+        Let's create a symbolic link for our first part of the file and link it to <b> /etc/leviathan_pass/leviathan3 </b>
+      </dl>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+$ ln -s /etc/leviathan_pass/leviathan3 /tmp/jimmy/space
+$ ~/printfile space\ test.txt
+      </code></pre>
+            </div>
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan3 <br>
+          Password: Ahdiemoo1j
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+    <dl class="anchor" id="level-3">
+      <dt> Level 3 -> Level 4 </dt>
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+$ ssh leviathan3@leviathan.labs.overthewire.org -p 2223
+$ ls -la
+      </code></pre>
+    </div>
+
+    <dl>
+      Launch the <code> ./level3 </code> executable; you'll notice that the program asks for a password; let's try ltrace command and see if it works
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+$ ltrace ./level3
+    # the password is compared to "snlprintf". Try to input it
+
+$ ./level3
+    # password: snlprintf
+
+$ whoami
+    # leviathan3
+    </code></pre>
+          </div>
+
+    <dl>
+      As you can see a shell has appeared but we are still leviathian3 user. Let's try to run again the ./level3 executable inside this shell
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+$ ltrace ./level3
+    # again the password is compared to "snlprintf". Try to input it
+
+$ ./level3
+    # password: snlprintf
+
+$ whoami
+    # leviathan4
+
+$ cat /etc/leviathan_pass/leviathan4
+    </code></pre>
+          </div>
+
+    <dl>
+    <blockquote>
+    <p><strong> To login to the next level: </strong> <br>
+      Username: leviathan4 <br>
+      Password: vuH0coox6m
+    </p>
+    </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+
+    <dl class="anchor" id="level-4">
+      <dt> Level 4 -> Level 5 </dt>
+    </dl>
+
+    <dl>
+      Exploring the folder tree and the file, we can see that there is a folder called .trash  inside which there's a file called <code> ./bin </code>. Run the executable and decode the binary to ASCII.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan4@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ cd .trash
+    $ ./bin
+    $ echo 01010100 01101001 01110100 01101000 00110100 01100011 01101111 01101011 01100101 01101001 00001010 | perl -lape '$_=pack"(B8)*",@F'
+
+    # if the number is without spaces
+    ($ echo 0101010001101001011101000110100000110100011000110110111101101011011001010110100100001010 | perl -lpe '$_=pack"B*",$_')
+        </code></pre>
+    </div>
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan5 <br>
+          Password: Tith4cokei
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+    <dl class="anchor" id="level-5">
+      <dt> Level 5 -> Level 6 </dt>
+    </dl>
+
+    <dl>
+      Running the executable <code> ./leviathan5 </code> we can notice that it seems to read the content of a file <b> <i> /tmp/file.log </i>  </b> which we cannot modify. What we can do it's try to create a symbolic link through which we can access the desired  <i> leviathan6 </i> password file.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan5@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ ./leviathan5
+        # Cannot find /tmp/file.log
+
+    $ ln -s /etc/leviathan_pass/leviathan6 /tmp/file.log
+    $ ./leviathan5
+        </code></pre>
+    </div>
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan6 <br>
+          Password: UgaoFee4li
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+
+    <dl class="anchor" id="level-6">
+      <dt> Level 6 -> Level 7 </dt>
+    </dl>
+
+    <dl>
+      Running the executable <code> ./leviathan6 </code> we can notice that it seems to accept a 4 digit code. Let's try to bruteforce it.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan6@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ ./leviathan6 1234
+        # Wrong
+
+    $ for i in {0000..9999}; do echo $i; ./leviathan6 $i; done
+        </code></pre>
+    </div>
+
+    <dl>
+      The password correct is 7123. With the right 4 digits the executable launch a shell as a leviathan7 user; let's hust read the password file.
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ cat /etc/leviathan_pass/leviathan7
+        </code></pre>
+    </div>
+
+
+    <dl>
+      <blockquote>
+        <p><strong> To login to the next level: </strong> <br>
+          Username: leviathan7 <br>
+          Password: ahy7MaeBo9
+        </p>
+      </blockquote>
+    </dl>
+    <hr> <!-- Finish post  -->
+
+    <dl class="anchor" id="level-7">
+      <dt> Level 7 </dt>
+    </dl>
+
+    <div class="row-full code">
+      <pre><code class="prism language-bash">
+    $ ssh leviathan7@leviathan.labs.overthewire.org -p 2223
+    $ ls -lah
+    $ cat CONGRATULATIONS
+        </code></pre>
+    </div>
+
+    <dl>
+      Well Done, you seem to have used a *nix system before, now try something more serious
+    </dl>
+    <hr> <!-- Finish post  -->
+
+
+    </article>
+
+    <section class="" role="group">
+      <button id="previous" onClick="location.href='bandit.html'"> Previous </button>
+      <button id="next" onClick="location.href='natas.html'"> Next </button>
+      <br> <br> <br>
+    </section>
+
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="include_footer"></div>
+
+  <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+  <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src="/js/sidebar.js"> </script>
+  <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+  <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+  <!-- Import HTML -->
+  <script>
+    // import navbar
+    $("#include_navbar").load("/html_import/navbar.html", function(){
+
+      // function to activate the hamburger menu
+      $('.menu-toggle').click(function(){
+        $('nav').toggleClass('active');
+      });
+    });
+
+    // import footer
+    $(function(){
+      $("#include_footer").load("/html_import/footer.html");
+    });
+
+    // import sidebar
+    $(function(){
+      $("#include_sidebar").load("../../html/sidebar.html");
+    });
+  </script>
+
+</body>
+
+</html>

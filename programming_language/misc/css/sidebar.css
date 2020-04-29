@@ -1,0 +1,216 @@
+#show {
+  font-size: 1.125em;
+  display: block;
+    width: 100%;
+  padding: 0.5em 0.75em;
+  margin: 0.25rem 0;
+  border: 0.0625rem solid transparent;
+  background: #f6f6f6;
+  border-radius: 0.125em;
+  text-align: center;
+  text-decoration: none;
+  color: #222;
+  letter-spacing: 0.0625rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  top: 90px;
+  opacity: 1;
+  visibility: hidden;
+  z-index: 10;
+  -webkit-transition-delay: 300ms;
+  transition-delay: 300ms;
+  left: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;  /* Chrome Safari */
+}
+
+.navigation h5{
+  text-align: left;
+  font-size: 25px;
+  margin-top: 1em;
+  margin-left: 5%;
+}
+
+.navigation ul, ol {
+  font-size: 18px;
+  max-width: 50rem;
+  margin: 1em 2.5em;
+}
+
+.navigation ul {
+  list-style-type: square;
+}
+
+.navigation a{
+  text-decoration: none;
+  color: #787878;
+}
+
+.navigation a:hover{
+  color: #222;
+  font-weight: bold;
+}
+
+.navigation.active {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+.navigation.active .navigation__inner {
+  background-color: #f6f6f6;
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+  -webkit-transition: background-color 0s linear 599ms, -webkit-transform 300ms linear;
+  transition: background-color 0s linear 599ms, -webkit-transform 300ms linear;
+  transition: transform 300ms linear, background-color 0s linear 599ms;
+  transition: transform 300ms linear, background-color 0s linear 599ms, -webkit-transform 300ms linear;
+}
+
+.navigation.active .navigation__inner:after {
+  width: 300%;
+  height: 100%;
+  border-radius: 50%;
+  -webkit-animation: elastic 150ms ease 300.5ms both;
+  animation: elastic 150ms ease 300.5ms both;
+}
+
+.navigation__inner {
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  top: 0;
+  left: 0;
+  opacity: 0.9;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  z-index: 999999;
+  -webkit-transform: translate(-100%, 0);
+  transform: translate(-100%, 0);
+  -webkit-transition: background-color 0s linear 300ms, -webkit-transform 300ms linear;
+  transition: background-color 0s linear 300ms, -webkit-transform 300ms linear;
+  transition: transform 300ms linear, background-color 0s linear 300ms;
+  transition: transform 300ms linear, background-color 0s linear 300ms, -webkit-transform 300ms linear;
+}
+
+.navigation__inner:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 100%;
+  top: 0;
+  right: 0;
+  background-color: #f6f6f6;
+  border-radius: 50%;
+  z-index: -1;
+  -webkit-transition: all 300ms linear;
+  transition: all 300ms linear;
+}
+
+.navigation__inner::-webkit-scrollbar {
+  display:none;
+}
+
+.navigation__inner{
+
+}
+
+.navigation { overflow: -moz-scrollbars-none; }
+
+@-webkit-keyframes elastic {
+  0% {
+    border-radius: 50%;
+  }
+
+  45% {
+    border-radius: 0;
+  }
+
+  65% {
+    border-top-right-radius: 40px 50%;
+    border-bottom-right-radius: 40px 50%;
+  }
+
+  80% {
+    border-radius: 0;
+  }
+
+  90% {
+    border-top-right-radius: 20px 50%;
+    border-bottom-right-radius: 20px 50%;
+  }
+
+  100% {
+    border-radius: 0;
+  }
+}
+
+@keyframes elastic {
+  0% {
+    border-radius: 50%;
+  }
+
+  45% {
+    border-radius: 0;
+  }
+
+  65% {
+    border-top-right-radius: 40px 50%;
+    border-bottom-right-radius: 40px 50%;
+  }
+
+  80% {
+    border-radius: 0;
+  }
+
+  90% {
+    border-top-right-radius: 20px 50%;
+    border-bottom-right-radius: 20px 50%;
+  }
+
+  100% {
+    border-radius: 0;
+  }
+}
+
+.swipe-area {
+    position: fixed;
+    width: 20%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    height: 100%;
+    background: #f3f3f3;
+    z-index: 1;
+}
+
+.swipe-area.active{
+  width: 100%;
+}
+
+@media (max-width: 1490px) {
+  .swipe-area{
+    width: 15%;
+  }
+
+  .navigation{
+    width: 300px;
+  }
+}
+
+@media (max-width: 970px) {
+  .swipe-area{
+    width: 8%;
+  }
+}

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Network Security </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Network Security </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <h5> Week 1 </h5>
+            <li> <a href="#sanity-check"> Sanity Check - Points: 500 </a></li>
+            <li> <a href="#no-comment"> No comment - Points: 500 </a></li>
+            <li> <a href="#well-hidden-ports"> Well-hidden ports - Points: 500 </a></li>
+            <li> <a href="#we-are-robots"> We are the robots - Points: 500 </a></li>
+            <li> <a href="#name-swap"> Name swap - Points: 500 </a></li>
+            <li> <a href="#naughty-attacker"> A naughty attacker - Points: 500 </a></li>
+            <li> <a href="#dreamliner"> Dreamliner - Points: 500 </a></li>
+          </ol>
+          <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
+          <ol>
+            <h5> Week 2 </h5>
+            <li> <a href="#"> coming soon ... </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="sanity-check">
+          <dt> Sanity Check - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming fromthe Internet and accessing their public web site. <br>
+          Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. <br>
+          We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          If you feel ready, open the attached file and gain a first reward just by looking at the file comment <br>
+
+          <code> $ sha256sum leopardo.pcapng </code> <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-01-sanity_check.png" alt="" />
+        </figure>
+
+        <dl>
+          This challenge can be simple solved by looking at the comment of the pcapng
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{a8ec63de-0c9a-473e-9b34-11026a9e6b19} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="no-comment">
+          <dt> No Comment - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming from the Internet and accessing their public web site. Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          Start analyzing the traffic and focus on those who are accessing the public website. Please tell us if Leopardo is leaking any sensitive information. Remember to leave us your comment about this. <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-02-no_comment.png" alt="" />
+        </figure>
+
+        <dl>
+          As figure above shows, since the challenge statement suggest us to focus on those who are accessing the public website, by following the HTTP stream we are able to identify a "weird" comment in the html website file that prompt us to look into the api.js file which content is the following:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-js">
+/* String.prototype.obf = function () {
+    var bytes = [];
+    for (var i = 0; i &lt; this.length; i++) {
+        bytes.push(this.charCodeAt(i).toString(16));
+    }
+    return bytes.join('$');
+} */
+
+/* String.prototype.deobf = function () {
+    var arr = this.split('$');
+    return arr.map(function(c) {
+        return String.fromCharCode(parseInt(c, 16))
+    }).reduce(function(a, b) {return a  + b})
+} */
+
+var api_user = "apiadmin";
+var api_password = "43$43$49$54$7b$38$30$30$62$30$63$32$31$2d$33$34$37$36$2d$34$33$62$34$2d$62$65$64$31$2d$30$30$61$35$39$34$36$65$30$34$64$35$7d"
+
+          </code></pre>
+        </div>
+
+        <dl>
+          Simply by removing the $ and convert hex to text we are able to get the flag
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{800b0c21-3476-43b4-bed1-00a5946e04d5} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start Post  -->
+        <dl class="anchor" id="well-hidden-ports">
+          <dt> Well-hidden ports - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming from the Internet and accessing their public web site. Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          After analyzing the public website, we need to understand if the web host only runs a web server. They told us that other services are switched off, and even if they were accidentally running, they do not expose any useful data. What do you think? Please confirm ASAP, it is important for your (and their) future career. <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-03-well_hidden_ports_1.png" alt="" />
+        </figure>
+
+        <dl>
+          The Statistic -> Conversations window display us all the informations about the tcp traffic. Since the challenge statement suggest us to look at the services, from figure above we can immediately see that there are 3 ports mostly involved: 80, 5432 and 10000.
+          By looking at all the traffic in these ports nothing seems to be abnormal or usefull. Thanks to a friend advice, I discover that the only thing possibly wrong here is the wireshark decode: HTTP traffic could be possibly decoded as TCP because is not from the standard port recognized by the tool.
+          By going to Edit -> Preferences -> Protocols -> HTTP and adding to the TCP ports the 5432 port the wireshark output changed a bit as figure below shows
+        </dl>
+
+        <figure>
+          <img src="img/6-03-well_hidden_ports_2.png" alt="" />
+        </figure>
+
+        <dl>
+          By simply looking at the HTTP flow we can find a base64 password as figure below shows. Decoding it give us the flag
+        </dl>
+
+        <figure>
+          <img src="img/6-03-well_hidden_ports_3.png" alt="" />
+        </figure>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ echo Q0NJVHs4ZGNkNmVmZC01YzgxLTRmM2MtOWQ3My02Y2MyNWJmMWJlNzZ9 | base64 -d
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{8dcd6efd-5c81-4f3c-9d73-6cc25bf1be76} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start Post  -->
+        <dl class="anchor" id="we-are-robots">
+          <dt> We are the robots - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming from the Internet and accessing their public web site. Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          A web server can run multiple sites on multiple ports. Robots file is a standard. What could go wrong? Please analyze the discovered evidence and give us feedback if they are exploited by the attacker. <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-04-we_are_the_robots_1.png" alt="" />
+        </figure>
+
+        <dl>
+          By simply looking at the TCP flow stream we found a suspicious nmap scansion with the flag written inside, in fact by simply substitute %7B with "{" and %7D with "}" we got our flag
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{37be0fff-05c4-4842-a794-33afec45592b} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start Post  -->
+        <dl class="anchor" id="name-swap">
+          <dt> Name swap - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming from the Internet and accessing their public web site. Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          Fortunately, the attacker has found relatively harmless information. We start to think that their monitoring service is too static, and something flew by. What do you think? <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-05-name_swap.png" alt="" />
+        </figure>
+
+        <dl>
+          Once again, just by lookig through the TCP stream we were able to find the password, hidden inside.
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{fc0eaa80-47e9-4c8a-87c7-de60a381b80f} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start Post  -->
+        <dl class="anchor" id="naughty-attacker">
+          <dt> A naughty attacker - Points: 500 </dt>
+          <dd> We suspect that Leopardo Company has been attacked. We provide you with a capture containing all the suspicious traffic coming from the Internet and accessing their public web site. Please analyze the traffic and give us evidence of each relevant phase of the attack. Understanding the above steps requires following the chronological sequence of registered packets. We will guide you in detecting them, and each given evidence will grant you a handsome reward... <br>
+          We reported the backdoor. Now it is closed, but probably something escaped their control. Please, find it. <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-06-naughty_attacker.png" alt="" />
+        </figure>
+
+        <dl>
+          By looking at the very end of the stream we found a base64 encrypted zip-compressed file. In order to to transform it in an usable zip archive, we use base64 to File online tool
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+# https://base64.guru/converter/decode/file
+          </code></pre>
+        </div>
+
+        <dl>
+          Once it has been done, a password is required to open the zip archive. We used the following python script to brute force it (please notice that the rockyou.txt is a password dictionary found on internet):
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import zipfile
+
+filename = 'flag.zip'
+dictionary = 'rockyou.txt'
+
+password = None
+file_to_open = zipfile.ZipFile(filename)
+with open(dictionary, 'r') as f:
+    for line in f.readlines():
+        password = line.strip('\n')
+        try:
+            file_to_open.extractall(pwd=password)
+            password = 'Password found: %s' % password
+            print password
+        except:
+            pass
+
+# OUTPUT: monello
+          </code></pre>
+        </div>
+
+        <dl>
+          Following the ouput of the file and our flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+CCIT{f688b33e-8dab-4eca-b6c9-027768dcee93}
+
+     _...._
+   .-.     /
+  /o.o\ ):.\
+  \   / `- .`--._
+  // /            `-.
+ '...\     .         `.
+  `--''.    '          `.
+      .'   .'            `-.
+   .-'    /`-.._            \
+ .'    _.'      :      .-'"'/
+| _,--`       .'     .'    /
+\ \          /     .'     /
+ \///        |    ' |    /
+             \   (  `.   ``-.
+              \   \   `._    \
+            _.-`   )    .'    )
+            `.__.-'  .-' _-.-'
+                     `.__,'
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{f688b33e-8dab-4eca-b6c9-027768dcee93} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start Post  -->
+        <dl class="anchor" id="dreamliner">
+          <dt> Dreamliner - Points: 500 </dt>
+          <dd> Smooth landings were never so easy.<br> <br>
+          <code> http://149.202.200.158:5050/ </code> <br>
+        </dl>
+
+        <figure>
+          <img src="img/6-07-dreamliner_1.png" alt="" />
+        </figure>
+
+        <dl>
+          The figure above shows the window we got. If we click on <i>"Landing Samples"</i> we got a <code>.pcapng</code> file. Let's analyze it. First we can get out the js function used inside the html page
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-js">
+function rdraw(msg) {
+    console.log(msg.a)
+    if (msg.flag) {
+        $(".target").effect("shake")
+        $(".target").fadeOut(800,function() {
+                $(".target").html("&lt;img src='images/flag.jpg'>&lt;h1>You had a happy landing: " + msg.flag + "&lt;/h1>");
+            })
+            .fadeIn(400);
+        return
+    }
+    if (msg.explode) {
+        $(".target").hide("explode", {
+            pieces: 150
+        }, 2000);
+        return
+    }
+
+    var alt = document.getElementById("altitude")
+    var cells = document.getElementById("t").getElementsByTagName("td");
+    for (i = 0; i &lt; 25; i++) {
+        if (i == msg.f)
+            cells[i].innerHTML = "&lt;img src=\"images/dreamliner.jpg\" width=40 height=40 \>";
+        else
+        if (i == msg.r)
+            cells[i].innerHTML = "&lt;img src=\"images/airstrip.png\" width=50 height=50 \>";
+        else
+            cells[i].innerHTML = "";
+    }
+
+    alt.value = msg.alt
+}
+
+$(document).ready(function() {
+    par = location.href.split('?')[1]
+    if (par == "simulator")
+        alert("Flight Simulator MODE")
+    else
+        par = "START"
+
+    $.ajax({
+        type: "POST",
+        url: "autopilot.php",
+        data: "a=" + par,
+        dataType: "json",
+        success: function(msg) {
+            rdraw(msg)
+        }
+    })
+    $("#send").click(function() {
+        var autopilot = $("#autopilot").val();
+        $.ajax({
+            type: "POST",
+            url: "autopilot.php",
+            data: "a=" + autopilot,
+            dataType: "json",
+            success: function(msg) {
+                rdraw(msg)
+            },
+            error: function() {
+                alert("Autopilot error");
+            }
+        });
+    });
+});
+          </code></pre>
+        </div>
+
+        <dl>
+          Moreover we have an already played game immediately after:
+        </dl>
+
+        <figure>
+          <img src="img/6-07-dreamliner_2.png" alt="" />
+        </figure>
+
+        <dl>
+          In the Figure above we can see all the command used in the game (TURNR, TURNL, DIVE, BRAKE) and also all the possible scenario: the aim of the game is to move the airplane in order to land, at each move the altitude is decreased by 100 meters and if you reach the altitude 0 outside the landing square the game is over, otherwise if you reach it exactly at altitude 0 you need to brake and get your happy landing flag. <br>
+          An example of solution is proposed below: <br>
+          <b>TURNR</b>, <b>TURNR</b>, <b>DIVE</b>, <b>TURNL</b>, <b>TURNL</b>, <b>DIVE</b>, <b>TURNR</b>, <b>TURNR</b>, <b>DIVE</b>, <b>DIVE</b>, <b>BRAKE</b>
+        </dl>
+
+        <figure>
+          <img src="img/6-07-dreamliner_3.png" alt="" />
+        </figure>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{d4a4e6c3-bd3c-4112-9dad-5cb6d4e1ea21} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='web_security.html'" > Previous </button>
+        <button id="next" onClick="location.href='#"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

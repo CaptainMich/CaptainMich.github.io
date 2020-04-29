@@ -1,104 +1,92 @@
-/*
-html5doctor.com Reset Stylesheet
-v1.6.1
-Last Updated: 2010-09-17
-Author: Richard Clark - http://richclarkdesign.com
-Twitter: @rich_clark
-*/
-
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-    margin:0;
-    padding:0;
-    border:0;
-    outline:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
+@font-face {
+  font-family: 'merriweather-regular';
+  src: url("/fonts/post/merriweather-regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-italic';
+  src: url("/fonts/post/merriweather-italic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-bold';
+  src: url("/fonts/post/merriweather-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-bolditalic';
+  src: url("/fonts/post/merriweather-bolditalic.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-black';
+  src: url("/fonts/post/merriweather-black.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-heavyitalic';
+  src: url("/fonts/post/merriweather-heavyitalic.woff") format("woff");
+  font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'merriweather-light';
+  src: url("/fonts/post/merriweather-light.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'merriweather-lightitalic';
+  src: url("/fonts/post/merriweather-lightitalic.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
 }
 
-body {
-    line-height:1;
+/* New Import */
+@font-face {
+  font-family: 'Bevan';
+  src: url("/fonts/post/Bevan.ttf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
 }
 
-article,aside,details,figcaption,figure,
-footer,header,hgroup,menu,nav,section {
-    display:block;
+
+h1, h2, h3, h4 {
+  font-family: 'merriweather-bold';
+  font-weight: 700;
+  font-style: normal;
 }
 
-nav ul {
-    list-style:none;
+[role="note"] {
+  font-family: 'merriweather-light';
+  font-weight: 200;
+  font-style: normal;
 }
 
-blockquote, q {
-    quotes:none;
+blockquote {
+  font-family: 'merriweather-lightitalic';
+  font-weight: 200;
+  font-style: italic;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content:'';
-    content:none;
+a[role="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  font-family: 'merriweather-regular';
+  font-weight: 400;
+  font-style: normal;
 }
 
-a {
-    margin:0;
-    padding:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
-}
-
-/* change colours to suit your needs */
-ins {
-    background-color:#ff9;
-    color:#000;
-    text-decoration:none;
-}
-
-/* change colours to suit your needs */
-mark {
-    background-color:#ff9;
-    color:#000;
-    font-style:italic;
-    font-weight:bold;
-}
-
-del {
-    text-decoration: line-through;
-}
-
-abbr[title], dfn[title] {
-    border-bottom:1px dotted;
-    cursor:help;
-}
-
-table {
-    border-collapse:collapse;
-    border-spacing:0;
-}
-
-/* change border colour to suit your needs */
-hr {
-    display:block;
-    height:1px;
-    border:0;
-    border-top:1px solid #cccccc;
-    margin:1em 0;
-    padding:0;
-}
-
-input, select {
-    vertical-align:middle;
+h5, h6, dl dt {
+  font-family: 'merriweather-italic';
+  font-weight: 400;
+  font-style: italic;
 }
 
 
@@ -170,23 +158,20 @@ header nav ul li{
 
 header nav ul li a{
   font-family: Catamaran;
-  font-size: 16px;
+  font-size: 20px;
   color: #111;
   text-transform: uppercase;
   text-decoration: none;
   display: block;
 }
 
-header nav ul li:hover{
+header nav ul li:hover,
+header nav ul li:hover a{
   text-decoration: none;
-  color: #111;
-  background-color: #e5e5e5;
+  color: #fff;
+  background-color: #333;
   line-height: 60px;
-}
-
-header nav ul li a:hover{
   text-decoration: none;
-  color: #111;
 }
 
 .menu-toggle{
@@ -207,12 +192,12 @@ header nav ul li a:hover{
     background-color: #fff;
     color: #111;
     padding: 20px;
-    font-size: 18px;
+    font-size: 20px;
     border: none;
     cursor: pointer;
     text-transform: uppercase;
     line-height: 50px;
-    width: 200px;
+    width: 250px;
 }
 
 .dropdown {
@@ -225,8 +210,7 @@ header nav ul li a:hover{
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    font-size: 16px;
-    min-width: 200px;
+    min-width: 250px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     right: 0;
@@ -234,6 +218,7 @@ header nav ul li a:hover{
 }
 
 .dropdown-content a {
+    font-size: 20px;
     color: black;
     padding: 12px 16px;
     text-decoration: none;
@@ -242,7 +227,9 @@ header nav ul li a:hover{
 }
 
 .dropdown-content a:hover {
-  background-color: #e5e5e5;
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
 }
 
 .dropdown:hover .dropdown-content {
@@ -250,7 +237,8 @@ header nav ul li a:hover{
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #ccc;
+    color: #fff;
+    background-color: #333;
 }
 
 @media (max-width: 1200px) {
@@ -281,6 +269,7 @@ header nav ul li a:hover{
     width: 100%;
     height: calc(300vh - 50px);
     background: #fff;
+    opacity: 0.8;
     top: 90px;
     left: -100%;
     transition: 0.5s;
@@ -296,12 +285,23 @@ header nav ul li a:hover{
     text-align: center;
     display: block;
     position: absolute;
-    left: 50%;
+    left: 48%;
     transform: translatex(-50%);
   }
 
-  header nav ul:hover{
-    background-color: #fff;
+  header nav ul li {
+    text-align: center;
+  }
+
+  header nav ul li a{
+    font-size: 35px;
+  }
+
+  header nav ul li:hover,
+  header nav ul li:hover a{
+    color: #000;
+    background-color: transparent !important;
+    font-weight: 900;
   }
 
 
@@ -394,424 +394,92 @@ header nav ul li a:hover{
 
 }
 
-/* INDEX - BANNER */
 
-.index-banner {
-  width: 100%;
-  height: calc(100vh - 100px);
-  background-image: url('../img/banner-blog.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  display: table;
-}
+/* SECTION */
 
-.vertical-center{
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.index-banner h2{
-  font-family: Catamaran;
-  font-size: 50px;
-  font-weight: 900;
-  line-height: 60px;
-  color: #111;
-  text-align: center;
-  /* text-shadow: 2px 2px #fff;*/
-  opacity: 1 !important;
-}
-
-.index-banner h1{
-  font-family: Cormorant Garamond;
-  font-size: 28px;
-  font-weight: 100;
-  font-style: italic;
-  line-height: 40px;
-  color: #111;
-  text-align: center;
-  /* text-shadow: 2px 2px #fff;*/
-}
-
-
-/* INDEX - LINKS */
-
-.index-links div {
-  margin: 16px 16px 0;
-  width: calc(100% - 32px);
-  height: 100px;
-  background-color: #f2f2f2;
-}
-
-.index-links div h3{
-  font-family: Catamaran;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 100px;
-  color: #111;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-@media only screen and (min-width: 950px) {
-
-  .wrapper{
-    width: 85%;
-    margin: 0 auto;
-  }
-
-  .index-banner{
-    height: 450px;
-  }
-
-  .index-banner h1{
-    display: block;
-    width: 560px;
-    margin: 0 auto;
-  }
-
-  .index-links {
-    padding-bottom: 20px;
-    overflow: hidden;
-  }
-
-  .index-links div {
-    margin: 40px 10px 0;
-    height: 250px;
-    float: left;
-  }
-
-  .index-boxlink-square{
-    width: calc(25% - 20px) !important;
-  }
-
-  .index-boxlink-rectangle{
-    width: calc(50% - 20px) !important;
-  }
-
-  .index-links div h3{
-    line-height: 250px;
-  }
-
-}
-
-@media (max-width: 400px) {
-
-  .index-banner {
-    margin-top: 70px;
-  }
-
-  .index-banner h2{
-    padding-top: 20px;
-    font-size: 43px;
-  }
-
-}
-
-/* SERVICES */
-.container-title{
-  margin-left: 8%;
-}
-
-.section-subtitle{
-  margin-top: 20px;
-  margin-bottom: 7px;
-  padding-left: 7px;
-  font-size: 54px;
-  line-height: 1;
-  text-transform: uppercase;
-  color: #111;
-  border-left: 10px solid #e6e6e6;
-  font-size: 600;
-  font-family: Catamaran;
- }
-
-
-.section-main-title{
-  margin-top: 0;
-  margin-bottom: 37px;
-  font-size: 45px;
-  line-height: 1.27;
-  font-weight: 300;
-  font-family: Catamaran;
-}
-
-.section-main-title strong{
-    font-weight: 900;
-}
-
-.servicebox{
-  padding: 20px 45px;
-  border-radius: 5px;
-  text-align: left;
-  overflow: hidden;
-  z-index: 1;
+#full-page-section {
+  height: 100vh;
   position: relative;
 }
 
-.servicebox:before {
-  content: "";
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  background: #242424;
+#full-page-section:nth-of-type(2) {
+  background-color: #333;
+}
+
+#full-page-section:nth-of-type(4) {
+  background-color: #333;
+}
+
+#full-page-section:nth-of-type(6) {
+  background-color: #333;
+}
+/* SCROLL DOWN */
+
+svg{
   position: absolute;
-  top: 0;
-  left: -100%;
-  z-index: -1;
-  transition: all 0.5s ease 0s;
+  top: 90%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
 }
 
-.servicebox:hover:before {
-   left: 0;
-}
+/* BANNER TITLE */
 
-.servicebox:after{
-  content: "";
-  width: 7px;
-  height: 0px;
-  border-radius: 5px;
-  background: orange;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: all 0.5s ease 0s;
-}
-
-.servicebox:hover:after {
-  height: 100%;
-}
-
-.servicebox .service-icon {
-  color: #414243;
-  margin-bottom: 10px;
-  transition: all 0.5s ease 0s;
-}
-
-.servicebox .service-icon span {
-  font-size: 25px
-}
-
-.servicebox .service-icon ion-icon,
-.servicebox .service-icon i{
-  font-size: 30px;
-}
-
-.servicebox .title{
-  display: inline-block;
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-right: 10px;
-}
-
-.servicebox .description{
-  font-size: 15px;
-  color: #777;
-  line-height: 25px;
-  transition: all 0.5s ease 0s;
-}
-
-.servicebox a{
-  text-decoration: none;
-}
-
-.servicebox:hover .service-icon,
-.servicebox:hover .description{
-  color: white;
-}
-
-
-@media only screen and (max-width: 950px) {
-  .container-title{
-    margin-left: 2%;
-  }
-}
-
-@media only screen and (max-width: 780px) {
-  .servicebox{
-
-  }
-}
-
-
-/* COUNTING UP */
-
-.stat{
-  background: #3a3a3a;
-  padding-top: 0px;
-  padding-bottom: 80px;
-  color: white;
-  margin-top: 100px;
-  margin-left: 120px;
-  margin-right: 120px;
-}
-
-.stat i,
-.stat ion-icon{
-  font-size: 45px;
-}
-
-.fa-code,
-.fa-bug{
-  font-size: 40px !important;
-}
-
-.stat-items{
-  display: block;
-  margin-top: 20px;
-}
-
-.stat-items h2{
-  font-weight: bolder;
-  font-size: 32px;
-  color: orange;
-  margin-top: 10px;
-}
-
-.stat p{
-  margin-top: 10px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  color: #b2b2b2;
-}
-
-@media only screen and (max-width: 1360px) {
-  .stat{
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-}
-
-
-/* DOCUMENTS */
-.container-title{
-  margin-left: 8%;
-}
-
-.documents-subtitle{
-  margin-top: 40px;
-  margin-bottom: 7px;
-  padding-left: 7px;
-  font-size: 54px;
-  line-height: 1;
-  text-transform: uppercase;
-  color: #111;
-  border-left: 10px solid #e6e6e6;
-  font-size: 600;
-  font-family: Catamaran;
- }
-
-
-.documents-main-title{
-  margin-top: 0;
-  margin-bottom: 37px;
-  font-size: 45px;
-  line-height: 1.27;
-  font-weight: 300;
-  font-family: Catamaran;
-}
-
-.documents-main-title strong{
-    font-weight: 900;
-}
-
-@media only screen and (max-width: 950px) {
-  .container-title{
-    margin-left: 2%;
-  }
-
-}
-
-/* DOCUMENTS - SWIPER */
-.swiper-container {
-  width: 87%;
-  padding-top: 10px;
-  padding-bottom: 50px;
-}
-
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  width: 500px;
-  height: 580px;
-  background: #3a3a3a;
-  border-style: groove;
-  border-width: 2px;
-  border-color: #3a3a3a;
-}
-
-.swiper-slide .imgBox {
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-}
-
-.swiper-slide .imgBox img{
-  width: 100%;
-}
-
-.swiper-slide .details{
-  box-sizing: border-box;
-  font-size: 20px;
-  padding: 20px;
-}
-
-.swiper-slide .details h3{
+.banner_title {
+  position:absolute;
+  bottom: 20%;
+  left:5%;
   margin: 0;
-  padding: 0;
-  font-size: 20px;
-  text-align: center;
-  line-height: 20px;
-  color: #fff;
+  font-size: 150px;
+  line-height: 1em;
+  opacity: 1;
+  font-weight: 900;
+  font-family: "Impact", sans-serif;
 }
 
-.swiper-slide .details h3 span{
-  font-size: 16px;
-  color: #fff;
+.left{
+  text-align: left;
+}
+
+.banner_title:first-of-type {
+  -webkit-animation: 0.5s ease-in toleft;
+          animation: 0.5s ease-in toleft;
+}
+.banner_title:last-of-type {
+  -webkit-animation: 0.5s ease-in toright;
+          animation: 0.5s ease-in toright;
+}
+
+@media (max-width: 1400px) {
+  .banner_title {
+    font-size: 110px;
+  }
+}
+
+@media (max-width: 970px) {
+  .banner_title {
+    font-size: 95px;
+    bottom: 15%;
+  }
+}
+
+@media (max-width: 785px) {
+  .banner_title {
+    font-size: 80px;
+    bottom: 15%;
+  }
 }
 
 @media (max-width: 600px) {
-
-  .swiper-container {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 50px;
+  .banner_title {
+    font-size: 70px;
+    bottom: 35%;
   }
+}
 
-  .swiper-slide {
-    width: 200px;
-    height: 280px;
-  }
-
-  .swiper-slide .imgBox {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .swiper-slide .imgBox img{
-    width: 100%;
-  }
-
-  .swiper-slide .details{
-    box-sizing: border-box;
-    font-size: 14px;
-    padding: 20px;
-  }
-
-  .swiper-slide .details h3{
-    margin: 0;
-    padding: 0;
-    font-size: 14px;
-    text-align: center;
-    line-height: 20px;
-  }
-
-  .swiper-slide .details h3 span{
-    font-size: 10px;
-    line-height: 0px;
+@media (max-width: 445px) {
+  .banner_title {
+    font-size: 55px;
+    bottom: 35%;
   }
 }
 

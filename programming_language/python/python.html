@@ -1,102 +1,129 @@
 <!DOCTYPE html>
 <html>
   <head>
-
-    <title> Python </title>
+    <meta charset="utf-8">
+    <title> Python | HOME </title>
     <link rel="shortcut icon" href="/img/favicon.ico" width="70">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/python.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="/programming_language/python/css/python.css">
   </head>
+
   <body>
-    <section class="intro">
-      <div class="inner">
-        <div class="content">
-          <h1> Python </h1>
 
-          <div class="container">
-            <a href="#" class="btn btn-1 modal__trigger" data-modal="#modal1">
-                <svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg> Code </a>
-            <a href="#" class="btn btn-1 modal__trigger" data-modal="#modal2">
-                <svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg> Projects </a>
-            <a href="#" class="btn btn-1 modal__trigger" data-modal="#modal3">
-                <svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg> Template </a>
-            <a href="../../index.html" class="btn btn-1">
-                <svg><rect x="0" y="0" fill="none" width="100%" height="100%"/></svg> Home </a>
-          </div>
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
 
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
 
-          <!-- The Modal - CODE -->
-          <div id="modal1" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
-          	<div class="modal__dialog">
-          		<div class="modal__content">
-          			<h1> < C0DE /> </h1>
-          			<h3> Data Types </h3>
-          			<p> 1. <a href="#" onclick="return open_NumericType();"> Numeric Type </a> </p>
-                <p> 2. <a href="#" onclick="return open_String();"> String </a> </p>
-                <hr>
-                <h3> Collection Types </h3>
-                <p> 1. <a href="#" onclick="return open_List();"> List </a> </p>
-                <p> 2. <a href="#" onclick="return open_Tuple();"> Tuple </a> </p>
-                <p> 3. <a href="#" onclick="return open_Set();"> Set </a> </p>
-                <p> 4. <a href="#" onclick="return open_Dictionary();"> Dictionary </a> </p>
-                <hr>
-                <h3> Loops </h3>
-                <p> 1. <a href="#" onclick="return open_IfStatement();"> If Statement </a> </p>
-                <p> 2. <a href="#" onclick="return open_WhileLoop();"> While Loop </a> </p>
-                <p> 3. <a href="#" onclick="return open_ForLoop()"> For Loop </a> </p>
-                <hr>
-                <h3> Advanced </h3>
-                <p> 1. <a href="#" onclick="return open_CommandLineArg();"> Command Line Arguments </a> </p>
-                <p> 2. <a href="#" onclick="return open_Function();"> Function </a> </p>
-                <hr>
-                <h3> OOP </h3>
-                <p> 1. <a href="#" onclick="return open_Class();"> Classes and Objects </a> </p>
-                <hr>
-                <h3> GUI </h3>
-                <p> 1. <a href="#" onclick="return open_GUI_Form_and_Widget();"> GUI Form and Widget </a> </p>
-          			<!-- modal close button -->
-          			<a href="" class="modal__close demo-close">
-          					<svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/><path d="M0 0h24v24h-24z" fill="none"/></svg>
-          				</a>
-          		</div>
-          	</div>
-          </div>
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
 
-          <!-- The Modal on btn 1-->
-          <div id="modal2" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
-          	<div class="modal__dialog">
-          		<div class="modal__content">
-                <h1> < PR0JECTS/> </h1>
-          			<p><a href="#" onclick="return open_SuperMarioNetworks();"> SuperMarioNetworks </a> </p>
+    <div class="parallax1">
+			<div class="caption">
+				<span class="border">HOME </span> <span class="extension"> .<span class="P">p</span><span class="Y">y</span>
+			</div>
+		</div>
 
-          			<!-- modal close button -->
-          			<a href="" class="modal__close demo-close">
-          					<svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/><path d="M0 0h24v24h-24z" fill="none"/></svg>
-          				</a>
-          		</div>
-          	</div>
-          </div>
+    <div class="container">
+      <article role="article">
+        <div class="index">
+          <!-- <h1><span>HOME</span> .py </h1> -->
+          <h2> Code </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol >
+              <h5> Data Types </h5>
+              <li> <a href="#" onclick="return open_NumericType();">  Numeric Types </a></li>
+              <li> <a href="#" onclick="return open_String();">  String </a></li>
 
-          <!-- The Modal on btn 1-->
-          <div id="modal3" class="modal modal--align-top modal__bg" role="dialog" aria-hidden="true">
-            <div class="modal__dialog">
-              <div class="modal__content">
-                <h1> < T3MPLATE /> </h1>
+              <h5> Collection </h5>
+              <li> <a href="#" onclick="return open_List();">  List </a></li>
+              <li> <a href="#" onclick="return open_Tuple();">  Tuple </a></li>
+              <li> <a href="#" onclick="return open_Set();">  Set </a></li>
+              <li> <a href="#" onclick="return open_Dictionary();">  Dictionary </a></li>
 
-                <!-- modal close button -->
-                <a href="" class="modal__close demo-close">
-                    <svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"/><path d="M0 0h24v24h-24z" fill="none"/></svg>
-                  </a>
-              </div>
-            </div>
-          </div>
+              <h5> Loops </h5>
+              <li> <a href="#" onclick="return open_IfStatement();">  If Statement </a></li>
+              <li> <a href="#" onclick="return open_WhileLoop();">  While Loop </a></li>
+              <li> <a href="#" onclick="return open_ForLoop()">  For Loop </a></li>
+
+              <h5> Advanced </h5>
+              <li> <a href="#"onclick="return open_CommandLineArg();">  Command Line Arguments </a></li>
+              <li> <a href="#" onclick="return open_Function();">  Function </a></li>
+              <li> <a href="#" onclick="return open_Subprocess();">  Subprocess </a></li>
+
+              <h5> OOP </h5>
+              <li> <a href="#" onclick="return open_Class();"> Classes </a></li>
+
+              <h5> GUI </h5>
+              <li> <a href="#" onclick="return open_GUI_Form_and_Widget();"> Form & Widget</a></li>
+            </ol>
+          </dl>
+          <br>
+
+          <h2> Projects </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li> <a href="#" onclick="return open_SuperMarioNetworks();"> SuperMario Networks </a></li>
+            </ol>
+          </dl>
+          <br>
+
+          <h2> Template </h2>
+          <hr style="margin-bottom: 0em; width: 50%; margin-left: 22%;">
+          <dl>
+            <ol>
+              <li> coming soon... </li>
+            </ol>
+          </dl>
+          <br>
 
         </div>
       </div>
-    </section>
 
+    	</article>
+
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
     <script type="text/javascript" src="js/code_open_function.js"></script>
     <script type="text/javascript" src="js/projects_open_function.js"></script>
-    <script type="text/javascript" src="/js/modal.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+    </script>
+
   </body>
 </html>

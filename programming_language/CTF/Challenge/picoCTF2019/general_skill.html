@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> picoCTF2019 | General Skill Writeup </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> General Skill Writeup </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#2warm"> 2Warm - Points: 50 </a></li>
+            <li> <a href="#lets-warm-up"> Lets Warm Up - Points: 50 </a></li>
+            <li> <a href="#warmed-up"> Warmed Up - Points: 50 </a></li>
+            <li> <a href="#bases"> Bases - Points: 100 </a></li>
+            <li> <a href="#first-grep-I"> First Grep - Points: 100 </a></li>
+            <li> <a href="#resources"> Resources - Points: 100 </a></li>
+            <li> <a href="#strings-it"> strings it - Points: 100 </a></li>
+            <li> <a href="#what-is-net-cat"> what's a net cat? - Points: 100 </a></li>
+            <li> <a href="#based"> Based - Points: 200 </a></li>
+            <li> <a href="#first-grep-II"> First Grep: Part II - Points: 200 </a></li>
+            <li> <a href="#plumbing"> plumbing - Points: 200 </a></li>
+            <li> <a href="#whats-the-difference"> whats-the-difference - Points: 200 </a></li>
+            <li> <a href="#where-is-the-file"> where-is-the-file - Points: 200 </a></li>
+            <li> <a href="#flag-shop"> flag_shop - Points: 300 </a></li>
+            <li> <a href="#mus1c"> mus1c - Points: 300 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="2warm">
+          <dt> 2Warm - Points: 50 </dt>
+          <dd> Can you convert the number 42 (base 10) to binary (base 2)? </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was '11111', you would submit 'picoCTF{11111}' as the flag. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+42 (base 10) = 101010 (base 2)
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{101010} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="lets-warm-up">
+          <dt> Lets Warm Up - Points: 50 </dt>
+          <dd> If I told you a word started with 0x70 in hexadecimal, what would it start with in ASCII? </dd>
+
+          <blockquote>
+            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was 'hello', you would submit 'picoCTF{hello}' as the flag. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+0x70 hex = p in ASCII
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{p} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="warmed-up">
+          <dt> Warmed Up - Points: 50 </dt>
+          <dd> What is 0x3D (base 16) in decimal (base 10) </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Submit your answer in our competition's flag format. For example, if you answer was '22', you would submit 'picoCTF{22}' as the flag. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+Simply convert the number
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{61} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="bases">
+          <dt> Bases - Points: 100 </dt>
+          <dd> What does this bDNhcm5fdGgzX3IwcDM1 mean? I think it has something to do with bases </dd>
+        </dl>
+        <dl>
+            <blockquote>
+            <p><strong>Hint:</strong> Submit your answer in our competition's flag format. For example, if you answer was 'hello', you would submit 'picoCTF{hello}' as the flag. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ echo bDNhcm5fdGgzX3IwcDM1 | base64 --decode
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{l3arn_th3_r0p35} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="first-grep-I">
+          <dt> First Grep - Points: 100 </dt>
+          <dd> Can you find the flag in file? This would be really tedious to look through manually, something tells me there is a better way. You can also find the file in /problems/first-grep_2_04dbf496b78e6c37c0097cdfef734d88 on the shell server. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> grep tutorial </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ grep -oE "picoCTF{.*}" file
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{grep_is_good_to_find_things_bf6aec61} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="resources">
+          <dt> Resources - Points: 100 </dt>
+          <dd> We put together a bunch of resources to help you out on our website! If you go over there, you might even find a flag! https://picoctf.com/resources (link) </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+Copy the flag from the page
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>picoCTF{r3source_pag3_f1ag}</strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="strings-it">
+          <dt> strings it - Points: 100 </dt>
+          <dd> Can you find the flag in file without running it? You can also find the file in /problems/strings-it_3_8386a6aa560aecfba03c0c6a550b5c51 on the shell server. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> man strings </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ strings file | grep -oE "picoCTF{.*}"
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{5tRIng5_1T_c7fff9e5} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="what-is-net-cat">
+          <dt> what's a net cat? - Points: 100 </dt>
+          <dd> Using netcat (nc) is going to be pretty important. Can you connect to 2019shell1.picoctf.com at port 21865 to get the flag? </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> nc tutorial </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ nc 2019shell1.picoctf.com 21865
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{nEtCat_Mast3ry_4fefb685} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="based">
+          <dt> Based - Points: 200 </dt>
+          <dd> To get truly 1337, you must understand different data encodings, such as hexadecimal or binary. Can you get the flag from this program to prove you are on the way to becoming 1337? Connect with nc 2019shell1.picoctf.com 20836. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> I hear python can convert things. </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> It might help to have multiple windows open </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+Use different converter
+   - binary to text
+   - octal to text
+   - hex to text
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{learning_about_converting_values_6cdcad0d} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+
+        <dl class="anchor" id="first-grep-II">
+          <dt> First Grep: Part II - Points: 200 </dt>
+          <dd> Can you find the flag in /problems/first-grep--part-ii_3_b4bf3244c2886de1566a28c1b5a465ae/files on the shell server? Remember to use grep. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> grep tutorial </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ssh 2019shell1.picoctf.com
+$ cd /problems/first-grep--part-ii_3_b4bf3244c2886de1566a28c1b5a465ae/files
+$ grep -oE "picoCTF{.*}"
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{grep_r_to_find_this_3675d798} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="plumbing">
+          <dt> plumbing - Points: 200 </dt>
+          <dd> Sometimes you need to handle process data outside of a file. Can you find a way to keep the output from this program and search for the flag? Connect to 2019shell1.picoctf.com 57911. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Remember the flag format is picoCTF{XXXX} </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> What's a pipe? No not that kind of pipe... This kind </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ nc 2019shell1.picoctf.com 57911 | grep -oE "picoCTF{.*}"
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{digital_plumb3r_931b2271} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="whats-the-difference">
+          <dt> whats-the-difference - Points: 200 </dt>
+          <dd> Can you spot the difference? kitters cattos. They are also available at /problems/whats-the-difference_0_00862749a2aeb45993f36cc9cf98a47a on the shell server </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> How do you find the difference between two files? </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> Dumping  the data from a hex editor may make it easier to compare. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+with open('./kitters.jpg', 'rb') as f:
+  kitters = f.read()
+
+with open('./cattos.jpg', 'rb') as f:
+  cattos = f.read()
+
+flag = ''
+for i in range(min(len(kitters), len(cattos))):
+  if kitters[i] != cattos[i]:
+    flag += cattos[i]
+print flag
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{th3yr3_a5_d1ff3r3nt_4s_bu773r_4nd_j311y_aslkjfdsalkfslkflkjdsfdszmz10548} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="where-is-the-file">
+          <dt> where-is-the-file - Points: 200 </dt>
+          <dd> I've used a super secret mind trick to hide this file. Maybe something lies in /problems/where-is-the-file_2_f1aa319cafd4b55ee4a60c1ba65255e2. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> What command can see/read files? </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> What's in the manual page of ls? </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ssh 2019shell1.picoctf.com
+$ cd /problems/where-is-the-file_2_f1aa319cafd4b55ee4a60c1ba65255e2
+$ cat .cant_me_see
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{w3ll_that_d1dnt_w0RK_30444bc6} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="flag-shop">
+          <dt> flag_shop - Points: 300 </dt>
+          <dd> There's a flag shop selling stuff, can you buy a flag? Source. Connect with nc 2019shell1.picoctf.com 3967. </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+#include &lt; stdio.h>
+#include &lt; stdlib.h>
+int main()
+{
+        setbuf(stdout, NULL);
+        int con;
+        con = 0;
+        int account_balance = 1100;
+        while(con == 0) {
+
+                printf("Welcome to the flag exchange\n");
+                printf("We sell flags\n");
+
+                printf("\n1. Check Account Balance\n");
+                printf("\n2. Buy Flags\n");
+                printf("\n3. Exit\n");
+                int menu;
+                printf("\n Enter a menu selection\n");
+                fflush(stdin);
+                scanf("%d", &menu);
+                if(menu == 1) {
+                        printf("\n\n\n Balance: %d \n\n\n", account_balance);
+                }
+                else if(menu == 2) {
+                        printf("Currently for sale\n");
+                        printf("1. Defintely not the flag Flag\n");
+                        printf("2. 1337 Flag\n");
+                        int auction_choice;
+                        fflush(stdin);
+                        scanf("%d", &auction_choice);
+                        if(auction_choice == 1) {
+                                printf("These knockoff Flags cost 900 each, enter desired quantity\n");
+
+                                int number_flags = 0;
+                                fflush(stdin);
+                                scanf("%d", &number_flags);
+                                if(number_flags > 0) {
+                                        int total_cost = 0;
+                                        total_cost = 900*number_flags;
+                                        printf("\nThe final cost is: %d\n", total_cost);
+                                        if(total_cost <= account_balance) {
+                                                account_balance = account_balance - total_cost;
+                                                printf("\nYour current balance after transaction: %d\n\n", account_balance);
+                                        }
+                                        else{
+                                                printf("Not enough funds to complete purchase\n");
+                                        }
+                                }
+                        }
+                        else if(auction_choice == 2) {
+                                printf("1337 flags cost 100000 dollars, and we only have 1 in stock\n");
+                                printf("Enter 1 to buy one");
+                                int bid = 0;
+                                fflush(stdin);
+                                scanf("%d", &bid);
+
+                                if(bid == 1) {
+
+                                        if(account_balance > 100000) {
+                                                FILE *f = fopen("flag.txt", "r");
+                                                if(f == NULL) {
+
+                                                        printf("flag not found: please run this on the server\n");
+                                                        exit(0);
+                                                }
+                                                char buf[64];
+                                                fgets(buf, 63, f);
+                                                printf("YOUR FLAG IS: %s\n", buf);
+                                        }
+
+                                        else{
+                                                printf("\nNot enough funds for transaction\n\n\n");
+                                        }
+                                }
+                        }
+                }
+                else{
+                        con = 1;
+                }
+
+        }
+        return 0;
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Two's compliment can do some weird things when numbers get really big! </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> In order to solve this challenge, as the hint suggest us, an overflow is needed. So the only possibility here is to overflow the total_cost variable by inserting an high number of desidered flags (please notice, the value shouldn't be to high otherwise the program could crash). </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ nc 2019shell1.picoctf.com 3967
+# Enter a menu selection
+$ 2
+# ...
+# Currently for sale
+#   1. Defintely not the flag Flag
+#   2. 1337 Flag
+$ 1
+# ...
+# These knockoff Flags cost 900 each, enter desired quantity
+$ 12232121
+# ...
+# Enter a menu selection
+$ 2
+# ...
+# Currently for sale
+#   1. Defintely not the flag Flag
+#   2. 1337 Flag
+$ 2
+# ...
+# 1337 flags cost 100000 dollars, and we only have 1 in stock
+# Enter 1 to buy one:
+$ 1
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{m0n3y_bag5_cd0ead78} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="mus1c">
+          <dt> mus1c - Points: 300 </dt>
+          <dd> I wrote you a song. Put it in the picoCTF{} flag format </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+Pico's a CTFFFFFFF
+my mind is waitin
+It's waitin
+
+Put my mind of Pico into This
+my flag is not found
+put This into my flag
+put my flag into Pico
+
+
+shout Pico
+shout Pico
+shout Pico
+
+My song's something
+put Pico into This
+
+Knock This down, down, down
+put This into CTF
+
+shout CTF
+my lyric is nothing
+Put This without my song into my lyric
+Knock my lyric down, down, down
+
+shout my lyric
+
+Put my lyric into This
+Put my song with This into my lyric
+Knock my lyric down
+
+shout my lyric
+
+Build my lyric up, up ,up
+
+shout my lyric
+shout Pico
+shout It
+
+Pico CTF is fun
+security is important
+Fun is fun
+Put security with fun into Pico CTF
+Build Fun up
+shout fun times Pico CTF
+put fun times Pico CTF into my song
+
+build it up
+
+shout it
+shout it
+
+build it up, up
+shout it
+shout Pico
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Do you think you can master rockstar? </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> This challenge is based on the Rockstar programming language which is a dynamically typed Turing-complete programming language designed for creating computer programs that are also song lyrics.
+          To decode the message an online interpreter has been used (<a href="https://codewithrockstar.com/online">link</a>). Since the output is in ascii, python help us to decode it </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+ascii_str = "114 114 114 111 99 107 110 114 110 48 49 49 51 114 "
+
+print("picoCTF{", end='')
+for c in ascii_str.split():
+	print(chr(int(c)), end='')
+
+print('}\n', end='')
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{rrrocknrn0113r} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='forensics.html'" > Previous </button>
+        <button id="next" onClick="location.href='reverse_engineering.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+
+  </body>
+</html>

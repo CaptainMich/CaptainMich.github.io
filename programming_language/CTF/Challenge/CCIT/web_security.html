@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Web Security </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Web Security </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <h5> Week 1 </h5>
+            <li> <a href="#basic-rce"> BasicRCE - Points: 500 </a></li>
+            <li> <a href="#php-is-love-php-is-life"> PHPisLovePHPisLife - Points: 500 </a></li>
+            <li> <a href="#zip-zap-level-1"> ZipZap - level 1 - Points: 500 </a></li>
+            <li> <a href="#plotty-boy"> Plotty boy - Points: 500 </a></li>
+            <li> <a href="#ssrf-basic-level-1"> SSRF Basic - level 1 - Points: 500 </a></li>
+            <li> <a href="#ssrf-basic-level-2"> SSRF Basic - level 2 - Points: 500 </a></li>
+            <li> <a href="#302camo"> 302Camo - Points: 500 </a></li>
+            <li> <a href="#basic-lfi"> Basic LFI - Points: 500 </a></li>
+            <li> <a href="#not-a-bug"> Not a Bug. It's a Feature - Points: 500 </a></li>
+          </ol>
+          <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
+          <ol>
+            <h5> Week 2 </h5>
+            <li> <a href="#"> coming soon ... </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="basic-rce">
+          <dt> BasicRCE - Points: 500 </dt>
+          <dd> How do injections work? <br>
+          <a href="http://149.202.200.158:5001/" style="color: #e94892;"> http://149.202.200.158:5001/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="php-is-love-php-is-life">
+          <dt> PHPisLovePHPisLife - Points: 500 </dt>
+          <dd> We all love PHP code injections &lt;3 <br>
+          <a href="http://149.202.200.158:5007/" style="color: #e94892;"> http://149.202.200.158:5007/ </a>
+        </dl>
+
+        <figure>
+          <img src="img/4-02-phpislove_phpislife.png" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-html">
+&lt;?php
+if(isset($_GET['source'])){
+    highlight_file(__FILE__);
+    return;
+}
+error_reporting(0);
+$flag = getenv('FLAG');
+?>
+    &lt;html>
+
+    &lt;head>
+        &lt;meta charset="utf-8">
+        &lt;title>PHPisLovePHPisLife&lt;/title>
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+        &lt;link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    &lt;/head>
+
+    &lt;body>
+        &lt;section class="hero">
+            &lt;div class="hero-body">
+                &lt;div class="container">
+                    &lt;h1 class="title">
+        PHPisLovePHPisLife
+      &lt;/h1>
+                    &lt;h2 class="subtitle">
+         You can view the source code &lt;a href="/?source">here&lt;/a>
+      &lt;/h2>
+                &lt;/div>
+            &lt;/div>
+        &lt;/section>
+        &lt;section class="section">
+            &lt;div class="columns">
+                &lt;div class="column">&lt;/div>
+                &lt;div class="column">
+                    &lt;div class="container">
+
+                        &lt;form method="POST">
+                            &lt;div class="field">
+                                &lt;div class="control">
+                                    &lt;input class="input" type="text" placeholder="Put some code" name="code">
+                                &lt;/div>
+                            &lt;/div>
+                            &lt;div class="field">
+                                &lt;div class="control">
+                                    &lt;input class="submit" type="submit" placeholder="Send" value="Send">
+                                &lt;/div>
+                            &lt;/div>
+                        &lt;/form>
+                    &lt;/div>
+
+                    &lt;div class="box">
+                        &lt;pre class="has-background-white">
+&lt;?php
+if(isset($_POST['code'])){
+
+    $code = $_POST['code'];
+    // I &lt;3 blacklists
+    $characters = ['\`', '\[', '\*', '\.', '\\\\', '\='];
+    $classes = get_declared_classes();
+    $functions = get_defined_functions()['internal'];
+    $strings = ['eval', 'include', 'require', 'function', 'flag', 'echo'];
+    $variables =  ['_GET', '_POST', '_COOKIE', '_REQUEST', '_SERVER', '_FILES', '_ENV', 'HTTP_ENV_VARS', '_SESSION', 'GLOBALS'];
+
+    $blacklist = array_merge($characters, $classes, $functions, $variables,$strings);
+
+    foreach ($blacklist as $blacklisted) {
+
+        if (preg_match ('/' . $blacklisted . '/im', $code)) {
+
+            $output = 'No hacks pls';
+        }
+    }
+
+    if(!isset($output)){
+        $my_function = create_function('',$code);
+        // $output = $my_function(); // I don't trust you
+        $output = 'This function is disabled.';
+    }
+    echo $output;
+}
+                ?>
+            &lt;/pre>
+                    &lt;/div>
+
+                &lt;/div>
+                &lt;div class="column">&lt;/div>
+            &lt;/div>
+        &lt;/section>
+    &lt;/body>
+
+    &lt;/html>
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="zip-zap-level-1">
+          <dt> ZipZap - level 1 - Points: 500 </dt>
+          <dd> This service has two flags in two levels. The first one is on the file /flag.txt <br>
+          <a href="http://149.202.200.158:5011/" style="color: #e94892;"> http://149.202.200.158:5011/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="plotty-boy">
+          <dt> Plotty boy - Points: 500 </dt>
+          <dd> Because I’m a CyberChallenge web guy, I cannot do any math. For this reason, I created this useful web site that plots math things for me. Can you please look for any vulns? <br> <br>
+          The flag is located on /flag.txt <br>
+          <a href="http://149.202.200.158:5009/" style="color: #e94892;"> http://149.202.200.158:5009/ </a>
+        </dl>
+
+
+        <dl>
+          <blockquote>
+            <p><strong> You don’t need to bruteforce anything; there are no hidden files/secrets. Just look at what you have:) </strong> <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="ssrf-basic-level-1">
+          <dt> SSRF Basic - level 1 - Points: 500 </dt>
+          <dd> An entry level challenge. There are 4 different levels with 4 different flags. Go Go Go! <br>
+          <a href="http://149.202.200.158:5002/" style="color: #e94892;"> http://149.202.200.158:5002/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="ssrf-basic-level-2">
+          <dt> SSRF Basic - level 2 - Points: 500 </dt>
+          <dd> An entry level challenge. There are 4 different levels with 4 different flags. Go Go Go! <br>
+          <a href="http://149.202.200.158:5003/" style="color: #e94892;"> http://149.202.200.158:5003/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="302camo">
+          <dt> 302Camo - Points: 500 </dt>
+          <dd> A simple PHP blog. We know for sure that there is a flag at the link <a href="http://149.202.200.158:5010/get_flag.php" style="color: #e94892;"> http://149.202.200.158:5010/get_flag.php </a> , but it doesn't seem reachable from the internet. Good luck!
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="basic-lfi">
+          <dt> Basic LFI - Points: 500 </dt>
+          <dd> I found this nice html template to write fancy web sites. I decided to start writing a simple PHP blog out of it, and, as every respectful project, I started a little bug bounty program. Are you able to find the content of the file flag.txt located in the root directory? A free flag as payment :) <br>
+
+          <a href="http://149.202.200.158:5000/" style="color: #e94892;"> http://149.202.200.158:5000/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="not-a-bug">
+          <dt> Not a Bug. It's a Feature - Points: 500 </dt>
+          <dd> Sometimes ago, I found a bug in one of the products of this company. They said it was not a bug, but I'm not sure about it. This is their main site, can you find another "non-bug"? <br>
+          <a href="http://149.202.200.158:5006/" style="color: #e94892;"> http://149.202.200.158:5006/ </a>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='cryptography.html'" > Previous </button>
+        <button id="next" onClick="location.href='network_security.html"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

@@ -17,7 +17,7 @@
 
 .navigation {
   position: fixed;
-  width: 300px;
+  width: 350px;
   height: 100%;
   top: 90px;
   opacity: 1;
@@ -42,7 +42,7 @@
 .navigation ul, ol {
   font-size: 18px;
   max-width: 50rem;
-  margin: 1em 2.5em;
+  margin: 0.5em 0.5em;
 }
 
 .navigation ul {
@@ -51,6 +51,7 @@
 
 .navigation a{
   text-decoration: none;
+  color: #787878;
 }
 
 .navigation a:hover{
@@ -86,7 +87,7 @@
 .navigation__inner {
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 100%;
   top: 0;
   left: 0;
   opacity: 0.9;
@@ -198,7 +199,7 @@
   width: 100%;
 }
 
-@media (max-width: 1490px) {
+@media (max-width: 1600px) {
   .swipe-area{
     width: 15%;
   }
@@ -211,5 +212,25 @@
 @media (max-width: 970px) {
   .swipe-area{
     width: 8%;
+  }
+}
+
+/* Swipe left icon */
+svg{
+  position: fixed;
+  top: 50%;
+  left: 0%;
+  transform: translateY(-50%) translateX(-50%);
+  transform: rotate(-90deg);
+  opacity: 0.55;
+}
+
+.navigation.active + svg{
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  svg{
+    display: none;
   }
 }

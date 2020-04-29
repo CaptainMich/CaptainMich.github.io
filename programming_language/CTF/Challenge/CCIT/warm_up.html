@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Warm up </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Warm up </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#the-rules"> The rules - Points: 50 </a></li>
+            <li> <a href="#do-you-know-base64"> Do you know base 64? - Points: 50 </a></li>
+            <li> <a href="#ascii-art-from-the-past"> ASCII art from the past - Points: 50 </a></li>
+            <li> <a href="#no-binary-no-train"> No binary no train - Points: 50 </a></li>
+            <li> <a href="#hackerino"> Hackerino - Points: 476 </a></li>
+            <li> <a href="#mickey-mouse">  Mickey Mouse - Points: 495 </a></li>
+            <li> <a href="#hackerino-again"> Hackerino (again) - Points: 500 </a></li>
+            <li> <a href="#googlebot"> Googlebot - Points: 500 </a></li>
+
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="the-rules">
+          <dt> The rules - Points: 50 </dt>
+          <dd> Have you read them? (on this website) </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+# simply read the rules page on the website. You'll find flag in clear-text
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{this_is_a_flag_example} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="do-you-know-base64">
+          <dt> Do you know base 64? - Points: 50 </dt>
+          <dd> Super easy exercise to try flag submission. </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# there is a string inside the pdf
+$ echo Q0NJVHtiYXNlNjRfd2lsbF9iZV95b3VyX2ZyaWVuZH0= | base64 -d
+
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{base64_will_be_your_friend} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="ascii-from-the-past">
+          <dt> ASCII art from the past - Points: 50 </dt>
+          <dd> Super easy exercise to try flag submission. </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+More than ASCII art?
+
+
+  /                       \
+ /X/                       \X\
+|XX\         _____         /XX|
+|XXX\     _/       \_     /XXX|___________
+ \XXXXXXX             XXXXXXX/            \\\
+   \XXXX    /     \    XXXXX/                \\\
+        |   0     0   |                         \
+         |           |                           \
+          \         /                            |______//
+           \       /                             |
+            | O_O | \                            |
+             \ _ /   \________________           |
+                        | |  | |      \         /
+                        / |  / |       \______/
+                        \ |  \ |        \ |  \ |
+                      __| |__| |      __| |__| |
+                      |___||___|      |___||___|
+
+
+-.-. -.-. .. - -- --- .-. ... . -.-. --- -.. . .- ... --. .-. .- ... ...
+    </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Notice that the flag of this simple exercise is not standard (do not add CCIT{...})</p>
+          </blockquote>
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# Decode Morse code
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCITMORSECODEASGRASS </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="no-binary-no-train">
+          <dt> No binary no train - Points: 50 </dt>
+          <dd> 01000011 01000011 01001001 01010100 01111011 01101100 00110011 00110100 01110010 01101110 01011111 00110010 01011111 01100011 00110000 01101110 01110110 01000101 01110010 01110100 01111101 </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+# simply convert binary to text
+def binary_to_string(s):
+    return ''.join(chr(int(s[i*8:i*8+8],2)) for i in range((len(s)//8) + 1))
+
+x='010000110100001101001001010101000111101101101100001100110011010001
+110010011011100101111100110010010111110110001100110000011011100111011
+00100010101110010011101001111101'
+print(binary_to_string(x))
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{l34rn_2_c0nvErt} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="hackerino">
+          <dt> Hackerino - Points: 476 </dt>
+          <dd> The tag is the suggestion. </dd>
+        </dl>
+
+        <figure>
+          <img src="img/1-01-staccah.jpg" alt="" />
+        </figure>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ strings staccah.jpg | grep CCIT{.*}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{strings_resturns_printable_characters_in_f1l3s} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="mickey-mouse">
+          <dt> Mickey Mouse - Points: 495 </dt>
+          <dd> With this image strings does not work...This is an indexed image. </dd>
+        </dl>
+
+        <figure>
+          <img src="img/1-02-mickeymouse.bmp" alt="" />
+        </figure>
+
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> See for an example <a href="https://en.wikipedia.org/wiki/Indexed_color"> https://en.wikipedia.org/wiki/Indexed_color </a> </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# for solving this challenge I use the following online tool
+# https://georgeom.net/StegOnline/upload
+# with the option LSB Half
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{Congrat_you_know_indexed_m0d3} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="hackerino-again">
+          <dt> Hackerino (again) - Points: 500 </dt>
+          <dd> Ohhhh, they are tracking us... <a href="http://peaceful-cliffs-00403.herokuapp.com/hackerino/"> follow the link and and find the flag </a>
+ </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# navigate to the image view page by adding 'staccah.jpg' at the end of
+# the link; open developer tool and search for the network page, then
+# in the header section of the 'file.jpg' there's the cookie flag in hex
+# decode it and get your flag
+          </code></pre>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+hex_str = "0x434349547b536f6d6574696d655f6330306b6965735f63616e5f747261636b5f796f75217d"[2:]
+bytes = bytes.fromhex(hex_str)
+ascii_string = bytes.decode("ASCII")
+print(ascii_string)
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{Sometime_c00kies_can_track_you!} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="googlebot">
+          <dt> Googlebot - Points: 500 </dt>
+          <dd> Googlebot is a respectable web crawler, but you are human...  <a href="http://peaceful-cliffs-00403.herokuapp.com/googlebot"> follow the lik and find the flag </a>
+ </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+# navigate to the link and add at the end /robots.txt
+# we'll find information about a disallowed directory
+# navigate to that directory and find the flag
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{this_secret_fl@g_will_not_be_crawled} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick="location.href='software_security.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

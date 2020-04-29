@@ -161,28 +161,16 @@ ip_address = f.get_broadcast(ip_block) + 1
 
     </main>
 
-    <footer id="myFooter">
-      <div class="footer">
-          <a href="#" class="social-icons"><i class="fab fa-github"></i></i></a>
-          <a href="#" class="social-icons"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="social-icons"><i class="fas fa-envelope"></i></a>
+    <!-- Footer -->
+    <div id="include_footer"></div>
 
-          <ul>
-              <li><a href="#">Site Information</a></li>
-              <li><a href="#">Contact me</a></li>
-              <li><a href="#">Reviews</a></li>
-              <li><a href="#">Terms of service</a></li>
-          </ul>
-          <p class="footer-copyright">© 2018 Mich, Inc. All rights reserved.</p>
-      </div>
-    </footer>
-
-
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
     <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
-    <script src="/js/return_to_top_arrow.js"></script>
-    <script type="text/javascript" src="/res/prism_themes/prism.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
 
     <!-- Import HTML -->
     <script>
@@ -192,6 +180,11 @@ ip_address = f.get_broadcast(ip_block) + 1
         $('.menu-toggle').click(function(){
           $('nav').toggleClass('active');
         });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
       });
     </script>
 

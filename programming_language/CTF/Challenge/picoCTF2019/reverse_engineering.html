@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> picoCTF2019 | Reverse Engineering Writeup </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Reverse Engineering Writeup </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <li> <a href="#vault-door-training"> vault-door-training - Points: 50 </a></li>
+            <li> <a href="#vault-door-1"> vault-door-1 - Points: 100 </a></li>
+            <li> <a href="#vault-door-3"> vault-door-3 - Points: 200 </a></li>
+            <li> <a href="#vault-door-4"> vault-door-4 - Points: 250 </a></li>
+            <li> <a href="#vault-door-5"> vault-door-5 - Points: 300 </a></li>
+            <li> <a href="#vault-door-6"> vault-door-6 - Points: 350 </a></li>
+            <li> <a href="#vault-door-7"> vault-door-7 - Points: 400 </a></li>
+            <li> <a href="#asm1"> asm1 - Points: 200 </a></li>
+            <li> <a href="#asm2"> asm2 - Points: 250 </a></li>
+            <li> <a href="#asm3"> asm3 - Points: 300 </a></li>
+            <li> <a href="#asm4"> asm4 - Points: 400 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+        <dl class="anchor" id="vault-door-training">
+          <dt> vault-door-training - Points: 50 </dt>
+          <dd> Your mission is to enter Dr. Evil's laboratory and retrieve the blueprints for his Doomsday Project. The laboratory is protected by a series of locked vault doors. Each door is controlled by a computer and requires a password to open. Unfortunately, our undercover agents have not been able to obtain the secret passwords for the vault doors, but one of our junior agents obtained the source code for each vault's computer! You will need to read the source code for each level to figure out what the password is for that vault door. As a warmup, we have created a replica vault in our training facility. The source code for the training vault is here: VaultDoorTraining.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoorTraining {
+    public static void main(String args[]) {
+        VaultDoorTraining vaultDoor = new VaultDoorTraining();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	}
+  else {
+	    System.out.println("Access denied!");
+	   }
+  }
+}
+
+    // The password is below. Is it safe to put the password in the source code?
+    // What if somebody stole our source code? Then they would know what our
+    // password is. Hmm... I will think of some ways to improve the security
+    // on the other doors.
+    //
+    // -Minion #9567
+    public boolean checkPassword(String password) {
+        return password.equals("w4rm1ng_Up_w1tH_jAv4_3b500738c12");
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> The password is revealed in the program's source code. </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ cat VaultDoorTraining.java
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{w4rm1ng_Up_w1tH_jAv4_3b500738c12} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="vault-door-1">
+          <dt> vault-door-1 - Points: 100 </dt>
+          <dd> This vault uses some complicated arrays! I hope you can make sense of it, special agent. The source code for this vault is here: VaultDoor1.java </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoor1 {
+    public static void main(String args[]) {
+        VaultDoor1 vaultDoor = new VaultDoor1();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+	String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+	   }
+  }
+}
+    // I came up with a more secure way to check the password without putting
+    // the password itself in the source code. I think this is going to be
+    // UNHACKABLE!! I hope Dr. Evil agrees...
+    //
+    // -Minion #8728
+    public boolean checkPassword(String password) {
+        return password.length() == 32 &&
+               password.charAt(0)  == 'd' &&
+               password.charAt(29) == 'f' &&
+               password.charAt(4)  == 'r' &&
+               password.charAt(2)  == '5' &&
+               password.charAt(23) == 'r' &&
+               password.charAt(3)  == 'c' &&
+               password.charAt(17) == '4' &&
+               password.charAt(1)  == '3' &&
+               password.charAt(7)  == 'b' &&
+               password.charAt(10) == '_' &&
+               password.charAt(5)  == '4' &&
+               password.charAt(9)  == '3' &&
+               password.charAt(11) == 't' &&
+               password.charAt(15) == 'c' &&
+               password.charAt(8)  == 'l' &&
+               password.charAt(12) == 'H' &&
+               password.charAt(20) == 'c' &&
+               password.charAt(14) == '_' &&
+               password.charAt(6)  == 'm' &&
+               password.charAt(24) == '5' &&
+               password.charAt(18) == 'r' &&
+               password.charAt(13) == '3' &&
+               password.charAt(19) == '4' &&
+               password.charAt(21) == 'T' &&
+               password.charAt(16) == 'H' &&
+               password.charAt(27) == '3' &&
+               password.charAt(30) == '3' &&
+               password.charAt(25) == '_' &&
+               password.charAt(22) == '3' &&
+               password.charAt(28) == 'e' &&
+               password.charAt(26) == '6' &&
+               password.charAt(31) == 'a';
+    }
+}
+            </code></pre>
+          </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Look up the charAt() method online. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+myPass = [None] * 32
+
+myPass[0]  = 'd'
+myPass[29] = 'f'
+myPass[4]  = 'r'
+myPass[2]  = '5'
+myPass[23] = 'r'
+myPass[3]  = 'c'
+myPass[17] = '4'
+myPass[1]  = '3'
+myPass[7]  = 'b'
+myPass[10] = '_'
+myPass[5]  = '4'
+myPass[9]  = '3'
+myPass[11] = 't'
+myPass[15] = 'c'
+myPass[8]  = 'l'
+myPass[12] = 'H'
+myPass[20] = 'c'
+myPass[14] = '_'
+myPass[6]  = 'm'
+myPass[24] = '5'
+myPass[18] = 'r'
+myPass[13] = '3'
+myPass[19] = '4'
+myPass[21] = 'T'
+myPass[16] = 'H'
+myPass[27] = '3'
+myPass[30] = '3'
+myPass[25] = '_'
+myPass[22] = '3'
+myPass[28] = 'e'
+myPass[26] = '6'
+myPass[31] = 'a'
+
+print("picoCTF{{{}}}".format(''.join(myPass)))
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{d35cr4mbl3_tH3_cH4r4cT3r5_63ef3a} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="vault-door-3">
+          <dt> vault-door-3 - Points: 200 </dt>
+          <dd> This vault uses for-loops and byte arrays. The source code for this vault is here: VaultDoor3.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+import java.util.*;
+
+class VaultDoor3 {
+    public static void main(String args[]) {
+        VaultDoor3 vaultDoor = new VaultDoor3();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+      }
+  }
+}
+    // Our security monitoring team has noticed some intrusions on some of the
+    // less secure doors. Dr. Evil has asked me specifically to build a stronger
+    // vault door to protect his Doomsday plans. I just *know* this door will
+    // keep all of those nosy agents out of our business. Mwa ha!
+    //
+    // -Minion #2671
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        char[] buffer = new char[32];
+        int i;
+        for (i=0; i&lt;8; i++) {
+            buffer[i] = password.charAt(i);
+        }
+        for (; i&lt;16; i++) {
+            buffer[i] = password.charAt(23-i);
+        }
+        for (; i&lt;32; i+=2) {
+            buffer[i] = password.charAt(46-i);
+        }
+        for (i=31; i>=17; i-=2) {
+            buffer[i] = password.charAt(i);
+        }
+        String s = new String(buffer);
+        return s.equals("jU5t_a_sna_3lpm1dg347_u_4_mfr54b");
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Make a table that contains each value of the loop variables and the corresponding buffer index that it writes to. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+buffer = [None] * 32
+password = 'jU5t_a_sna_3lpm1dg347_u_4_mfr54b'
+
+for i in range(0,8):
+	buffer[i] = password[i]
+
+for i in range(8,16):
+    	buffer[i] = password[23-i]
+
+for i in range(16,32,2):
+    	buffer[i] = password[46-i]
+
+for i in range(31,16,-2):
+    	buffer[i] = password[i]
+
+print("picoCTF{{{}}}".format(''.join(buffer)))
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{jU5t_a_s1mpl3_an4gr4m_4_u_7f35db} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="vault-door-4">
+          <dt> vault-door-4 - Points: 250 </dt>
+          <dd> This vault uses ASCII encoding for the password. The source code for this vault is here: VaultDoor4.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+import java.util.*;
+
+class VaultDoor4 {
+    public static void main(String args[]) {
+        VaultDoor4 vaultDoor = new VaultDoor4();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+      }
+  }
+}
+    // I made myself dizzy converting all of these numbers into different bases,
+    // so I just *know* that this vault will be impenetrable. This will make Dr.
+    // Evil like me better than all of the other minions--especially Minion
+    // #5620--I just know it!
+    //
+    //  .:::.   .:::.
+    // :::::::.:::::::
+    // :::::::::::::::
+    // ':::::::::::::'
+    //   ':::::::::'
+    //     ':::::'
+    //       ':'
+    // -Minion #7781
+    public boolean checkPassword(String password) {
+        byte[] passBytes = password.getBytes();
+        byte[] myBytes = {
+            106 , 85  , 53  , 116 , 95  , 52  , 95  , 98  ,
+            0x55, 0x6e, 0x43, 0x68, 0x5f, 0x30, 0x66, 0x5f,
+            0142, 0131, 0164, 063 , 0163, 0137, 070 , 060 ,
+            'f' , '8' , 'e' , '1' , 'e' , '0' , '4' , '7' ,
+        };
+        for (int i=0; i&lt;32; i++) {
+            if (passBytes[i] != myBytes[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+          </code></pre>
+        </div>
+
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Use a search engine to find an "ASCII table" </p>
+          </blockquote>
+
+          <blockquote>
+            <p><strong>Hint:</strong> You will also need to know the difference between octal, decimal, and hexademical numbers </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+passBytes = [None] * 32
+myBytes = [
+            106 , 85  , 53  , 116 , 95  , 52  , 95  , 98  ,
+            '0x55', '0x6e', '0x43', '0x68', '0x5f', '0x30', '0x66', '0x5f',
+            '0o142', '0o131', '0o164', '0o63' , '0o163', '0o137', '0o70' , '0o60' ,
+            'f' , '8' , 'e' , '1' , 'e' , '0' , '4' , '7' ,
+	]
+
+# base10
+for i in range(0,8):
+	passBytes[i] =  chr(myBytes[i])
+
+# base16
+for i in range(8,16):
+	#passBytes[i] =  bytearray.fromhex(myBytes[i].replace('0x', '')).decode()
+	passBytes[i] =  chr(int(myBytes[i], 16))
+
+# base8
+for i in range(16,24):
+	passBytes[i] =  chr(int(myBytes[i], 8))
+
+for i in range(24,32):
+	passBytes[i] =  myBytes[i]
+
+print("picoCTF{{{}}}".format(''.join(passBytes)))
+
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{jU5t_4_bUnCh_0f_bYt3s_80f8e1e047} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="vault-door-5">
+          <dt> vault-door-5 - Points: 300 </dt>
+          <dd> In the last challenge, you mastered octal (base 8), decimal (base 10), and hexadecimal (base 16) numbers, but this vault door uses a different change of base as well as URL encoding! The source code for this vault is here: VaultDoor5.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.net.URLDecoder;
+import java.util.*;
+
+class VaultDoor5 {
+    public static void main(String args[]) {
+        VaultDoor5 vaultDoor = new VaultDoor5();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Minion #7781 used base 8 and base 16, but this is base 64, which is
+    // like... eight times stronger, right? Riiigghtt? Well that's what my twin
+    // brother Minion #2415 says, anyway.
+    //
+    // -Minion #2414
+    public String base64Encode(byte[] input) {
+        return Base64.getEncoder().encodeToString(input);
+    }
+
+    // URL encoding is meant for web pages, so any double agent spies who steal
+    // our source code will think this is a web site or something, defintely not
+    // vault door! Oh wait, should I have not said that in a source code
+    // comment?
+    //
+    // -Minion #2415
+    public String urlEncode(byte[] input) {
+        StringBuffer buf = new StringBuffer();
+        for (int i=0; i&lt;input.length; i++) {
+            buf.append(String.format("%%%2x", input[i]));
+        }
+        return buf.toString();
+    }
+
+    public boolean checkPassword(String password) {
+        String urlEncoded = urlEncode(password.getBytes());
+        String base64Encoded = base64Encode(urlEncoded.getBytes());
+        String expected = "JTYzJTMwJTZlJTc2JTMzJTcyJTc0JTMxJTZlJTY3JTVm"
+                        + "JTY2JTcyJTMwJTZkJTVmJTYyJTYxJTM1JTY1JTVmJTM2"
+                        + "JTM0JTVmJTYzJTMxJTM0JTYzJTYzJTY1JTMxJTMx";
+        return base64Encoded.equals(expected);
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  You may find an encoder/decoder tool helpful, such as https://encoding.tools/  </p>
+          </blockquote>
+
+          <blockquote>
+            <p><strong>Hint:</strong> Read the wikipedia articles on URL encoding and base 64 encoding to understand how they work and what the results look like. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import base64
+
+encoded = 'JTYzJTMwJTZlJTc2JTMzJTcyJTc0JTMxJTZlJTY3JTVmJTY2JTcyJTMwJTZkJTVmJTYyJTYxJTM1JTY1JTVmJTM2JTM0JTVmJTYzJTMxJTM0JTYzJTYzJTY1JTMxJTMx'
+data = base64.b64decode(encoded).decode('utf-8')
+print(data)
+data = data.replace('%', ' 0x')
+print(data)
+
+ch = data.split(" ")
+print(ch)
+
+print('picoCTF{', end = '')
+for c in ch:
+	if(c != ''):
+		print(chr(int(c, 16)), end = '')
+
+print('}\n', end = '')
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{c0nv3rt1ng_fr0m_ba5e_64_c14cce11} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="vault-door-6">
+          <dt> vault-door-6 - Points: 350 </dt>
+          <dd> This vault uses an XOR encryption scheme. The source code for this vault is here: VaultDoor6.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+
+class VaultDoor6 {
+    public static void main(String args[]) {
+        VaultDoor6 vaultDoor = new VaultDoor6();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Dr. Evil gave me a book called Applied Cryptography by Bruce Schneier,
+    // and I learned this really cool encryption system. This will be the
+    // strongest vault door in Dr. Evil's entire evil volcano compound for sure!
+    // Well, I didn't exactly read the *whole* book, but I'm sure there's
+    // nothing important in the last 750 pages.
+    //
+    // -Minion #3091
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        byte[] passBytes = password.getBytes();
+        byte[] myBytes = {
+            0x3b, 0x65, 0x21, 0xa , 0x38, 0x0 , 0x36, 0x1d,
+            0xa , 0x3d, 0x61, 0x27, 0x11, 0x66, 0x27, 0xa ,
+            0x21, 0x1d, 0x61, 0x3b, 0xa , 0x2d, 0x65, 0x27,
+            0xa , 0x31, 0x30, 0x30, 0x30, 0x64, 0x61, 0x33,
+        };
+        for (int i=0; i&lt;32; i++) {
+            if (((passBytes[i] ^ 0x55) - myBytes[i]) != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> If X ^ Y = Z, then Z ^ Y = X. Write a program that decrypts the flag based on this fact. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+passBytes = [None] * 32
+myBytes = [
+            0x3b, 0x65, 0x21, 0xa , 0x38, 0x0 , 0x36, 0x1d,
+            0xa , 0x3d, 0x61, 0x27, 0x11, 0x66, 0x27, 0xa ,
+            0x21, 0x1d, 0x61, 0x3b, 0xa , 0x2d, 0x65, 0x27,
+            0xa , 0x31, 0x30, 0x30, 0x30, 0x64, 0x61, 0x33,
+	]
+
+for i in range(32):
+	passBytes[i] =  chr(myBytes[i] ^ 0x55)
+
+print("picoCTF{{{}}}".format(''.join(passBytes)))
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{n0t_mUcH_h4rD3r_tH4n_x0r_deee14f} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="vault-door-7">
+          <dt> vault-door-7 - Points: 400 </dt>
+          <dd> This vault uses bit shifts to convert a password string into an array of integers. Hurry, agent, we are running out of time to stop Dr. Evil's nefarious plans! The source code for this vault is here: VaultDoor7.java </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-java">
+import java.util.*;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import java.security.*;
+
+class VaultDoor7 {
+    public static void main(String args[]) {
+        VaultDoor7 vaultDoor = new VaultDoor7();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter vault password: ");
+        String userInput = scanner.next();
+	String input = userInput.substring("picoCTF{".length(),userInput.length()-1);
+	if (vaultDoor.checkPassword(input)) {
+	    System.out.println("Access granted.");
+	} else {
+	    System.out.println("Access denied!");
+        }
+    }
+
+    // Each character can be represented as a byte value using its
+    // ASCII encoding. Each byte contains 8 bits, and an int contains
+    // 32 bits, so we can "pack" 4 bytes into a single int. Here's an
+    // example: if the hex string is "01ab", then those can be
+    // represented as the bytes {0x30, 0x31, 0x61, 0x62}. When those
+    // bytes are represented as binary, they are:
+    //
+    // 0x30: 00110000
+    // 0x31: 00110001
+    // 0x61: 01100001
+    // 0x62: 01100010
+    //
+    // If we put those 4 binary numbers end to end, we end up with 32
+    // bits that can be interpreted as an int.
+    //
+    // 00110000 00110001 01100001 01100010 -> 808542562
+    //
+    // Since 4 chars can be represented as 1 int, the 32 character password can
+    // be represented as an array of 8 ints.
+    //
+    // - Minion #7816
+    public int[] passwordToIntArray(String hex) {
+        int[] x = new int[8];
+        byte[] hexBytes = hex.getBytes();
+        for (int i=0; i&lt;8; i++) {
+            x[i] = hexBytes[i*4]   << 24
+                 | hexBytes[i*4+1] << 16
+                 | hexBytes[i*4+2] << 8
+                 | hexBytes[i*4+3];
+        }
+        return x;
+    }
+
+    public boolean checkPassword(String password) {
+        if (password.length() != 32) {
+            return false;
+        }
+        int[] x = passwordToIntArray(password);
+        return x[0] == 1096770097
+            && x[1] == 1952395366
+            && x[2] == 1600270708
+            && x[3] == 1601398833
+            && x[4] == 1716808014
+            && x[5] == 1734293603
+            && x[6] == 959591523
+            && x[7] == 842097204;
+    }
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Use a decimal/hexademical converter such as this one: https://www.mathsisfun.com/binary-decimal-hexadecimal-converter.html </p>
+          </blockquote>
+          <blockquote>
+            <p><strong>Hint:</strong> You will also need to consult an ASCII table such as this one: https://www.asciitable.com/ </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd> Below a python script that solve the challenge </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+x =[0] * 8
+
+x[0] = 1096770097
+x[1] = 1952395366
+x[2] = 1600270708
+x[3] = 1601398833
+x[4] = 1716808014
+x[5] = 1734293603
+x[6] = 959591523
+x[7] = 842097204
+
+ch = [None] * 4
+buffer = ""
+
+for i in range(0,8):
+	tmp = str(bin(x[i])[2:].zfill(32))
+	ch[0] = chr(int(hex(int(tmp[:8], 2)), 16))
+	ch[1] = chr(int(hex(int(tmp[8:16], 2)), 16))
+	ch[2] = chr(int(hex(int(tmp[16:24], 2)), 16))
+	ch[3] = chr(int(hex(int(tmp[24:32], 2)), 16))
+	buffer += ch[0] + ch[1] + ch[2] + ch[3]
+
+print("picoCTF{{{}}}".format(buffer))
+          </code></pre>
+        </div>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{A_b1t_0f_b1t_sh1fTiNg_8c924c21b4} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="asm1">
+          <dt> asm1 - Points: 200 </dt>
+          <dd> What does asm1(0x610) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm1_1_95494d904d73b330976420bc1cd763ec. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> assembly conditions (https://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm) </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+asm1:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp
+	<+3>:   cmp    DWORD PTR [ebp+0x8],0x3b9    ; 953
+	<+10>:	jg     0x50f &lt;asm1+34>              ; jump greater
+	<+12>:	cmp    DWORD PTR [ebp+0x8],0x1      ; 1
+	<+16>:	jne    0x507 &lt;asm1+26>              ; jump not equal
+	<+18>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+21>:	add    eax,0x11
+	<+24>:	jmp    0x526 &lt;asm1+57>
+	<+26>:	mov    eax,DWORD PTR [ebp+0x8]      ;
+	<+29>:	sub    eax,0x11                     ; 17 -> 1569
+	<+32>:	jmp    0x526 &lt;asm1+57>              ; jump
+	<+34>:	cmp    DWORD PTR [ebp+0x8],0x477
+	<+41>:	jne    0x520 &lt;asm1+51>
+	<+43>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+46>:	sub    eax,0x11
+	<+49>:	jmp    0x526 &lt;asm1+57>
+	<+51>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+54>:	add    eax,0x11
+	<+57>:	pop    ebp
+	<+58>:	ret                                 ; 1569 -> 0x621
+
+// input 0x610 -> 1552
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0x621} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="asm2">
+          <dt> asm2 - Points: 250 </dt>
+          <dd> What does asm2(0x10,0x18) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm2_0_a50f0b17a6f50b50a53305ebd71af535. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> assembly conditions (https://www.tutorialspoint.com/assembly_programming/assembly_conditions.htm) </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+asm2:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp                     ; ebp = esp
+	<+3>:   sub    esp,0x10                    ; esp - 16
+	<+6>:   mov    eax,DWORD PTR [ebp+0xc]     ; eax = ebp + 12
+	<+9>:   mov    DWORD PTR [ebp-0x4],eax     ; [ebp - 4] = eax
+	<+12>:	mov    eax,DWORD PTR [ebp+0x8]     ; eax = ebp + 8
+	<+15>:	mov    DWORD PTR [ebp-0x8],eax     ; [ebp - 8] = eax
+	<+18>:	jmp    0x50c &lt;asm2+31>
+	<+20>:	add    DWORD PTR [ebp-0x4],0x1     ; [ebp - 4] + 1
+	<+24>:	add    DWORD PTR [ebp-0x8],0xcb    ; [ebp - 8] + 203
+	<+31>:	cmp    DWORD PTR [ebp-0x8],0xb693  ; 46739
+	<+38>:	jle    0x501 &lt;asm2+20>             ; jump less equal
+	<+40>:	mov    eax,DWORD PTR [ebp-0x4]     ; eax = [ebp - 4]
+	<+43>:	leave                              ; eax = 231+24 = 255 -> 0xff
+	<+44>:	ret
+
+input: 0x10,0x18 -> 16,24
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> Otherwise you can use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm2
+
+asm2:
+	push   ebp
+	mov    ebp,esp
+	sub    esp,0x10
+	mov    eax,DWORD PTR [ebp+0xc]
+	mov    DWORD PTR [ebp-0x4],eax
+	mov    eax,DWORD PTR [ebp+0x8]
+	mov    DWORD PTR [ebp-0x8],eax
+	jmp    asm2+31
+	add    DWORD PTR [ebp-0x4],0x1
+	add    DWORD PTR [ebp-0x8],0xcb
+	cmp    DWORD PTR [ebp-0x8],0xb693
+	jle    asm2+20
+	mov    eax,DWORD PTR [ebp-0x4]
+	leave
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm2(0x10,0x18));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm2.s -o asm2.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm2.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0xff} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+
+        <dl class="anchor" id="asm3">
+          <dt> asm3 - Points: 300 </dt>
+          <dd> What does asm3(0xc264bd5c,0xb5a06caa,0xad761175) return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm3_1_b71abaa5cc92e3f7061f23957206b434. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> more(?) registers (https://wiki.skullsecurity.org/index.php?title=Registers) </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+asm3:
+	<+0>:   push   ebp
+	<+1>:   mov    ebp,esp
+	<+3>:   xor    eax,eax
+	<+5>:   mov    ah,BYTE PTR [ebp+0x9]
+	<+8>:   shl    ax,0x10
+	<+12>:	sub    al,BYTE PTR [ebp+0xd]
+	<+15>:	add    ah,BYTE PTR [ebp+0xf]
+	<+18>:	xor    ax,WORD PTR [ebp+0x10]
+	<+22>:	nop
+	<+23>:	pop    ebp
+	<+24>:	ret
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> As before it's possible to use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm2
+
+asm3:
+	push   ebp
+	mov    ebp,esp
+	xor    eax,eax
+	mov    ah,BYTE PTR [ebp+0x9]
+	shl    ax,0x10
+    sub    al,BYTE PTR [ebp+0xd]
+	add    ah,BYTE PTR [ebp+0xf]
+	xor    ax,WORD PTR [ebp+0x10]
+	nop
+	pop    ebp
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm3(0xc264bd5c,0xb5a06caa,0xad761175));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm3.s -o asm3.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm3.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0xa4e1} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+        <dl class="anchor" id="asm4">
+          <dt> asm4 - Points: 400 </dt>
+          <dd> What will asm4("picoCTF_c1373") return? Submit the flag as a hexadecimal value (starting with '0x'). NOTE: Your submission for this question will NOT be in the normal flag format. Source located in the directory at /problems/asm4_5_ca12dca0134f6b54a52c905ffc1e5b35. </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Treat the Array argument as a pointer </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-nasm">
+<+0>:   push   ebp
+<+1>:   mov    ebp,esp
+<+3>:   push   ebx
+<+4>:   sub    esp,0x10
+<+7>:   mov    DWORD PTR [ebp-0x10],0x247
+<+14>:	mov    DWORD PTR [ebp-0xc],0x0
+<+21>:	jmp    0x518 &lt;asm4+27>
+<+23>:	add    DWORD PTR [ebp-0xc],0x1
+<+27>:	mov    edx,DWORD PTR [ebp-0xc]
+<+30>:	mov    eax,DWORD PTR [ebp+0x8]
+<+33>:	add    eax,edx
+<+35>:	movzx  eax,BYTE PTR [eax]
+<+38>:	test   al,al
+<+40>:	jne    0x514 &lt;asm4+23>
+<+42>:	mov    DWORD PTR [ebp-0x8],0x1
+<+49>:	jmp    0x587 &lt;asm4+138>
+<+51>:	mov    edx,DWORD PTR [ebp-0x8]
+<+54>:	mov    eax,DWORD PTR [ebp+0x8]
+<+57>:	add    eax,edx
+<+59>:	movzx  eax,BYTE PTR [eax]
+<+62>:	movsx  edx,al
+<+65>:	mov    eax,DWORD PTR [ebp-0x8]
+<+68>:	lea    ecx,[eax-0x1]
+<+71>:	mov    eax,DWORD PTR [ebp+0x8]
+<+74>:	add    eax,ecx
+<+76>:	movzx  eax,BYTE PTR [eax]
+<+79>:	movsx  eax,al
+<+82>:	sub    edx,eax
+<+84>:	mov    eax,edx
+<+86>:	mov    edx,eax
+<+88>:	mov    eax,DWORD PTR [ebp-0x10]
+<+91>:	lea    ebx,[edx+eax*1]
+<+94>:	mov    eax,DWORD PTR [ebp-0x8]
+<+97>:	lea    edx,[eax+0x1]
+<+100>:	mov    eax,DWORD PTR [ebp+0x8]
+<+103>:	add    eax,edx
+<+105>:	movzx  eax,BYTE PTR [eax]
+<+108>:	movsx  edx,al
+<+111>:	mov    ecx,DWORD PTR [ebp-0x8]
+<+114>:	mov    eax,DWORD PTR [ebp+0x8]
+<+117>:	add    eax,ecx
+<+119>:	movzx  eax,BYTE PTR [eax]
+<+122>:	movsx  eax,al
+<+125>:	sub    edx,eax
+<+127>:	mov    eax,edx
+<+129>:	add    eax,ebx
+<+131>:	mov    DWORD PTR [ebp-0x10],eax
+<+134>:	add    DWORD PTR [ebp-0x8],0x1
+<+138>:	mov    eax,DWORD PTR [ebp-0xc]
+<+141>:	sub    eax,0x1
+<+144>:	cmp    DWORD PTR [ebp-0x8],eax
+<+147>:	jl     0x530 &lt;asm4+51>
+<+149>:	mov    eax,DWORD PTR [ebp-0x10]
+<+152>:	add    esp,0x10
+<+155>:	pop    ebx
+<+156>:	pop    ebp
+<+157>:	ret
+          </code></pre>
+        </div>
+
+        <dl>
+          <dd> As before it's possible to use the assembly function as function of a C program in the following way </dd>
+        </dl>
+
+          <div class="row-full code">
+            <pre><code class="prism language-nasm">
+.intel_syntax noprefix
+
+.global asm4
+
+asm4:
+	push   ebp
+	mov    ebp,esp
+	push   ebx
+	sub    esp,0x10
+	mov    DWORD PTR [ebp-0x10],0x247
+	mov    DWORD PTR [ebp-0xc],0x0
+	jmp    asm4+27
+	add    DWORD PTR [ebp-0xc],0x1
+	mov    edx,DWORD PTR [ebp-0xc]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	test   al,al
+	jne    asm4+23
+	mov    DWORD PTR [ebp-0x8],0x1
+	jmp    asm4+138
+	mov    edx,DWORD PTR [ebp-0x8]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	movsx  edx,al
+	mov    eax,DWORD PTR [ebp-0x8]
+	lea    ecx,[eax-0x1]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,ecx
+	movzx  eax,BYTE PTR [eax]
+	movsx  eax,al
+	sub    edx,eax
+	mov    eax,edx
+	mov    edx,eax
+	mov    eax,DWORD PTR [ebp-0x10]
+	lea    ebx,[edx+eax*1]
+	mov    eax,DWORD PTR [ebp-0x8]
+	lea    edx,[eax+0x1]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,edx
+	movzx  eax,BYTE PTR [eax]
+	movsx  edx,al
+	mov    ecx,DWORD PTR [ebp-0x8]
+	mov    eax,DWORD PTR [ebp+0x8]
+	add    eax,ecx
+	movzx  eax,BYTE PTR [eax]
+	movsx  eax,al
+	sub    edx,eax
+	mov    eax,edx
+	add    eax,ebx
+	mov    DWORD PTR [ebp-0x10],eax
+	add    DWORD PTR [ebp-0x8],0x1
+	mov    eax,DWORD PTR [ebp-0xc]
+	sub    eax,0x1
+	cmp    DWORD PTR [ebp-0x8],eax
+	jl     asm4+51
+	mov    eax,DWORD PTR [ebp-0x10]
+	add    esp,0x10
+	pop    ebx
+	pop    ebp
+	ret
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-c">
+#include &lt;stdio.h>
+
+int main() {
+    printf("Flag: 0x%x\n", asm4("picoCTFc1373"));
+}
+            </code></pre>
+          </div>
+
+          <div class="row-full code">
+            <pre><code class="prism language-ascii">
+all:
+	gcc -m32 -c asm4.s -o asm4.o -fno-stack-protector -no-pie
+	gcc -m32 -c solve.c -o solve.o -fno-stack-protector -no-pie
+	gcc -m32 -o a.out solve.o asm4.o -fno-stack-protector -no-pie
+	./a.out
+clean:
+	rm a.out *.o
+            </code></pre>
+          </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> picoCTF{0x1d8} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr> <!-- Finish post  -->
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='general_skill.html'" > Previous </button>
+        <button id="next" onClick="location.href='web_exploitation.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

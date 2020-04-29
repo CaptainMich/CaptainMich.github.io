@@ -1,48 +1,48 @@
 @font-face {
   font-family: 'merriweather-regular';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-regular.woff") format("woff");
+  src: url("/fonts/post/merriweather-regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'merriweather-italic';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-italic.woff") format("woff");
+  src: url("/fonts/post/merriweather-italic.woff") format("woff");
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
   font-family: 'merriweather-bold';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-bold.woff") format("woff");
+  src: url("/fonts/post/merriweather-bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: 'merriweather-bolditalic';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-bolditalic.woff") format("woff");
+  src: url("/fonts/post/merriweather-bolditalic.woff") format("woff");
   font-weight: 700;
   font-style: italic;
 }
 @font-face {
   font-family: 'merriweather-black';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-black.woff") format("woff");
+  src: url("/fonts/post/merriweather-black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
   font-family: 'merriweather-heavyitalic';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-heavyitalic.woff") format("woff");
+  src: url("/fonts/post/merriweather-heavyitalic.woff") format("woff");
   font-weight: 900;
   font-style: italic;
 }
 @font-face {
   font-family: 'merriweather-light';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-light.woff") format("woff");
+  src: url("/fonts/post/merriweather-light.woff") format("woff");
   font-weight: 200;
   font-style: normal;
 }
 @font-face {
   font-family: 'merriweather-lightitalic';
-  src: url("https://adamblummusic.github.io/Web-Type/font/merriweather-lightitalic.woff") format("woff");
+  src: url("/fonts/post/merriweather-lightitalic.woff") format("woff");
   font-weight: 200;
   font-style: italic;
 }
@@ -116,7 +116,7 @@ h1 {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 3.3625rem;
 }
 
 h3 {

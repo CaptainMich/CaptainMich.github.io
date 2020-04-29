@@ -57,12 +57,16 @@ function open_Function() {
    window.open("code/advanced/Function.html", "_self");
 }
 
+function open_Subprocess() {
+   window.open("code/advanced/Subprocess.html", "_self");
+}
+
 /* ---------------------------------------------- */
 /*                      OOP                       */
 /* ---------------------------------------------- */
 
 function open_Class() {
-   window.open("code/OOP/Classes_and_Objects.html", "_self");
+   window.open("code/OOP/Classes.html", "_self");
 }
 
 /* ---------------------------------------------- */

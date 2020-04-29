@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title> C++ Code | Base Class </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-monokai.css">
+      <link rel="stylesheet" href="template.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+    <br><br><br><br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Base Class Template </h3>
+        <p> </p>
+
+<div class="row-full code">
+  <pre><code class="language-cpp line-numbers">
+/**
+  @file   Base.h
+  @brief  Header for Base Class
+*/
+
+#ifndef	BASE_DEF__
+#define	BASE_DEF__
+
+
+#include  < iostream >
+#include  < stdio.h >
+
+using namespace std;
+
+/**
+  @class  Base
+  @brief  This is the top-most hierarchical level class
+*/
+
+class Base
+{
+  /// Local variable
+  int age;
+
+  public:
+  /// @name CONSTRUCTORS/DESTRUCTOR
+  /// @{
+
+  /// Default constructor
+  Base();
+
+  /// Copy constructor
+  Base( Base & X);
+
+  /// Init constructor
+  Base(int value);
+
+  /// Destructor
+  ~Base();
+  //@}
+
+  /// @name OPERATORS
+  /// @{
+
+  /// Assignment operator
+  void  operator = (Base &X);
+
+  /// Comparison operator
+  bool  operator == (Base &X);
+  //@}
+
+  /// @name INTERFACE
+  /// @{
+
+  /// Interface polymorph function
+  virtual void  PrintStatus();
+
+	//virtual  void	PrintStatus();
+  //@}
+
+  /// @name DEBUGGING
+  /// @{
+
+  void  Dump();
+  //@}
+};
+
+#endif
+
+  </code></pre>
+</div>
+
+<div class="row-full code">
+  <pre><code class="language-cpp line-numbers">
+/**
+  @file   Base.cpp
+  @brief  Implementation file for Base Class
+*/
+
+#include "Base.h"
+
+///////////////////////////////////////////////////////
+// Default constructor
+
+Base::Base()
+{
+  cout << "Base default constructor"<< endl << flush;
+  age = 0;
+}
+
+///////////////////////////////////////////////////////
+// Copy constructor
+
+Base::Base( Base & X)
+{
+  cout << "Base copy constructor"<< endl << flush;
+  age = X.age;
+}
+
+///////////////////////////////////////////////////////
+// Init constructor
+
+Base::Base(int value)
+{
+  cout << "Base init constructor"<< endl << flush;
+  age = value;
+}
+
+///////////////////////////////////////////////////////
+// Destructor
+
+Base::~Base()
+{
+  cout << "Base destructor"<< endl << flush;
+}
+
+///////////////////////////////////////////////////////
+// Assignment operator
+
+void Base::operator = (Base &X)
+{
+  age = X.age;
+}
+
+///////////////////////////////////////////////////////
+// Comparison operator
+
+bool Base::operator == (Base &X)
+{
+  if (age == X.age)
+    return true;
+
+  return false;
+}
+
+///////////////////////////////////////////////////////
+//  Debug
+
+void Base::Dump()
+{
+  cout << "BASE OBJECT : "
+       << "Age = " << age << endl << flush;
+}
+
+///////////////////////////////////////////////////////
+//  Polymorph interface fucntion
+
+void Base::PrintStatus()
+{
+  cout << "** [Base]  age = " << this->age << endl << flush;
+}
+  </code></pre>
+</div>
+    	</article>
+
+
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+    </script>
+
+  </body>
+</html>

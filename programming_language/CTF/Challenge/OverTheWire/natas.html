@@ -83,9 +83,12 @@
           <dt> Level 0 -> Level 1 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-0.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-0.png')" >
+            <img src="img/natas-0.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           Just do a page inspection to find the password
@@ -172,9 +175,12 @@ print(re.findall("&lt;!--The password for natas1 is (.*) -->", content)[0])
           <dt> Level 1 -> Level 2 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-1.png')" >
+            <img src="img/natas-1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           Again, do a page inspection to find the password but before disable the js of the page.
@@ -260,9 +266,12 @@ print(re.findall("&lt;!--The password for natas2 is (.*) -->", content)[0])
           <dt> Level 2 -> Level 3 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-2.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-2.png')" >
+            <img src="img/natas-2.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-html">
@@ -307,9 +316,12 @@ print(re.findall("&lt;!--The password for natas2 is (.*) -->", content)[0])
           As we can see from the HTML code, there is a picture stored in <b> files/pixel.png </b>. If we address that link we found an image with one white pixel. What we can try here is to access only a portion of that path (just the <b> /file</b> part) and see if we can find something.
         </dl>
 
-        <figure>
-          <img src="img/natas-2-1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-2-1.png')" >
+            <img src="img/natas-2-1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           As expected there is a <b> users.txt </b> file storing the password for the next level
@@ -355,9 +367,12 @@ print(re.findall("natas3:(.*)", content)[0])
           <dt> Level 3 -> Level 4 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-3.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-3.png')" >
+            <img src="img/natas-3.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-html">
@@ -454,9 +469,12 @@ print(re.findall("natas4:(.*)", content)[0])
           <dt> Level 4 -> Level 5 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-4.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-4.png')" >
+            <img src="img/natas-4.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-html">
@@ -503,9 +521,12 @@ print(re.findall("natas4:(.*)", content)[0])
           As the HTML code suggest us, the only way to access this page is by being natas5 user. In order to do this, we need to modify the header of the request, particularly the <b> referer </b> voice. There are two way to do this: one from the inspection panel under the netwotk tab, the other one by command line. For the second one, we need to copy the request as curl and paste in the terminal.
         </dl>
 
-        <figure>
-          <img src="img/natas-4-1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-4-1.png')" >
+            <img src="img/natas-4-1.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
@@ -556,9 +577,12 @@ print(re.findall("The password for natas5 is (.*)", content)[0])
           <dt> Level 5 -> Level 6 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-5.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-5.png')" >
+            <img src="img/natas-5.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-html">
@@ -601,9 +625,12 @@ print(re.findall("The password for natas5 is (.*)", content)[0])
           As the HTML code suggest us, we are not logged in. After some web ispection, we found under the storage tab a cookie named <b> loggedin </b> set to 0. Again, as before, to set this to 1 we can change the value from the ispection panel or from command line.
         </dl>
 
-        <figure>
-          <img src="img/natas-5-1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-5-1.png')" >
+            <img src="img/natas-5-1.png" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
@@ -658,9 +685,12 @@ print(re.findall(" natas6 is (.*)&lt;/div>", content)[0])
           <dt> Level 6 -> Level 7 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-6.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-6.png')" >
+            <img src="img/natas-6.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           This levele request us to find a password to submit inside the input secre field. By viewing the source code, the output is the following
@@ -739,9 +769,12 @@ include "includes/secret.inc";
           <dt> Level 7 -> Level 8 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-7.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-7.png')" >
+            <img src="img/natas-7.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           This time we are asked to find a password with apparently no hint in the homepage. By clicking both on <b> Home </b> or <b> About </b> and ispecting the HTML code we find that there is one:
@@ -812,9 +845,12 @@ include "includes/secret.inc";
           <dt> Level 8 -> Level 9 </dt>
         </dl>
 
-        <figure>
-          <img src="img/natas-8.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/natas-8.png')" >
+            <img src="img/natas-8.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           This challenge looks like natas6 challenge.
@@ -913,6 +949,7 @@ if(array_key_exists("submit", $_POST)) {
   <script type="text/javascript" src="/js/sidebar.js"> </script>
   <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
   <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+  <script type="text/javascript" src="/js/img-zoom.js"></script>
 
   <!-- Import HTML -->
   <script>

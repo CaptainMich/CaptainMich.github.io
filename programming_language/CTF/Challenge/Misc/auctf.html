@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> MISC | AUCTF 2019 </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> AUCTF 2019 </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <h5> Bash </h5>
+            <li> <a href="#bash-1"> BASH 1 - Points: 1000 </a></li>
+            <li> <a href="#bash-2"> BASH 2 - Points: 1000 </a></li>
+            <li> <a href="#bash-3"> BASH 3 - Points: 1000 </a></li>
+            <li> <a href="#bash-4"> BASH 4 - Points: 1000 </a></li>
+            <li> <a href="#bash-5"> BASH 5 - Points: 1000 </a></li>
+          </ol>
+          <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
+          <ol>
+            <h5> Pwn </h5>
+            <li> <a href="#">  - Points: 1000 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="bash-1">
+          <dt> BASH 1 - Points: 1000 </dt>
+          <dd>
+            SSH into the server <br>
+            <code>ssh challenges.auctf.com -p 30040 -l level1</code> <br>
+            password: aubie
+          </dd>
+        </dl>
+
+        <dl>
+          <dd>
+            Let's ssh into the server. After the login, we can <code>ls</code> the directory: there is a README file that we have read access to
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ ls
+$ cat README
+
+# Output:
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> auctf{W3lcoM3_2_da_C7F} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick="location.href='#'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

@@ -186,9 +186,12 @@ print(binary_to_string(x))
           <dd> The tag is the suggestion. </dd>
         </dl>
 
-        <figure>
-          <img src="img/1-01-staccah.jpg" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/1-01-staccah.jpg')" >
+            <img src="img/1-01-staccah.jpg" alt="" />
+          </figure>
+        </div>
 
         <div class="row-full code">
           <pre><code class="prism language-bash">
@@ -211,10 +214,12 @@ $ strings staccah.jpg | grep CCIT{.*}
           <dd> With this image strings does not work...This is an indexed image. </dd>
         </dl>
 
-        <figure>
-          <img src="img/1-02-mickeymouse.bmp" alt="" />
-        </figure>
-
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/1-02-mickeymouse.bmp')" >
+            <img src="img/1-02-mickeymouse.bmp" alt="" />
+          </figure>
+        </div>
 
         <dl>
           <blockquote>
@@ -320,6 +325,7 @@ print(ascii_string)
     <script type="text/javascript" src="/js/sidebar.js"> </script>
     <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
 
     <!-- Import HTML -->
     <script>

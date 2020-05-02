@@ -482,24 +482,7 @@ img {
   display: block;
 }
 
-figure {
-  max-width: 42.5rem;
-  margin: 2em auto;
-  padding: 1em;
-  background: #f6f6f6;
-}
 
-figure figcaption {
-  padding-top: 1.25rem;
-  font-size: 1.125rem;
-  text-align: center;
-}
-
-figure figcaption:before {
-  counter-increment: figure;
-  content: "Figure " counter(figure) ": ";
-  opacity: 0.5;
-}
 
 [role="note"] {
   color: #666666;
@@ -640,10 +623,40 @@ td {
   }
 }
 
+/*FIGURE ZOOM */
 
+.fig-container {
+  max-width: 42.5rem;
+  margin: auto auto;
+  padding: 1em 0em;
+  background: #f6f6f6;
+}
 
-/* DROPDOWN */
+figure figcaption {
+  padding-top: 1.25rem;
+  font-size: 1.125rem;
+  text-align: center;
+}
 
-.dropdown-content {
-    font-size: 16px;
+figure figcaption:before {
+  counter-increment: figure;
+  content: "Figure " counter(figure) ": ";
+  opacity: 0.5;
+}
+
+figure.zoom {
+  background-position: 50% 50%;
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+figure.zoom img:hover{
+  opacity: 0;
+}
+
+figure.zoom img {
+  transition: opacity 0.5s;
+  display: block;
+  width: 100%;
 }

@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CRYPTOHACK </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> CryptoHack - General </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <h5> Encoding </h5>
+            <li> <a href="#enc-ascii"> ASCII - Points: 5 </a></li>
+            <li> <a href="#enc-hex"> Hex - Points: 5 </a></li>
+            <li> <a href="#enc-base64"> Base64 - Points: 10 </a></li>
+            <li> <a href="#enc-bytes-bigint"> Bytes and Big Integers - Points: 10 </a></li>
+            <li> <a href="#enc-challenge"> Encoding Challenge - Points: 40 </a></li>
+          </ol>
+          <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
+          <ol>
+            <h5> XOR </h5>
+            <li> <a href="#xor-starter"> XOR Starter - Points: 10 </a></li>
+            <li> <a href="#xor-properties"> XOR Properties - Points: 15 </a></li>
+            <li> <a href="#xor-fav-byte"> Favourite byte - Points: 20 </a></li>
+            <li> <a href="#xor-know-xor-dont"> You either know, XOR you don't - Points: 30 </a></li>
+            <li> <a href="#xor-lemur"> Lemur XOR - Points: 40 </a></li>
+          </ol>
+          <ol>
+            <h5> Mathematics </h5>
+            <li> <a href="#math-gcd"> Greatest Common Divisor - Points: 15 </a></li>
+            <li> <a href="#math-extended-gcd"> Extended GCD - Points: 20 </a></li>
+          </ol>
+
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="enc-ascii">
+          <dt> ASCII - Points: 5 </dt>
+          <dd>
+            ASCII is a 7-bit encoding standard which allows the representation of text using the integers 0-127. Using the below integer array, convert the numbers to their corresponding ASCII characters to obtain a flag. <code>[99,114,121,112,116,111,123, 65,83,67,73,73,95,112,114, 49,110,116,52,98,108,51,125]</code>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+ASCII = [99, 114, 121, 112, 116, 111, 123, 65, 83, 67, 73, 73, 95, 112, 114,
+49, 110, 116, 52, 98, 108, 51, 125]
+flag = ''
+
+for c in ASCII:
+    flag += chr(c)
+
+print(flag)
+          </code></pre>
+        </div>
+
+        <dl>
+          Convert each integer to character to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 ascii.py
+# crypto{ASCII_pr1nt4bl3}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{ASCII_pr1nt4bl3} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="enc-hex">
+          <dt> Hex - Points: 5 </dt>
+          <dd>
+            When we encrypt something the resulting ciphertext commonly has bytes which are not printable ASCII characters. If we want to share our encrypted data, it's common to  encode it into something more user-friendly and portable across  different systems. Included below is a the flag encoded as a hex string. Decode this back into bytes to get the flag. <code>  63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d </code>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from binascii import unhexlify
+
+flag = unhexlify(b'63727970746f7b596f755f77696c6c5f62655f776f726b696e675f776974685f6865785f737472696e67735f615f6c6f747d')
+print(flag)
+          </code></pre>
+        </div>
+
+        <dl>
+          Decode hex to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 hex.py
+# b'crypto{You_will_be_working_with_hex_strings_a_lot}'
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{You_will_be_working_with_hex_strings_a_lot} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="enc-base64">
+          <dt> Base64 - Points: 10 </dt>
+          <dd>
+            Another common encoding scheme is Base64, which allows us to represent binary data as an ASCII string using 64 characters. One character of a Base64 string encodes 6 bits, and so 4 characters of Base64 encodes three 8-bit bytes. Base64 is most commonly used online, where binary data such as images can be easy included into html or css files. Take the below hex string, decode it into bytes and then encode it into Base64. <br>
+            <code>  72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf </code>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import base64
+from binascii import unhexlify
+
+hex = unhexlify('72bca9b68fc16ac7beeb8f849dca1d8a783e8acf9679bf9269f7bf')
+flag = base64.b64encode(hex)
+print(flag)
+          </code></pre>
+        </div>
+
+        <dl>
+          First of all decode hex, then encode into base64 to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 base.py
+# b'crypto/Base+64+Encoding+is+Web+Safe/'
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto/Base+64+Encoding+is+Web+Safe/ </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="enc-bytes-bigint">
+          <dt> Bytes and Big Integers - Points: 10 </dt>
+          <dd>
+            Cryptosystems like RSA works  on numbers, but messages are made up of characters. How should we  convert our messages into numbers so that mathematical operations can be  applied? The most common way is to take the ordinal bytes of the  message, convert them into hexadecimal, and concatenate. This can be  interpreted as a base-16 number, and also represented in base-10.
+            To illustrate:
+          </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p>
+              <strong>message</strong>: HELLO <br>
+              <strong>ascii bytes:</strong> [72, 69, 76, 76, 79] <br>
+              <strong>hex bytes:</strong> [0x48, 0x45, 0x4c, 0x4c, 0x4f] <br>
+              <strong>base-16:</strong> 0x48454c4c4f <br>
+              <strong>base-10:</strong> 310400273487 <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd>
+             Python's PyCryptodome library implements this with the methods <code>  bytes_to_long </code> and <code> long_to_bytes</code> from <b>Crypto.Util.number</b>. <br>
+             Convert the following integer back into a message <br>
+             <code>11515195063862318899931685488813747395775516287289682636499965282714637259206269</code>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from Crypto.Util.number import bytes_to_long
+from Crypto.Util.number import long_to_bytes
+
+data = 11515195063862318899931685488813747395775516287289682636499965282714637259206269
+bytes = long_to_bytes(data)
+print(bytes)
+          </code></pre>
+        </div>
+
+        <dl>
+          Simply convert long to byte with the respectively function to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# b'crypto{3nc0d1n6_4ll_7h3_w4y_d0wn}'
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{3nc0d1n6_4ll_7h3_w4y_d0wn} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="enc-challenge">
+          <dt> Encoding Challenge - Points: 40 </dt>
+          <dd>
+            Now you've got the hang of the various encodings you'll be encountering, let's have a look at automating it. Can you pass all 100 levels to get the flag? The 13377.py file attached below is the source code for what's running on the server. The pwntools_example.py file provides the start of a solution using the incredibly convenient pwntools library, which you can use if you like (we prefer it over the  telnetlib library, however it's not compatible with Windows). If you're  having trouble getting pwntools to work, then you might want to try basing your answer on the script provided in the Introduction "Network  Attacks" challenge instead.
+            Connect at <code>nc socket.cryptohack.org 13377</code>
+          </dd>
+        </dl>
+
+        <dl>
+          <br> Source code on the server
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+from Crypto.Util.number import bytes_to_long, long_to_bytes
+from utils import listener # this is cryptohack's server-side module and not part of python
+import base64
+import codecs
+import random
+
+FLAG = "crypto{????????????????????}"
+ENCODINGS = [
+    "base64",
+    "hex",
+    "rot13",
+    "bigint",
+    "utf-8",
+]
+
+with open('/usr/share/dict/words') as f:
+    WORDS = [line.strip().replace("'", "") for line in f.readlines()]
+
+
+class Challenge():
+    def __init__(self):
+        self.challenge_words = ""
+        self.stage = 0
+
+    def create_level(self):
+        self.stage += 1
+        self.challenge_words = "_".join(random.choices(WORDS, k=3))
+        encoding = random.choice(ENCODINGS)
+
+        if encoding == "base64":
+            encoded = base64.b64encode(self.challenge_words.encode()).decode() # wow so encode
+        elif encoding == "hex":
+            encoded = self.challenge_words.encode().hex()
+        elif encoding == "rot13":
+            encoded = codecs.encode(self.challenge_words, 'rot_13')
+        elif encoding == "bigint":
+            encoded = hex(bytes_to_long(self.challenge_words.encode()))
+        elif encoding == "utf-8":
+            encoded = [ord(b) for b in self.challenge_words]
+
+        return {"type": encoding, "encoded": encoded}
+
+    #
+    # This challenge function is called on your input, which must be JSON
+    # encoded
+    #
+    def challenge(self, your_input):
+        if self.stage == 0:
+            return self.create_level()
+        elif self.stage == 100:
+            self.exit = True
+            return {"flag": FLAG}
+
+        if self.challenge_words == your_input["decoded"]:
+            return self.create_level()
+
+        return {"error": "Decoding fail"}
+
+
+listener.start_server(port=13377)
+
+          </code></pre>
+        </div>
+
+        <dl>
+          As we can notice from the code above, what happens on the server is: there are 100 stages, at each stage a string is composed by linking 3 randomly words together, where the words come from a list of them read by an external file; the string is then encrypted in some way and finally sent back.
+          At each iteration the server also check our answer, basically we need to decode the string and send it back. If we are able to decode all the 100 stages we get our flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from pwn import * # pip install pwntools
+import json
+from Crypto.Util.number import bytes_to_long, long_to_bytes
+import base64
+import codecs
+import random
+from binascii import unhexlify
+
+
+r = remote('socket.cryptohack.org', 13377, level = 'debug')
+
+def json_recv():
+    line = r.recvline()
+    return json.loads(line.decode())
+
+def json_send(hsh):
+    request = json.dumps(hsh).encode()
+    r.sendline(request)
+
+def list_to_string(s):
+    output = ""
+    return(output.join(s))
+
+for i in range(0,101):
+    received = json_recv()
+    if "flag" in received:
+        print("\n[*] FLAG: {}".format(received["flag"]))
+        break
+
+    print("\n[-] Cycle: {}".format(i))
+    print("[-] Received type: {}".format(received["type"]))
+    print("[-] Received encoded value: {}".format(received["encoded"]))
+
+    word = received["encoded"]
+    encoding = received["type"]
+
+    if encoding == "base64":
+        decoded = base64.b64decode(word).decode('utf8').replace("'", '"')
+    elif encoding == "hex":
+        decoded = (unhexlify(word)).decode('utf8').replace("'", '"')
+    elif encoding == "rot13":
+        decoded = codecs.decode(word, 'rot_13')
+    elif encoding == "bigint":
+        decoded = unhexlify(word.replace("0x", "")).decode('utf8').replace("'", '"')
+    elif encoding == "utf-8":
+        decoded = list_to_string([chr(b) for b in word])
+
+    print("[-] Decoded: {}".format(decoded))
+    print("[-] Decoded Type: {}".format(type(decoded)))
+
+    to_send = {
+        "decoded": decoded
+    }
+
+    json_send(to_send)
+
+          </code></pre>
+        </div>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 pwntools_example_f93ca6ccef2def755aa8f6d9aa6e9c5b.py
+# [+] Opening connection to socket.cryptohack.org on port 13377: Done
+# [DEBUG] Received 0x3e bytes: b'{"type": "rot13", "encoded": "pbafgnapl_rssrzvanpl_cerccvre"}\n'
+# [-] Cycle: 0
+# [-] Received type: rot13
+# [-] Received encoded value: pbafgnapl_rssrzvanpl_cerccvre
+# [-] Decoded: constancy_effeminacy_preppier
+# [-] Decoded Type: &lt;class 'str'>
+# [DEBUG] Sent 0x2d bytes: b'{"decoded": "constancy_effeminacy_preppier"}\n'
+# ...
+# ...
+# [*] FLAG: crypto{3nc0d3_d3c0d3_3nc0d3}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{3nc0d3_d3c0d3_3nc0d3} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="xor-starter">
+          <dt> XOR Starter - Points: 10 </dt>
+          <dd>
+              XOR is a bitwise operator which returns 0 if the bits are the same, and 1 otherwise. In textbooks the XOR operator is denoted by ⊕, but in most challenges and programming languages you will see the caret ^ used instead.
+          </dd>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/02-cryptohack-general-xor.png')" >
+            <img src="img/02-cryptohack-general-xor.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          <dd>
+            For binary strings we XOR bit by bit: <code> b'0110' ^ b'1010' = b'1100'</code> . We can XOR integers by first converting the integer from decimal to binary. We can XOR strings by first converting each character to the integer representing the Unicode character. Given the string <code>"label"</code>  XOR each character with the integer <code>13</code>. Convert these integers back to a string and submit the flag as <b>codecrypto{new_string}</b>.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+data = "label"
+flag = ''
+
+for c in data:
+    flag += chr(ord(c) ^ 13)
+
+print('crypto{{{}}}'.format(flag))
+          </code></pre>
+        </div>
+
+        <dl>
+          Read character by character and do the xor between the integer value of each character and 13
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+crypto{aloha}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{aloha} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="xor-properties">
+          <dt> XOR Properties - Points: 15 </dt>
+          <dd>
+            In the last challenge, you saw how XOR worked at the level of bits. In this one, we're going to cover the properties of the XOR operation and then use them to undo a chain of operations that have encrypted a flag. Gaining an intuition for how this works will help greatly when you come to attacking real cryptosystems later, especially in the block ciphers category. <br> <br>
+
+            There are four main properties we should consider when we solve challenges using the XOR operator
+          </dd>
+        </dl>
+        <dl>
+          <blockquote>
+            <p>
+              <strong>Commutative</strong>: A ⊕ B = B ⊕ A  <br>
+              <strong>Associative:</strong> A ⊕ (B ⊕ C) = (A ⊕ B) ⊕ C <br>
+              <strong>Identity:</strong> A ⊕ 0 = A <br>
+              <strong>Self-Inverse:</strong> A ⊕ A = 0  <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <dd>
+            Let's break this down. Commutative means that the order of the XOR operations is not important. Associative means that a chain of operations can be carried out without order (we do not need to worry about brackets). The identity is 0, so XOR with 0 "does nothing", and lastly something XOR'd with itself returns zero. <br> <br>
+
+            Let's try this out in action! Below is a series of outputs where three random keys have been XOR'd together and with the flag. Use the above properties to undo the encryption in the final line to obtain the flag.
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p style="font-size:13px;">
+              <strong style="font-size:14px;">KEY1</strong> = a6c8b6733c9b22de7bc0253266a3867df55acde8635e19c73313 <br>
+<strong style="font-size:14px;">KEY2 ^ KEY1</strong> = 37dcb292030faa90d07eec17e3b1c6d8daf94c35d4c9191a5e1e <br>
+<strong style="font-size:14px;">KEY2 ^ KEY3</strong> = c1545756687e7573db23aa1c3452a098b71a7fbf0fddddde5fc1 <br>
+<strong style="font-size:13px;">FLAG ^ KEY1 ^ KEY3 ^ KEY2</strong> = 04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf <br>
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Before you XOR these objects, be sure to decode from hex to bytes. If you have pwntools installed, you have a xor function for byte strings: from pwn import xor </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+from binascii import unhexlify
+
+def xor_two_str(s1,s2):
+    if len(str1) != len(str2):
+        raise "XOR EXCEPTION: Strings are not of equal length!"
+
+    return ''.join(format(int(a, 16) ^ int(b, 16), 'x') for a,b in zip(s1,s2))
+
+
+KEY1 = "a6c8b6733c9b22de7bc0253266a3867df55acde8635e19c73313"
+
+KEY2 = xor_two_str("37dcb292030faa90d07eec17e3b1c6d8daf94c35d4c9191a5e1e", KEY1)
+print("[-] KEY2: {}".format(KEY2))
+
+KEY3 = xor_two_str("c1545756687e7573db23aa1c3452a098b71a7fbf0fddddde5fc1", KEY2)
+print("[-] KEY3: {}".format(KEY3))
+
+KEY4 = xor_two_str(xor_two_str(KEY1, KEY2), KEY3)
+print("[-] KEY4: {}\n".format(KEY4))
+
+FLAG = xor_two_str("04ee9855208a2cd59091d04767ae47963170d1660df7f56f5faf", KEY4)
+print("[*] FLAG: {}".format(unhexlify(FLAG)))
+          </code></pre>
+        </div>
+
+        <dl>
+          As we can see from the proposed keys, the only applicable property is the commutative one. Let's apply it to get KEY2 from KEY1 and then do the same for the remaining KEYs. Finally we get the flag in hex format, decoding it we get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# [-] KEY2: 911404e13f94884eabbec925851240a52fa381ddb79700dd6d0d
+# [-] KEY3: 504053b757eafd3d709d6339b140e03d98b9fe62b84add0332cc
+# [-] KEY4: 679ce12554e557ada0e38f2e52f126e54240b2576c83c4196cd2
+#
+# [*] FLAG: b'crypto{x0r_i5_ass0c1at1v3}'
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{x0r_i5_ass0c1at1v3} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="xor-fav-byte">
+          <dt> Favourite byte - Points: 20 </dt>
+          <dd>
+              I've hidden my data using XOR with a single byte. Don't forget to decode from hex first. <code> 73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d </code>
+          </dd>
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from binascii import unhexlify
+import string
+
+def single_byte_xor(input, key):
+    if len(chr(key)) != 1:
+      raise "KEY LENGTH EXCEPTION: In single_byte_xor key must be 1 byte long!"
+
+    output = b''
+    for b in input:
+        output += bytes([b ^ key])
+
+    try:
+        return output.decode("utf-8")
+    except:
+        return "Cannot Decode some bytes"
+
+data = "73626960647f6b206821204f21254f7d694f7624662065622127234f726927756d"
+decoded = unhexlify(data)
+
+print("[-] HEX_DECODE: {}\n".format(decoded))
+
+result = {}
+for i in range(256):
+    result[i] = (single_byte_xor(decoded, i))
+    #print("[-] KEY: {}\nSTRING: {}".format(i,single_byte_xor(decoded, i)))
+
+print("[*] FLAG: {}".format([s for s in result.values() if "crypto" in s]))
+          </code></pre>
+        </div>
+
+        <dl>
+          This is a single byte XOR-cypher. In order to break it we need to xor each single byte of our decoded data with one single byte at time. Iterating through all the possible bytes we finally get our flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# [-] HEX_DECODE: b"sbi`d\x7fk h! O!%O}iOv$f eb!'#Ori'um"
+# ...
+# [*] FLAG: ['crypto{0x10_15_my_f4v0ur173_by7e}']
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{0x10_15_my_f4v0ur173_by7e} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="xor-know-xor-dont">
+          <dt> You either know, XOR you don't - Points: 30 </dt>
+          <dd>
+              I've encrypted the flag with my secret key, you'll never be able to guess it <code>e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104 </code>
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Remember the flag format and how it might help you in this challenge! </p>
+          </blockquote>
+        </dl>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+from binascii import unhexlify
+
+def brute(input, key):
+    if len(input) != len(key):
+        return "Failed!"
+
+    output = b''
+    for b1, b2 in zip(input, key):
+        output += bytes([b1 ^ b2])
+    try:
+        return output.decode("utf-8")
+    except:
+        return "Cannot Decode some bytes"
+
+data = "0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104"
+cipher = unhexlify(data)
+print("[-] CIPHER: {}".format(cipher))
+
+# First Step
+key_part = brute(cipher[:7], "crypto{".encode())
+print("[-] PARTIAL KEY FOUND: {}".format(key_part))
+
+# Second Step
+key = (key_part + "y").encode()
+key += key * int((len(cipher) - len(key))/len(key))
+key += key[:((len(cipher) - len(key))%len(key))]
+print("[-] Decoding using KEY: {}".format(key))
+
+plain = brute(cipher, key)
+print("\n[*] FLAG: {}".format(plain))
+          </code></pre>
+        </div>
+
+        <dl>
+          We know that is a XOR-cipher, the first thing we can try, as suggested, it's to look for a part of the key by xoring the first seven character of the FLAG which is <code>"crypto{"</code> and the same number of character from our ciphertext (code section <i>"First Step"</i>). <br>
+          As result we have <code>"myXORke"</code>. By using not so much immgination we can try <b>myXORkey</b> as key and by repeating it over the lenght of our ciphertext and xoring with all the cipher we get our flag (code section <i>"Second Step"</i>).
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# [-] CIPHER: # b"\x0e\x0b!?&amp;\x04\x1eH\x0b&amp;!\x7f'4.\x17]\x0e\x07\n<[\x10>%&amp;!\x7f'4.\x17]\x0e\x07~&4Q\x15\x01\x04"
+# [-] PARTIAL KEY FOUND: myXORke
+# [-] Decoding using KEY: b'myXORkeymyXORkeymyXORkeymyXORkeymyXORkeymy'
+# ...
+# [*] FLAG: crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="math-gcd">
+          <dt> Greatest Common Divisor - Points: 15 </dt>
+          <dd>
+            The Greatest Common Divisor (GCD), sometimes known as the highest common factor, is the largest number which divides two positive integers (a,b). For a = 12, b = 8 we can calculate the divisors of a: {1,2,3,4,6,12} and the divisors of b: {1,2,4,8}. Comparing these two, we see that gcd(a,b) = 4. Now imagine we take a = 11, b = 17. Both a and b are prime numbers. As a prime number has only itself and 1 as divisors, gcd(a,b) = 1. We say that for any two integers a,b, if gcd(a,b) = 1 then a and b are coprime integers. If a and b are prime, they are also coprime. If a is prime and b < a then a and b are coprime.
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Think about the case for a prime and b > a, why are these not necessarily coprime? </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          There are many tools to calculate the GCD of two integers, but for this task we recommend looking up <b>Euclid's Algorithm</b>. Try coding it up; it's only a couple of lines. Use a = 12, b = 8 to test it. Now calculate gcd(a,b) for a = 66528, b = 52920 and enter it below.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+def euclid_gcd(x, y):
+    if x < y:
+        return euclid_gcd(y, x)
+
+    while y != 0:
+        (x, y) = (y, x % y)
+
+    print("\n[+] GCD: {}".format(x))
+    return x
+
+# a = 12
+# b = 8
+
+a = 66528
+b = 52920
+
+euclid_gcd(a, b)
+          </code></pre>
+        </div>
+
+        <dl>
+          Simply calculate the GCD using the Euclidean algorithm.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# [+] GCD: 1512
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> 1512 </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="math-extended-gcd">
+          <dt> Extended GCD - Points: 20 </dt>
+          <dd>
+            Let a and b be positive integers.
+            The extended Euclidean algorithm is an efficient way to find integers u,v such that: <br> <br>
+            <b style="margin-left: 20%"> a * u + b * v = gcd(a,b) </b>
+          </dd>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong>  Later, when we learn to decrypt RSA, we will need this algorithm to calculate the modular inverse of the public exponent. </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          Using the two primes p = 26513, q = 32321, find the integers u,v such that: <br>
+          <b style="margin-left: 20%"> p * u + q * v = gcd(p,q) </b> <br>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong>Hint:</strong> Knowing that p,q are prime, what would you expect gcd(p,q) to be? </p>
+          </blockquote>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+def extended_gcd(p,q):
+    if p == 0:
+        return (q, 0, 1)
+    else:
+        (gcd, u, v) = extended_gcd(q % p, p)
+        return (gcd, v - (q // p) * u, u)
+
+p = 26513
+q = 32321
+
+gcd, u, v = extended_gcd(p, q)
+print("[+] GCD: {}".format(gcd))
+print("[+] u,v: {},{}".format(u,v))
+print("\n[*] FLAG: crypto{{{},{}}}".format(u,v))
+          </code></pre>
+        </div>
+
+        <dl>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 flag.py
+# [+] GCD: 1
+# [+] u,v: 10245,-8404
+#
+# [*] FLAG: crypto{10245,-8404}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{10245,-8404} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='introduction.html'" > Previous </button>
+        <button id="next" onClick="location.href='#'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

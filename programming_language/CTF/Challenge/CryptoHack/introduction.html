@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CRYPTOHACK </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> CryptoHack - Intro </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol>
+            <h5> Introduction </h5>
+            <li> <a href="#finding-flags"> Finding Flags - Points: 2 </a></li>
+            <li> <a href="#great-snakes"> Great Snakes - Points: 3 </a></li>
+            <li> <a href="#network-attacks"> Network Attacks - Points: 5 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="finding-flags">
+          <dt> Finding Flags - Points: 2 </dt>
+          <dd>
+            Each challenge is designed to help introduce you to a new piece of cryptography. Solving a challenge will require you to find a "flag". These flags will usually be in the format <b> crypto{y0ur_f1rst_fl4g} </b>. The flag format helps you verify that you found the correct solution. Try submitting this into the form below to solve your first challenge.
+          </dd>
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{y0ur_f1rst_fl4g} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="great-snakes">
+          <dt> Great Snakes - Points: 3 </dt>
+          <dd>
+            Modern cryptography involves code, and code involves coding. CryptoHack provides a good opportunity to sharpen your skills. Of  all modern programming languages, Python 3 stands out as ideal for  quickly writing cryptographic scripts and attacks. Run the attached Python script and it will output your flag.
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import sys
+# import this
+
+if sys.version_info.major == 2:
+    print("You are running Python 2, which is no longer supported. Please update to Python 3.")
+
+ords = [81, 64, 75, 66, 70, 93, 73, 72, 1, 92, 109, 2, 84, 109, 66, 75, 70, 90, 2, 92, 79]
+
+print("Here is your flag:")
+print("".join(chr(o ^ 0x32) for o in ords))
+          </code></pre>
+        </div>
+
+        <dl>
+          Run the script to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 great_snakes_35381fca29d68d8f3f25c9fa0a9026fb.py
+# Here is your flag:
+# crypto{z3n_0f_pyth0n}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{z3n_0f_pyth0n} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="network-attacks">
+          <dt> Network Attacks - Points: 3 </dt>
+          <dd>
+            Several of the challenges are dynamic and require you to talk to our challenge servers over the network. This allows you to perform man-in-the-middle attacks on people trying to communicate, or directly attack a vulnerable service. To keep  things consistent, our interactive servers always send and receive JSON objects.  Python makes such network communication easy with the <code>telnetlib</code>  module. Conveniently, it's part of Python's standard library, so let's use it for now. For this challenge, connect to <code>socket.cryptohack.org</code> on port <code>11112</code>. Send a JSON object with the key <code>buy</code> and value <code>flag</code>. The example script below contains the beginnings of a solution for you to modify, and you can reuse it for later challenges. <br>
+            Connect at <code>nc socket.cryptohack.org 11112</code>
+          </dd>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+#!/usr/bin/env python3
+
+import telnetlib
+import json
+
+HOST = "socket.cryptohack.org"
+PORT = 11112
+
+tn = telnetlib.Telnet(HOST, PORT)
+
+def readline():
+    return tn.read_until(b"\n")
+
+def json_recv():
+    line = readline()
+    return json.loads(line.decode())
+
+def json_send(hsh):
+    request = json.dumps(hsh).encode()
+    tn.write(request)
+
+print(readline())
+print(readline())
+print(readline())
+print(readline())
+
+request = {
+    "buy": "flag"
+}
+
+json_send(request)
+response = json_recv()
+print(response)
+          </code></pre>
+        </div>
+
+        <dl>
+          Run the script to get the flag
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ python3 telnetlib_example_dbc6ff5dc4dcfac568d7978a801d3ead.py
+# b"Welcome to netcat's flag shop!\n"
+# b'What would you like to buy?\n'
+# b"I only speak JSON, I hope that's ok.\n"
+# b'\n'
+# {'flag': 'crypto{sh0pp1ng_f0r_fl4g5}'}
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> crypto{sh0pp1ng_f0r_fl4g5} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" > Previous </button>
+        <button id="next" onClick="location.href='general.html'"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+  </body>
+</html>

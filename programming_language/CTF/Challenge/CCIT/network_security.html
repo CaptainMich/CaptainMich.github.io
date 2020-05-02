@@ -65,9 +65,12 @@
           <code> $ sha256sum leopardo.pcapng </code> <br>
         </dl>
 
-        <figure>
-          <img src="img/6-01-sanity_check.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-01-sanity_check.png')" >
+            <img src="img/6-01-sanity_check.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           This challenge can be simple solved by looking at the comment of the pcapng
@@ -89,8 +92,15 @@
           Start analyzing the traffic and focus on those who are accessing the public website. Please tell us if Leopardo is leaking any sensitive information. Remember to leave us your comment about this. <br>
         </dl>
 
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-02-no_comment.png')" >
+            <img src="img/6-02-no_comment.png" alt="" />
+          </figure>
+        </div>
+
         <figure>
-          <img src="img/6-02-no_comment.png" alt="" />
+          <img src="" alt="" />
         </figure>
 
         <dl>
@@ -141,9 +151,12 @@ var api_password = "43$43$49$54$7b$38$30$30$62$30$63$32$31$2d$33$34$37$36$2d$34$
           After analyzing the public website, we need to understand if the web host only runs a web server. They told us that other services are switched off, and even if they were accidentally running, they do not expose any useful data. What do you think? Please confirm ASAP, it is important for your (and their) future career. <br>
         </dl>
 
-        <figure>
-          <img src="img/6-03-well_hidden_ports_1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-03-well_hidden_ports_1.png')" >
+            <img src="img/6-03-well_hidden_ports_1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           The Statistic -> Conversations window display us all the informations about the tcp traffic. Since the challenge statement suggest us to look at the services, from figure above we can immediately see that there are 3 ports mostly involved: 80, 5432 and 10000.
@@ -151,16 +164,26 @@ var api_password = "43$43$49$54$7b$38$30$30$62$30$63$32$31$2d$33$34$37$36$2d$34$
           By going to Edit -> Preferences -> Protocols -> HTTP and adding to the TCP ports the 5432 port the wireshark output changed a bit as figure below shows
         </dl>
 
-        <figure>
-          <img src="img/6-03-well_hidden_ports_2.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-03-well_hidden_ports_2.png')" >
+            <img src="img/6-03-well_hidden_ports_2.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           By simply looking at the HTTP flow we can find a base64 password as figure below shows. Decoding it give us the flag
         </dl>
 
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-03-well_hidden_ports_3.png')" >
+            <img src="img/6-03-well_hidden_ports_3.png" alt="" />
+          </figure>
+        </div>
+
         <figure>
-          <img src="img/6-03-well_hidden_ports_3.png" alt="" />
+          <img src="" alt="" />
         </figure>
 
 
@@ -187,9 +210,12 @@ $ echo Q0NJVHs4ZGNkNmVmZC01YzgxLTRmM2MtOWQ3My02Y2MyNWJmMWJlNzZ9 | base64 -d
           A web server can run multiple sites on multiple ports. Robots file is a standard. What could go wrong? Please analyze the discovered evidence and give us feedback if they are exploited by the attacker. <br>
         </dl>
 
-        <figure>
-          <img src="img/6-04-we_are_the_robots_1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-04-we_are_the_robots_1.png')" >
+            <img src="img/6-04-we_are_the_robots_1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           By simply looking at the TCP flow stream we found a suspicious nmap scansion with the flag written inside, in fact by simply substitute %7B with "{" and %7D with "}" we got our flag
@@ -212,9 +238,12 @@ $ echo Q0NJVHs4ZGNkNmVmZC01YzgxLTRmM2MtOWQ3My02Y2MyNWJmMWJlNzZ9 | base64 -d
           Fortunately, the attacker has found relatively harmless information. We start to think that their monitoring service is too static, and something flew by. What do you think? <br>
         </dl>
 
-        <figure>
-          <img src="img/6-05-name_swap.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-05-name_swap.png')" >
+            <img src="img/6-04-we_are_the_robots_1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           Once again, just by lookig through the TCP stream we were able to find the password, hidden inside.
@@ -237,9 +266,12 @@ $ echo Q0NJVHs4ZGNkNmVmZC01YzgxLTRmM2MtOWQ3My02Y2MyNWJmMWJlNzZ9 | base64 -d
           We reported the backdoor. Now it is closed, but probably something escaped their control. Please, find it. <br>
         </dl>
 
-        <figure>
-          <img src="img/6-06-naughty_attacker.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-06-naughty_attacker.png')" >
+            <img src="img/6-04-we_are_the_robots_1.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           By looking at the very end of the stream we found a base64 encrypted zip-compressed file. In order to to transform it in an usable zip archive, we use base64 to File online tool
@@ -325,9 +357,12 @@ CCIT{f688b33e-8dab-4eca-b6c9-027768dcee93}
           <code> http://149.202.200.158:5050/ </code> <br>
         </dl>
 
-        <figure>
-          <img src="img/6-07-dreamliner_1.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)" style="background-image: url('\img/6-07-dreamliner_1.png')" >
+            <img src="img/6-07-dreamliner_1.png" alt="" />
+          </figure>
+        </div>
+
 
         <dl>
           The figure above shows the window we got. If we click on <i>"Landing Samples"</i> we got a <code>.pcapng</code> file. Let's analyze it. First we can get out the js function used inside the html page
@@ -407,9 +442,12 @@ $(document).ready(function() {
           Moreover we have an already played game immediately after:
         </dl>
 
-        <figure>
-          <img src="img/6-07-dreamliner_2.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-07-dreamliner_2.png')" >
+            <img src="img/6-07-dreamliner_2.png" alt="" />
+          </figure>
+        </div>
 
         <dl>
           In the Figure above we can see all the command used in the game (TURNR, TURNL, DIVE, BRAKE) and also all the possible scenario: the aim of the game is to move the airplane in order to land, at each move the altitude is decreased by 100 meters and if you reach the altitude 0 outside the landing square the game is over, otherwise if you reach it exactly at altitude 0 you need to brake and get your happy landing flag. <br>
@@ -417,9 +455,12 @@ $(document).ready(function() {
           <b>TURNR</b>, <b>TURNR</b>, <b>DIVE</b>, <b>TURNL</b>, <b>TURNL</b>, <b>DIVE</b>, <b>TURNR</b>, <b>TURNR</b>, <b>DIVE</b>, <b>DIVE</b>, <b>BRAKE</b>
         </dl>
 
-        <figure>
-          <img src="img/6-07-dreamliner_3.png" alt="" />
-        </figure>
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/6-07-dreamliner_3.png')" >
+            <img src="img/6-07-dreamliner_3.png" alt="" />
+          </figure>
+        </div>
 
         <div class="scrolling-wrapper">
         <dl>
@@ -453,6 +494,7 @@ $(document).ready(function() {
     <script type="text/javascript" src="/js/sidebar.js"> </script>
     <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
     <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
 
     <!-- Import HTML -->
     <script>
@@ -475,6 +517,7 @@ $(document).ready(function() {
         $("#include_sidebar").load("../../html/sidebar.html");
       });
     </script>
+
 
   </body>
 </html>

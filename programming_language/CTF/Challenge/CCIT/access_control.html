@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Network Security </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Access Control </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <li> <a href="#bootstrap"> Bootstrap - Points: 500 </a></li>
+            <li> <a href="#setuid"> Setuid - Points: 500 </a></li>
+            <li> <a href="#arbitrary-command-exec"> Arbitrary Command Exec - Points: 500 </a></li>
+            <li> <a href="#exit-vim"> Exit VIM - Points: 500 </a></li>
+            <li> <a href="#read-flag"> Read flag - Points: 500 </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="bootstrap">
+          <dt> Bootstrap - Points: 500 </dt>
+          <dd> Download and boot this 32 bit Linux machine <br>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/11-01-bootstrap_1.png')" >
+            <img src="img/11-01-bootstrap_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The flag is straight.
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{72318565-c76d-4ed9-81b6-afc582e757777} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="setuid">
+          <dt> Setuid - Points: 500 </dt>
+          <dd> Find an executable file owned by flag00 with Set User ID. Read the ‘flag.txt‘ file in flag00’s home. Log in as level00 with password level00 <br>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login: </strong> <br>
+              Username: level00 <br>
+              Password: level00
+            </p>
+          </blockquote>
+        </dl>
+
+        <dl>
+          As the statement suggest we have to find an executable owned by flag00 with the set user id. We can find it by using the command <b>find</b>. After that by simply running the file so found a bash opens as user flag00, then we can read the flag.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/11-02-setuid_1.png')" >
+            <img src="img/11-02-setuid_1.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-shell">
+$ cd /tmp
+$ find / -user flag00 > tmp
+$ cat tmp
+$ cd /home/flag00/
+$ /usr/share/nano/fishy
+$ cat flag.txt
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{997874cf-581a-49ca-a449-51d24dd31fa5} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="arbitrary-command-exec">
+          <dt> Arbitrary Command Exec - Points: 500 </dt>
+          <dd> Use the ‘/home/flag01/flag01‘ executable to read flag.txt. <br>
+              Source code available at ‘/home/flag01/flag01.c‘ <br>
+              Log in as level01 with password level01
+            <br>
+        </dl>
+
+        <dl>
+          <blockquote>
+            <p><strong> To login: </strong> <br>
+              Username: level01 <br>
+              Password: level01
+            </p>
+          </blockquote>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/11-03-arbitrary-command-exec_1.png')" >
+            <img src="img/11-03-arbitrary-command-exec_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          As the image above show this program use the <b>/usr/bin/env echo</b> to print out the value of a readable file. Then, we can write our own echo executable and let the file use it instead of the deafault one. Let's create a file named echo with inside the code to execute a bash, then modify the PATH variable accordingly and start the flag01 executable from the folder we have created the echo file in and, after the bash pop up, read the flag.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/11-03-arbitrary-command-exec_2.png')" >
+            <img src="img/11-03-arbitrary-command-exec_2.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+$ nano echo
+    !#/usr/bin/env bash
+    bash
+$ export PATH=:/home/level01:/bin
+$ ../flag01/flag01
+$ cat /home/flag01/flag.txt
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{0fc0a412-4184-4c9d-af48-498f7bc713db} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='network_security.html'" > Previous </button>
+        <button id="next"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+
+  </body>
+</html>

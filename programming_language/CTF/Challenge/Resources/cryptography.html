@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CTF | Resources Cryptography </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Resources - Cryptography </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <li> <a href="#crypto"> Cryptography </a></li>
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="crypto">
+          <dt> Cryptography </dt>
+          <dd> <br>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/11-01-bootstrap_1.png')" >
+            <img src="img/11-01-bootstrap_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The flag is straight.
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{72318565-c76d-4ed9-81b6-afc582e757777} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='network_security.html'" > Previous </button>
+        <button id="next"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+
+  </body>
+</html>

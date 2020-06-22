@@ -660,3 +660,96 @@ figure.zoom img {
   display: block;
   width: 100%;
 }
+
+
+/* PARALLAX */
+
+.parallax1 {
+  background: url("../img/bg-2.jpg");
+  min-height: 50vh;
+}
+
+.parallax1,
+.parallax2,
+.parallax3 {
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.caption span.border {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 18px;
+  font-weight: 900;
+  font-size: 50px;
+  font-family: $header-font;
+}
+
+.caption span.extension{
+  color: #fff;
+  padding: 18px;
+  font-size: 60px;
+  font-family: 'QumpellkaNo12';
+}
+
+.extension .P{
+  color: #306998;
+  opacity: 1;
+  font-size: 90px;
+  font-family: 'Bevan';
+}
+
+.extension .Y{
+  color: #ffd43b;
+  opacity: 1;
+  font-weight: 900;
+  font-size: 90px;
+  font-family: 'Bevan';
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 42.5%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+@media (max-width: 580px) {
+
+  .parallax1{
+    min-height: 300px;
+  }
+
+  .caption {
+    top: 50%;
+  }
+
+  .caption span.border {
+    font-size: 30px;
+  }
+
+  .caption span.extension{
+    font-size: 40px;
+  }
+
+  .extension .P{
+    font-size: 60px;
+  }
+
+  .extension .Y{
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .caption span.extension{
+    display: none;
+  }
+
+}

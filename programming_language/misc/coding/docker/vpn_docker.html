@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <title> Docker | VPN server </title>
+    <link rel="shortcut icon" href="/img/favicon.ico" width="70">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/fonts/fonts.css" >
+      <link rel="stylesheet" href="/res/bootstrap.min.css">
+      <link rel="stylesheet" href="/res/w3.css">
+      <link rel="stylesheet" href="/css/style.css">
+      <link rel="stylesheet" href="/css/personal_icon.css">
+      <link rel="stylesheet" href="/res/prism_themes/prism-base16-ateliersulphurpool.light.css">
+      <link rel="stylesheet" href="vpn_docker.css">
+
+  </head>
+  <body>
+
+    <!-- Navbar -->
+    <div id="include_navbar"></div>
+
+    <!-- Return to Top -->
+    <a href="javascript:" id="return-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!--  -->
+    <main>
+
+      <div class="container">
+
+      <article role="article">
+    		<div class="head-title">
+    			<h2> VPN Server using Docker </h2>
+    			<h5> A Project by Captain Mich, Dadigno, Heyo & Fra </h5>
+    			<time> October, 2020 </time>
+    		</div>
+
+    		<p> This is an OpenVPN server in a Docker container complete with an EasyRSA PKI CA which will not use pre-built image and make our own image from a Dockerfile and other scripts written by <a href="https://github.com/kylemanna/"> kylemanna </a> and licensed under MIT. </p>
+
+    		<div role="group">
+    			<a href="file/vpn.zip" role="button">Download ZIP</a>
+    			<a href="" role="button">Download TAR</a>
+    			<a href="https://github.com/kylemanna/docker-openvpn" role="button">Fork on Github</a>
+    		</div>
+
+    		<h3> Introduction </h3>
+    		<p> In this post, we will examine a method for creating your own OpenVPN server with Docker. Our OpenVPN server will also be capable of handling multiple user accounts and different port options thanks to Docker’s easy port exporting options. We will start with UDP 3000 port which is different than its default port (UDP 1194).</p>
+
+
+    		<h3> Coding </h3>
+    		<p> First start with cloning the git repository into our server: </p>
+
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+git clone https://github.com/kylemanna/docker-openvpn.git
+          </code></pre>
+        </div>
+
+        <!-- <figure>
+          <img src="img/.png" alt="" />
+          <figcaption> Test Image </figcaption>
+        </figure> -->
+
+    		<!-- <blockquote>
+    			<code>blockquote</code>. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita, distinctio, facere quo laudantium fuga laborum odio eum doloremque officia eligendi voluptatibus id nulla fugit ut ipsum suscipit vel eveniet! Dolore!
+    		</blockquote> -->
+
+    		<br> <p> Change current directory to our cloned repository: </p> <br>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+cd docker-openvpn/
+          </code></pre>
+        </div>
+
+        <br> <p> Build a new Docker image from these files. We will name it myownvpn in this example: </p>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+docker build -t myownvpn .
+          </code></pre>
+        </div>
+
+        <br> <p> Afterwards, we need a volume or directory to store our config files and keys. This is a very significant step due to our keys will be put in that directory. As a result, I suggest you to keep that directory safe. </p>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+cd ..
+mkdir vpn-data && touch vpn-data/vars
+          </code></pre>
+        </div>
+
+        <br> <p> Finally, we can start with generating OpenVPN config file: </p>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+docker run -v $PWD/vpn-data:/etc/openvpn --rm myownvpn ovpn_genconfig -u udp://IP_ADDRESS:3000
+          </code></pre>
+        </div>
+
+        <br> <p> Be sure that your IP address is written in the command above. You can change your port on that stage. In this example, we used UDP 3000.</p>
+
+         <br> <p> We should init our PKI. This covers generating our CA certificate and we will have a private key belong to the PKI. We will be asked a password for protecting the private key. The command and truncated output will look like this: </p>
+
+        <div class="row-full code">
+          <pre><code class="prism language-bash">
+docker run -v $PWD/vpn-data:/etc/openvpn --rm -it myownvpn ovpn_initpki
+          </code></pre>
+        </div>
+
+        <br> <p> Finally, we can run the VPN server based on that config: </p>
+
+       <div class="row-full code">
+         <pre><code class="prism language-bash">
+docker run -v $PWD/vpn-data:/etc/openvpn -d -p 3000:1194/udp --cap-add=NET_ADMIN myownvpn
+         </code></pre>
+       </div>
+
+       <br> <p> We did not create any users yet. In order to connect to this OpenVPN server, we can create a user per connection with this command: </p>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+docker run -v $PWD/vpn-data:/etc/openvpn --rm -it myownvpn easyrsa build-client-full user1 nopass
+        </code></pre>
+      </div>
+
+      <br> <p> Note that we added a user with username user1 and we passed the nopass option. With that option, the user can connect directly with configuration file. This also means that if somebody gets the config file which we will generate in seconds, he or she can connect to our VPN server without need of anything else. You will also be asked about certificate authority password during the user creation. </p>
+
+      <br> <p> At the last step, we will generate a configuration file which will be sent to the user. In order to generate that file, we can run that command: </p>
+
+     <div class="row-full code">
+       <pre><code class="prism language-bash">
+docker run -v $PWD/vpn-data:/etc/openvpn --rm myownvpn ovpn_getclient user1 > user1.ovpn
+       </code></pre>
+     </div>
+
+      <br> <p> You can copy user1.ovpn file with SCP, SFTP, or any method you want. Users can connect to your server with that file </p>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+sudo openvpn --config user1.ovpn
+        </code></pre>
+      </div>
+
+      <br> <p> In order to navigate in internet you need to modify the last line of user1.ovpn just created as follow: </p>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+#redirect-gateway def1
+route 192.168.0.0/24 255.255.0.0
+        </code></pre>
+      </div>
+
+      <br> <p> then inside /etc/sysctl.conf </p>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+net.ipv4.ip_forward = 1
+        </code></pre>
+      </div>
+
+      <br> <p> and finally run: </p>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+iptables -I FORWARD -j ACCEPT
+iptables -t nat -I POSTROUTING -s 192.168.255.0/24 -o eth0 -j MASQUERADE
+        </code></pre>
+      </div>
+
+      <h3> Cheatsheet </h3>
+
+      <div class="row-full code">
+        <pre><code class="prism language-bash">
+#Copy file from a remote host to local host SCP example
+scp username@from_host:file.txt /local/directory/
+
+#Copy file from local host to a remote host SCP example:
+scp file.txt username@to_host:/remote/directory/
+
+#Copy directory from a remote host to local host SCP example
+scp -r username@from_host:/remote/directory/  /local/directory/
+
+#Copy directory from local host to a remote host SCP example:
+scp -r /local/directory/ username@to_host:/remote/directory/
+
+#Copy file from remote host to remote host SCP example
+scp username@from_host:/remote/directory/file.txt username@to_host:/remote/directory/
+        </code></pre>
+      </div>
+
+
+    	</article>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="include_footer"></div>
+
+    <script type="text/javascript" src="/fonts/fontawesome.js"></script>
+    <script type="text/javascript" src="/res/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/return_to_top_arrow.js"></script>
+    <script type="text/javascript" src="/res/prism_themes/prism_lb.js"></script>
+
+    <!-- Import HTML -->
+    <script>
+      // import navbar
+      $("#include_navbar").load("/html_import/navbar.html", function(){
+
+        // function to activate the hamburger menu
+        $('.menu-toggle').click(function(){
+          $('nav').toggleClass('active');
+        });
+      });
+
+      // import footer
+      $(function(){
+        $("#include_footer").load("/html_import/footer.html");
+      });
+    </script>
+
+  </body>
+</html>
